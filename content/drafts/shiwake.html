@@ -1,0 +1,62 @@
+---
+title: "簿記の仕訳方法のまとめ"
+date: "2015/10/26"
+tags: ["簿記"]
+draft: true
+---
+
+<h1>簿記の仕訳方法のまとめ</h1>
+
+<h2>基本的な考え方</h2>
+<ul>
+  <li>現金が増えるときは左（借方）に記入
+  <li>現金が減るときは右（貸方）に記入
+  <li>三分法と分記法
+  <ul>
+    <li>分記法: 商品売買を商品（資産）と商品売買益（収益）で処理する
+    <li>三分法: 商品売買を仕入（費用）、売上（収益）、繰越商品（資産）で処理する。
+      簿記 3 級の試験では主に三分法で出題されます。
+  </ul>
+</ul>
+
+<h2>具体例</h2>
+
+<style>
+td {
+  vertical-align: top;
+  padding-right: 10px;
+  border: solid 1px gray;
+}
+.up { color: #090; }
+.down { color: #900; }
+.note { border: none; }
+</style>
+<table>
+  <tr>
+    <thead>
+      <th>借方</th><th>貸方</th>
+      <th>ケース</th>
+    </thead>
+  </tr>
+  <tr>
+    <td>（商品）100</td>
+    <td class="down">（現金）100</td>
+    <td class="note">商品を購入した（分記法）</td>
+  </tr>
+  <tr>
+    <td class="up">（現金）150</td>
+    <td>（商品）100<br>（商品売買益）50</td>
+    <td class="note">商品を売り上げた（分記法）</td>
+  </tr>
+  <tr>
+    <td>（仕入）100</td>
+    <td class="down">（現金）100</td>
+    <td class="note">商品を仕入れた（三分法）</td>
+  </tr>
+  <tr>
+    <td class="up">（現金）150</td>
+    <td>（売上）150</td>
+    <td class="note">商品を売り上げた（三分法）</td>
+  </tr>
+</table>
+

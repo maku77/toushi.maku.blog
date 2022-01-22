@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="92" height="92" viewBox="0, 0, 92, 92">
+  <g id="レイヤー_1" transform="translate(-1229, -54)">
+    <path d="M1245.5,68 L1245.5,75.5" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <g>
+      <path d="M1243,75.5 L1248,75.5 L1248,88 L1243,88 L1243,75.5 z" fill="#000000"/>
+      <path d="M1243,75.5 L1248,75.5 L1248,88 L1243,88 L1243,75.5 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    </g>
+    <path d="M1245.5,95.5 L1245.5,88" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M1230.5,55.5 L1275.5,55.5 L1275.5,100.5 L1230.5,100.5 L1230.5,55.5 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <g>
+      <path d="M1258,65.5 L1263,65.5 L1263,88 L1258,88 L1258,65.5 z" fill="#FFFFFF"/>
+      <path d="M1258,65.5 L1263,65.5 L1263,88 L1258,88 L1258,65.5 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    </g>
+    <path d="M1260.5,60.5 L1260.5,65.5" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M1260.5,88 L1260.5,93" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M1290.5,60.5 L1290.5,68" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <g>
+      <path d="M1288,68 L1293,68 L1293,80.5 L1288,80.5 L1288,68 z" fill="#FFFFFF"/>
+      <path d="M1288,68 L1293,68 L1293,80.5 L1288,80.5 L1288,68 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    </g>
+    <path d="M1290.5,88 L1290.5,80.5" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M1275.5,55.5 L1320.5,55.5 L1320.5,100.5 L1275.5,100.5 L1275.5,55.5 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <g>
+      <path d="M1303,68 L1308,68 L1308,90.5 L1303,90.5 L1303,68 z" fill="#000000"/>
+      <path d="M1303,68 L1308,68 L1308,90.5 L1303,90.5 L1303,68 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    </g>
+    <path d="M1305.5,63 L1305.5,68" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M1305.5,90.5 L1305.5,95.5" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M1230.5,100.5 L1275.5,100.5 L1275.5,145.5 L1230.5,145.5 L1230.5,100.5 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M1275.5,100.5 L1320.5,100.5 L1320.5,145.5 L1275.5,145.5 L1275.5,100.5 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M1260.5,108 L1260.5,113" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <g>
+      <path d="M1258,113 L1263,113 L1263,133 L1258,133 L1258,113 z" fill="#000000"/>
+      <path d="M1258,113 L1263,113 L1263,133 L1258,133 L1258,113 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    </g>
+    <path d="M1260.5,140.5 L1260.5,133" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <g>
+      <path d="M1243,118 L1248,118 L1248,130.5 L1243,130.5 L1243,118 z" fill="#000000"/>
+      <path d="M1243,118 L1248,118 L1248,130.5 L1243,130.5 L1243,118 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    </g>
+    <path d="M1245.5,113 L1245.5,118" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M1245.5,130.5 L1245.5,135.5" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M1305.5,108 L1305.5,113" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M1303,113 L1308,113 L1308,133 L1303,133 L1303,113 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M1305.5,140.5 L1305.5,133" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M1288,118 L1293,118 L1293,130.5 L1288,130.5 L1288,118 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M1290.5,113 L1290.5,118" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M1290.5,130.5 L1290.5,135.5" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+  </g>
+</svg>

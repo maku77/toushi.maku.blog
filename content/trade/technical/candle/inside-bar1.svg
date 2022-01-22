@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="92" height="92" viewBox="0, 0, 92, 92">
+  <g id="レイヤー_1" transform="translate(-29, -54)">
+    <path d="M60.5,65.5 L60.5,80.5" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M55.5,80.5 L65.5,80.5 L65.5,120.5 L55.5,120.5 L55.5,80.5 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M60.5,135.5 L60.5,120.5" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M30.5,55.5 L120.5,55.5 L120.5,145.5 L30.5,145.5 L30.5,55.5 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <g>
+      <path d="M85.5,90.5 L95.5,90.5 L95.5,115.5 L85.5,115.5 L85.5,90.5 z" fill="#000000"/>
+      <path d="M85.5,90.5 L95.5,90.5 L95.5,115.5 L85.5,115.5 L85.5,90.5 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    </g>
+    <path d="M90.5,80.5 L90.5,90.5" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M90.5,115.5 L90.5,125.5" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+  </g>
+</svg>

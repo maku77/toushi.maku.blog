@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="92" height="92" viewBox="0, 0, 92, 92">
+  <g id="レイヤー_1" transform="translate(-404, -54)">
+    <path d="M405.5,55.5 L495.5,55.5 L495.5,145.5 L405.5,145.5 L405.5,55.5 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M435.5,70.5 L435.5,80.5" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M430.5,80.5 L440.5,80.5 L440.5,120.5 L430.5,120.5 L430.5,80.5 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M435.5,135.5 L435.5,120.5" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M460.5,90.5 L470.5,90.5 L470.5,115.5 L460.5,115.5 L460.5,90.5 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M465.5,80.5 L465.5,90.5" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    <path d="M465.5,115.5 L465.5,125.5" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+  </g>
+</svg>

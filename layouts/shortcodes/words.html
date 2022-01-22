@@ -1,0 +1,77 @@
+  <style>
+  .local-wordCount {
+    text-align: right;
+  }
+  .local-ref {
+    margin-top: 0.5em;
+  }
+  dt {
+    color: #dd3300;
+    font-weight: bolder;
+  }
+  dt > .eng {
+    color: gray;
+    font-weight: normal;
+    font-style: italic;
+  }
+  dt > .index {
+    color: lightgray;
+    font-weight: normal;
+    font-size: smaller;
+  }
+  dt > .tag {
+    color: gray;
+    font-size: smaller;
+    font-weight: normal;
+    vertical-align: middle;
+    border: solid 1px lightgray;
+    border-radius: 1em;
+    padding: 0.1em 0.7em;
+    background: #efefef;
+  }
+  dd {
+    margin-top: 0.3em;
+    font-weight: normal;
+  }
+  </style>
+
+  <div class="local-wordCount">
+    登録数: {{ len .Site.Data.words.definitions }}（随時追加中）
+  </div>
+
+  <dl>
+    {{- range $index, $elem := .Site.Data.words.definitions }}
+      <dt>
+        <span class="index">{{ add $index 1 }}. </span>
+        <a name="{{ .label }}" /></a>
+        {{ .label }}
+        {{- with .yomi }}（{{ . }}）{{ end }}
+        {{ with .english }}<span class="eng">{{ . }}</span>{{ end }}
+        {{ range .tags }}
+          <span class="tag">{{ . }}</span>
+        {{ end }}
+      </dt>
+      <dd>
+        {{ with .desc }}{{ . | markdownify }}{{ end }}
+        {{- with .link }}
+          <div class="local-ref">→ <a href="#{{.}}">{{ . }}</a></div>
+        {{- end }}
+        {{- with .more }}
+          <div class="local-ref">→ <a href="{{ . | relURL }}">★もっと詳しく</a></div>
+        {{- end }}
+        {{- range .pages }}
+          <div class="local-ref">→ 参考ページ: <a href="{{ .pid }}">{{ .title }}</a></div>
+        {{- end }}
+      </dt>
+    {{- end }}
+  </dl>
+
+  {{/*
+  <h3>aliases</h3>
+  <dl>
+    {{- range .Site.Data.words.aliases }}
+      <dt>{{ .label }}</dt>
+      <dd>→ {{ (index $.Site.Data.words.definitions .masterId).label }}</dt>
+    {{- end }}
+  </dl>
+  */}}

@@ -1,0 +1,19 @@
+ev7fpx7:
+  title: 基本データ型の一覧
+  pages:
+    -
+      label: JavaScript
+      url: https://maku77.github.io/js/intro/types.html
+    -
+      label: Kotlin
+      url: https://maku77.github.io/kotlin/basic/types.html
+    -
+      label: MQL
+      url: /p/3n2eq3e
+    -
+      label: Python
+      url: https://maku77.github.io/python/syntax/types.html
+    -
+      label: R
+      url: https://maku77.github.io/r/basic/data-types.html
+

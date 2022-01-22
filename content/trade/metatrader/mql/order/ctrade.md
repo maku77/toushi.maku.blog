@@ -1,0 +1,177 @@
+---
+title: "MetaTrader/MQL: 注文を出す - CTrade クラス"
+linkTitle: "注文を出す - CTrade クラス"
+url: "/p/bw6tgck"
+date: "2020-11-08"
+tags: ["MetaTrader/MQL"]
+weight: 200
+---
+
+MQL で注文を出すときは、クラスベースの `CTrade` や、関数ベースの `OrderSend` を使用します。
+ここでは、`CTrade` クラスを使って注文を出す方法を説明します。
+`OrderSend` 関数と違い、`CTrade` クラスは注文ごとにメソッドが分かれているのでコードの可読性が上がるかもしれません。
+
+
+CTrade クラスのインクルード
+----
+
+[トレード用クラス](https://www.mql5.com/ja/docs/standardlibrary/tradeclasses) のひとつである [CTrade クラス](https://www.mql5.com/ja/docs/standardlibrary/tradeclasses/ctrade) を使用すると、取引のための注文を出したり、注文をキャンセルしたりできます。
+`Ctrade` クラスを使用するには、次のように `Trade/Trade.mql` ヘッダファイルをインクルードする必要があります。
+
+{{< code lang="cpp" >}}
+#include <Trade/Trade.mqh>
+CTrade trade;  // CTrade インスタンスの生成
+{{< /code >}}
+
+
+カレントシンボルで成行注文を出す (CTrade.Buy, CTrade.Sell)
+----
+
+[CTrade.Buy メソッド](https://www.mql5.com/ja/docs/standardlibrary/tradeclasses/ctrade/ctradebuy) で __成行の買い__ 注文を出すことができます。
+第 1 引数 (`volume`) だけが必須で、ここで取引のロット数（0.1 なら 1万通貨）を指定します。
+許容するスリッページ（ポイント数）は、[CTrade.SetDeviationInPoints メソッド](https://www.mql5.com/ja/docs/standardlibrary/tradeclasses/ctrade/ctradesetdeviationinpoints) で指定できます。
+
+次のスクリプトを実行すると、現在のシンボルを 0.1 ロット購入します。
+
+{{< code lang="cpp" title="Scripts/Sample.mq5（スクリプトの例）" >}}
+#include <Trade/Trade.mqh>
+CTrade trade;
+
+void OnStart() {
+    const double LOT = 0.1;  // 取引するロット数（ボリューム）
+
+    // 許容するスリッページ（ポイント数）を設定
+    trade.SetDeviationInPoints(5);
+
+    // 現在のチャートの通貨を、現在の買値 (Ask) で購入する
+    if (!trade.Buy(LOT)) {
+        // 注文エラー
+        uint code = trade.ResultRetcode();
+        string desc = trade.ResultRetcodeDescription();
+        printf("ERROR(%u): %s", code, desc);
+    }
+}
+{{< /code >}}
+
+__成行の売り__ 注文を出したいときは、`CTrade.Buy` メソッドの代わりに [CTrade.Sell メソッド](https://www.mql5.com/ja/docs/standardlibrary/tradeclasses/ctrade/ctradesell) を使用します。
+パラメータは買い注文と同様です。
+
+
+マジックナンバーの設定 (CTrade.SetExpertMagicNumber)
+----
+
+EA で注文を出す場合は、あらかじめ [CTrade.SetExpertMagicNumber メソッド](https://www.mql5.com/ja/docs/standardlibrary/tradeclasses/ctrade/ctradesetexpertmagicnumber) を使ってマジックナンバーを設定しておく必要があります。
+次のサンプルコードは、初回の NewTick イベントで買い注文を入れる EA の実装例です。
+グローバル変数が増えるとコードが読みにくくなるので、取引まわりの処理は `MyAlgo` クラスにまとめています。
+
+{{< code lang="cpp" title="Experts/SampleEA.mq5（EA の例）" >}}
+#property strict
+#include <Trade/Trade.mqh>
+
+input double Lot = 0.1;  // 取引するロット数（ボリューム）
+input ulong Slippage = 3;  // 許容スリッページポイント
+input ulong Magic = 77700;  // EAマジックナンバー
+
+class MyAlgo {
+    CTrade m_trade;
+    bool m_isOrdered;  // 一度だけオーダーするためのフラグ
+
+public:
+    void Init() {
+        m_isOrdered = false;
+
+        // 許容するスリッページ（ポイント数）を設定
+        m_trade.SetDeviationInPoints(Slippage);
+
+        // EAのマジックナンバーを設定
+        m_trade.SetExpertMagicNumber(Magic);
+    }
+
+    void BuyOnce() {
+        if (m_isOrdered) return;
+        m_isOrdered = true;
+
+        // 現在のチャートの通貨を、現在の買値 (Ask) で購入する
+        if (!m_trade.Buy(Lot)) {
+            // 注文エラーが発生した場合
+            uint code = m_trade.ResultRetcode();
+            string desc = m_trade.ResultRetcodeDescription();
+            printf("ERROR(%u): %s", code, desc);
+        }
+    }
+};
+
+MyAlgo algo;
+
+int OnInit() {
+    algo.Init();
+    return INIT_SUCCEEDED;
+}
+
+void OnTick() {
+    algo.BuyOnce();
+}
+{{< /code >}}
+
+
+いろいろな条件を指定して成行注文を出す
+----
+
+`CTrade.Buy` メソッドのシグネチャは次のようになっており、第 2 引数以降で条件を指定して注文を出すことができます。
+
+{{< code lang="cpp" >}}
+bool Buy(
+  double       volume,       // ポジションボリューム
+  const string symbol=NULL,  // シンボル（NULL なら現在のシンボル）
+  double       price=0.0,    // 価格（0 なら現在の買値 (Ask)）
+  double       sl=0.0,       // 決済逆指値（同時に損切りの逆指値注文を出す）
+  double       tp=0.0,       // 決済指値（同時に利食いの指値注文を出す）
+  const string comment=""    // コメント
+)
+{{< /code >}}
+
+次のサンプルスクリプトでは、成行の買い注文を入れると同時に、損切り (stop loss) を 100 ポイント下（USDJPY ならおそらく 0.1 円）に設定します。
+
+{{< code lang="cpp" title="Scripts/Sample.mq5（スクリプトの例）" >}}
+#include <Trade/Trade.mqh>
+CTrade trade;
+
+// 指定した通貨において、ポイント数を価格に変換します。
+double pointToPrice(string symbol, uint point) {
+    double rate = SymbolInfoDouble(symbol, SYMBOL_POINT);
+    return rate * point;
+}
+
+void OnStart() {
+    // 許容するスリッページ（ポイント数）を設定
+    trade.SetDeviationInPoints(5);
+
+    // 損切り価格、利食い価格を指定して成行の買い注文
+    string sym = _Symbol;  // 現在の通貨
+    double lot = 0.1;  // ロット数
+    double ask = SymbolInfoDouble(sym, SYMBOL_ASK);  // 現在の買値
+    double sl = ask - pointToPrice(sym, 100);  // 損切りは 100 ポイント下
+    double tp = ask + pointToPrice(sym, 200);  // 利食いは 200 ポイント上
+
+    if (!trade.Buy(lot, sym, ask, sl, tp)) {
+        uint code = trade.ResultRetcode();
+        string desc = trade.ResultRetcodeDescription();
+        printf("ERROR(%u): %s", code, desc);
+    }
+}
+{{< /code >}}
+
+- 参考: [現在の通貨／シンボルのポイントサイズを調べる (Point, SymbolInfoDouble)](/p/gkcxsb2)
+
+
+指値注文、逆指値注文を出す
+----
+
+`CTrade.Buy` や `CTrade.Sell` メソッドの代わりに、次のようなメソッドを使用することで、指値注文や逆指値注文を出すことができます。
+パラメータは成行注文とほぼ同様ですが、待機注文になるため、有効期限などを指定できるようになっています。
+
+- [CTrade.BuyLimit メソッド](https://www.mql5.com/ja/docs/standardlibrary/tradeclasses/ctrade/ctradebuylimit) ... 買い指値注文（現在 Ask 値より低い値段に買い予約）
+- [CTrade.BuyStop メソッド](https://www.mql5.com/ja/docs/standardlibrary/tradeclasses/ctrade/ctradebuystop) ... 買い逆指値注文（現在 Ask 値より高い値段に買い予約）
+- [CTrade.SellLimit メソッド](https://www.mql5.com/ja/docs/standardlibrary/tradeclasses/ctrade/ctradeselllimit) ... 売り指値注文（現在 Bid 値より高い値段に売り予約）
+- [CTrade.SellStop メソッド](https://www.mql5.com/ja/docs/standardlibrary/tradeclasses/ctrade/ctradesellstop) ... 売り逆指値注文（現在 Bid 値より低い値段に売り予約）
+

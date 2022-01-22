@@ -1,0 +1,17 @@
+{{- $name := .Get "name" }}
+{{- $long := .Get "long-name" }}
+{{- $jp := .Get "jp-name" }}
+{{- $inventor := .Get "inventor" }}
+{{- $year := .Get "year" }}
+<table>
+  <thead>
+    <tr><th colspan="2">基本情報</th></tr>
+  </thead>
+  <tbody>
+    <tr><th>英語名</th><td><b>{{ $name }}</b>{{ with $long }}: {{ $long }}{{ end }}</td></tr>
+    <tr><th>日本語名</th><td>{{ $jp }}</td></tr>
+    <tr><th>考案者</th><td>{{ with $inventor }}{{ . }}{{ else }}─{{ end }}</td></tr>
+    <tr><th>考案年</th><td>{{ with $year }}{{ . }}{{ else }}─{{ end }}</td></tr>
+  </tbody>
+</table>
+
