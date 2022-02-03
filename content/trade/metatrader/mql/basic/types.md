@@ -1,11 +1,13 @@
 ---
-title: "MetaTrader/MQL: 基本データ型の一覧"
-linkTitle: "基本データ型の一覧"
+title: "MetaTrader/MQL: 基本データ型一覧"
+linkTitle: "MQL の基本データ型一覧"
 url: "/p/3n2eq3e"
 date: "2021-01-03"
 tags: ["MetaTrader/MQL"]
 compare: "ev7fpx7"
 ---
+
+MetaTrader 用のプログラミング言語 MQL では、次のような基本型が定義されています。
 
 | 型名 | 種類 | バイト数 | 値の範囲 | リテラルの例 |
 | ---- | ---- | ---- | ---- | ---- |

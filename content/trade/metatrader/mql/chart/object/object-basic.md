@@ -1,9 +1,10 @@
 ---
-title: "MetaTrader/MQL: 描画オブジェクトの基本 (ObjectCreate)"
-linkTitle: "描画オブジェクトの基本 (ObjectCreate)"
+title: "MetaTrader/MQL: 描画オブジェクトの基本 (ObjectCreate, ObjectDelete, ObjectSetXxx)"
+linkTitle: "描画オブジェクトの基本 (ObjectCreate, ObjectDelete, ObjectSetXxx)"
 url: "/p/du6env6"
 date: "2021-02-13"
 tags: ["MetaTrader/MQL"]
+weight: 101
 ---
 
 描画オブジェクトの作成 (ObjectCreate)

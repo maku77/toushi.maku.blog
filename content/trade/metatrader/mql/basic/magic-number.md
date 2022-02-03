@@ -1,9 +1,10 @@
 ---
-title: "MetaTrader/MQL: EAのマジックナンバーとは"
-linkTitle: "EAのマジックナンバーとは"
+title: "MetaTrader/MQL: EA のマジックナンバーについて理解する"
+linkTitle: "EA のマジックナンバーについて理解する"
 url: "/p/p6fgxgf"
 date: "2020-12-27"
 tags: ["MetaTrader/MQL"]
+weight: 204
 ---
 
 マジックナンバー・ジェネレーター
@@ -36,11 +37,11 @@ EA 用のマジックナンバーとして、ランダムな 8 桁の整数値�
 
 MT4/5 の EA（エキスパートアドバイザ）から何らかの注文を出す場合、マジックナンバーと呼ばれる整数値を設定する必要があります。
 これは、[OrderSend 関数](https://www.mql5.com/ja/docs/trading/ordersend) で注文を出す場合も、[CTrade クラス](https://www.mql5.com/ja/docs/standardlibrary/tradeclasses/ctrade) で注文を出す場合も同様です。
-具体的な次のようにマジックナンバーを指定します。
+具体的には次のようにマジックナンバーを指定します。
 
-- MT4 の OrderSend 関数の場合 ... `magic` パラメータ（int 値）
 - MT5 の OrderSend 関数の場合 ... `MqlTradeRequest` オブジェクト の `magic` フィールド（uint 値）
-- CTrade クラスの場合 ... `SetExpertMagicNumber` メソッド（uint 値）
+- MT5 の CTrade クラスの場合 ... `SetExpertMagicNumber` メソッド（uint 値）
+- MT4 の OrderSend 関数の場合 ... `magic` パラメータ（int 値）
 
 このマジックナンバーは、__どの EA から出された注文かを識別するため__ のものであり、1 つの口座内で複数の EA を動かすときは、それぞれ異なる値を割り当てておく必要があります。
 マジックナンバーが重複してしまうと、別の EA から注文を修正されてしまうといった誤動作の原因になります。
@@ -57,6 +58,7 @@ __0 というマジックナンバーは手動でのエントリーを示す__ �
 
 注文の種類ごとにマジックナンバーを割り当てることにより、アルゴリズム別に損益合計を求めたり、注文をまとめて決済したりできます。
 とはいっても、シンプルな EA であれば、マジックナンバーは 1 つだけで十分です。
+
 
 マジックナンバーの定義方法
 ----

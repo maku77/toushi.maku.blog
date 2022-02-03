@@ -3,7 +3,7 @@ title: "MQL で Hello World"
 url: "/p/ay9a762"
 date: "2020-10-27"
 tags: ["MetaTrader/MQL"]
-weight: 2
+weight: 102
 ---
 
 ここでは、MetaTrader の MetaEditor を使って、次のように `Hello World` と表示するだけの Script を作成してみます。

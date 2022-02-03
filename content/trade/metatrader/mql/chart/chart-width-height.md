@@ -1,6 +1,6 @@
 ---
-title: "MetaTrader/MQL: チャートのサイズ（幅・高さ）を取得する"
-linkTitle: "チャートのサイズ（幅・高さ）を取得する"
+title: "MetaTrader/MQL: チャートのサイズ（幅・高さ）を取得する (ChartGetInteger)"
+linkTitle: "チャートのサイズ（幅・高さ）を取得する (ChartGetInteger)"
 url: "/p/xhxumiu"
 date: "2020-10-27"
 lastmod: "2021-01-29"

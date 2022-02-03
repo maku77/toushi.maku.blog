@@ -1,9 +1,10 @@
 ---
 title: "MetaTrader 用のプログラミング言語 MQL とは"
+linkTitle: "MQL とは"
 url: "/p/rk2hvbq"
 date: "2014-11-09"
 tags: ["MetaTrader/MQL"]
-weight: 1
+weight: 101
 ---
 
 MQL は MetaQuotes Language の略であり、MetaQuotes Software 社の作成した言語です。MetaQuotes Software 社は FX トレードのためのソフトウェアである MetaTrader（Windows 用）を開発しており、MQL はこの中で動作するプログラムを作成するための言語です。MQL を使ってプログラムを作成すると、

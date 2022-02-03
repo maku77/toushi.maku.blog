@@ -1,6 +1,6 @@
 ---
-title: "MetaTrader/MQL: チャート上でのキーハンドリング"
-linkTitle: "チャート上でのキーハンドリング"
+title: "MetaTrader/MQL: チャート上でのキーハンドリング (OnChartEvent)"
+linkTitle: "チャート上でのキーハンドリング (OnChartEvent)"
 url: "/p/c5z4ka3"
 date: "2021-01-30"
 tags: ["MetaTrader/MQL"]
