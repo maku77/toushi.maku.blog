@@ -1,14 +1,19 @@
 ---
-title: "MetaTrader のショートカットキー（ホットキー）"
+title: "MetaTrader のショートカットキー（ホットキー）を使いこなす"
 url: "/p/6uype3p"
 date: "2020-11-03"
 tags: ["MetaTrader"]
+weight: 201
 ---
 
-{{< private >}}
+{{% private %}}
 - [MetaTrader 5 Help - Hot Keys](https://www.metatrader5.com/en/terminal/help/start_advanced/hotkeys)
-- ●の付いたものは、アクティブなチャートに作用するもの。
-{{< /private >}}
+- [MetaTrader 4 のヘルプ - Fast Navigation](https://www.metatrader4.com/ja/trading-platform/help/overview/fast_nav)
+{{% /private %}}
+
+MetaTrader にはたくさんのメニューやボタンが配置されていますが、これらはほとんどキーボードだけで操作できるようになっています。
+普段からなるべくキーボードだけで操作して、自然に手を動かせるようになりましょう。
+特に、通貨ペアや時間足を頻繁に切り替えるときは、[Fast Navigation](#fast-navigation) という仕組みを知っていると爆速操作が可能になります。
 
 
 どのチャートがアクティブかに依存しないホットキー
@@ -51,7 +56,7 @@ tags: ["MetaTrader"]
     <tr><td>{{< image-inline src="chart-type-bar.png" >}}バーチャート</td><td><kbd>Alt + 1</kbd></td></tr>
     <tr><td>{{< image-inline src="chart-type-candle.png" >}}ローソク足</td><td><kbd>Alt + 2</kbd></td></tr>
     <tr><td>{{< image-inline src="chart-type-line.png" >}}ラインチャート</td><td><kbd>Alt + 3</kbd></td></tr>
-    <tr><td>■出来高の表示／非表示</td><td><kbd>Ctrl + L</kbd></td></tr>
+    <tr><td>出来高の表示／非表示</td><td><kbd>Ctrl + L</kbd></td></tr>
     <tr><td>背景のグリッドを表示／非表示</td><td><kbd>Ctrl + G</kbd></td></tr>
     <tr><td>Crosshair ツールの起動</td><td><kbd>Ctrl + F</kbd> / <kbd>マウス中ボタン</kbd></td></tr>
     <tr><td>上端の OHLC 価格テキストを表示／非表示</td><td><kbd>Ctrl + H</kbd></td></tr>
@@ -73,13 +78,11 @@ tags: ["MetaTrader"]
   </tbody>
 </table>
 
-### Fast Navigation {#fast-navigation}
 
-{{< private >}}
-- [MetaTrader 4 のヘルプ - Fast Navigation](https://www.metatrader4.com/ja/trading-platform/help/overview/fast_nav)
-{{< /private >}}
+チャートの高速切り替え (Fast Navigation) {#fast-navigation}
+----
 
-チャート上で <kbd>Enter</kbd> を押すと、Fast Navigation というコマンド入力領域が表示されます。
+チャート上で <kbd>Enter</kbd> を押すと、__Fast Navigation__ というコマンド入力領域が表示されます。
 そこに下記のような、通貨ペアや時間足を入力することで、素早くチャートを切り替えることができます。
 <kbd>Enter</kbd> で切替実行、<kbd>Esc</kbd> でキャンセルできます。
 
