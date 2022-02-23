@@ -16,15 +16,20 @@ MT5 で現在の口座のポジション情報を取得するには、下記の�
 - [double PositionGetDouble(ENUM_POSITION_PROPERTY_DOUBLE)](https://www.mql5.com/en/docs/trading/positiongetdouble)<br>戻り値が浮動小数点数のポジション情報
 - [string PositionGetString(ENUM_POSITION_PROPERTY_STRING)](https://www.mql5.com/en/docs/trading/positiongetstring)<br>戻り値が文字列のポジション情報
 
+あと後述しますが、これらの関数には、戻り値が `bool` 型になった別バージョンも用意されています。
+
 これらの関数を呼び出す前に、どのポジションの情報を取得するかを、次のような関数を使って選択しておく必要があります。
 これらの関数を呼び出した瞬間に、内部的にそのポジションの情報がコピーされ、上記の参照関数で取得できるようになるようです。
 
-- [string PositionGetSymbol(int index)](https://www.mql5.com/en/docs/trading/positiongetsymbol)<br>ポジションのインデックス番号を指定してポジションを選択します。指定可能なインデックスの範囲は `0` 〜 `PositionsTotal() - 1` です。この関数は、ついでに選択したポジションのシンボル名を返します。ポジションを選択できなかった場合は、空文字列(`""`) を返します。
-- [bool PositionSelect(string symbol)](https://www.mql5.com/en/docs/trading/positionselect)<br>シンボル名でポジションを選択します。主にシンボルごとにポジションが集約されるネットアカウントで使われますが、ヘッジアカウントで使用すると、そのシンボルのポジションのうち、最小インデックスのポジションが選択されます。
-- [bool PositionSelectByTicket(ulong ticket)](https://www.mql5.com/en/docs/trading/positionselectbyticket)<br>ポジションのチケット番号を指定してポジションを選択します。通し番号ではなく、ポジションごとに割り当てられたユニークな ID であることに注意してください。
+- [string PositionGetSymbol(int index)](https://www.mql5.com/en/docs/trading/positiongetsymbol)<br>
+ポジションの __インデックス番号__ を指定してポジションを選択します。指定可能なインデックスの範囲は `0` 〜 `PositionsTotal() - 1` です。この関数は、ついでに選択したポジションのシンボル名を返します。ポジションを選択できなかった場合は、空文字列 (`""`) を返します。
+- [bool PositionSelect(string symbol)](https://www.mql5.com/en/docs/trading/positionselect)<br>
+__シンボル名__ でポジションを選択します。主にシンボルごとにポジションが集約されるネットアカウントで使われますが、ヘッジアカウントで使用すると、そのシンボルのポジションのうち、最小インデックスのポジションが選択されます。
+- [bool PositionSelectByTicket(ulong ticket)](https://www.mql5.com/en/docs/trading/positionselectbyticket)
+<br>ポジションの __チケット番号__ を指定してポジションを選択します。通し番号ではなく、ポジションごとに割り当てられたユニークな ID であることに注意してください。
 
 {{< note title="ポジションの選択という煩わしさ" >}}
-ポジションに関する情報を取得する場合、「ポジションの選択 → そのポジションの情報取得」という手順を踏まないといけないため、コーディングが非常に煩わしくなってしまいます。
+ポジションに関する情報を取得する場合、__「ポジションの選択 → そのポジションの情報取得」__ という手順を踏まないといけないため、コーディングが非常に煩わしくなってしまいます。
 非同期処理があたり前の昨今では、このような API 体系は設計が悪いとしか言いようがないのですが、こうなっている以上、これを使ってがんばるしかないです。
 多くの EA では独自のラッパー関数を作成して、ポジションの選択と情報取得をまとめて行うようにしているようです。
 {{< /note >}}
@@ -38,9 +43,12 @@ MT5 で現在の口座のポジション情報を取得するには、下記の�
 取得した値は、2 つ目の引数で参照渡しした変数に格納されます。
 
 {{< code lang="cpp" >}}
-bool PositionGetInteger(ENUM_POSITION_PROPERTY_INTEGER property_id, long& long_var);
-bool PositionGetDouble(ENUM_POSITION_PROPERTY_DOUBLE property_id, double& double_var);
-bool PositionGetString(ENUM_POSITION_PROPERTY_STRING property_id, string& string_var);
+bool PositionGetInteger(
+    ENUM_POSITION_PROPERTY_INTEGER property_id, long& long_var);
+bool PositionGetDouble(
+    ENUM_POSITION_PROPERTY_DOUBLE property_id, double& double_var);
+bool PositionGetString(
+    ENUM_POSITION_PROPERTY_STRING property_id, string& string_var);
 {{< /code >}}
 
 ポジション情報を取得できなかったときのエラーチェックを入れる場合は、こちらのバージョンを使うとコードの意味が伝わりやすくなるかもしれません。
@@ -53,7 +61,7 @@ if (volume == 0) {
 }
 {{< /code >}}
 
-{{< code lang="cpp" title="第 2 引数で情報を取得するバージョン" >}}
+{{< code lang="cpp" title="戻り値で bool（成功 or 失敗）を返すバージョン" >}}
 double volume;
 if (!PositionGetDouble(POSITION_VOLUME, volume)) {
     // 情報を取得できなかった場合のエラー処理
@@ -63,7 +71,7 @@ if (!PositionGetDouble(POSITION_VOLUME, volume)) {
 大して変わらないので、好きな方を使えばよさそうです。
 
 
-ポジション情報取得のサンプルコード
+サンプルコード（ポジション情報を表示する）
 ----
 
 次のサンプルスクリプトは、現在保有しているポジションの情報をメッセージボックスで表示します。
@@ -164,7 +172,7 @@ void OnStart() {
     const int total = PositionsTotal();
     for (int i = 0; i < total; i++) {
         PositionGetSymbol(i);  // ポジションを選択状態にする
-        string s = StringFormat("%s\n%s\n%s",
+        string s = StringFormat("%s\n\n%s\n\n%s",
             getPositionInfoStr(),
             getPositionInfoInteger(),
             getPositionInfoDouble());
@@ -177,6 +185,7 @@ void OnStart() {
 POSITION_SYMBOL = EURUSD
 POSITION_COMMENT =
 POSITION_EXTERNAL_ID =
+
 POSITION_TICKET = 1558806
 POSITION_IDENTIFIER = 1558806
 POSITION_TIME = 2021.01.07 21:42:30
@@ -186,6 +195,7 @@ POSITION_TIME_UPDATE_MSC = 1610055750757
 POSITION_TYPE = 0 (POSITION_TYPE_BUY)
 POSITION_MAGIC = 5432100
 POSITION_REASON = 3 (POSITION_REASON_EXPERT)
+
 POSITION_VOLUME = 0.1
 POSITION_PRICE_OPEN = 1.22690
 POSITION_PRICE_CURRENT = 1.21694

@@ -108,12 +108,12 @@ struct MqlRates {
 次のスクリプトでは、最新のバーから 3 本分の四本値 (OHLC) 情報を取得しています。
 データ格納先の配列を [ArraySetAsSeries 関数](https://www.mql5.com/en/docs/array/arraysetasseries)（[日本語](https://www.mql5.com/ja/docs/array/arraysetasseries)）でシリーズ化（時系列化）すると、配列の先頭要素が最新のバーの情報を表すようになります（デフォルトでは、配列の先頭要素は一番過去のバー情報）。
 
-{{< code lang="cpp" title="Scripts/Test.mq5" >}}
+{{< code lang="cpp" title="Scripts/Test.mq5（例: 最新の 3 本のバーの OHLC を取得する）" >}}
 void OnStart() {
     MqlRates rates[];
     ArraySetAsSeries(rates, true);  // 先頭要素を最新バーとする
-    int copied = CopyRates(_Symbol, PERIOD_CURRENT, 0, 3, rates);
-    for (int i = 0; i < copied; i++) {
+    int copiedCount = CopyRates(_Symbol, PERIOD_CURRENT, 0, 3, rates);
+    for (int i = 0; i < copiedCount; i++) {
         Print(i, ": time=", rates[i].time,
             ", O=", rates[i].open, ", H=", rates[i].high,
             ", L=", rates[i].low, ", C=", rates[i].close,
@@ -137,12 +137,12 @@ void OnStart() {
 - [CopyClose](https://www.mql5.com/en/docs/series/copyclose)（[日本語](https://www.mql5.com/ja/docs/series/copyclose)）... 各バーの終値 (`double[]`) を取得
 - [CopySpread](https://www.mql5.com/en/docs/series/copyspread)（[日本語](https://www.mql5.com/ja/docs/series/copyspread)）... 各バーのスプレッド（ポイント数）(`int[]`) を取得
 
-{{< code lang="cpp" title="例: 最新の 3 本の終値を取得する" >}}
+{{< code lang="cpp" title="例: 最新の 3 本のバーの「終値」を取得する" >}}
 void OnStart() {
     double closes[];
     ArraySetAsSeries(closes, true);
-    int copied = CopyClose(_Symbol, PERIOD_CURRENT, 0, 3, closes);
-    for (int i = 0; i < copied; i++) {
+    int copiedCount = CopyClose(_Symbol, PERIOD_CURRENT, 0, 3, closes);
+    for (int i = 0; i < copiedCount; i++) {
         Print(i, ": ", closes[i]);
     }
     // 配列の内容は次のように出力しても OK

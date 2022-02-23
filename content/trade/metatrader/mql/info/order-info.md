@@ -49,8 +49,10 @@ void OnStart() {
 EA のプログラム内で現在の注文数合計を取得する場合は、次のように、その EA のマジックナンバーで入れられた注文だけを対象にカウントすべきかもしれません。
 
 {{< code lang="cpp" >}}
-// 指定したマジックナンバーで入っている注文の数を調べます。
-int GetOrdersTotalByMagic(long magic) {
+input ulong Magic = 63043000;
+
+/** 指定したマジックナンバーで入っている注文の数を調べます。 */
+int GetOrdersTotalByMagic(ulong magic) {
     const int total = OrdersTotal();
     int totalByMagic = 0;
     for (int i = 0; i < total; i++) {
@@ -60,6 +62,14 @@ int GetOrdersTotalByMagic(long magic) {
         }
     }
     return totalByMagic;
+}
+
+void OnStart() {
+    if (GetOrdersTotalByMagic(Magic) == 0) {
+        // 注文がひとつもないときの処理
+    } else {
+        // すでに何らかの注文が入っているときの処理
+    }
 }
 {{< /code >}}
 
@@ -77,10 +87,10 @@ MT5 で各待機注文の情報を取得するには、下記のような関数�
 選択関数を呼び出した瞬間に、その待機注文の情報が内部バッファにコピーされ、上記の参照関数で取得できるようになるようです。
 
 - [ulong OrderGetTicket(int index)](https://www.mql5.com/en/docs/trading/ordergetticket)（[日本語](https://www.mql5.com/ja/docs/trading/ordergetticket)）<br>待機注文のインデックス番号を指定して待機注文を選択します。指定可能なインデックスの範囲は `0` 〜 `OrdersTotal() - 1` です。この関数は、ついでに選択した待機注文のチケット番号を返します。待機注文を選択できなかった場合は、0 を返します。
-- [bool OrderSelect(ulong ticket)](https://www.mql5.com/en/docs/trading/orderselect)（[日本語](https://www.mql5.com/ja/docs/trading/orderselect)）<br>待機注文のチケット番号を指定して待機注文を選択します。チケット番号は、`OrderGetInteger(ORDER_TICKET)` 取得できる値と同じものです。待機注文を選択できなかった場合は、`false` を返します。
+- [bool OrderSelect(ulong ticket)](https://www.mql5.com/en/docs/trading/orderselect)（[日本語](https://www.mql5.com/ja/docs/trading/orderselect)）<br>待機注文のチケット番号を指定して待機注文を選択します。チケット番号は、`OrderGetInteger(ORDER_TICKET)` で取得できる値と同じものです。待機注文を選択できなかった場合は、`false` を返します。
 
 
-待機注文の情報を取得するサンプルコード
+サンプルコード（待機注文の情報を表示する）
 ----
 
 下記のスクリプトを実行すると、現在入っている待機注文の詳細情報を 1 つずつメッセージボックスで表示します。
@@ -192,7 +202,7 @@ void showOrderInfo(int orderIndex) {
     }
 
     // 選択した待機注文の情報を表示
-    string msg = StringFormat("%s\n%s\n%s",
+    string msg = StringFormat("%s\n\n%s\n\n%s",
         getOrderInfoStr(),
         getOrderInfoInteger(),
         getOrderInfoDouble()
@@ -215,6 +225,7 @@ void OnStart() {
 {{< code title="実行結果" >}}
 ORDER_SYMBOL = USDJPY
 ORDER_COMMENT =
+
 ORDER_TICKET = 1699871
 ORDER_TYPE = 2 (ORDER_TYPE_BUY_LIMIT)
 ORDER_STATE = 1 (ORDER_STATE_PLACED)
@@ -229,6 +240,7 @@ ORDER_MAGIC = 0
 ORDER_REASON = 0 (ORDER_REASON_CLIENT)
 ORDER_POSITION_ID = 0
 ORDER_POSITION_BY_ID = 0
+
 ORDER_VOLUME_INITIAL = 0.1
 ORDER_VOLUME_CURRENT = 0.1
 ORDER_PRICE_OPEN = 103.686
