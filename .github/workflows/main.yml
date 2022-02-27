@@ -27,4 +27,6 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Deploy with rsync
-        run: rsync -e "ssh -i key" -r -h public/ maku@memoja.net:index.memoja.net
+        run: >
+          rsync -e 'ssh -i key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+          -r -h public/ maku@memoja.net:index.memoja.net
