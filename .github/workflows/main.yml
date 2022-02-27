@@ -28,5 +28,9 @@ jobs:
 
       - name: Deploy with rsync
         run: >
-          rsync -e 'ssh -i key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
-          -r -h public/ maku@memoja.net:index.memoja.net
+          rsync -e 'ssh -i key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
+          -r -h public/ ${SSH_USER}@${SSH_HOST}:${DST_PATH}
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          DST_PATH: ${{ secrets.DST_PATH }}
