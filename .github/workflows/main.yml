@@ -4,7 +4,7 @@ on:
   pull_request:
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -20,6 +20,14 @@ jobs:
 
       - name: Build
         run: hugo --minify
+
+      - name: Generate ssh key
+        run: echo "$SSH_PRIVATE_KEY" > key && chmod 600 key
+        env:
+          SSH_PRIAVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Check ssh key
+        run: file key
 
       - name: Run a one-line script
         run: echo Hello, world!
