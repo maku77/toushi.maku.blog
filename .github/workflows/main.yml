@@ -26,8 +26,5 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Check ssh key
-        run: file key
-
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Deploy with rsync
+        run: rsync -e "ssh -i key" -r -h public/ maku@memoja.net:index.memoja.net
