@@ -24,7 +24,7 @@ jobs:
       - name: Generate ssh key
         run: echo "$SSH_PRIVATE_KEY" > key && chmod 600 key
         env:
-          SSH_PRIAVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Check ssh key
         run: file key
