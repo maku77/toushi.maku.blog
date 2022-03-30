@@ -171,7 +171,7 @@ $(function() {
 - Standard Deviation Channel
 
 ### ボラティリティ
-- ATR: Average True Range
+- [ATR: Average True Range](/p/tasaq7n)
 - Chaikin Volatility
 - Chande Volatility Index Dynamic Average
 - Historical Volatility Ratio

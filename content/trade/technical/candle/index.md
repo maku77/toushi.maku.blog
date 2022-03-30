@@ -9,9 +9,9 @@ description: "ローソク足の形には、投資家たちの心理が表され
 
 <style>
   .local-table { width: 100%; table-layout: fixed; }
-  .local-table td { border: none; vertical-align: top; }
-  .local-table img { width: 100%; }
-  .local-candle { width: 15%; }
+  .local-table b { font-size: larger; }
+  .local-table td { padding-bottom: 1em; border: none; vertical-align: top; }
+  .local-table img { padding-top: 0.3em; width: 100%; min-width: 100px; }
 </style>
 
 はらみ足 (Inside bar)、抱き線 (Engulfing)
@@ -19,7 +19,7 @@ description: "ローソク足の形には、投資家たちの心理が表され
 
 <table class="local-table">
   <tr>
-    <td class="local-candle"><img src="inside-bar-all.svg"></td>
+    <td><img src="inside-bar-all.svg"></td>
     <td><b>はらみ足 (Inside bar)</b><br>
     前の足の実体の範囲（始値〜終値）に、次の足の実体（始値〜終値）がすっぽりと収まるパターンです。
     <strong>相場の転換時</strong>に現れることが多いと言われていますが、頻繁に現れるパターンであり、これだけで相場転換を判断するのは危険です。
@@ -53,7 +53,7 @@ description: "ローソク足の形には、投資家たちの心理が表され
 
 <table class="local-table">
   <tr>
-    <td class="local-candle"><img src="morning-star.svg"></td>
+    <td><img src="morning-star.svg"></td>
     <td><b>三川明けの明星 (Morning star)</b><br>
     <strong>底入れ</strong>を示すサインです。
     </td>
@@ -74,7 +74,7 @@ description: "ローソク足の形には、投資家たちの心理が表され
 
 <table class="local-table">
   <tr>
-    <td class="local-candle"><img src="three-white-soldiers.svg"></td>
+    <td><img src="three-white-soldiers.svg"></td>
     <td><b>赤三兵 (Three white soldiers)</b><br>
     安値と高値を切り上げながら3連続する陽線が出現するパターンです。
     底値圏で出れば<strong>上昇転換</strong>のサインとなります。
@@ -95,7 +95,7 @@ description: "ローソク足の形には、投資家たちの心理が表され
 
 <table class="local-table">
   <tr>
-    <td class="local-candle"><img src="hammer.svg"></td>
+    <td><img src="hammer.svg"></td>
     <td><b>カラカサ (Hammer, Hanging man)</b><br>
     上昇トレンドや下降トレンドが継続した後に、下に長いヒゲを持つ短い実体が登場するパターンです。
     一般的に、下降トレンドの後に出現するものをハンマー (Hammer) と呼び、<strong>上昇転換</strong>を示唆します。
@@ -116,7 +116,7 @@ description: "ローソク足の形には、投資家たちの心理が表され
 
 <table class="local-table">
   <tr>
-    <td class="local-candle"><img src="two-days-reversal1.svg"></td>
+    <td><img src="two-days-reversal1.svg"></td>
     <td><b>2デイ・リバーサル (上昇転換)</b><br>
     前日が大きな下落、当日が大きな上昇となり、前日始値と当日終値が一致するパターンです。底値圏で現れると<strong>上昇転換</strong>のサインとなり、二つのローソクを合わせると同時線になります。同時線が相場の反転を示すと言われる理由です。
     </td>
