@@ -1,10 +1,10 @@
 ---
-title: "MetaTrader/MQL: 決済注文を出す（ポジションのクローズ） (MT5)"
-linkTitle: "決済注文を出す（ポジションのクローズ） (MT5)"
+title: "MetaTrader/MQL: OrderSend で決済注文を出す（ポジションのクローズ）(MT5)"
+linkTitle: "OrderSend で決済注文を出す（ポジションのクローズ）(MT5)"
 url: "/p/wb8rxic"
 date: "2021-02-02"
 tags: ["MetaTrader/MQL"]
-weight: 4
+weight: 2
 ---
 
 ポジションのクローズは反対売買

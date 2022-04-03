@@ -1,10 +1,11 @@
 ---
-title: "MetaTrader/MQL: 注文を出す - MqlTradeRequest構造体の詳細 (MT5)"
-linkTitle: "注文を出す - MqlTradeRequest構造体の詳細 (MT5)"
+title: "MetaTrader/MQL: OrderSend の引数を理解する - MqlTradeRequest/MqlTradeResult 構造体 (MT5)"
+linkTitle: "OrderSend の引数を理解する - MqlTradeRequest/MqlTradeResult 構造体 (MT5)"
 url: "/p/j6iu7hs"
 date: "2020-11-08"
+lastmod: "2022-04-03"
 tags: ["MetaTrader/MQL"]
-weight: 1
+weight: 100
 ---
 
 MT5 の OrderSend 関数
@@ -14,15 +15,15 @@ MT5 で注文を出すには [OrderSend 関数](https://www.mql5.com/en/docs/tra
 
 {{< code lang="cpp" title="MT5 の OrderSend 関数" >}}
 bool OrderSend(
-  MqlTradeRequest& request,  // 注文内容
-  MqlTradeResult&  result    // 注文結果
+  MqlTradeRequest& request,  // 注文内容を指定する
+  MqlTradeResult&  result    // 注文結果が格納される
 )
 {{< /code >}}
 
-ここでは、注文内容を指定するための [MqlTradeRequest 構造体](https://www.mql5.com/en/docs/constants/structures/mqltraderequest)（[日本語](https://www.mql5.com/ja/docs/constants/structures/mqltraderequest)）について説明します。
+ここでは、注文結果が格納される [MqlTradeResult 構造体](https://www.mql5.com/en/docs/constants/structures/mqltraderesult)（[日本語](https://www.mql5.com/ja/docs/constants/structures/mqltraderesult)）と、注文結果が格納される [MqlTradeResult 構造体](https://www.mql5.com/en/docs/constants/structures/mqltraderesult)（[日本語](https://www.mql5.com/ja/docs/constants/structures/mqltraderesult)）について説明します。
 
 
-MqlTradeRequest 構造体
+MqlTradeRequest 構造体（注文内容を指定する）
 ----
 
 `MqlTraderRequest` 構造体には次のようなフィールドが定義されています。
@@ -163,6 +164,8 @@ EA でも `magic` 引数を省略 (=`0`) することはできますが、その
 ブローカーの注文執行方式が、Instant execution あるいは Request execution のときのみ有効です。
 注文後に許容スリッページ以上の価格変化があった場合、ブローカーからリクオート（約定拒否）されます。
 
+- 参考: [MT5 のポイントとは何か](/p/gkcxsb2)
+
 ### ENUM_ORDER_TYPE type（必須）
 
 注文タイプ（買い／売りのどちらなのか、成行／待機注文のどちらなのか）を指定します。
@@ -218,4 +221,48 @@ EA でも `magic` 引数を省略 (=`0`) することはできますが、その
 
 `action` 引数で `TRADE_ACTION_CLOSE_BY` を指定して 2 つの反対ポジションを相殺させるときに、2 つ目のポジションのチケット番号を指定します。1 つ目のポジションは `position` 引数で指定します。
 両建てが可能なヘッジアカウントのみで有効です。
+
+
+MqlTradeResult 構造体（注文結果が格納される）
+----
+
+（追記予定）
+
+`MqlTraderResult` 構造体には次のようなフィールドが定義されています。
+各フィールドにどのような値を設定すべきかを順に説明していきます。
+
+{{< code lang="cpp" title="MqlTradeResult 構造体" >}}
+struct MqlTradeResult {
+  uint    retcode;  // 操作のリターンコード
+  ulong   deal;     // 実行された場合の 約定チケット
+  ulong   order;    // 注文された場合のチケット
+  double  volume;   // ブローカーによって確認された約定ボリューム
+  double  price;    // ブローカーによって確認された約定価格
+  double  bid;      // 現在の売値
+  double  ask;      // 現在の買値
+  string  comment;  // 操作に対するブローカーコメント（デフォルトは取引サーバの返したコードの記述）
+  uint    request_id;  // ディスパッチの際に、端末によって設定されたリクエストID
+  uint    retcode_external;  // 外部取引システムのリターンコード
+};
+{{< /code >}}
+
+### uint retcode
+
+### ulong deal
+
+### ulong order
+
+### double volume
+
+### double price
+
+### double bid
+
+### double ask
+
+### string comment
+
+### uint request_id
+
+### uint retcode_external
 

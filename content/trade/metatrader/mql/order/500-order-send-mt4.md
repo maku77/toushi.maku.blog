@@ -1,10 +1,10 @@
 ---
-title: "MetaTrader/MQL: 注文を出す - OrderSend関数 (MT4)"
-linkTitle: "注文を出す - OrderSend関数 (MT4)"
+title: "MetaTrader/MQL: OrderSend で注文を出す (MT4)"
+linkTitle: "OrderSend で注文を出す (MT4)"
 url: "/p/oanyb2a"
 date: "2021-01-12"
 tags: ["MetaTrader/MQL"]
-weight: 100
+weight: 500
 ---
 
 MT4 で指定したシンボル（USDJPY などの通貨ペア）に対して、成行注文や指値注文を出すには [OrderSend 関数](https://docs.mql4.com/trading/ordersend) を使用します。
