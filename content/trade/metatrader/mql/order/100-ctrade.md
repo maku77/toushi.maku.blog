@@ -4,7 +4,7 @@ linkTitle: "CTrade クラスで注文を出す (MT5)"
 url: "/p/bw6tgck"
 date: "2020-11-08"
 tags: ["MetaTrader/MQL"]
-weight: 200
+weight: 100
 ---
 
 MQL で注文を出すときは、クラスベースの `CTrade` や、関数ベースの `OrderSend` を使用します。
@@ -20,6 +20,7 @@ CTrade クラスのインクルード
 
 {{< code lang="cpp" >}}
 #include <Trade/Trade.mqh>
+
 CTrade trade;  // CTrade インスタンスの生成
 {{< /code >}}
 
@@ -35,23 +36,24 @@ CTrade trade;  // CTrade インスタンスの生成
 
 次のスクリプトを実行すると、現在のシンボルを 0.1 ロット購入します。
 
-{{< code lang="cpp" title="Scripts/Sample.mq5（スクリプトの例）" >}}
-#include <Trade/Trade.mqh>
-CTrade trade;
+{{< code lang="cpp" title="Scripts/Buy.mq5（成行買いのスクリプト実装例）" >}}
+#include <Trade/Trade.mqh>  // CTrade
+const double LOT = 0.1;  // 取引するロット数（ボリューム） 0.1 = 1万通貨
 
+/** スクリプトのエントリポイント */
 void OnStart() {
-    const double LOT = 0.1;  // 取引するロット数（ボリューム）
-
-    // 許容するスリッページ（ポイント数）を設定
-    trade.SetDeviationInPoints(5);
-
-    // 現在のチャートの通貨を、現在の買値 (Ask) で購入する
-    if (!trade.Buy(LOT)) {
-        // 注文エラー
-        uint code = trade.ResultRetcode();
-        string desc = trade.ResultRetcodeDescription();
-        printf("ERROR(%u): %s", code, desc);
+    CTrade trade;
+    trade.SetDeviationInPoints(5);  // 許容するスリッページ（ポイント数）を設定
+    if (!trade.Buy(LOT)) {  // 現在のチャートの通貨を、現在の買値 (Ask) で購入
+        printTradeError(trade);
     }
+}
+
+/** トレード関数がエラーになったときのエラー出力 */
+void printTradeError(const CTrade& trade) {
+    uint code = trade.ResultRetcode();
+    string desc = trade.ResultRetcodeDescription();
+    printf("ERROR(%u): %s", code, desc);
 }
 {{< /code >}}
 
@@ -63,7 +65,7 @@ __成行の売り__ 注文を出したいときは、`CTrade.Buy` メソッド�
 `CTrade.Buy` メソッドのシグネチャは次のようになっており、第 2 引数以降で条件を指定して注文を出すことができます。
 第 1 引数だけ指定した場合は、カレントチャートの通貨を、指定したロット数だけ成行買いすることになります。
 
-{{< code lang="cpp" >}}
+{{< code lang="cpp"  title="CTrade クラスの Buy メソッド" >}}
 bool Buy(
   double       volume,       // ポジションボリューム（0.1 = 1 万通貨）
   const string symbol=NULL,  // シンボル（NULL なら現在のシンボル）
@@ -74,34 +76,33 @@ bool Buy(
 )
 {{< /code >}}
 
-次のサンプルスクリプトでは、成行の買い注文を入れると同時に、損切り (stop loss) を 100 ポイント下（USDJPY ならおそらく 0.1 円）に設定します。
+次のサンプルスクリプトでは、成行の買い注文を入れると同時に、損切り (stop loss) を 100 ポイント下（USDJPY ならおそらく 0.1 円）、利確 (take profit) を 200 ポイント上に設定します。
 
-{{< code lang="cpp" title="Scripts/Sample.mq5（スクリプトの例）" >}}
+{{< code lang="cpp" title="Scripts/BuyWithStopLoss.mq5" >}}
 #include <Trade/Trade.mqh>
-CTrade trade;
-
-// 指定した通貨において、ポイント数を価格に変換します。
-double pointToPrice(string symbol, uint point) {
-    double rate = SymbolInfoDouble(symbol, SYMBOL_POINT);
-    return rate * point;
-}
 
 void OnStart() {
+    CTrade trade;
+
     // 許容するスリッページ（ポイント数）を設定
     trade.SetDeviationInPoints(5);
 
     // 損切り価格、利食い価格を指定して成行の買い注文
-    string sym = _Symbol;  // 現在の通貨
+    string sym = _Symbol;  // カレントチャートの通貨
     double lot = 0.1;  // ロット数
     double ask = SymbolInfoDouble(sym, SYMBOL_ASK);  // 現在の買値
     double sl = ask - pointToPrice(sym, 100);  // 損切りは 100 ポイント下
     double tp = ask + pointToPrice(sym, 200);  // 利食いは 200 ポイント上
 
     if (!trade.Buy(lot, sym, ask, sl, tp)) {
-        uint code = trade.ResultRetcode();
-        string desc = trade.ResultRetcodeDescription();
-        printf("ERROR(%u): %s", code, desc);
+        printTradeError(trade);
     }
+}
+
+// 指定した通貨において、ポイント数を価格に変換します。
+double pointToPrice(string symbol, uint point) {
+    double rate = SymbolInfoDouble(symbol, SYMBOL_POINT);
+    return rate * point;
 }
 {{< /code >}}
 
@@ -127,14 +128,14 @@ EA で注文を出す場合は、あらかじめ [CTrade.SetExpertMagicNumber �
 次のサンプルコードは、初回の NewTick イベントで買い注文を入れる EA の実装例です。
 グローバル変数が増えるとコードが読みにくくなるので、取引まわりの処理は `MyAlgo` クラスにまとめています。
 
-{{< code lang="cpp" title="Experts/SampleEA.mq5（EA の例）" >}}
+{{< code lang="cpp" title="Experts/BuyOnce.mq5（EA の例）" >}}
 #property strict
-#include <Trade/Trade.mqh>
+#include <Trade/Trade.mqh>  // CTrade
 
 input double Lot = 0.1;  // 取引するロット数（ボリューム）
-input ulong Slippage = 3;  // 許容スリッページポイント
+input ulong Slippage = 3;  // 最大許容スリッページポイント
 // Auto-generated by https://memoja.net/p/p6fgxgf/
-input ulong Magic = 58146000;  // EAマジックナンバー
+input ulong Magic = 58146000;  // EA のマジックナンバー
 
 class MyAlgo {
     CTrade m_trade;
@@ -143,37 +144,37 @@ class MyAlgo {
 public:
     void Init() {
         m_isOrdered = false;
-
-        // 許容するスリッページ（ポイント数）を設定
-        m_trade.SetDeviationInPoints(Slippage);
-
-        // EAのマジックナンバーを設定
-        m_trade.SetExpertMagicNumber(Magic);
+        m_trade.SetDeviationInPoints(Slippage);  // 最大許容スリッページポイント
+        m_trade.SetExpertMagicNumber(Magic);  // EA のマジックナンバーを設定
     }
 
+    /** 最初の呼び出し時のみ、成行買いを行います。 */
     void BuyOnce() {
         if (m_isOrdered) return;
         m_isOrdered = true;
 
-        // 現在のチャートの通貨を、現在の買値 (Ask) で購入する
-        if (!m_trade.Buy(Lot)) {
-            // 注文エラーが発生した場合
-            uint code = m_trade.ResultRetcode();
-            string desc = m_trade.ResultRetcodeDescription();
-            printf("ERROR(%u): %s", code, desc);
-        }
+        // 現在のチャートの通貨を、現在の買値 (Ask) で購入
+        if (!m_trade.Buy(Lot)) printTradeError(m_trade);
+    }
+
+private:
+    /** トレード関数がエラーになったときのエラー出力 */
+    void printTradeError(const CTrade& trade) {
+        uint code = trade.ResultRetcode();
+        string desc = trade.ResultRetcodeDescription();
+        printf("ERROR(%u): %s", code, desc);
     }
 };
 
-MyAlgo algo;
+MyAlgo g_algo;
 
 int OnInit() {
-    algo.Init();
+    g_algo.Init();
     return INIT_SUCCEEDED;
 }
 
 void OnTick() {
-    algo.BuyOnce();
+    g_algo.BuyOnce();
 }
 {{< /code >}}
 

@@ -4,7 +4,7 @@ linkTitle: "OrderSend で成行注文を出す (MT5)"
 url: "/p/iz8gpw6"
 date: "2021-02-01"
 tags: ["MetaTrader/MQL"]
-weight: 1
+weight: 200
 ---
 
 成行注文時の OrderSend 関数の使い方
