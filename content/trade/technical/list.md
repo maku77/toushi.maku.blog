@@ -6,6 +6,10 @@ date: "2017-09-24"
 weight: 1
 ---
 
+{{% private %}}
+- 移動平均のダマシを軽減するコツ ... 終値ではなく、高値と安値の中間値 (median price) を使う。
+{{% /private %}}
+
 <script>
 $(function() {
   var arr = [
