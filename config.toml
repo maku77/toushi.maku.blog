@@ -12,8 +12,8 @@ googleAnalytics = "UA-63069513-2"
   unsafe = true
 
 [params]
-  sidebarLogo = "assets/img/site-logo.png"
-  image = "assets/img/site-logo.png"
+  sidebarLogo = "img/site-logo.png"
+  image = "img/site-logo.png"
   facebookAppId = "525778660924912"
   Author = "まく"
   AmazonId = "maku04-22"
