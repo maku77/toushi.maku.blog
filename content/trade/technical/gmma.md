@@ -13,7 +13,7 @@ GMMA の概要
     name="GMMA"
     long-name="Guppy Multi Moving Average"
     jp-name="複合型移動平均線"
-    inventor="ダリル・グッピー（オーストラリアのテクニカル・アナリスト）"
+    inventor="Daryl Guppy（ダリル・グッピー） ... オーストラリアのテクニカル・アナリスト）"
     year=""
 >}}
 
@@ -36,4 +36,11 @@ GMMA の概要
     - 短期線6本が長期戦6本に絡んだが、元の方向へ戻ったとき
     - 短期戦の方向がすべて下向きになったが、すべて上向きに戻ったとき
     - ただし、いずれも長期線が規則正しく同じ方向に並んでいるときのみ
+
+
+その他
+----
+
+- GMMA の考案者である Guppy 氏は、ローソク足を表示せず、12 本の EMA だけを表示してトレードしているらしい。
+- Daryl Guppy 氏の Web サイト: [guppytraders.com](https://www.guppytraders.com)
 
