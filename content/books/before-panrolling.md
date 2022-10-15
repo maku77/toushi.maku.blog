@@ -6,13 +6,13 @@ date: "2016-08-21"
 tags: ["読書"]
 ---
 
-{{% amazon
+{{< amazon
   itemId="B00U0YFFP6"
   title="これからパンローリングの投資本を読む人へ"
   author="塩見勉"
   publisher="パンローリング株式会社"
   imageUrl="https://images-fe.ssl-images-amazon.com/images/I/61n7KYiR04L.jpg"
-%}}
+>}}
 
 投資家として成長するために、どのような姿勢で学んでいけばいいかを簡潔に説明してくれる本です。
 
