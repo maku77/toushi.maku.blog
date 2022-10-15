@@ -1,5 +1,6 @@
 ---
 title: "読書メモ『株の五輪書』河合達憲"
+linkTitle: "『株の五輪書』河合達憲"
 url: "/p/ivdaznn"
 date: "2017-07-23"
 tags: ["読書"]
