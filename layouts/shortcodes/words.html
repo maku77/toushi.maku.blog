@@ -1,15 +1,16 @@
-  <style>
+{{- $words := .Site.Data.words.definitions }}
+
+<style>
   .local-wordCount {
     text-align: right;
   }
   .local-ref {
-    margin-top: 0.5em;
   }
   dt {
     color: #dd3300;
     font-weight: bolder;
   }
-  dt > .eng {
+  dt > .en, dt > .jp {
     color: gray;
     font-weight: normal;
     font-style: italic;
@@ -33,45 +34,64 @@
     margin-top: 0.3em;
     font-weight: normal;
   }
-  </style>
+</style>
 
   <div class="local-wordCount">
-    登録数: {{ len .Site.Data.words.definitions }}（随時追加中）
+    登録数: {{ len $words }}（随時追加中）
   </div>
 
   <dl>
-    {{- range $index, $elem := .Site.Data.words.definitions }}
+    {{- range $index, $elem := $words }}
       <dt>
         <span class="index">{{ add $index 1 }}. </span>
+        {{- with .id }}<a id="{{ . }}"></a>{{ end }}
         <a name="{{ .label }}" /></a>
         {{ .label }}
         {{- with .yomi }}（{{ . }}）{{ end }}
-        {{ with .english }}<span class="eng">{{ . }}</span>{{ end }}
+        {{ with .english }}<span class="en">{{ . }}</span>{{ end }}
+        {{ with .japanese }}<span class="jp">{{ . }}</span>{{ end }}
         {{ range .tags }}
           <span class="tag">{{ . }}</span>
         {{ end }}
       </dt>
       <dd>
-        {{ with .desc }}{{ . | markdownify }}{{ end }}
+        {{- with .desc }}{{ . | markdownify }}{{ end }}
+
         {{- with .link }}
-          <div class="local-ref">→ <a href="#{{.}}">{{ . }}</a></div>
+          <div class="local-ref"><a href="#{{ . }}">{{ . }}</a></div>
         {{- end }}
-        {{- with .more }}
-          <div class="local-ref">→ <a href="{{ . | relURL }}">★もっと詳しく</a></div>
+
+        {{- with .synonyms }}
+          <div class="local-ref">📙同義語: {{ . | markdownify }}</div>
         {{- end }}
+
+        {{- with .antonyms }}
+          <div class="local-ref">📕対義語: {{ . | markdownify }}</div>
+        {{- end }}
+
+        {{- with .related }}
+          <div class="local-ref">📗関連用語: {{ . | markdownify }}</div>
+        {{- end }}
+
         {{- range .pages }}
-          <div class="local-ref">→ 参考ページ: <a href="{{ .pid }}">{{ .title }}</a></div>
+          <div class="local-ref">📘参考ページ: <a href="{{ .pid }}">{{ .title }}</a></div>
         {{- end }}
+
+        {{- with .more }}
+          <div class="local-ref"><a href="{{ . | relURL }}">📘もっと詳しく</a></div>
+        {{- end }}
+
+        {{/* - if .related }}
+          <div class="local-ref">関連用語:
+            {{- range .related }}
+              {{- $relatedWords := where $words "id" "==" . }}
+              {{- range $relatedWords }}
+                <a href="#{{ .id }}">{{ .label }}</a>
+              {{- end }}
+            {{- end }}
+          </div>
+        {{- end */}}
       </dt>
     {{- end }}
   </dl>
 
-  {{/*
-  <h3>aliases</h3>
-  <dl>
-    {{- range .Site.Data.words.aliases }}
-      <dt>{{ .label }}</dt>
-      <dd>→ {{ (index $.Site.Data.words.definitions .masterId).label }}</dt>
-    {{- end }}
-  </dl>
-  */}}
