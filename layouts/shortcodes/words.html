@@ -64,32 +64,41 @@
         {{- errorf "Word \"%s (%s)\" has neither `.desc` nor `.copy_desc`." .label .id  }}
       {{- end }}
 
+      {{- /* copy_desc が定義されていたらオリジナルの単語定義の desc と tags を採用 */}}
+      {{- $copiedDesc := "" }}
+      {{- $tags := .tags }}
+      {{- with .copy_desc }}
+        {{- $copiedWord := index (first 1 (where $words "id" "==" .)) 0 }}
+        {{- if $copiedWord }}
+          {{- $tags = $copiedWord.tags }}
+          {{- $copiedDesc = $copiedWord.desc }}
+          {{- if $elem.desc }}
+            {{- errorf "\"%s (%s)\" には `.copy_desc` が設定されているのに `.desc` が設定されています。" $elem.label $elem.id }}
+          {{- end }}
+          {{- if $elem.tags }}
+            {{- errorf "\"%s (%s)\" には `.copy_desc` が設定されているのに `.tags` が設定されています。" $elem.label $elem.id }}
+          {{- end }}
+        {{- else }}
+          {{- errorf "\"%s (%s)\" の `.copy_desc` に設定された `%s` という ID は定義されていません。" $elem.label $elem.id . }}
+        {{- end }}
+      {{- end }}
+
       <dt>
-        <span class="index">{{ add $index 1 }}. </span>
         {{- with .id }}<a id="{{ . }}"></a>{{ end }}
-        <a name="{{ .label }}" /></a>
+        <span class="index">{{ add $index 1 }}. </span>
         {{ .label }}
         {{- with .yomi }}（{{ . }}）{{ end }}
-        {{ with .english }}<span class="en">{{ . }}</span>{{ end }}
-        {{ with .japanese }}<span class="jp">{{ . }}</span>{{ end }}
-        {{ range .tags }}
-          <span class="tag">{{ . }}</span>
-        {{ end }}
-
+        {{- with .english }}<span class="en">{{ . }}</span>{{ end }}
+        {{- with .japanese }}<span class="jp">{{ . }}</span>{{ end }}
+        {{- range $tags }}<span class="tag">{{ . }}</span>{{ end }}
         {{- with .synonyms }}
           <div class="local-synonyms">{{ . | markdownify }}</div>
         {{- end }}
       </dt>
       <dd>
         {{- with .desc }}{{ . | markdownify }}{{ end }}
-
-        {{- with .copy_desc }}
-          {{- $originalWord := index (first 1 (where $words "id" "==" .)) 0 }}
-            {{- with $originalWord }}
-              <div class="local-copyDesc">{{ .desc | markdownify }}</div>
-            {{- else }}
-              {{- errorf "\"%s (%s)\" の `.copy_desc` に設定された `%s` という ID は定義されていません。" $elem.label $elem.id . }}
-            {{- end }}
+        {{- with $copiedDesc }}
+          <div class="local-copyDesc">{{ . | markdownify }}</div>
         {{- end }}
 
         {{- with .link }}

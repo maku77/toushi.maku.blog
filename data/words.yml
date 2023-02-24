@@ -259,7 +259,7 @@ definitions:
     yomi: きさき
     date: 2020-01-27
     tags: [先物]
-    copy_desc: 9gqjvf4
+    desc: 先物取引における直近の限月より先の限月のこと。直近の限月のことは [期近](#9gqjvf4) 呼びます。
     related: "[期近](#9gqjvf4)"
 
   - label: 基準価額
@@ -276,7 +276,8 @@ definitions:
     desc: 先物取引のおける直近の限月のこと。例えば、今が 1 月ならば 3 月のこと。「一限月」とも言います。その次の限月（あるいはそれ以降の限月）のことは [期先](#c8xmnwx) といいます。
     related: "[期先](#c8xmnwx)"
 
-  - label: 期待インフレ率
+  - id: oo6poii
+    label: 期待インフレ率
     tags: [経済]
     desc: 将来の物価上昇率の予想値。大きく 2 種類あり、「家計の期待インフレ率」は日銀や内閣府による国民へのアンケート調査により求められます。「市場の期待インフレ率」は、BEI (ブレーク・イーブン・インフレ率）という普通国債の利回りから、物価連動国債の流通利回りを引いた値から求められます。消費者物価指数は、予想物価上昇率に連動した動きをすることが知られているため、政府は物価操作のために、期待インフレ率をごにょごにょしようとします。
   - id: ymfez8m
@@ -471,7 +472,6 @@ definitions:
     label: 裁定取引
     yomi: さいていとりひき
     date: 2018-08-16
-    tags: [取引]
     copy_desc: wmbjo3q
     synonyms: "[アービトラージ](#wmbjo3q)"
 
@@ -722,7 +722,6 @@ definitions:
     label: セカンダリーマーケット
     yomi: せかんだりーまーけっと
     date: 2018-04-21
-    tags: [市場]
     copy_desc: ztat3aq
     synonyms: "[流通市場](#ztat3aq)"
     antonyms: "[発行市場](#bhea8cu) / [プライマリーマーケット](#zdihbyx)"
@@ -740,7 +739,6 @@ definitions:
     label: ゼロクーポン債
     yomi: ぜろくーぽんさい
     date: 2018-08-17
-    tags: ["債券"]
     copy_desc: dtvibix
     synonyms: "[ディスカウント債](#8d8hv2t) / [割引債](#dtvibix)"
 
@@ -751,6 +749,7 @@ definitions:
   - id: 6esenhd
     label: ソーシャルトレード
     yomi: そーしゃるとれーど
+    tags: [取引]
     desc: 他の人が作ったシステムや、取引手法に沿って売買を行うことをソーシャルトレードと言います。真似てトレードを行うため、コピートレードや、ミラートレードとも呼ばれます。
     synonyms: "[コピートレード](#tsnbazx) / [ミラートレード](#qmazk63)"
 
@@ -843,7 +842,6 @@ definitions:
     label: ディスカウント債
     yomi: でぃすかうんとさい
     date: 2018-08-17
-    tags: [債券]
     copy_desc: dtvibix
     synonyms: "[ゼロクーポン債](#z2n4d87), [割引債](#dtvibix)"
 
@@ -887,7 +885,6 @@ definitions:
     label: 店頭取引
     yomi: てんとうとりひき
     date: 2018-04-21
-    tags: [取引]
     copy_desc: spy94om
     synonyms: "[相対取引](#spy94om)"
     antonyms: "[取引所取引](#rse6iwf)"
@@ -1055,7 +1052,6 @@ definitions:
 
   - id: 6cev69c
     label: 日経225
-    tags: [指標]
     copy_desc: ztwbkok
     synonyms: "[日経平均株価](#ztwbkok)"
 
@@ -1125,7 +1121,6 @@ definitions:
   - id: 7ok44oi
     label: 売買高
     yomi: ばいばいだか
-    tags: [取引]
     copy_desc: zucvnsq
     synonyms: "[出来高](#zucvnsq)"
 
@@ -1200,7 +1195,6 @@ definitions:
     label: 非遡求型融資
     yomi: ひそきゅうがたゆうし
     date: 2018-08-19
-    tags: [金融]
     copy_desc: jkszgdu
     synonyms: "[ノンリコースローン](#jkszgdu)"
 
@@ -1357,7 +1351,6 @@ definitions:
     label: "ボックス相場"
     yomi: ぼっくすそうば
     english: Boxed range
-    tags: [相場]
     copy_desc: arubrcg
     synonyms: "[レンジ相場](#arubrcg)"
     antonyms: "[トレンド相場](#gvjzwc4)"
@@ -1635,7 +1628,6 @@ definitions:
     yomi: ろんどんぎんこうかんとりひききんり
     english: "LIBOR: London Interbank Offered Rate"
     date: 2018-04-20
-    tags: [金利]
     copy_desc: ifvteeu
     synonyms: "[LIBOR: London Interbank Offered Rate](#ifvteeu)"
 
@@ -1652,7 +1644,7 @@ definitions:
     label: 割引債
     yomi: わりびきさい
     date: 2018-08-17
-    tags: ["債券"]
+    tags: ["金利", "債券"]
     desc: 利息の受け取りの権利（クーポン）がつかない債券のことを、「ゼロクーポン債」、「ディスカウント債」「割引債」と呼びます（特に海外で発行される割引債はゼロクーポン債と呼ぶのが一般的です）。債権の購入時と売却時の価格差だけが利益となります（償還差益）。クーポンがない代わりに、発行時の価格は額面価格に比べて安く設定されます。例えば、アメリカ国債（ゼロクーポン債）の残存 20 年 8 ヵ月物は、額面 100 ドルのものが 56.92 ドル（利回り 2.73 ％）で購入できます（2018 年 8 月時点）。日本の代表的な割引債は、__国庫短期証券__（2ヵ月・3ヵ月・6ヵ月・1年）です。
     synonyms: "[ゼロクーポン債](#z2n4d87) / [ディスカウント債](#8d8hv2t)"
 
@@ -1666,7 +1658,6 @@ definitions:
   - id: wzu3cn3
     label: 4 本値
     yomi: よんほんね
-    tags: [テクニカル, 取引]
     copy_desc: iimn9aq
     synonyms: "[四本値](#iimn9aq)"
 
@@ -1716,7 +1707,6 @@ definitions:
   - id: iupgowq
     label: "CDB: China Development Bank"
     japanese: 国家開発銀行
-    tags: [中国]
     copy_desc: n4uc4xo
     synonyms: "[国家開発銀行](#n4uc4xo)"
 
@@ -1727,7 +1717,6 @@ definitions:
   - id: ftt6qae
     label: CoCo 債 (Contingent Convertible Bonds)
     date: 2017-06-07
-    tags: [債権]
     copy_desc: 8nqbnyu
     synonyms: "[偶発転換社債](#8nqbnyu)"
 
@@ -1739,8 +1728,8 @@ definitions:
   - id: 74mf44y
     label: "Cross-shareholding"
     japanese: 株式持ち合い
-    synonyms: "[株式持ち合い](#yqdi9k6)"
     copy_desc: yqdi9k6
+    synonyms: "[株式持ち合い](#yqdi9k6)"
 
   ### d
 
@@ -1750,7 +1739,6 @@ definitions:
   - id: o6u6hsr
     label: "DOE: Dividend on Equity Ratio"
     japanese: 自己資本配当率
-    tags: [指標]
     copy_desc: tbf3x8a
     synonyms: "[自己資本配当率](#tbf3x8a)"
 
@@ -1919,7 +1907,6 @@ definitions:
     label: Self-regulatory Organizations
     japanese: 自主規制機関
     date: 2018-08-16
-    tags: [機関, 金商法]
     copy_desc: en7ow6n
     synonyms: "[自主規制機関](#en7ow6n)"
 
@@ -1952,7 +1939,6 @@ definitions:
   - id: id8g4yx
     label: "SQ: Special Quotation"
     japanese: 特別清算指数
-    tags: [指標]
     copy_desc: nnx28av
     synonyms: "[特別清算指数](#nnx28av)"
 
@@ -1981,7 +1967,6 @@ definitions:
     yomi: たいぼー
     japanese: 東京銀行間取引金利
     date: 2018-07-31
-    tags: [金利]
     copy_desc: myyqgm9
     synonyms: "[東京銀行間取引金利](#myyqgm9)"
 
