@@ -4,6 +4,13 @@
   .local-wordCount {
     text-align: right;
   }
+  .local-copied {
+    {{- if .Site.IsServer }}
+      color: gray;
+      background: #eee;
+      border-radius: 0.3em;
+    {{- end }}
+  }
   .local-ref {
   }
   .local-synonyms {
@@ -15,18 +22,12 @@
     content: '＝';
     margin-right: 0.2em;
   }
-  .local-copyDesc {
-    {{- if .Site.IsServer }}
-      color: gray;
-      background: #eee;
-      border-radius: 0.3em;
-    {{- end }}
-  }
   dt {
     color: #dd3300;
     font-weight: bolder;
   }
   dt > .en, dt > .jp {
+    margin-left: 0.5em;
     color: gray;
     font-weight: normal;
     font-style: italic;
@@ -37,6 +38,7 @@
     font-size: smaller;
   }
   dt > .tag {
+    margin-left: 0.5em;
     color: gray;
     font-size: smaller;
     font-weight: normal;
@@ -65,7 +67,7 @@
       {{- end }}
 
       {{- /* copy が定義されていたらオリジナルの単語定義の desc、tags、antonyms、related を採用 */}}
-      {{- $copiedDesc := "" }}
+      {{- $desc := .desc }}
       {{- $tags := .tags }}
       {{- $antonyms := .antonyms }}
       {{- $related := .related }}
@@ -73,7 +75,7 @@
       {{- with .copy }}
         {{- $copiedWord := index (first 1 (where $words "id" "==" .)) 0 }}
         {{- if $copiedWord }}
-          {{- $copiedDesc = $copiedWord.desc }}
+          {{- $desc = $copiedWord.desc }}
           {{- $tags = $copiedWord.tags }}
           {{- $antonyms = $copiedWord.antonyms }}
           {{- $related = $copiedWord.related }}
@@ -107,11 +109,8 @@
           <div class="local-synonyms">{{ . | markdownify }}</div>
         {{- end }}
       </dt>
-      <dd>
-        {{- with .desc }}{{ . | markdownify }}{{ end }}
-        {{- with $copiedDesc }}
-          <div class="local-copyDesc">{{ . | markdownify }}</div>
-        {{- end }}
+      <dd{{ if .copy }} class="local-copied"{{ end }}>
+        {{- with $desc }}{{ . | markdownify }}{{ end }}
 
         {{- with $antonyms }}
           <div class="local-ref">📕対義語: {{ . | markdownify }}</div>
