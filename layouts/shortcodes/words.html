@@ -73,6 +73,8 @@
           {{- $originalWord := index (first 1 (where $words "id" "==" .)) 0 }}
             {{- with $originalWord }}
               <div class="local-copyDesc">{{ .desc | markdownify }}</div>
+            {{- else }}
+              {{- errorf "\"%s (%s)\" の `.copy_desc` に設定された `%s` という ID は定義されていません。" $elem.label $elem.id . }}
             {{- end }}
         {{- end }}
 
