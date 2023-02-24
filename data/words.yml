@@ -724,7 +724,6 @@ definitions:
     date: 2018-04-21
     copy: ztat3aq
     synonyms: "[流通市場](#ztat3aq)"
-    antonyms: "[発行市場](#bhea8cu) / [プライマリーマーケット](#zdihbyx)"
 
   - id: vwonj53
     label: セルサイドアナリスト
@@ -887,7 +886,6 @@ definitions:
     date: 2018-04-21
     copy: spy94om
     synonyms: "[相対取引](#spy94om)"
-    antonyms: "[取引所取引](#rse6iwf)"
 
   - label: テンバガー
     yomi: てんばがー
@@ -1263,7 +1261,6 @@ definitions:
     date: 2018-04-21
     copy: bhea8cu
     synonyms: "[発行市場](#bhea8cu)"
-    antonyms: "[セカンダリーマーケット](#iyy4iyj) / [流通市場](#ztat3aq)"
 
   - label: プライムレート
     english: Prime Rate
@@ -1353,7 +1350,6 @@ definitions:
     english: Boxed range
     copy: arubrcg
     synonyms: "[レンジ相場](#arubrcg)"
-    antonyms: "[トレンド相場](#gvjzwc4)"
 
   - label: ホットマネー
     tags: [市場]

@@ -64,19 +64,31 @@
         {{- errorf "Word \"%s (%s)\" has neither `.desc` nor `.copy`." .label .id  }}
       {{- end }}
 
-      {{- /* copy が定義されていたらオリジナルの単語定義の desc と tags を採用 */}}
+      {{- /* copy が定義されていたらオリジナルの単語定義の desc、tags、antonyms、related を採用 */}}
       {{- $copiedDesc := "" }}
       {{- $tags := .tags }}
+      {{- $antonyms := .antonyms }}
+      {{- $related := .related }}
+
       {{- with .copy }}
         {{- $copiedWord := index (first 1 (where $words "id" "==" .)) 0 }}
         {{- if $copiedWord }}
-          {{- $tags = $copiedWord.tags }}
           {{- $copiedDesc = $copiedWord.desc }}
+          {{- $tags = $copiedWord.tags }}
+          {{- $antonyms = $copiedWord.antonyms }}
+          {{- $related = $copiedWord.related }}
+
           {{- if $elem.desc }}
             {{- errorf "\"%s (%s)\" には `.copy` が設定されているのに `.desc` が設定されています。" $elem.label $elem.id }}
           {{- end }}
           {{- if $elem.tags }}
             {{- errorf "\"%s (%s)\" には `.copy` が設定されているのに `.tags` が設定されています。" $elem.label $elem.id }}
+          {{- end }}
+          {{- if $elem.antonyms }}
+            {{- errorf "\"%s (%s)\" には `.copy` が設定されているのに `.antonyms` が設定されています。" $elem.label $elem.id }}
+          {{- end }}
+          {{- if $elem.related }}
+            {{- errorf "\"%s (%s)\" には `.copy` が設定されているのに `.related` が設定されています。" $elem.label $elem.id }}
           {{- end }}
         {{- else }}
           {{- errorf "\"%s (%s)\" の `.copy` に設定された `%s` という ID は定義されていません。" $elem.label $elem.id . }}
@@ -101,15 +113,11 @@
           <div class="local-copyDesc">{{ . | markdownify }}</div>
         {{- end }}
 
-        {{- with .link }}
-          <div class="local-ref"><a href="#{{ . }}">{{ . }}</a></div>
-        {{- end }}
-
-        {{- with .antonyms }}
+        {{- with $antonyms }}
           <div class="local-ref">📕対義語: {{ . | markdownify }}</div>
         {{- end }}
 
-        {{- with .related }}
+        {{- with $related }}
           <div class="local-ref">📗関連用語: {{ . | markdownify }}</div>
         {{- end }}
 
@@ -120,17 +128,6 @@
         {{- with .more }}
           <div class="local-ref"><a href="{{ . | relURL }}">📘もっと詳しく</a></div>
         {{- end }}
-
-        {{/* - if .related }}
-          <div class="local-ref">関連用語:
-            {{- range .related }}
-              {{- $relatedWords := where $words "id" "==" . }}
-              {{- range $relatedWords }}
-                <a href="#{{ .id }}">{{ .label }}</a>
-              {{- end }}
-            {{- end }}
-          </div>
-        {{- end */}}
       </dt>
     {{- end }}
   </dl>
