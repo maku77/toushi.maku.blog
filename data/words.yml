@@ -452,7 +452,7 @@ definitions:
     label: コピートレード
     yomi: こぴーとれーど
     synonyms: "[ソーシャルトレード](#6esenhd) / [ミラートレード](#qmazk63)"
-    copy_desc: 6esenhd
+    copy: 6esenhd
 
   - label: ゴルディロックス相場（適温相場）
     yomi: ごるでぃろっくすそうば
@@ -472,7 +472,7 @@ definitions:
     label: 裁定取引
     yomi: さいていとりひき
     date: 2018-08-16
-    copy_desc: wmbjo3q
+    copy: wmbjo3q
     synonyms: "[アービトラージ](#wmbjo3q)"
 
   - label: 財テク
@@ -647,7 +647,7 @@ definitions:
   - id: fw5ghan
     label: 新株予約権無償割当
     yomi: しんかぶよやくけんむしょうわりあて
-    copy_desc: tixnw6j
+    copy: tixnw6j
     synonyms: "[ライツ・イシュー](#su45o2p) / [ライツ・オファリング](#tixnw6j)"
 
   - label: 信用リスク
@@ -703,7 +703,7 @@ definitions:
   - id: o5tzfap
     label: 政策決定会合
     yomi: せいさくけっていかいごう
-    copy_desc: f2wm2o5
+    copy: f2wm2o5
     synonyms: "[金融政策決定会合](#f2wm2o5)"
 
   - label: 政府債務残高
@@ -722,7 +722,7 @@ definitions:
     label: セカンダリーマーケット
     yomi: せかんだりーまーけっと
     date: 2018-04-21
-    copy_desc: ztat3aq
+    copy: ztat3aq
     synonyms: "[流通市場](#ztat3aq)"
     antonyms: "[発行市場](#bhea8cu) / [プライマリーマーケット](#zdihbyx)"
 
@@ -739,7 +739,7 @@ definitions:
     label: ゼロクーポン債
     yomi: ぜろくーぽんさい
     date: 2018-08-17
-    copy_desc: dtvibix
+    copy: dtvibix
     synonyms: "[ディスカウント債](#8d8hv2t) / [割引債](#dtvibix)"
 
   - label: 総会屋
@@ -842,7 +842,7 @@ definitions:
     label: ディスカウント債
     yomi: でぃすかうんとさい
     date: 2018-08-17
-    copy_desc: dtvibix
+    copy: dtvibix
     synonyms: "[ゼロクーポン債](#z2n4d87), [割引債](#dtvibix)"
 
   - label: ディフェンシブ・ストック
@@ -885,7 +885,7 @@ definitions:
     label: 店頭取引
     yomi: てんとうとりひき
     date: 2018-04-21
-    copy_desc: spy94om
+    copy: spy94om
     synonyms: "[相対取引](#spy94om)"
     antonyms: "[取引所取引](#rse6iwf)"
 
@@ -1010,7 +1010,7 @@ definitions:
   - id: gtikjt5
     label: トレンドフォロー
     yomi: とれんどふぉろー
-    copy_desc: 8pctq2u
+    copy: 8pctq2u
     synonyms: "[順張り](#8pctq2u)"
 
   ### na
@@ -1052,7 +1052,7 @@ definitions:
 
   - id: 6cev69c
     label: 日経225
-    copy_desc: ztwbkok
+    copy: ztwbkok
     synonyms: "[日経平均株価](#ztwbkok)"
 
   - id: ztwbkok
@@ -1121,7 +1121,7 @@ definitions:
   - id: 7ok44oi
     label: 売買高
     yomi: ばいばいだか
-    copy_desc: zucvnsq
+    copy: zucvnsq
     synonyms: "[出来高](#zucvnsq)"
 
   - id: bhea8cu
@@ -1195,7 +1195,7 @@ definitions:
     label: 非遡求型融資
     yomi: ひそきゅうがたゆうし
     date: 2018-08-19
-    copy_desc: jkszgdu
+    copy: jkszgdu
     synonyms: "[ノンリコースローン](#jkszgdu)"
 
   - label: ひびが入る
@@ -1261,7 +1261,7 @@ definitions:
     label: プライマリーマーケット
     yomi: ぷりまりーまーけっと
     date: 2018-04-21
-    copy_desc: bhea8cu
+    copy: bhea8cu
     synonyms: "[発行市場](#bhea8cu)"
     antonyms: "[セカンダリーマーケット](#iyy4iyj) / [流通市場](#ztat3aq)"
 
@@ -1297,7 +1297,7 @@ definitions:
   - id: b3zi2te
     label: プリンシパル・インベストメント
     yomi: ぷりんしぱる・いんべすとめんと
-    copy_desc: sgem6ju
+    copy: sgem6ju
     synonyms: "[自己勘定投資](#sgem6ju)"
 
   - id: 9d34z9r
@@ -1351,7 +1351,7 @@ definitions:
     label: "ボックス相場"
     yomi: ぼっくすそうば
     english: Boxed range
-    copy_desc: arubrcg
+    copy: arubrcg
     synonyms: "[レンジ相場](#arubrcg)"
     antonyms: "[トレンド相場](#gvjzwc4)"
 
@@ -1411,7 +1411,7 @@ definitions:
   - id: qmazk63
     label: ミラートレード
     yomi: みらーとれーど
-    copy_desc: 6esenhd
+    copy: 6esenhd
     synonyms: "[コピートレード](#tsnbazx) / [ソーシャルトレード](#6esenhd)"
 
   ### mu
@@ -1515,7 +1515,7 @@ definitions:
 
   - id: su45o2p
     label: ライツ・イシュー
-    copy_desc: tixnw6j
+    copy: tixnw6j
     synonyms: "[新株予約権無償割当](#fw5ghan) / [ライツ・オファリング](#tixnw6j)"
 
   - id: tixnw6j
@@ -1628,7 +1628,7 @@ definitions:
     yomi: ろんどんぎんこうかんとりひききんり
     english: "LIBOR: London Interbank Offered Rate"
     date: 2018-04-20
-    copy_desc: ifvteeu
+    copy: ifvteeu
     synonyms: "[LIBOR: London Interbank Offered Rate](#ifvteeu)"
 
   ### ワ行 (wa-column)
@@ -1658,7 +1658,7 @@ definitions:
   - id: wzu3cn3
     label: 4 本値
     yomi: よんほんね
-    copy_desc: iimn9aq
+    copy: iimn9aq
     synonyms: "[四本値](#iimn9aq)"
 
   ### a-z alnum 1-9
@@ -1707,7 +1707,7 @@ definitions:
   - id: iupgowq
     label: "CDB: China Development Bank"
     japanese: 国家開発銀行
-    copy_desc: n4uc4xo
+    copy: n4uc4xo
     synonyms: "[国家開発銀行](#n4uc4xo)"
 
   - label: "CDR"
@@ -1717,7 +1717,7 @@ definitions:
   - id: ftt6qae
     label: CoCo 債 (Contingent Convertible Bonds)
     date: 2017-06-07
-    copy_desc: 8nqbnyu
+    copy: 8nqbnyu
     synonyms: "[偶発転換社債](#8nqbnyu)"
 
   - label: "CP: Commercial Paper"
@@ -1728,7 +1728,7 @@ definitions:
   - id: 74mf44y
     label: "Cross-shareholding"
     japanese: 株式持ち合い
-    copy_desc: yqdi9k6
+    copy: yqdi9k6
     synonyms: "[株式持ち合い](#yqdi9k6)"
 
   ### d
@@ -1739,7 +1739,7 @@ definitions:
   - id: o6u6hsr
     label: "DOE: Dividend on Equity Ratio"
     japanese: 自己資本配当率
-    copy_desc: tbf3x8a
+    copy: tbf3x8a
     synonyms: "[自己資本配当率](#tbf3x8a)"
 
   ### e
@@ -1873,12 +1873,12 @@ definitions:
 
   - id: ohpma5v
     label: "PE: Private Equity"
-    copy_desc: kk3wvxt
+    copy: kk3wvxt
     synonyms: "[プライベート・エクイティ](#kk3wvxt)"
 
   - id: o68iusz
     label: "PE ファンド: Private Equity ファンド"
-    copy_desc: v73vs6f
+    copy: v73vs6f
     synonyms: "[プライベート・エクイティ・ファンド](#v73vs6f)"
 
   - label: "PEX: Palestine Exchange"
@@ -1907,7 +1907,7 @@ definitions:
     label: Self-regulatory Organizations
     japanese: 自主規制機関
     date: 2018-08-16
-    copy_desc: en7ow6n
+    copy: en7ow6n
     synonyms: "[自主規制機関](#en7ow6n)"
 
   - label: Sell Limit
@@ -1939,7 +1939,7 @@ definitions:
   - id: id8g4yx
     label: "SQ: Special Quotation"
     japanese: 特別清算指数
-    copy_desc: nnx28av
+    copy: nnx28av
     synonyms: "[特別清算指数](#nnx28av)"
 
   ### t
@@ -1967,7 +1967,7 @@ definitions:
     yomi: たいぼー
     japanese: 東京銀行間取引金利
     date: 2018-07-31
-    copy_desc: myyqgm9
+    copy: myyqgm9
     synonyms: "[東京銀行間取引金利](#myyqgm9)"
 
   - label: "TOB: Take Over Bid"
@@ -1981,7 +1981,7 @@ definitions:
   - id: 72mvrj9
     label: "TTM: Telegraphic Transfer Middle Rate"
     japanese: 仲値
-    copy_desc: 9cwhh8y
+    copy: 9cwhh8y
     synonyms: "[仲値](#9cwhh8y)"
 
   ### u
