@@ -7,7 +7,8 @@ definitions:
     desc: >
       異なる市場間で、本質的には同じ商品を、異なる価格や金利で売買することによって利益をあげようとする取引。
       裁定取引ともいいます（ここでいう裁定とは、手動で取引するという意味での裁定ではないことに注意）。
-    related: "[アーブ](#xfrrhqz) / [裁定取引](#jpoja29)"
+    synonyms: "[裁定取引](#jpoja29)"
+    related: "[アーブ](#xfrrhqz)"
 
   - id: xfrrhqz
     label: アーブ
@@ -22,7 +23,11 @@ definitions:
     yomi: あいたいとりひき
     date: 2017-12-27
     tags: [取引]
-    desc: 市場を介さずに、1 対 1 の売り手と買い手による合意によって成立する取引。日本の FX 業者は相対取引を行っています（店頭FX）。
+    desc: >
+      取引所以外で行われる取引で、市場を介さずに 1 対 1 の売り手と買い手による合意によって成立するものを相対取引といいます。
+      取引所の上場基準を満たしていない証券などが取引されますが、日本証券業協会の定めた規則に従います。
+      店頭取引とも呼ばれますが、文字通り「店頭」で取引されるわけではなく、ネットなどを介して取引できます。
+      ほとんどの日本の FX 業者は相対取引を行っており、店頭 FX と呼ばれます。
     synonyms: "[店頭取引](#4cfi2ke)"
     antonyms: "[取引所取引](#rse6iwf)"
 
@@ -254,6 +259,7 @@ definitions:
     yomi: きさき
     date: 2020-01-27
     tags: [先物]
+    copy_desc: 9gqjvf4
     related: "[期近](#9gqjvf4)"
 
   - label: 基準価額
@@ -338,7 +344,7 @@ definitions:
     yomi: ぐうはつてんかんしゃさい
     date: 2017-06-07
     tags: [債権]
-    desc: 転換社債のひとつで、発行側の都合で株式に転換されます。通常、業績が悪くなった場合など、ネガティブなケースで転換が行われます。CoCo 債 (Contingent Convertible Bonds) とも呼ばれます。
+    desc: 転換社債のひとつで、発行側の都合で株式に転換されます。通常、業績が悪くなった場合など、ネガティブなケースで転換が行われます。
     synonyms: "[CoCo 債 (Contingent Convertible Bonds)](#ftt6qae)"
 
   - label: グリーンシート市場、グリーンシート銘柄
@@ -390,7 +396,8 @@ definitions:
   - id: xm6ksmb
     label: 権利落ち日
     yomi: けんりおちび
-    synonyms: "[権利付最終日](#iki4u4e)"
+    desc: "[権利付最終日](#iki4u4e) の翌営業日。得られる権利分の価格下落が発生するのが一般的です。"
+    related: "[権利付最終日](#iki4u4e)"
 
   - id: iki4u4e
     label: 権利付最終日
@@ -398,8 +405,8 @@ definitions:
     desc: >
       配当や株式分割の権利確定日から数えて 4 営業日前の日。
       株主としての権利を得るためには、権利付最終日の取引終了時点で株式を保有しておく必要があります。
-      権利付最終日の翌営業日のことを「権利落ち日」と言い、得られる権利分の価格下落が発生するのが一般的です。
-    synonyms: "[権利落ち日](#xm6ksmb)"
+      権利付最終日の翌営業日のことを [権利落ち日](#xm6ksmb) と言います。
+    related: "[権利落ち日](#xm6ksmb)"
 
   - label: 現渡し
     yomi: げんわたし
@@ -444,6 +451,7 @@ definitions:
     label: コピートレード
     yomi: こぴーとれーど
     synonyms: "[ソーシャルトレード](#6esenhd) / [ミラートレード](#qmazk63)"
+    copy_desc: 6esenhd
 
   - label: ゴルディロックス相場（適温相場）
     yomi: ごるでぃろっくすそうば
@@ -464,7 +472,8 @@ definitions:
     yomi: さいていとりひき
     date: 2018-08-16
     tags: [取引]
-    related: "[アービトラージ](#wmbjo3q)"
+    copy_desc: wmbjo3q
+    synonyms: "[アービトラージ](#wmbjo3q)"
 
   - label: 財テク
     desc: 本業に必要な分以上の資金を運用することで利ザヤを稼いだりすること。1980 年代に企業による投資の自由化が進み、急速に増えました。不動産価格が上がる原因のひとつとなりました。
@@ -638,7 +647,8 @@ definitions:
   - id: fw5ghan
     label: 新株予約権無償割当
     yomi: しんかぶよやくけんむしょうわりあて
-    synonyms: "[ライツ・イシュー](#su45o2p) / →[ライツ・オファリング](#tixnw6j)"
+    copy_desc: tixnw6j
+    synonyms: "[ライツ・イシュー](#su45o2p) / [ライツ・オファリング](#tixnw6j)"
 
   - label: 信用リスク
     yomi: しんようりすく
@@ -653,24 +663,34 @@ definitions:
     date: 2021-07-04
     tags: [取引]
     desc: 隠れて注文を出すアルゴリズム。例えば、1000円で何枚か買いたいとき、板に1000円の売りが出た瞬間に買いをぶつけるように動作します。買枚数と売枚数が 0 の価格帯に注文を出したときに、一瞬で約定してしまうときは、ステルス注文が仕掛けられています。主に大口が使う手法ですが、セリングクライマックスなどでは、大口も注文をさらけ出して来るため、そこが大底になって相場が反転しやすくなります。
+
   - label: ストップ高
     yomi: すとっぷだか
     date: 2020-01-27
     tags: [相場]
     desc: 価格が値幅制限の上限に張り付いたまま売買が成立しない状態になること。
+
   - label: スプーフィング
     yomi: すぷーふぃんぐ
     date: 2021-06-16
     tags: [取引]
     desc: 取引するつもりのない注文を出して、他の投資家に誤解を与える行為。
+
   - label: スラストアップデイ
     yomi: すらすとあっぷでい
     tags: [相場]
     desc: プライスアクションの一種。前日の高値よりも高く大引すること。逆は、スラストダウンデイ。
+
   - label: スワップ
     yomi: すわっぷ
     tags: [取引]
     desc: 異なるキャッシュフローを交換する取引のこと。
+
+  - label: スワップレート
+    yomi: すわっぷれーと
+    date: 2023-02-24
+    tags: [金利]
+    desc: インターバンク市場で取引されているスワップの固定金利。
 
   ### se
 
@@ -683,6 +703,7 @@ definitions:
   - id: o5tzfap
     label: 政策決定会合
     yomi: せいさくけっていかいごう
+    copy_desc: f2wm2o5
     synonyms: "[金融政策決定会合](#f2wm2o5)"
 
   - label: 政府債務残高
@@ -702,6 +723,7 @@ definitions:
     yomi: せかんだりーまーけっと
     date: 2018-04-21
     tags: [市場]
+    copy_desc: ztat3aq
     synonyms: "[流通市場](#ztat3aq)"
     antonyms: "[発行市場](#bhea8cu) / [プライマリーマーケット](#zdihbyx)"
 
@@ -719,7 +741,8 @@ definitions:
     yomi: ぜろくーぽんさい
     date: 2018-08-17
     tags: ["債券"]
-    synonyms: "[ディスカウント債](#8d8hv2t) / →[割引債](#dtvibix)"
+    copy_desc: dtvibix
+    synonyms: "[ディスカウント債](#8d8hv2t) / [割引債](#dtvibix)"
 
   - label: 総会屋
     english: corporate racketeer; fixers / enforcers / manipulators of stockholders' meetings
@@ -728,7 +751,7 @@ definitions:
   - id: 6esenhd
     label: ソーシャルトレード
     yomi: そーしゃるとれーど
-    desc: 他の人が作ったシステムや、取引手法に沿って売買を行うこと。真似てトレードを行うため、[コピートレード](#tsnbazx)や、[ミラートレード](#qmazk63)とも呼ばれます。
+    desc: 他の人が作ったシステムや、取引手法に沿って売買を行うことをソーシャルトレードと言います。真似てトレードを行うため、コピートレードや、ミラートレードとも呼ばれます。
     synonyms: "[コピートレード](#tsnbazx) / [ミラートレード](#qmazk63)"
 
   - label: ソーシャルレンディング
@@ -821,7 +844,8 @@ definitions:
     yomi: でぃすかうんとさい
     date: 2018-08-17
     tags: [債券]
-    related: "[ゼロクーポン債](#z2n4d87), [→割引債](#dtvibix)"
+    copy_desc: dtvibix
+    synonyms: "[ゼロクーポン債](#z2n4d87), [割引債](#dtvibix)"
 
   - label: ディフェンシブ・ストック
     yomi: でぃふぇんしぶ・すとっく
@@ -830,8 +854,9 @@ definitions:
   - id: zucvnsq
     label: 出来高
     yomi: できだか
+    english: "trading volume; turnover"
     tags: [取引]
-    desc: trading volume; turnover。＝売買高。市場で売買の成立した株式や債権などの合計数量。株式で言えば、売買された株数。
+    desc: 市場で売買の成立した株式や債権などの合計数量。株式で言えば、売買された株数。
     synonyms: "[売買高](#7ok44oi)"
 
   - label: 手サイン
@@ -862,11 +887,8 @@ definitions:
     label: 店頭取引
     yomi: てんとうとりひき
     date: 2018-04-21
-    tags: [市場]
-    desc: >
-      取引所以外で行なわれる取引のことを店頭取引と言います。
-      取引所の上場基準を満たしていない証券が取引されます。
-      日本証券業協会の定めた規則によって取引されます。
+    tags: [取引]
+    copy_desc: spy94om
     synonyms: "[相対取引](#spy94om)"
     antonyms: "[取引所取引](#rse6iwf)"
 
@@ -928,6 +950,7 @@ definitions:
     label: 特別参加者
     yomi: とくべつさんかしゃ
     date: 2021-12-15
+    desc: "[国債市場特別参加者制度](#f3n72bf) において、特別枠の国際入札に参加する権利を得た銀行や証券会社のこと。"
     tags: [市場]
     related: "[国債市場特別参加者制度](#f3n72bf)"
 
@@ -985,6 +1008,7 @@ definitions:
   - id: gtikjt5
     label: トレンドフォロー
     yomi: とれんどふぉろー
+    copy_desc: 8pctq2u
     synonyms: "[順張り](#8pctq2u)"
 
   ### na
@@ -1027,6 +1051,7 @@ definitions:
   - id: 6cev69c
     label: 日経225
     tags: [指標]
+    copy_desc: ztwbkok
     synonyms: "[日経平均株価](#ztwbkok)"
 
   - id: ztwbkok
@@ -1058,7 +1083,7 @@ definitions:
       借金を返せなくなった場合に、その担保の価値を超えた返済を求めないローン。
       リスクが高い分、金利が高く、うまく運用すれば貸し手は十分な利ざやを稼ぐことができます。
       借り手も、事業がうまくいかなかったときに失うものが担保だけで済むので、大きなダメージを受けなくて済みます。
-      欧米では一般的なローンの形態ですが、日本では担保が値下がりしたとしても全額返済を求められるリコースローンが主流です。
+      欧米では一般的なローンの形態ですが、日本では担保が値下がりしたとしても全額返済を求められるリコースローン（遡及型融資）が主流です。
     synonyms: "[非遡求型融資](#fodu8sz)"
 
   ### ha
@@ -1096,6 +1121,7 @@ definitions:
     label: 売買高
     yomi: ばいばいだか
     tags: [取引]
+    copy_desc: zucvnsq
     synonyms: "[出来高](#zucvnsq)"
 
   - id: bhea8cu
@@ -1105,9 +1131,8 @@ definitions:
     tags: [市場]
     desc: >
       証券市場は機能面から発行市場と [流通市場](#ztat3aq) に分かれます。
-      発行市場は、新規に発行される証券が、企業などの発行者から直接、あるいは金融商品取引業社（証券会社）などを介して、投資者（投資家）に第一次取得される市場です。
+      発行市場（＝プライマリーマーケット）は、新規に発行される証券が、企業などの発行者から直接、あるいは金融商品取引業社（証券会社）などを介して、投資者（投資家）に第一次取得される市場です。
       発行市場は、当事者間での取引（[相対取引](#spy94om)）で証券の売買が行われます。
-      発行市場は、[プライマリーマーケット](#zdihbyx) とも呼ばれます。
     synonyms: "[プライマリーマーケット](#zdihbyx)"
     antonyms: "[セカンダリーマーケット](#iyy4iyj) / [流通市場](#ztat3aq)"
 
@@ -1171,6 +1196,7 @@ definitions:
     yomi: ひそきゅうがたゆうし
     date: 2018-08-19
     tags: [金融]
+    copy_desc: jkszgdu
     synonyms: "[ノンリコースローン](#jkszgdu)"
 
   - label: ひびが入る
@@ -1219,9 +1245,10 @@ definitions:
   - id: kk3wvxt
     label: プライベート・エクイティ
     yomi: ぷらいべーと・えくいてぃ
-    english: PE (Private Equity)
+    english: "PE: Private Equity"
     tags: [戦略]
     desc: 上場していない株式のこと。ただし、買収に関するコンテキストで PE という言葉を使う場合、企業が必要としている資金を提供する代わりに、積極的な経営関与やガバナンスを行う投資手法のことを指します。未上場のベンチャー企業に投資するベンチャー投資（ベンチャー・キャピタル）や、バイアウト投資などがあります。米プライベートエクイティ投資会社としては、カーライル・グループやアポロ・グローバル・マネジメントなどがよく知られています。
+    synonyms: "[PE: Private Equity](#ohpma5v)"
     related: "[エクイティ](#5fg85y9) / [バイアウト投資](#bzyd6b2) / [プライベート・エクイティ・ファンド](#v73vs6f)"
 
   - id: v73vs6f
@@ -1235,6 +1262,7 @@ definitions:
     label: プライマリーマーケット
     yomi: ぷりまりーまーけっと
     date: 2018-04-21
+    copy_desc: bhea8cu
     synonyms: "[発行市場](#bhea8cu)"
     antonyms: "[セカンダリーマーケット](#iyy4iyj) / [流通市場](#ztat3aq)"
 
@@ -1270,6 +1298,7 @@ definitions:
   - id: b3zi2te
     label: プリンシパル・インベストメント
     yomi: ぷりんしぱる・いんべすとめんと
+    copy_desc: sgem6ju
     synonyms: "[自己勘定投資](#sgem6ju)"
 
   - id: 9d34z9r
@@ -1324,6 +1353,7 @@ definitions:
     yomi: ぼっくすそうば
     english: Boxed range
     tags: [相場]
+    copy_desc: arubrcg
     synonyms: "[レンジ相場](#arubrcg)"
     antonyms: "[トレンド相場](#gvjzwc4)"
 
@@ -1383,6 +1413,7 @@ definitions:
   - id: qmazk63
     label: ミラートレード
     yomi: みらーとれーど
+    copy_desc: 6esenhd
     synonyms: "[コピートレード](#tsnbazx) / [ソーシャルトレード](#6esenhd)"
 
   ### mu
@@ -1486,7 +1517,8 @@ definitions:
 
   - id: su45o2p
     label: ライツ・イシュー
-    synonyms: "[新株予約権無償割当](#fw5ghan) / →[ライツ・オファリング](#tixnw6j)"
+    copy_desc: tixnw6j
+    synonyms: "[新株予約権無償割当](#fw5ghan) / [ライツ・オファリング](#tixnw6j)"
 
   - id: tixnw6j
     label: ライツ・オファリング
@@ -1534,9 +1566,8 @@ definitions:
     tags: [市場]
     desc: >
       証券市場は機能面から [発行市場](#bhea8cu) と流通市場に分かれます。
-      流通市場は、発行済の証券が、第二次、第三次投資者に転売、流通される市場です。
-      流通市場における取引には、 __(1)[取引所取引](#rse6iwf)__ （東証などでの売買）の他に、 __(2)[店頭取引](#4cfi2ke)__ や __(3)PTS（私設取引システム）__ があります。
-      流通市場は、[セカンダリーマーケット](#iyy4iyj)とも呼ばれます。
+      流通市場（＝セカンダリーマーケット）は、発行済の証券が、第二次、第三次投資者に転売、流通される市場です。
+      流通市場における取引には、 (1) [取引所取引](#rse6iwf)（東証などでの売買）の他に、 (2) [店頭取引](#4cfi2ke) や、(3) PTS（私設取引システム）があります。
     synonyms: "[セカンダリーマーケット](#iyy4iyj)"
     antonyms: "[発行市場](#bhea8cu) / [プライマリーマーケット](#zdihbyx)"
 
@@ -1600,6 +1631,7 @@ definitions:
     english: "LIBOR: London Interbank Offered Rate"
     date: 2018-04-20
     tags: [金利]
+    copy_desc: ifvteeu
     synonyms: "[LIBOR: London Interbank Offered Rate](#ifvteeu)"
 
   ### ワ行 (wa-column)
@@ -1616,7 +1648,7 @@ definitions:
     yomi: わりびきさい
     date: 2018-08-17
     tags: ["債券"]
-    desc: 利息の受け取りの権利（クーポン）がつかない債券で、「[ゼロクーポン債](#z2n4d87)」、「[ディスカウント債](#8d8hv2t)」とも呼ばれます（特に海外で発行される割引債はゼロクーポン債と呼ぶのが一般的です）。債権の購入時と売却時の価格差だけが利益となります（償還差益）。クーポンがない代わりに、発行時の価格は額面価格に比べて安く設定されます。例えば、アメリカ国債（ゼロクーポン債）の残存 20 年 8 ヵ月物は、額面 100 ドルのものが 56.92 ドル（利回り 2.73 ％）で購入できます（2018 年 8 月時点）。日本の代表的な割引債は、__国庫短期証券__（2ヵ月・3ヵ月・6ヵ月・1年）です。
+    desc: 利息の受け取りの権利（クーポン）がつかない債券のことを、「ゼロクーポン債」、「ディスカウント債」「割引債」と呼びます（特に海外で発行される割引債はゼロクーポン債と呼ぶのが一般的です）。債権の購入時と売却時の価格差だけが利益となります（償還差益）。クーポンがない代わりに、発行時の価格は額面価格に比べて安く設定されます。例えば、アメリカ国債（ゼロクーポン債）の残存 20 年 8 ヵ月物は、額面 100 ドルのものが 56.92 ドル（利回り 2.73 ％）で購入できます（2018 年 8 月時点）。日本の代表的な割引債は、__国庫短期証券__（2ヵ月・3ヵ月・6ヵ月・1年）です。
     synonyms: "[ゼロクーポン債](#z2n4d87) / [ディスカウント債](#8d8hv2t)"
 
   ### 数値 (0-9)
@@ -1630,6 +1662,7 @@ definitions:
     label: 4 本値
     yomi: よんほんね
     tags: [テクニカル, 取引]
+    copy_desc: iimn9aq
     synonyms: "[四本値](#iimn9aq)"
 
   ### a-z alnum 1-9
@@ -1679,6 +1712,7 @@ definitions:
     label: "CDB: China Development Bank"
     japanese: 国家開発銀行
     tags: [中国]
+    copy_desc: n4uc4xo
     synonyms: "[国家開発銀行](#n4uc4xo)"
 
   - label: "CDR"
@@ -1689,6 +1723,7 @@ definitions:
     label: CoCo 債 (Contingent Convertible Bonds)
     date: 2017-06-07
     tags: [債権]
+    copy_desc: 8nqbnyu
     synonyms: "[偶発転換社債](#8nqbnyu)"
 
   - label: "CP: Commercial Paper"
@@ -1700,6 +1735,7 @@ definitions:
     label: "Cross-shareholding"
     japanese: 株式持ち合い
     synonyms: "[株式持ち合い](#yqdi9k6)"
+    copy_desc: yqdi9k6
 
   ### d
 
@@ -1710,6 +1746,7 @@ definitions:
     label: "DOE: Dividend on Equity Ratio"
     japanese: 自己資本配当率
     tags: [指標]
+    copy_desc: tbf3x8a
     synonyms: "[自己資本配当率](#tbf3x8a)"
 
   ### e
@@ -1841,11 +1878,14 @@ definitions:
 
   ### p
 
-  - label: "PE: Private Equity"
+  - id: ohpma5v
+    label: "PE: Private Equity"
+    copy_desc: kk3wvxt
     synonyms: "[プライベート・エクイティ](#kk3wvxt)"
 
   - id: o68iusz
     label: "PE ファンド: Private Equity ファンド"
+    copy_desc: v73vs6f
     synonyms: "[プライベート・エクイティ・ファンド](#v73vs6f)"
 
   - label: "PEX: Palestine Exchange"
@@ -1875,6 +1915,7 @@ definitions:
     japanese: 自主規制機関
     date: 2018-08-16
     tags: [機関, 金商法]
+    copy_desc: en7ow6n
     synonyms: "[自主規制機関](#en7ow6n)"
 
   - label: Sell Limit
@@ -1907,6 +1948,7 @@ definitions:
     label: "SQ: Special Quotation"
     japanese: 特別清算指数
     tags: [指標]
+    copy_desc: id8g4yx
     synonyms: "[特別清算指数](#nnx28av)"
 
   ### t
@@ -1935,6 +1977,7 @@ definitions:
     japanese: 東京銀行間取引金利
     date: 2018-07-31
     tags: [金利]
+    copy_desc: myyqgm9
     synonyms: "[東京銀行間取引金利](#myyqgm9)"
 
   - label: "TOB: Take Over Bid"
@@ -1948,6 +1991,7 @@ definitions:
   - id: 72mvrj9
     label: "TTM: Telegraphic Transfer Middle Rate"
     japanese: 仲値
+    copy_desc: 9cwhh8y
     synonyms: "[仲値](#9cwhh8y)"
 
   ### u

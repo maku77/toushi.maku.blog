@@ -6,6 +6,13 @@
   }
   .local-ref {
   }
+  .local-copyDesc {
+    {{- if .Site.IsServer }}
+      color: gray;
+      background: #eee;
+      border-radius: 0.3em;
+    {{- end }}
+  }
   dt {
     color: #dd3300;
     font-weight: bolder;
@@ -42,6 +49,11 @@
 
   <dl>
     {{- range $index, $elem := $words }}
+      {{- /* desc も copy_desc も定義されていない単語が見つかったらエラー表示 */}}
+      {{- if and (not (isset . "desc")) (not (isset . "copy_desc")) }}
+        {{- errorf "Word \"%s (%s)\" has neither `.desc` nor `.copy_desc`." .label .id  }}
+      {{- end }}
+
       <dt>
         <span class="index">{{ add $index 1 }}. </span>
         {{- with .id }}<a id="{{ . }}"></a>{{ end }}
@@ -56,6 +68,13 @@
       </dt>
       <dd>
         {{- with .desc }}{{ . | markdownify }}{{ end }}
+
+        {{- with .copy_desc }}
+          {{- $originalWord := index (first 1 (where $words "id" "==" .)) 0 }}
+            {{- with $originalWord }}
+              <div class="local-copyDesc">{{ .desc | markdownify }}</div>
+            {{- end }}
+        {{- end }}
 
         {{- with .link }}
           <div class="local-ref"><a href="#{{ . }}">{{ . }}</a></div>
