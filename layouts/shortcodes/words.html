@@ -6,6 +6,15 @@
   }
   .local-ref {
   }
+  .local-synonyms {
+    color: #666;
+    font-weight: normal;
+    margin-left: 3em;
+  }
+  .local-synonyms::before {
+    content: '＝';
+    margin-right: 0.2em;
+  }
   .local-copyDesc {
     {{- if .Site.IsServer }}
       color: gray;
@@ -38,6 +47,7 @@
     background: #efefef;
   }
   dd {
+    color: #333;
     margin-top: 0.3em;
     font-weight: normal;
   }
@@ -65,6 +75,10 @@
         {{ range .tags }}
           <span class="tag">{{ . }}</span>
         {{ end }}
+
+        {{- with .synonyms }}
+          <div class="local-synonyms">{{ . | markdownify }}</div>
+        {{- end }}
       </dt>
       <dd>
         {{- with .desc }}{{ . | markdownify }}{{ end }}
@@ -80,10 +94,6 @@
 
         {{- with .link }}
           <div class="local-ref"><a href="#{{ . }}">{{ . }}</a></div>
-        {{- end }}
-
-        {{- with .synonyms }}
-          <div class="local-ref">📙同義語: {{ . | markdownify }}</div>
         {{- end }}
 
         {{- with .antonyms }}
