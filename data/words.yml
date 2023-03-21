@@ -1641,6 +1641,14 @@ definitions:
 
   ### ri
 
+  - id: tdtxyef
+    label: リクイディティ・プロバイダー
+    yomi: りくいでぃてぃ・ぷろばいだー
+    date: 2023-03-18
+    desc: 市場において流動性（リクイディティ）を提供する金融機関。
+    tags: [市場]
+    synonyms: "[Liquidity Provider](#n77z253)"
+
   - label: リクスバンク
     yomi: りくすばんく
     date: 2020-02-04
@@ -1945,6 +1953,11 @@ definitions:
       世界の金利の目安とされていましたが、2013 年の夏、談合によって不正操作されていたことが明るみになりました。
     synonyms: "[ロンドン銀行間取引金利](#2iimr75)"
     related: "[TIBOR（東京銀行間取引金利）](#myyqgm9)"
+
+  - id: n77z253
+    label: "Liquidity Provider"
+    copy: tdtxyef
+    synonyms: "[リクイディティ・プロバイダー](#tdtxyef)"
 
   ### m
 
