@@ -19,3 +19,7 @@ googleAnalytics = "UA-63069513-2"
   AmazonId = "maku04-22"
   CustomSearchId = "partner-pub-6317852277883092:4842999464"
 
+[module]
+[[module.imports]]
+  path = "github.com/maku77/hugo-module-maku-common"
+
