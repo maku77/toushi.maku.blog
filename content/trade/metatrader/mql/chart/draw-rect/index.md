@@ -96,7 +96,7 @@ if (!::ObjectCreate(0, "Rect1", OBJ_RECTANGLE_LABEL, 0, 0, 0)) {
 
 ```cpp
 #property copyright "maku"
-#property link      "https://memoja.net/"
+#property link      "https://toushi.maku.blog/"
 #property version   "1.00"
 #property strict
 #property indicator_chart_window

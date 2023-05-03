@@ -1,4 +1,4 @@
-module github.com/maku77/memoja.net
+module github.com/maku77/toushi.maku.blog
 
 go 1.18
 
