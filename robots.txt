@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://memoja.net/sitemap.xml
+Sitemap: https://toushi.maku.blog/sitemap.xml
