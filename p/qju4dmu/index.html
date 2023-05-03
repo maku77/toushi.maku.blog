@@ -56,7 +56,7 @@ bool ObjectCreate( long chart_id, // チャート識別子（0 はカレント�
 </span></span><span class=line><span class=cl><span class=o>::</span><span class=n>ObjectSetInteger</span><span class=p>(</span><span class=n>chart</span><span class=p>,</span> <span class=n>name</span><span class=p>,</span> <span class=n>OBJPROP_SELECTED</span><span class=p>,</span> <span class=nb>false</span><span class=p>);</span></span></span></code></pre></div></div></figure><p>矩形オブジェクトの <code>OBJPROP_BACK</code> プロパティの設定は重要です。
 この値を <code>true</code> にしておかないと、ローソク足よりも前面に矩形が描画されて、ローソク足が隠れてしまいます。</p><h2 id=サンプルコード>サンプルコード</h2><p>下記のサンプルコードは、画面左上に青色の矩形を表示するだけの簡単なインジケーターの実装例です。
 インジケーターをチャートにアタッチすると矩形が表示され (<code>OnInit</code>)、デタッチすると矩形が削除されます (<code>OnDeinit</code>)。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=cp>#property copyright &#34;maku&#34;
-</span></span></span><span class=line><span class=cl><span class=cp>#property link      &#34;https:</span><span class=c1>//memoja.net/&#34;
+</span></span></span><span class=line><span class=cl><span class=cp>#property link      &#34;https:</span><span class=c1>//toushi.maku.blog/&#34;
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=cp>#property version   &#34;1.00&#34;
 </span></span></span><span class=line><span class=cl><span class=cp>#property strict
 </span></span></span><span class=line><span class=cl><span class=cp>#property indicator_chart_window
