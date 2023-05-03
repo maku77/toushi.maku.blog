@@ -1,0 +1,13 @@
+name: Build and deploy website
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: maku77/maku.blog/.github/workflows/main.yml@main
+    with:
+      domain: 'toushi.maku.blog'
+
