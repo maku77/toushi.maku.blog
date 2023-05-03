@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="297.5" height="141.242" viewBox="0, 0, 297.5, 141.242">
+  <g id="レイヤー_1" transform="translate(-68.5, -148.5)">
+    <path d="M79.5,257.5 L79.5,257.5" fill-opacity="0" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <g>
+      <path d="M75.5,266.754 C125.5,315.5 114.698,245.901 155.5,225.5 C175.5,215.5 184.408,251.023 206.5,245.5 C230.715,239.446 235.5,195.5 255.5,185.5 C278.207,174.146 280.81,224.063 306.5,215.5 C332.186,206.938 335.147,183.714 341.744,164.659" fill-opacity="0" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M344.797,165.911 L345.083,156.517 L338.69,163.407 M341.744,164.659 L345.083,156.517" fill-opacity="0" stroke="#000000" stroke-width="1.5" stroke-opacity="1"/>
+    </g>
+    <path d="M275.5,219.5 L365.5,219.5" fill-opacity="0" stroke="#EE0066" stroke-width="1.5" stroke-dasharray="4.5,3"/>
+    <path d="M320.5,211.5 C317.739,211.5 315.5,209.709 315.5,207.5 C315.5,205.291 317.739,203.5 320.5,203.5 C323.261,203.5 325.5,205.291 325.5,207.5 C325.5,209.709 323.261,211.5 320.5,211.5 z" fill-opacity="0" stroke="#EE0066" stroke-width="3"/>
+    <g>
+      <path d="M330.431,195.5 C340.859,206.648 343.157,232.017 344.813,255.624" fill-opacity="0" stroke="#0022EE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M341.521,255.853 L345.424,264.403 L348.106,255.395 M344.813,255.624 L345.424,264.403" fill-opacity="0" stroke="#0022EE" stroke-width="1.5" stroke-opacity="1"/>
+    </g>
+    <text transform="matrix(1, 0, 0, 1, 303.004, 199.5)">
+      <tspan x="-8.004" y="7.5" font-family="ArialMT" font-size="24" fill="#EE0066">A</tspan>
+    </text>
+  </g>
+</svg>

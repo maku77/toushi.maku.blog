@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ツール on 投資で実現！不労所得生活</title><link>https://memoja.net/tags/%E3%83%84%E3%83%BC%E3%83%AB/</link><description>Recent content in ツール on 投資で実現！不労所得生活</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Mon, 07 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://memoja.net/tags/%E3%83%84%E3%83%BC%E3%83%AB/index.xml" rel="self" type="application/rss+xml"/><item><title>資産配分シミュレーター（高橋ダン氏のライオン戦略用）</title><link>https://memoja.net/p/jxanz7d/</link><pubDate>Mon, 07 Dec 2020 00:00:00 +0000</pubDate><guid>https://memoja.net/p/jxanz7d/</guid><description>投資資金を振り分けるための計算機 高橋ダン氏の書籍 『お金の増やし方』 、『勝利の投資術』 で紹介されている「ライオン戦略」は、長期投資の戦略として非常に参考になります。 簡単に言うと、投資用の資金を「長期投資用、短期投資用」の 2 つに分け、さらに長期投資用の資金を一定の比率でいろいろな資産に分散投資する戦略です。
+下記のツールは、投資資金を一定の比率で各資産に分配するための計算機です。 投資資金のところに金額を入力すると、それぞれいくら配分すればよいか表示されます（割合は固定してます）。
+投資資金: 万円 長期投資（8割） 万円 &amp;nbsp; 株式・社債・不動産（5割） 万円 &amp;nbsp; コモディティ（3割） 万円 &amp;nbsp; 国債・現金（2割） 万円 短期投資（2割） 万円 各資産について まず、「長期投資」と「短期投資」に使う資金は口座（証券口座）を分けて管理 することで、比率を守って投資できるようにします。 長期投資部分は、毎月いろいろな領域の ETF を少しずつ買っていくことで、分散投資します（シャープレシオを上げるのが重要）。 特定の領域の資産割合が大きくなってしまった場合は、別の領域の ETF の購入割合を大きくするなどして毎月リバランスします。
+長期投資（8割） 長期投資用の資産は長く持ち続けることによる複利効果を狙います。 短期的な大きなリターンは期待せず、多くの商品に分散投資することで安定したリターンを確保します。 出来高が大きく、信託報酬（経費率）の低い ETF を活用します。
+長期投資資産のカテゴリ どう分散するか？ 具体的な ETF 例 株式・社債・不動産（5割）
+（経済成長時に上昇する部分） 「先進国／途上国」、
+「ドル建て／円建て／ユーロ建て」 VEA, VWO, SPY,
+1615, 1306, 2800,
+FXI, SX5S, FEZ,
+EIDO, HYG コモディティ（3割）
+（経済危機に備える部分） 貴金属（金／銀／プラチナ）、
+ベースメタル（亜鉛／鉛／アルミニウム）、
+原油、天然ガス、農業商品、ビットコイン GLD, IAU, GDX,
+GDXJ, SLV, PPLT,</description></item></channel></rss>

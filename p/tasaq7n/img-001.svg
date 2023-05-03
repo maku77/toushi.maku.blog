@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="438" height="167" viewBox="0, 0, 438, 167">
+  <g id="レイヤー_1" transform="translate(-18, -42)">
+    <g>
+      <path d="M156,156 L180,156 L180,192 L156,192 L156,156 z" fill="#FFFFFF"/>
+      <path d="M180,156 L180,192 L156,192 L156,156 L180,156 z M178,158 L158,158 L158,190 L178,190 L178,158 z" fill="#000000"/>
+    </g>
+    <g>
+      <path d="M216,60 L240,60 L240,97.5 L216,97.5 L216,60 z" fill="#000000"/>
+      <path d="M240,60 L240,97.5 L216,97.5 L216,60 L240,60 z M238,62 L218,62 L218,95.5 L238,95.5 L238,62 z" fill="#000000"/>
+    </g>
+    <path d="M168.5,132.5 L168.5,156.5" fill-opacity="0" stroke="#000000" stroke-width="2"/>
+    <g>
+      <path d="M252.5,54.5 L252.5,102.5" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+      <path d="M255.5,56.5 L252.5,49.5 L249.5,56.5 M252.5,54.5 L252.5,49.5 M257.5,48.5 L247.5,48.5" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="1"/>
+      <path d="M249.5,100.5 L252.5,107.5 L255.5,100.5 M252.5,102.5 L252.5,107.5 M247.5,108.5 L257.5,108.5" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="1"/>
+    </g>
+    <path d="M168.5,192.5 L168.5,204.5" fill-opacity="0" stroke="#000000" stroke-width="2"/>
+    <path d="M228.5,48.5 L228.5,60.5" fill-opacity="0" stroke="#000000" stroke-width="2"/>
+    <text transform="matrix(1, 0, 0, 1, 360, 79.5)">
+      <tspan x="-96" y="-1.5" font-family="HiraginoSans-W6" font-size="18" fill="#000000">当日高値</tspan>
+      <tspan x="-24" y="-1.5" font-family="HelveticaNeue-Bold" font-size="18" fill="#000000">~</tspan>
+      <tspan x="-13.2" y="-1.5" font-family="HiraginoSans-W6" font-size="18" fill="#000000">当日安値</tspan>
+      <tspan x="-96" y="16.5" font-family="HiraginoSans-W6" font-size="14" fill="#000000">（通常のレンジ）</tspan>
+    </text>
+    <g>
+      <path d="M204.5,114.5 L204.5,150.5" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+      <path d="M207.5,116.5 L204.5,109.5 L201.5,116.5 M204.5,114.5 L204.5,109.5 M209.5,108.5 L199.5,108.5" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="1"/>
+      <path d="M201.5,148.5 L204.5,155.5 L207.5,148.5 M204.5,150.5 L204.5,155.5 M199.5,156.5 L209.5,156.5" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="1"/>
+    </g>
+    <text transform="matrix(1, 0, 0, 1, 312, 150)">
+      <tspan x="-96" y="-0" font-family="HiraginoSans-W6" font-size="18" fill="#000000">前日終値</tspan>
+      <tspan x="-24" y="-0" font-family="HelveticaNeue-Bold" font-size="18" fill="#000000">~</tspan>
+      <tspan x="-13.2" y="-0" font-family="HiraginoSans-W6" font-size="18" fill="#000000">当日安値</tspan>
+    </text>
+    <g>
+      <path d="M192.5,54.5 L192.5,150.5" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+      <path d="M195.5,56.5 L192.5,49.5 L189.5,56.5 M192.5,54.5 L192.5,49.5 M197.5,48.5 L187.5,48.5" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="1"/>
+      <path d="M189.5,148.5 L192.5,155.5 L195.5,148.5 M192.5,150.5 L192.5,155.5 M187.5,156.5 L197.5,156.5" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="1"/>
+    </g>
+    <path d="M228.5,98 L228.5,108.5" fill-opacity="0" stroke="#000000" stroke-width="2"/>
+    <text transform="matrix(1, 0, 0, 1, 102, 83.5)">
+      <tspan x="-77.4" y="6.5" font-family="HiraginoSans-W6" font-size="18" fill="#000000">前日終値</tspan>
+      <tspan x="-5.4" y="6.5" font-family="HelveticaNeue-Bold" font-size="18" fill="#000000">~</tspan>
+      <tspan x="5.4" y="6.5" font-family="HiraginoSans-W6" font-size="18" fill="#000000">当日高値</tspan>
+    </text>
+  </g>
+</svg>
