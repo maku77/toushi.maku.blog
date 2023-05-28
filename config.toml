@@ -6,7 +6,8 @@ pygmentsUseClasses = true
 languageCode = "ja-jp"
 title = "まくまく投資ノート"
 theme = "maku"
-googleAnalytics = "UA-63069513-2"
+# googleAnalytics = "UA-63069513-2"
+googleAnalytics = "G-Q28XZ15ZKZ"
 
 [markup.goldmark.renderer]
   unsafe = true
