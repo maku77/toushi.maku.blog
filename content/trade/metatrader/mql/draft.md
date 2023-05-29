@@ -6,6 +6,45 @@ tags: ["MetaTrader/MQL"]
 draft: true
 ---
 
+コーディングスタイルを考える
+----
+
+- エンコーディング形式: UTF-8
+- インデント: スペース 4 文字
+- 命名規則（大文字・小文字）
+  - メンバー変数: `m_camelCase`
+  - グローバル変数: `g_camelCase`
+  - 定数: `UPPER_CASE`
+  - クラス名: `CamelCase`
+  - public/protected メソッド: `CamelCase`
+  - private メソッド: `camelCase`
+  - 長いパラメーターの改行位置（Kotlin のスタイルを参考に）
+  - インプット変数: `i_camelCase`（行末コメントで表示するテキストを定義する）
+
+
+CExpert クラス
+----
+
+```cpp
+#include <Expert\Expert.mqh>
+```
+
+- Expert Advisor が認識するポジションは、シンボル (`m_symbol`) とマジック (`m_magic`) のペア情報により識別される。
+- マジックナンバーをセットしておかないと、手動で入れた取引と区別できなくなってしまうので注意が必要。
+
+
+クラスライブラリ
+----
+
+- `CObject` (`Object.mqh`) ... MQL5 クラスライブラリのベースクラス
+  - `CWnd` (`Controls/Wnd.mqh`) ... 全コントールの共通クラス。サイズの制御やイベントハンドリングなどが含まれます。
+  - `CWndContainer` (`Controls/WndContainer.mqh`) ... `CWnd` のコンテナ
+    - `CDialog` (`Controls/Dialog.mqh`) ... キャプション付きのダイアログ
+      - `CAppDialog` (`Controls/Dialog.mqh`)
+  - `CWndObj` (`Controls/WndObj.mqh`)
+    - `CPanel` (`Controls/Panel.mqh`)
+
+
 現在の背景色に隠れない色を作る (XOR な色)
 ----
 
