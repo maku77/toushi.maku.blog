@@ -228,6 +228,17 @@ definitions:
     desc: 2000年頃に外資系金融機関が始めた店頭オプション。つまり、投資家が取引所を使わず、金融機関と相対で売買するオプション商品です。取引所のルールが適用されないので自由度が高い反面、コストが高いというのが特徴です。例えば、日経225オプションなどと比べて限月や取引単位を自由に決められます。日本の取引所では流動性がほとんどない個別株オプションなども各金融機関の裁量で扱えます。
     tags: [商品]
 
+  - id: u7newpe
+    label: 株価収益率
+    yomi: かぶかしゅうえきりつ
+    copy: 7j6wkqq
+    synonyms: "[PER: Price Earnings Ratio](#7j6wkqq)"
+
+  - id: f2g7mbz
+    label: 株式公開買い付け
+    copy: vnyqcxd
+    synonyms: "[TOB: Take Over Bid](#vnyqcxd)"
+
   - id: yqdi9k6
     label: 株式持ち合い
     yomi: かぶしきもちあい
@@ -1001,6 +1012,16 @@ definitions:
     yomi: でぃふぇんしぶ・すとっく
     desc: 景気変動の影響を受けにくい株。日用品を扱う銘柄が代表的（日本の銘柄では、ユニチャーム、キーコーヒーなど）。
 
+  - id: vkuxi7i
+    label: 敵対的買収
+    yomi: てきたいてきばいしゅう
+    date: 2023-06-10
+    desc: >
+      企業の買収を仕掛けたときに、現経営陣（取締役会）が反対している場合に敵対的買収と呼びます。
+      多数の株主が賛成していても、取締役会が反対していれば敵対的買収になります。
+      逆に、多数の株主が反対していても、取締役会が賛成していれば、友好的買収になります。
+    related: "[TOB（Take Over Bid; 株式公開買い付け）](#vnyqcxd)"
+
   - id: zucvnsq
     label: 出来高
     yomi: できだか
@@ -1627,6 +1648,12 @@ definitions:
     tags: [組織]
     desc: 商品先物（コモディティ）や金融先物に特化して投資を行うファンドのこと。
 
+  - id: xkgxqrk
+    label: マネージメント・バイアウト
+    yomi: まねーじめんと・ばいあうと
+    copy: bc5ate6
+    synonyms: "[MBO](#bc5ate6)"
+
   - label: 満玉
     yomi: まんぎょく
     desc: 資金規模ギリギリでポジションを取ること。
@@ -2105,17 +2132,25 @@ definitions:
 
   ### m
 
-  - label: "M&amp;A: Mergers &amp; Acquisitions"
+  - label: "M&A: Mergers and Acquisitions"
     tags: [M&A]
-    desc: 合併・買収のこと。TOB や MBO などの手法があります。
+    desc: 合併・買収のこと。[TOB（株式公開買い付け）](#vnyqcxd) や MBO などの手法があります。
 
   - label: "MAS: Monetary Authority of Singapore"
     tags: [機関]
     desc: シンガポールの金融通貨庁。ICO の扱いの方針などを出したりしています。
 
-  - label: "MBO :Management Buyout"
+  - id: bc5ate6
+    label: "MBO :Management Buyout"
     tags: [M&A]
-    desc: 経営陣が参加する買収。__企業の経営者が__ その企業の株式を譲り受け（購入）し、__オーナーとなること__。非公開会社にしたい場合（非上場化）などに行われることがあります。
+    desc: >
+      経営陣が参加する買収。
+      __企業の経営者が__ その企業の株式を譲り受け（購入）し、__オーナーとなること__。
+      非公開会社にしたい場合（非上場化）などに行われることがあります。
+      経営陣が自社株を TOB（公開買い付け）で取得するのが一般的です。
+      TOB 後は上場廃止になるため、株主は MBO 発表後は TOB に応募して株式を処分します。
+    synonyms: "[マネージメント・バイアウト](#xkgxqrk)"
+    related: "[TOB（Take Over Bid; 株式公開買い付け）](#vnyqcxd)"
 
   - label: "MMF: Money Management Fund"
     tags: [投資信託]
@@ -2169,6 +2204,16 @@ definitions:
     label: "PE ファンド: Private Equity ファンド"
     copy: v73vs6f
     synonyms: "[プライベート・エクイティ・ファンド](#v73vs6f)"
+
+  - id: 7j6wkqq
+    label: "PER: Price Earnings Ratio"
+    tags: [指標]
+    date: 2023-06-10
+    desc: >
+      「株価 ÷ 一株利益(EPS)」で求められる倍率で、株価の割高・割安を判断するための指標です。
+      この指標は、企業が何年間の利益でその株価と同じ金額を回収できるかを示しています。
+      多くの場合は 10〜20 倍程度になりますが、成長企業の場合は 50 倍を超えることもありますし、問題のある企業では非常に低い倍率となる場合もあります。
+    synonyms: "[株価収益率](#u7newpe)"
 
   - label: "PEX: Palestine Exchange"
     tags: [市場]
@@ -2260,9 +2305,14 @@ definitions:
     copy: myyqgm9
     synonyms: "[東京銀行間取引金利](#myyqgm9)"
 
-  - label: "TOB: Take Over Bid"
+  - id: vnyqcxd
+    label: "TOB: Take Over Bid"
     tags: [M&A]
-    desc: 株式公開買い付け。公開市場において株式の買い付けを行い、その企業の経営権を獲得企業買収方法。その企業の合意がない場合は、敵対的 TOB と呼びます。
+    desc: >
+      公開市場において株式の買い付けを行い、その企業の経営権を獲得する企業買収方法です。
+      その企業（取締役会）の合意がない場合は、敵対的 TOB と呼びます。
+    synonyms: "[株式公開買い付け](#f2g7mbz)"
+    related: "[敵対的買収](#vkuxi7i)"
 
   - label: "TSX: Tront Stock Exchange"
     tags: [市場]
