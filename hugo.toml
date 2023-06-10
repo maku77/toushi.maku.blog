@@ -18,7 +18,9 @@ googleAnalytics = "G-Q28XZ15ZKZ"
   facebookAppId = "525778660924912"
   Author = "まく"
   AmazonId = "maku04-22"
-  CustomSearchId = "partner-pub-6317852277883092:4842999464"
+  CustomSearchId = "a3565b62678da48be"
+  # 下記は memoja.net 時代の ID
+  # CustomSearchId = "partner-pub-6317852277883092:4842999464"
 
 [module]
 [[module.imports]]
