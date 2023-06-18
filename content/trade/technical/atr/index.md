@@ -1,7 +1,7 @@
 ---
 title: "テクニカル指標: ATR (Average True Range)"
 linkTitle: "ATR (Average True Range)"
-url: "/p/tasaq7n"
+url: "p/tasaq7n/"
 date: "2022-03-30"
 tags: ["ATR", "テクニカル指標"]
 description: "ATR は真の値幅 (TR: True Range) の平均値です。直近の価格がどのくらいの変動幅で推移しているかを調べるために使います。"

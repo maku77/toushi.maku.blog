@@ -1,6 +1,6 @@
 ---
-title: "MetaTrader/MQL: プログラムがデモ口座で実行されている調べる"
-linkTitle: "プログラムがデモ口座で実行されているか調べる"
+title: "MetaTrader/MQL: プログラムがデモ口座で実行されている調べる (ACCOUNT_TRADE_MODE)"
+linkTitle: "プログラムがデモ口座で実行されているか調べる (ACCOUNT_TRADE_MODE)"
 url: "/p/e7gjidc"
 date: "2021-01-26"
 tags: ["MetaTrader/MQL"]

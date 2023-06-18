@@ -1,10 +1,10 @@
 ---
-title: "MetaTrader/MQL: インジケータの実装例 - Momentum（モメンタム）"
-linkTitle: "インジケータの実装例 - Momentum（モメンタム）"
+title: "MetaTrader/MQL: インジケーターの実装例 - Momentum（モメンタム）"
+linkTitle: "インジケーターの実装例 - Momentum（モメンタム）"
 url: "/p/3emsz6c"
 date: "2015-06-14"
 tags: ["MetaTrader/MQL"]
-weight: 903
+weight: 900
 ---
 
 モメンタムは下記の計算式で求められます。

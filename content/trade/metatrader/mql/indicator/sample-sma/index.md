@@ -1,10 +1,10 @@
 ---
-title: "MetaTrader/MQL: インジケータの実装例 - SMA（単純移動平均）"
-linkTitle: "インジケータの実装例 - SMA（単純移動平均）"
+title: "MetaTrader/MQL: インジケーターの実装例 - SMA（単純移動平均）"
+linkTitle: "インジケーターの実装例 - SMA（単純移動平均）"
 url: "/p/h3fr3do"
 date: "2015-02-01"
 tags: ["MetaTrader/MQL"]
-weight: 901
+weight: 900
 ---
 
 移動平均線のカスタムインジケータを作成する

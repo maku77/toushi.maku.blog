@@ -1,13 +1,13 @@
 ---
-title: "MetaTrader/MQL: カスタムインジケータで使用できるイベント"
-linkTitle: "カスタムインジケータで使用できるイベント"
+title: "MetaTrader/MQL: カスタムインジケーターで使用できるイベント"
+linkTitle: "カスタムインジケーターで使用できるイベント"
 url: "/p/ugs5fq2"
 date: "2015-06-10"
 tags: ["MetaTrader/MQL"]
 weight: 100
 ---
 
-カスタムインジケータのプログラム内で、決まったシグネチャで関数を定義しておくと、特定のイベント発生時に自動的にその関数を呼び出してくれるようになります。
+カスタムインジケーターのプログラム内で、決まったシグネチャで関数を定義しておくと、特定のイベント発生時に自動的にその関数を呼び出してくれるようになります。
 
 
 OnInit 関数
@@ -15,10 +15,10 @@ OnInit 関数
 
 [int OnInit()](https://www.mql5.com/en/docs/basis/function/events#oninit)
 
-- インジケータが最初にチャートにアタッチされたとき
+- インジケーターが最初にチャートにアタッチされたとき
 - チャートのシンボル（USDJPY など）やタイムフレーム（時間足）が変更されたとき
-- MetaEditor 上でインジケータが再コンパイルされたとき
-- インジケータの入力パラメータがダイアログから変更されたとき
+- MetaEditor 上でインジケーターが再コンパイルされたとき
+- インジケーターの入力パラメータがダイアログから変更されたとき
 
 
 OnDeinit 関数
@@ -26,11 +26,11 @@ OnDeinit 関数
 
 [void OnDeinit(const int reason)](https://www.mql5.com/en/docs/basis/function/events#ondeinit)
 
-- チャートからインジケータをデタッチしたとき (REASON_REMOVE (1))
-- MetaEditor 上でインジケータが再コンパイルされたとき (REASON_RECOMPILE (2))
+- チャートからインジケーターをデタッチしたとき (REASON_REMOVE (1))
+- MetaEditor 上でインジケーターが再コンパイルされたとき (REASON_RECOMPILE (2))
 - チャートのシンボル（USDJPY など）やタイムフレーム（時間足）が変更されたとき (REASON_CHARTCHANGE (3))
 - チャートを閉じたとき (REASON_CHARTCLOSE (4))
-- インジケータの入力パラメータがダイアログから変更されたとき (REASON_PARAMETERS (5))
+- インジケーターの入力パラメータがダイアログから変更されたとき (REASON_PARAMETERS (5))
 - OnInit() が 0 以外の値を返して失敗したとき (REASON_INITFAILED (8))
 - MetaTrader（ターミナル）を閉じたとき (REASON_CLOSE (9))
 
@@ -47,5 +47,5 @@ OnCalculate 関数
 [void OnCalculate(...)](https://www.mql5.com/en/docs/basis/function/events#oncalculate)
 
 `OnCalculate()` は Tick ごと（最新の価格が変化するごと）に呼び出されます。
-インジケータを最初にチャートにアタッチしたときにも呼び出されます。
+インジケーターを最初にチャートにアタッチしたときにも呼び出されます。
 

@@ -1,7 +1,7 @@
 ---
 title: "MetaTrader/MQL: MQL での色の表現方法 (color)"
 linkTitle: "MQL での色の表現方法 (color)"
-url: "/p/rn6kw8j"
+url: "p/rn6kw8j/"
 date: "2015-10-10"
 lastmod: "2021-02-12"
 tags: ["MetaTrader/MQL"]

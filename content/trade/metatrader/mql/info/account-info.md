@@ -1,8 +1,11 @@
 ---
-title: "MetaTrader/MQL: アカウント情報（口座情報）を取得する (AccountXxx) (MT5)"
-linkTitle: "アカウント情報（口座情報）を取得する (AccountXxx) (MT5)"
-url: "/p/nb7h9vg"
+title: "MetaTrader/MQL: アカウント情報（口座情報）を取得する (AccountInfo*) (MT5)"
+linkTitle: "アカウント情報（口座情報）を取得する (AccountInfo*) (MT5)"
+url: "p/nb7h9vg/"
 date: "2021-01-12"
+lastmod: "2023-06-18"
+changes:
+  - 2023-06-18: それぞれの情報について詳しい説明を追加
 tags: ["MetaTrader/MQL"]
 weight: 101
 ---
@@ -14,12 +17,123 @@ MQL5 の下記の関数を使用すると、現在の口座の情報（証拠金
 - [double AccountInfoDouble(ENUM_ACCOUNT_INFO_DOUBLE)](https://www.mql5.com/en/docs/account/accountinfodouble) ... 戻り値が浮動小数点数の口座情報
 - [string AccountInfoDouble(ENUM_ACCOUNT_INFO_STRING)](https://www.mql5.com/en/docs/account/accountinfostring) ... 戻り値が文字列の口座情報
 
-次のスクリプトを実行すると、すべてのアカウント情報をチャート上にコメントで表示します。
 
-{{< code lang="cpp" title="Scripts/TestAccountInfo.mq5" >}}
+デポジット通貨を取得する
+----
+
+口座の入出金に使用される通貨（デポジット通貨）は、下記のようにして取得することができます。
+
+```cpp
+// 口座の通貨（"JPY" など）
+string currency = AccountInfoString(ACCOUNT_CURRENCY);
+```
+
+
+口座残高、純資産の情報を取得する
+----
+
+口座の証拠金情報は、__`AccountInfoDouble`__ を使用して取得することができます。
+通貨が日本円 (JPY) の場合は小数点数以下の情報は必要ありませんが、いろいろな通貨を扱えるようにするために戻り値は `double` 型になっています。
+
+
+```cpp
+// 証拠金残高（ポジションを取っても変化せず、決済した時点で増減する）
+double balance = AccountInfoDouble(ACCOUNT_BALANCE);
+
+// 評価損益（ポジションを閉じると証拠金残高に反映される）
+double profit = AccountInfoDouble(ACCOUNT_PROFIT);
+
+// 純資産（証拠金残高＋評価損益）
+double equity = AccountInfoDouble(ACCOUNT_EQUITY);
+
+Alert(StringFormat("Balance: %.0f, Profit: %.0f, Equity: %.0f",
+    balance, profit, equity));
+```
+
+純資産は評価損益を加味したものですので、`balance + profit = equity` が成り立っているはずです。
+
+
+必要証拠金や有効証拠金の情報を取得する
+----
+
+現在のポジションのために使用している __必要証拠金__ や、さらにどれだけのエントリができるかを表す __有効証拠金__ の情報を取得するには、下記のようにします。
+
+```cpp
+// 純資産
+double equity = AccountInfoDouble(ACCOUNT_EQUITY);
+
+// 必要証拠金（ポジションや予約注文のために使用している証拠金）
+double margin = AccountInfoDouble(ACCOUNT_MARGIN);
+
+// 有効証拠金（使用可能な証拠金の残り金額）
+double freeMargin = AccountInfoDouble(ACCOUNT_MARGIN_FREE);
+
+Alert(StringFormat(
+    "Equity: %.0f, Margin: %.0f, FreeMargin: %.0f",
+    equity, margin, freeMargin));
+```
+
+有効証拠金は、純資産から必要証拠金を引いた残りの金額なので、上記の結果は `equity = margin + freeMargin` となっているはずです。
+
+
+証拠金維持率を取得する
+----
+
+証拠金維持率 (%) に関する情報を取得するには下記のようにします。
+マージンコールがかかる維持率の情報を取得することもできます。
+
+```cpp
+// 証拠金維持率 (%)（純資産／必要証拠金）
+double marginLevel = AccountInfoDouble(ACCOUNT_MARGIN_LEVEL);
+
+// マージンコールがかかる証拠金維持率 (Margin call level: %)
+double marginSoCall = AccountInfoDouble(ACCOUNT_MARGIN_SO_CALL);
+
+// 強制ロスカットがかかる証拠金維持率 (Stop out level: %)
+double marginSoSo = AccountInfoDouble(ACCOUNT_MARGIN_SO_SO);
+
+Alert(StringFormat(
+    "MarginLevel: %.2f%%, MarginSoCall: %.2f%%, MarginSoSo: %.2f%%",
+    marginLevel, marginSoCall, marginSoSo));
+```
+
+ちなみに、ちょくちょく出てくる So というのは Stop Out の略です。
+
+証拠金維持率は、現在の必要証拠金 (margin) に対する純資産 (equity) の割合ですから、下記のように計算することもできます。
+
+```cpp
+double equity = AccountInfoDouble(ACCOUNT_EQUITY);
+double margin = AccountInfoDouble(ACCOUNT_MARGIN);
+double marginLevel = equity * 100 / margin;
+Alert(StringFormat("MarginLevel: %.2f%%", marginLevel));
+```
+
+
+レバレッジ情報を取得する
+----
+
+現在の口座のレバレッジ設定を取得するには下記のようにします。
+例えば、レバレッジ 25 倍の口座であれば、25 という値が取得できます。
+
+```cpp
+long leverage = AccountInfoInteger(ACCOUNT_LEVERAGE);
+Alert(StringFormat("Leverage: %d", leverage));
+```
+
+
+すべてのアカウント情報を表示するスクリプト
+----
+
+最後に、簡単にすべてのアカウント情報を表示するスクリプトの実装例を紹介しておきます。
+次のスクリプトを実行すると、すべてのアカウント情報をメッセージボックスで表示します。
+
+{{< code lang="cpp" title="Scripts/maku/ShowAccountInfo.mq5" >}}
 #property strict
 
-string getAccountInfoStr() {
+/**
+ * AccountInfoInteger API で取得できるアカウント情報を取得する。
+ */
+string getAccountInfoInteger() {
     // 口座番号
     long login = AccountInfoInteger(ACCOUNT_LOGIN);
     // 口座取引モード
@@ -57,12 +171,15 @@ string getAccountInfoStr() {
     return s;
 }
 
+/**
+ * AccountInfoDouble API で取得できるアカウント情報を取得する。
+ */
 string getAccountInfoDouble() {
     // 証拠金残高（円）
     double balance = AccountInfoDouble(ACCOUNT_BALANCE);
     // 信用額（円）
     double credit = AccountInfoDouble(ACCOUNT_CREDIT);
-    // 損益（円）
+    // 評価損益（円）
     double profit = AccountInfoDouble(ACCOUNT_PROFIT);
     // 純資産（証拠金残高 - 損益）（円）
     double equity = AccountInfoDouble(ACCOUNT_EQUITY);
@@ -110,6 +227,9 @@ string getAccountInfoDouble() {
     return s;
 }
 
+/**
+ * AccountInfoString API で取得できるアカウント情報を取得する。
+ */
 string getAccountInfoString() {
     // クライアント名
     string name = AccountInfoString(ACCOUNT_NAME);
@@ -127,16 +247,21 @@ string getAccountInfoString() {
         "\nACCOUNT_COMPANY = " + company;
 }
 
+/**
+ * スクリプトのエントリーポイント。
+ */
 void OnStart() {
-    Comment(getAccountInfoStr() + "\n\n" + 
+    MessageBox(
+        getAccountInfoInteger() + "\n\n" +
         getAccountInfoDouble() + "\n\n" +
-        getAccountInfoString());
+        getAccountInfoString()
+    );
 }
 {{< /code >}}
 
 {{< code title="実行結果" >}}
 ----- AccountInfoInteger -----
-ACCOUNT_LOGIN = 400996254
+ACCOUNT_LOGIN = 123456789
 ACCOUNT_TRADE_MODE = 0 (ACCOUNT_TRADE_MODE_DEMO)
 ACCOUNT_LEVERAGE = 25
 ACCOUNT_LIMIT_ORDERS = 0

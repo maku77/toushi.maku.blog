@@ -1,10 +1,10 @@
 ---
-title: "MetaTrader/MQL: インジケータの実装例 - WMA（加重移動平均）"
-linkTitle: "インジケータの実装例 - WMA（加重移動平均）"
+title: "MetaTrader/MQL: インジケーターの実装例 - WMA（加重移動平均）"
+linkTitle: "インジケーターの実装例 - WMA（加重移動平均）"
 url: "/p/f2eq2dp"
 date: "2015-06-10"
 tags: ["MetaTrader/MQL"]
-weight: 902
+weight: 900
 ---
 
 WMA: Weighted Moving Average（加重移動平均線）は、直前の価格ほど重みをおいた移動平均線です。

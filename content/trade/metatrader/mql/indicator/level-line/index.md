@@ -1,13 +1,13 @@
 ---
-title: "MetaTrader/MQL: カスタムインジケータに水平線を表示する"
-linkTitle: "カスタムインジケータに水平線を表示する"
+title: "MetaTrader/MQL: カスタムインジケーターに水平線を表示する (IndicatorSet*)"
+linkTitle: "カスタムインジケーターに水平線を表示する (IndicatorSet*)"
 url: "/p/fsy7djp"
 date: "2015-06-14"
 tags: ["MetaTrader/MQL"]
 weight: 100
 ---
 
-`IndicatorSetXxx()` 系の関数を使用して、インジケータに水平線を表示することができます。
+`IndicatorSetXxx()` 系の関数を使用して、インジケーターに水平線を表示することができます。
 下記の例では、`0.1` と `-0.1` の値の位置に水平線を表示しています（`0.0` の位置には、デフォルトで水平線が表示されるようです）。
 
 {{< image src="img-001.png" >}}

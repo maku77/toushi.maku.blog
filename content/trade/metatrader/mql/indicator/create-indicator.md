@@ -1,6 +1,6 @@
 ---
-title: "MetaTrader/MQL: カスタムインジケータを作成する"
-linkTitle: "カスタムインジケータを作成する"
+title: "MetaTrader/MQL: カスタムインジケーターを作成する"
+linkTitle: "カスタムインジケーターを作成する"
 url: "/p/5q5gs5g"
 date: "2015-02-01"
 tags: ["MetaTrader/MQL"]
