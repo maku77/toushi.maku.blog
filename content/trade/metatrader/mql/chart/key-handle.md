@@ -6,7 +6,11 @@ date: "2021-01-30"
 tags: ["MetaTrader/MQL"]
 ---
 
-EA の `OnChartEvent` 関数でチャートイベントをハンドルすると、チャート上でのキーボード入力を取得することができます。
+{{% private %}}
+- [チャートイベントの種類 - MQL5 リファレンス](https://www.mql5.com/ja/docs/constants/chartconstants/enum_chartevents)
+{{% /private %}}
+
+EA の __`OnChartEvent()`__ 関数でチャートイベントをハンドルすると、チャート上でのキーボード入力を取得することができます。
 これを利用すると、自作の EA にキーボードショートカット（ホットキー）機能を付けることができます。
 例えば、数字の `1` キーを押したときに、0.1 ロットの買い成行注文を出す、といったことができます。
 
@@ -18,10 +22,12 @@ int OnInit() {
     return INIT_SUCCEEDED;
 }
 
-void OnChartEvent(const int id,
-                  const long &lparam,
-                  const double &dparam,
-                  const string &sparam) {
+void OnChartEvent(
+    const int id,
+    const long &lparam,
+    const double &dparam,
+    const string &sparam
+) {
     if (id == CHARTEVENT_KEYDOWN) {
         string key;
         if ('0' <= lparam && lparam <= 'z') {
@@ -37,10 +43,12 @@ void OnChartEvent(const int id,
 特定のキー（例えば数字の `1` キー）が押されたときに、ユーザーに確認を求めてから処理を行いたい場合は次のようにします。
 
 {{< code lang="cpp" >}}
-void OnChartEvent(const int id,
-                  const long &lparam,
-                  const double &dparam,
-                  const string &sparam) {
+void OnChartEvent(
+    const int id,
+    const long &lparam,
+    const double &dparam,
+    const string &sparam
+) {
     if (id == CHARTEVENT_KEYDOWN && lparam == '1') {
         if (MessageBox("Are you sure to buy?", NULL, MB_YESNO) == IDYES) {
             // ここで買う！
@@ -49,8 +57,4 @@ void OnChartEvent(const int id,
     }
 }
 {{< /code >}}
-
-{{< private >}}
-[チャートイベントの種類](https://www.mql5.com/ja/docs/constants/chartconstants/enum_chartevents)
-{{< /private >}}
 

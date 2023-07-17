@@ -19,7 +19,7 @@ WMA: Weighted Moving Average（加重移動平均線）は、直前の価格ほ�
     - 5 つ前の値 x 1
 2. これを 15 (1+2+3+4+5) で割る
 
-{{< code lang="cpp" title="MyWma.mq4" >}}
+{{< code lang="cpp" title="MyWma.mq5" >}}
 #property copyright "Maku"
 #property link      "http://www.mql5.com"
 #property version   "1.00"

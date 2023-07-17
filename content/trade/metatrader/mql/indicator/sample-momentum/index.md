@@ -24,7 +24,7 @@ weight: 900
 
 {{< image src="img-001.png" >}}
 
-{{< code lang="cpp" title="Momentum.mq4" >}}
+{{< code lang="cpp" title="Momentum.mq5" >}}
 #property copyright "Maku"
 #property version   "1.00"
 

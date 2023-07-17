@@ -7,11 +7,11 @@ tags: ["MetaTrader/MQL"]
 weight: 900
 ---
 
-{{< image w="500" src="img-001.png" title="LargeSymbol インジケーター" >}}
+{{< image w="500" border="true" src="img-001.png" title="LargeSymbol インジケーター" >}}
 
 下記の LargeSymbol インジケーターをチャートに適用すると、チャートの左上に大きな文字で通貨ペアと、タイムフレーム（時間足）を表示します（コードリポジトリは[こちら](https://github.com/maku77/metatrader/)）。
 
-{{< code lang="cpp" title="Indicators/maku/LargeSymbol.mq4" >}}
+{{< code lang="cpp" title="Indicators/maku/LargeSymbol.mq5" >}}
 /*
  * LargeSymbol indicator.
  *

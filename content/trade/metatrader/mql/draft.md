@@ -4,6 +4,7 @@ url: "/p/bs5bejb"
 date: "2021-06-14"
 tags: ["MetaTrader/MQL"]
 draft: true
+weight: 1
 ---
 
 コーディングスタイルを考える

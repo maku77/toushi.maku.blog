@@ -13,6 +13,8 @@ weight: 1
 ここでは、最初のステップとして、ローソク足の終値をラインで結ぶだけのカスタムインジケータを作成してみます。
 Meta Editor 上で `Control + N` を押して、Custom Indicator を選択すると、カスタムインジケータのファイルを新規作成することができます。
 
+下記は、終値を結ぶラインを引く簡単なインジケーターの実装例です。
+
 {{< code lang="cpp" title="MyIndicator.mt4" >}}
 #property strict
 #property indicator_chart_window
@@ -58,7 +60,11 @@ int OnCalculate(
 }
 {{< /code >}}
 
-### 各パートの説明
+
+各パートの説明
+----
+
+### プロパティ設定
 
 {{< code lang="cpp" >}}
 #property indicator_chart_window  // チャート上に表示する
@@ -79,17 +85,26 @@ int OnCalculate(
 
 上記のプロパティでは、表示用の 1 本目のラインの設定を行っています。ここではラインが 1 本だけですが、複数のラインを表示するカスタムインジケータを作る場合は、各プロパティ名のサフィックスを 2、3、4 と増やしていきます。
 
+### OnInit 関数
+
 {{< code lang="cpp" >}}
 // Buffer for indicator line
 double gBuffer[];
 
 int OnInit() {
     SetIndexBuffer(0, gBuffer, INDICATOR_DATA);
+    // SetIndexBuffer(0, gBuffer);  と省略しても OK
     return INIT_SUCCEEDED;
 }
 {{< /code >}}
 
-最初に一度だけ呼ばれる `OnInit()` 関数の中では、配列 `gBuffer` を、画面表示用のバッファ (`INDICATOR_DATA`) として割り当てています。このバッファに値を設定することで、画面上にインジケータが表示されることになります。仮に、計算用としてだけ使うバッファを追加で割り当てたい場合は、`INDICATOR_CALCULATIONS` というタイプを指定して割り当てます（この場合、`indicator_buffers` プロパティの値を 2 に増やします）。
+最初に一度だけ呼ばれる __`OnInit`__ 関数の中では、配列 `gBuffer` を、画面表示用のバッファ (__`INDICATOR_DATA`__) として割り当てています。
+このバッファに値を設定することで、画面上にインジケータが表示されることになります。
+デフォルトで `INDICATOR_DATA` が使われるので、`SetIndexBuffer(0, gBuffer)` と省略して記述することもできます。
+
+もし、計算用としてだけ使うバッファを追加で割り当てたい場合は、`INDICATOR_CALCULATIONS` というタイプを指定して割り当てます（この場合、プログラム先頭部分の `indicator_buffers` プロパティの値を 2 に増やします）。
+
+### OnCalculate 関数
 
 {{< code lang="cpp" >}}
 int OnCalculate(
@@ -116,23 +131,25 @@ int OnCalculate(
 }
 {{< /code >}}
 
-計算のメイン部分となるのが `OnCalculate()` 関数です。`OnCalculate()` 関数は、tick（価格の更新）が発生するごとに呼び出されます。
-チャート上のローソク足の数や、始値、終値などの情報がパラメータで渡されます。
+計算のメイン部分となるのが __`OnCalculate`__ 関数です。
+`OnCalculate` 関数は、tick（価格の更新）が発生するごとに呼び出されます。
+チャート上のローソク足の数や、始値、終値などの情報がパラメーターとして渡されるので、これらの値を使って指標の値を計算します。
 
-### パラメータの説明
+- `OnCalculate` 関数のパラメーター（抜粋）
+  - `int rates_total` ... ローソク足の数
+  - `const datetime &time[]` ... ローソク足が確定した時刻（time[0] が最新のローソク足）
+  - `const double &open[]` ... ローソク足ごとの始値（open[0] が最新のローソク足）
+  - `const double &high[]` ... ローソク足ごとの高値（high[0] が最新のローソク足）
+  - `const double &low[]` ... ローソク足ごとの安値（low[0] が最新のローソク足）
+  - `const double &close[]` ... ローソク足ごとの終値（close[0] が最新のローソク足）
 
-* `int rates_total` ... ローソク足の数
-* `const datetime &time[]` ... ローソク足が確定した時刻（time[0] が最新のローソク足）
-* `const double &open[]` ... ローソク足ごとの始値（open[0] が最新のローソク足）
-* `const double &high[]` ... ローソク足ごとの高値（high[0] が最新のローソク足）
-* `const double &low[]` ... ローソク足ごとの安値（low[0] が最新のローソク足）
-* `const double &close[]` ... ローソク足ごとの終値（close[0] が最新のローソク足）
-
-価格などを示すデータは、配列の形で渡されます。配列のインデックス 0 が最新のローソク足の価格を表しています。ローソク足の本数は `rates_total` で渡されるので、配列のインデックスとしては、`0`（最新の値）〜 `rates_total-1`（一番古い値）の範囲で指定することができます。
+価格などを示すデータは、配列の形で渡されます。
+配列のインデックス 0 が最新のローソク足の価格を表しています（直感とは逆かもしれないので注意）。
+ローソク足の本数は __`rates_total`__ で渡されるので、配列のインデックスとしては、`0`（最新の値）〜 `rates_total-1`（一番古い値）の範囲で指定することができます。
 例えば以下のような感じです。
 
-* `close[rates_total - 1]` ... チャート上の左端のローソク足の終値
-* `close[0]` ... チャート上の右端のローソク足の終値
+- `close[rates_total - 1]` ... チャート上の左端のローソク足の終値
+- `close[0]` ... チャート上の右端のローソク足の終値
 
 以下のようにすべてのローソク足の終値を、インジケータ用のバッファにそのまま設定してやることで、終値を結ぶインジケータを表示しています。
 
@@ -142,17 +159,16 @@ for (int i = 0; i < rates_total; ++i) {
 }
 {{< /code >}}
 
-実は、`OnCalculate()` が呼び出されるたびに `gBuffer[]` のすべての値を再設定する必要はありません。
+実は、`OnCalculate` 関数が呼び出されるたびに `gBuffer[]` のすべての値を再設定する必要はありません。
 前回の呼び出しでセットした値は、`gBuffer[]` に保持されているためです。
-以降、これを利用した最適化の説明を行います。
+次に、これを利用した最適化方法を説明します。
 
 
 カスタムインジケータの OnCalculate 関数を最適化する
 -----
 
-カスタムインジケータの計算部分を担う `OnCalculate` は、価格の変化（NewTick イベント）ごとに呼び出されますが、`prev_calculated` パラメータの値をうまく使うことで、すでに計算済みの値を再計算しないでも済むように処理を最適化ことができます。
-下記の `OnCalculate()` は、インジケータバッファ (`gBuffer`) に、各ローソク足の終値をセットしています。
-
+カスタムインジケータの計算部分を担う `OnCalculate` 関数は、価格の変化（NewTick イベント）ごとに呼び出されますが、__`prev_calculated`__ パラメーターの値をうまく使うことで、すでに計算済みの値を再計算しないでも済むように処理を最適化できます。
+下記の `OnCalculate` 実装では、インジケータ用のバッファー (`gBuffer`) に、各ローソク足の終値をセットしています。
 
 {{< code lang="cpp" >}}
 // double gBuffer[];  // Buffer for indicator line

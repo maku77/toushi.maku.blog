@@ -14,7 +14,7 @@ weight: 900
 
 {{< image src="img-001.png" >}}
 
-{{< code lang="cpp" title="MySma.mt4" >}}
+{{< code lang="cpp" title="MySma.mq5" >}}
 #property description "My Moving Average"
 #property strict
 #property indicator_chart_window
