@@ -129,3 +129,9 @@ void OnBookEvent(const string& symbol);
 
 インジケーターの [`OnBookEvent()`](https://www.mql5.com/en/docs/event_handlers/onbookevent) 関数は、__BookEvent__ イベントが発生したときに呼び出されます。
 
+
+（おまけ）インジケーターのイベントをすべて表示するインジケーター
+----
+
+- https://github.com/maku77/metatrader/blob/main/MQL5/Indicators/maku77/IndicatorEvents.mq5
+
