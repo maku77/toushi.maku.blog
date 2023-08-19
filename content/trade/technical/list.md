@@ -1,6 +1,6 @@
 ---
 title: "テクニカル指標の一覧"
-url: "/p/7y8y8yw"
+url: "p/7y8y8yw/"
 tags: ["テクニカル指標"]
 date: "2017-09-24"
 weight: 1
@@ -11,8 +11,8 @@ weight: 1
 {{% /private %}}
 
 <script>
-$(function() {
-  var arr = [
+document.addEventListener('DOMContentLoaded', function() {
+  const arr = [
     { en: "Bill William's Alligator Oscillator", jp: '', tags: ['trend'] },
     { en: "Bill William's Alligator", jp: '', tags: ['trend'] },
     { en: "Lane's Stochastic Oscillator", jp: '', tags: ['momentum'] },
@@ -107,9 +107,9 @@ $(function() {
     { en: 'EMA: Exponential Moving Average', jp: '指数平滑移動平均', tags: ['ma'], url: '/p/67gvggc' },
     { en: '', jp: '究極のオシレーター', tags: ['ma'] },
   ];
-  var html = '';
-  for (var i = 0; i < arr.length; ++i) {
-    var e = arr[i];
+  let html = '';
+  for (let i = 0; i < arr.length; ++i) {
+    const e = arr[i];
     html += '<tr>';
     if (e.url) {
       html += '<td><a href="' + e.url + '">' + e.en + '</td>';
@@ -126,7 +126,7 @@ $(function() {
     html += '<td>' + (e.note ? e.note : '-') + '</td>';
     html += '</tr>';
   }
-  $('#placeholder').append(html);
+  document.getElementById('placeholder').innerHTML += html;
 });
 </script>
 

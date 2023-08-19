@@ -1,6 +1,6 @@
 ---
 title: "FX 時刻表"
-url: "/p/9vqo9fk"
+url: "p/9vqo9fk/"
 date: "2016-01-17"
 tags: ["FX"]
 ---
@@ -92,9 +92,10 @@ FX の重要時間
 
 
 <script>
-$(function() {
+document.addEventListener('DOMContentLoaded', function() {
   'use strict';
-  var Layout = new function() {
+
+  const Layout = new function() {
     // Base position
     this.MARGIN_TOP = 50;
     this.MARGIN_LEFT = 50;
@@ -129,8 +130,8 @@ $(function() {
     this.COLOR_TOKYO_STOCK = '#6cf';
   }();
 
-  var canvas = document.getElementById('my-canvas');
-  var c = canvas.getContext('2d');
+  const canvas = document.getElementById('my-canvas');
+  const c = canvas.getContext('2d');
 
   // Market Labels
   drawMarketLabel(c, 0, 'ロンドン');
@@ -176,9 +177,9 @@ $(function() {
   drawTimeLabels(c);
 
   function drawMarketCells(ctx, index, fromHour, toHour, color) {
-    var x = Layout.OFFSET_MARKET_X + (Layout.MARKET_WIDTH * index);
-    var y = Layout.OFFSET_MARKET_Y + (Layout.MARKET_HEIGHT * fromHour);
-    var h = Layout.MARKET_HEIGHT * (toHour - fromHour);
+    const x = Layout.OFFSET_MARKET_X + (Layout.MARKET_WIDTH * index);
+    const y = Layout.OFFSET_MARKET_Y + (Layout.MARKET_HEIGHT * fromHour);
+    const h = Layout.MARKET_HEIGHT * (toHour - fromHour);
     ctx.fillStyle = color;
     ctx.fillRect(x, y, Layout.MARKET_WIDTH, h);
   }
@@ -186,10 +187,10 @@ $(function() {
   function drawTimeLines(ctx) {
     ctx.beginPath();
     ctx.strokeStyle = Layout.COLOR_TIME_LINE;
-    var x1 = Layout.OFFSET_MARKET_X;
-    var x2 = Layout.OFFSET_MARKET_X + (Layout.MARKET_WIDTH * 3);
-    for (var i = 0; i < 25; ++i) {
-      var y = Layout.MARGIN_TOP + (Layout.MARKET_HEIGHT * i);
+    const x1 = Layout.OFFSET_MARKET_X;
+    const x2 = Layout.OFFSET_MARKET_X + (Layout.MARKET_WIDTH * 3);
+    for (let i = 0; i < 25; ++i) {
+      const y = Layout.MARGIN_TOP + (Layout.MARKET_HEIGHT * i);
       ctx.moveTo(x1, y);
       ctx.lineTo(x2, y);
     }
@@ -200,7 +201,7 @@ $(function() {
     ctx.font = "12pt sans-serif";
     ctx.fillStyle = Layout.COLOR_TIME_LABEL;
 
-    for (var i = 0; i <= 24; ++i) {
+    for (let i = 0; i <= 24; ++i) {
       ctx.fillText(i + ':00', Layout.OFFSET_TIME_LABEL_X,
           Layout.OFFSET_TIME_LABEL_Y + (Layout.MARKET_HEIGHT * i));
     }
@@ -222,12 +223,12 @@ $(function() {
 });
 
 function TimeCell(index) {
-  var WIDTH = 48, HEIGHT = 30;
+  const WIDTH = 48, HEIGHT = 30;
 
   // Public properties.
-  var that = {
+  const that = {
     draw: function(ctx) {
-      var x1 = (WIDTH + 2) * index + 10;
+      const x1 = (WIDTH + 2) * index + 10;
       ctx.fillStyle = '#dee';
       ctx.fillRect(x1, 10, WIDTH, HEIGHT);
       drawText(ctx);
