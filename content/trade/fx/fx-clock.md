@@ -20,23 +20,23 @@ FX で一攫千金を狙おうとする人たちも、この時間帯は特に�
 ----
 
 ### オセアニア
-- ウェリントン市場（ニュージーランド）- [New Zealand Exchange](http://www.nzx.com/)
+- ウェリントン市場（ニュージーランド）- [New Zealand Exchange](https://www.nzx.com/)
     - 為替市場: 6:00〜14:00 (5:00〜13:00)
     - 株式市場: 7:00〜13:45 (6:00〜12:45)（現地時間 10:00〜16:45）
-- シドニー市場（オーストラリア）- [Australian Securities Exchange](http://www.asx.com.au/)
+- シドニー市場（オーストラリア）- [Australian Securities Exchange](https://www.asx.com.au/)
     - 為替市場: 6:00〜15:00 (5:00〜14:00)</li>
     - 株式市場: 9:00〜15:45 (8:00〜14:45)（現地時間 10:00〜16:45）</li>
 
 ### アジア
-- 東京（日本）★ - [日本取引所グループ (JPX: Japan Exchange Group)](http://www.jpx.co.jp/)
+- 東京（日本）★ - [日本取引所グループ (JPX: Japan Exchange Group)](https://www.jpx.co.jp/)
     - 為替市場: 9:00〜17:00
     - 株式市場: 9:00〜11:30、12:30〜15:00
-- 香港市場（香港）- [Hong Kong Exchanges](http://www.hkex.com.hk/)
+- 香港市場（香港）- [Hong Kong Exchanges](https://www.hkex.com.hk/)
     - 為替市場: 10:00〜18:00
     - 株式市場: 11:00～13:30、15:30〜17:00（現地時間: 10:00〜12:30、14:30〜16:00）
-- 上海市場（中国）- [Shanghai Stock Exchange](http://english.sse.com.cn/)
+- 上海市場（中国）- [Shanghai Stock Exchange](https://english.sse.com.cn/)
     - 株式市場: 10:30〜18:30（現地時間: 9:30〜15:30）
-- シンガポール市場（シンガポール）- [Singapore Exchange](http://www.sgx.com/)
+- シンガポール市場（シンガポール）- [Singapore Exchange](https://www.sgx.com/)
     - 為替市場: 10:00〜18:00（現地時間: 9:00〜17:00）
 - ムンバイ市場（インド）
     - 為替市場: 13:25〜19:00（現地時間: ）昼休みなし
@@ -44,12 +44,12 @@ FX で一攫千金を狙おうとする人たちも、この時間帯は特に�
     - 為替市場 (14:00〜23:00)
 
 ### ヨーロッパ
-- フランクフルト市場（ドイツ）- [Frankfurt Stock Exchange](http://www.boerse-frankfurt.de/en/start)
+- フランクフルト市場（ドイツ）- [Frankfurt Stock Exchange](https://www.boerse-frankfurt.de/en/start)
     - 為替市場: 17:00〜1:00 (16:00〜0:00)
     - 株式市場: 17:30〜1:30 (16:30〜0:30)（現地時間: 9:30〜17:30）
 - チューリッヒ（スイス）
     - 為替市場 (17:00〜3:00)
-- ロンドン市場（イギリス）★ - [London Stock Exchange](http://www.londonstockexchange.com/)
+- ロンドン市場（イギリス）★ - [London Stock Exchange](https://www.londonstockexchange.com/)
     - 為替市場: 17:00〜2:00 (16:00〜0:00)
     - 株式市場: 17:30〜1:30 (16:30〜0:30) （現地時間: 8:30〜16:30）
 
@@ -58,24 +58,24 @@ FX で一攫千金を狙おうとする人たちも、この時間帯は特に�
     - 株式市場: 16:00〜23:30（現地時間: 9:00〜16:30）
 
 ###  アメリカ
-- ニューヨーク市場（アメリカ）★ - [New York Stock Exchange](https://www.nyse.com)
+- ニューヨーク市場（アメリカ）★ - [NYSE: New York Stock Exchange](https://www.nyse.com)
     - 為替市場: 22:30〜7:00 (21:30〜6:00)
     - 株式市場: 23:30〜6:00 (22:30〜5:00) （現地時間: 9:30〜16:00）昼休みなし
-- トロント市場（カナダ）- [Toronto Stock Exchange](http://www.tsx.com/)
+- トロント市場（カナダ）- [Toronto Stock Exchange](https://www.tsx.com/)
     - 株式市場: 23:30〜6:00 (22:30〜5:00) （現地時間: 9:30〜16:00）
 
 
 FX の重要時間
 ----
 
-- **ロンドンフィックス: 25:00（夏: 24:00）**
+- __ロンドンフィックス: 25:00（夏: 24:00）__
     - 世界の金の値段である、スポット価格を決めます。金はドル建てで取引されるため、ドルに関連する相場が大きく動きます。
-- **NY オプションカット: 24:00（夏: 23:00）**
+- __NY オプションカット: 24:00（夏: 23:00）__
     - オプションカットは通貨オプションの権利行使期限です。相場が大きく動きます。
-- **東京仲値算定: 9:55**
+- __東京仲値算定: 9:55__
     - 各銀行が仲値 (TTM) を決定する時間帯で、取引が活発化します。
     - 仲値不足により、銀行によるドル買いが起こることがあります。
-    - 特に**ゴトウ日（5 の倍数の日）**は企業等の大口決済が多く、取引が活発になります。
+    - 特に __ゴトウ日（5 の倍数の日）__ は企業等の大口決済が多く、取引が活発になります。
 
 
 各国の夏時間（サマータイム）

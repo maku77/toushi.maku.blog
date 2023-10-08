@@ -48,7 +48,7 @@ date: "2016-01-19"
   * 税の優遇措置: なし
   * 1 人で複数の契約が可能
 
-参考: [財形貯蓄制度｜厚生労働省](http://www2.mhlw.go.jp/topics/seido/rousei/kinrousya/980831_2.htm)
+参考: [財形貯蓄制度｜厚生労働省](https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000106564.html)
 
 
 借り入れによる教育資金の確保

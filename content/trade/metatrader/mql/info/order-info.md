@@ -79,9 +79,9 @@ void OnStart() {
 
 MT5 で各待機注文の情報を取得するには、下記のような関数に取得したい情報の enum 値を渡します。
 
-- [long  OrderGetInteger(ENUM_ORDER_PROPERTY_INTEGER)](https://www.mql5.com/en/docs/trading/ordergetinteger)（[日本語](https://www.mql5.com/jp/docs/trading/ordergetinteger)）<br>戻り値が整数（あるいは bool や enum 値）の待機注文情報
-- [double OrderGetDouble(ENUM_ORDER_PROPERTY_DOUBLE)](https://www.mql5.com/en/docs/trading/ordergetdouble)（[日本語](https://www.mql5.com/jp/docs/trading/ordergetdouble)）<br>戻り値が浮動小数点数の待機注文情報
-- [string OrderGetString(ENUM_ORDER_PROPERTY_STRING)](https://www.mql5.com/en/docs/trading/ordergetstring)（[日本語](https://www.mql5.com/jp/docs/trading/ordergetstring)）<br>戻り値が文字列の待機注文情報
+- [long  OrderGetInteger(ENUM_ORDER_PROPERTY_INTEGER)](https://www.mql5.com/en/docs/trading/ordergetinteger)（[日本語](https://www.mql5.com/ja/docs/trading/ordergetinteger)）<br>戻り値が整数（あるいは bool や enum 値）の待機注文情報
+- [double OrderGetDouble(ENUM_ORDER_PROPERTY_DOUBLE)](https://www.mql5.com/en/docs/trading/ordergetdouble)（[日本語](https://www.mql5.com/ja/docs/trading/ordergetdouble)）<br>戻り値が浮動小数点数の待機注文情報
+- [string OrderGetString(ENUM_ORDER_PROPERTY_STRING)](https://www.mql5.com/en/docs/trading/ordergetstring)（[日本語](https://www.mql5.com/ja/docs/trading/ordergetstring)）<br>戻り値が文字列の待機注文情報
 
 これらの関数を呼び出す前に、どの待機注文の情報を取得するかを、次のような選択関数を使って選択しておく必要があります。
 選択関数を呼び出した瞬間に、その待機注文の情報が内部バッファにコピーされ、上記の参照関数で取得できるようになるようです。

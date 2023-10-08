@@ -1,7 +1,7 @@
 ---
 title: "テクニカル指標: DMI（方向性指数）"
 linkTitle: "DMI（方向性指数）"
-url: "/p/9ju3pvu"
+url: "p/9ju3pvu/"
 date: "2019-08-09"
 tags: ["DMI", "テクニカル指標"]
 description: "DMI（方向性指数）は、価格の上昇力や、下落力（トレンドの強さ）を見極めるために使用するテクニカル指標です。"
