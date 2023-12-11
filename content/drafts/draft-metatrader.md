@@ -7,8 +7,17 @@ draft: true
 ---
 
 - [MetaTrader トップページ](/p/etedykx)
-
 - [Conversion Functions](https://docs.mql4.com/mql5_language/mql5_functions/mql5_convert)
+
+
+メタエディタの初期設定
+----
+
+- インデントの設定
+  1. `F4` キーでメタエディタを開く
+  2. `ツール` → `オプション`
+     - 「一般」タブの「タブサイズ」を __4 文字__ に設定
+     - 「スタイラー」タブの「スタイル」で __Java__ を選択（デフォルトは MetaQuotes になっている）
 
 
 バックテストを起動する (MT4?) <!-- 2020-01-06 -->

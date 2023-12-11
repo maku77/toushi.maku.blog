@@ -37,6 +37,6 @@ tags: ["金商法", "証券外務員"]
 ----
 
 このような法律に裏付けされた自主規制の仕組みは、もともとはアメリカから輸入されたものです。
-アメリカの証券界の自主規制機関には、**国法証券取引所**、および、**FINTA（Financial Industory Regulatory Authority: 金融取引業規制機構）**があります。
+アメリカの証券界の自主規制機関には、**国法証券取引所**、および、__FINTA（Financial Industory Regulatory Authority: 金融取引業規制機構）__ があります。
 両者は SEC (Securities and Exchange Commission: 証券取引委員会）と連携を取りながら、様々な自主規制措置を講じています。
 
