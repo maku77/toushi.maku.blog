@@ -2337,6 +2337,16 @@ definitions:
     tags: [理論]
     desc: 1965 年にウィリアム・シャープ氏などが提唱した理論で、市場ポートフォリオ（市場全体の資産の加重平均）が最適なポートフォリオであるとするもの。
 
+  - label: "CBOE: Chicago Board Options Exchange"
+    tags: [取引所]
+    date: 2024-02-23
+    desc: シカゴ・ボード・オプション取引所。
+
+  - label: "CBT: Chicago Board of Trade"
+    tags: [取引所]
+    date: 2024-02-23
+    desc: シカゴ商品取引所。CBT あるいは CBOT と略されます。シカゴ・マーカンタイル取引所グループの商品先物取引所です。
+
   - id: iupgowq
     label: "CDB: China Development Bank"
     japanese: 国家開発銀行
@@ -2346,6 +2356,11 @@ definitions:
   - label: "CDR"
     tags: [中国]
     desc: 中国預託証券。ADR（米預託証券）の中国版。中国本土の市場で、海外上場企業に人民元建てで投資できます。
+
+  - label: "CME: Chicago Mercantile Exchange"
+    date: 2024-02-23
+    tags: [取引所]
+    desc: シカゴ・マーカンタイル取引所。シカゴを本拠地とする世界的なデリバティブ市場です。
 
   - id: ftt6qae
     label: CoCo 債 (Contingent Convertible Bonds)
@@ -2558,6 +2573,14 @@ definitions:
   - label: "PEX: Palestine Exchange"
     tags: [市場]
     desc: パレスチナ取引所。パレスチナ・ナブルスに 1995 年に設立された取引所。通過は新シェケル（2020 年 11 月時点で、1 新シェケルは約 30 円）。代表的な株価指数は __Al Quds__。Web サイトは [web.pex.ps](https://web.pex.ps)
+
+  - label: "PHLX: Philadelphia Stock Exchange"
+    date: 2024-02-23
+    tags: [取引所]
+    desc: >
+      フィラデルフィア証券取引所。
+      2008 年に NASDAQ に買収され NASDAQ PHLX LLC となりました。
+      米国市場においてオプション取引の中心的な役割を果たしています。
 
   ### q
 
