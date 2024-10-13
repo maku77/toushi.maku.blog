@@ -1,7 +1,7 @@
 ---
 title: "MetaTrader/MQL: 基本データ型一覧"
 linkTitle: "MQL の基本データ型一覧"
-url: "/p/3n2eq3e"
+url: "p/3n2eq3e/"
 date: "2021-01-03"
 tags: ["MetaTrader/MQL"]
 compare: "ev7fpx7"
