@@ -35,7 +35,5 @@ clrBlack           // Black
 
 `clrRed` のような定義済みのカラー値として何が用意されているかは、下記を参照してください。
 
-{{< reference >}}
-- [MQL5 - Web Colors](https://www.mql5.com/en/docs/constants/objectconstants/webcolors)（[日本語](https://www.mql5.com/ja/docs/constants/objectconstants/webcolors)）
-{{< /reference >}}
+- （参考）[MQL5 - Web Colors](https://www.mql5.com/en/docs/constants/objectconstants/webcolors)（[日本語](https://www.mql5.com/ja/docs/constants/objectconstants/webcolors)）
 

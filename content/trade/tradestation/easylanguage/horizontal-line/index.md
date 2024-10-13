@@ -57,8 +57,6 @@ myLine1.Weight = 2;
 myLine2.Weight = 1;
 {{< /code >}}
 
-{{< reference >}}
-- [垂直線を描画する (VerticalLine)](/p/f3gs6gs)
-- [インジケーターサンプル「本日のOHLCラインを表示する」](/p/h4fr3dn)
-{{< /reference >}}
+- （参考）[垂直線を描画する (VerticalLine)](/p/f3gs6gs)
+- （参考）[インジケーターサンプル「本日のOHLCラインを表示する」](/p/h4fr3dn)
 

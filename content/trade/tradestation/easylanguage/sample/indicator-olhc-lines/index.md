@@ -75,7 +75,5 @@ once (LastBarOnChart) begin
 end;
 {{< /code >}}
 
-{{< reference >}}
-- [水平線を描画する (HorizontalLine)](/p/ufr2cmv/)
-{{< /reference >}}
+- （参考）[水平線を描画する (HorizontalLine)](/p/ufr2cmv/)
 

@@ -1,7 +1,7 @@
 ---
 title: "EasyLanguage で垂直線を描画する (VerticalLine)"
 linkTitle: "垂直線を描画する (VerticalLine)"
-url: "/p/f3gs6gs"
+url: "p/f3gs6gs/"
 date: "2020-04-18"
 tags: ["トレステ", "EasyLanguage"]
 image: "img-001.png"
@@ -110,7 +110,5 @@ method void DrawVerticalLine() begin
 end;
 {{< /code >}}
 
-{{< reference >}}
-- [水平線を描画する (HorizontalLine)](/p/ufr2cmv)
-{{< /reference >}}
+- （参考）[水平線を描画する (HorizontalLine)](/p/ufr2cmv)
 

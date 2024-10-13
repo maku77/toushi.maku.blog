@@ -10,5 +10,5 @@ categoryIcon: _index.jpg
 
 株式投資や FX トレードなどに役立つ用語を日々追加中。
 
-{{< maku-common/words words >}}
+{{< word-list words >}}
 
