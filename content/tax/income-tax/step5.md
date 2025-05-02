@@ -56,7 +56,7 @@ description: "所得税額が計算できたら、次は税額控除を行って
     <tr><td></td><th>源泉分離課税</th><th>総合課税</th><th>申告分離課税</th></tr>
   </thead>
   <tbody>
-    <tr><th>税率</th><td>約20%</td><td>約20%</td><td>累進税率</td></tr>
+    <tr><th>税率</th><td>約20%</td><td>累進税率</td><td>約20%</td></tr>
     <tr><th>配当控除</th><td>×</td><td>◯</td><td>×</td></tr>
     <tr><th>株式との損益通算</th><td>×</td><td>×</td><td>◯</td></tr>
     <tr><th>借入金利子の控除</td><td>×</td><td>◯</td><td>◯</td></tr>
