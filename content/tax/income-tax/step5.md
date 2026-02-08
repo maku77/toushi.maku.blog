@@ -1,10 +1,13 @@
 ---
 title: "所得税の計算: 差引所得税額（申告納税額）を計算する"
-url: "/p/9banee7"
+url: "p/9banee7/"
 linkTitle: "税額控除"
 date: "2016-01-02"
+lastmodSage: "2026-02-09"
 tags: ["税金"]
 description: "所得税額が計算できたら、次は税額控除を行って、申告納税額を求めます。"
+changes:
+  - 2026-02-09: リンク切れしたリンクを削除
 ---
 
 <style>
@@ -95,12 +98,6 @@ description: "所得税額が計算できたら、次は税額控除を行って
 そもそも総所得が多い場合（累進税率 20% 超の場合）は、総合課税にしてしまうと累進課税によって多くの税金を取られますから、一律 20% の税金で済む申告分離課税を選択した方が有利です。
 
 確定申告には配当金の支払通知書が必要なので、なくさないように保管しておきましょう。
-
-<ul>
-  <li>参考: <a href="https://www.nta.go.jp/taxanswer/shotoku/1331.htm">国税庁: 上場株式等の配当所得に係る申告分離課税制度</a>
-  <li>参考: <a href="https://www.nta.go.jp/taxanswer/shotoku/1250.htm">国税庁: 配当控除</a>
-  <li>参考: <a href="http://www.mizuho-sc.com/beginner/zeikin.html">みずほ証券：証券税制早わかり 株式の税金</a>
-</ul>
 
 
 （2）住宅ローン控除（住宅借入金等特別控除）
