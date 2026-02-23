@@ -1,2 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>デリバティブ on まくまく投資ノート</title><link>https://toushi.maku.blog/tags/%E3%83%87%E3%83%AA%E3%83%90%E3%83%86%E3%82%A3%E3%83%96/</link><description>Recent content in デリバティブ on まくまく投資ノート</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Mon, 27 Jan 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/tags/%E3%83%87%E3%83%AA%E3%83%90%E3%83%86%E3%82%A3%E3%83%96/index.xml" rel="self" type="application/rss+xml"/><item><title>デリバティブの分類メモ</title><link>https://toushi.maku.blog/p/6igqtr8/</link><pubDate>Mon, 27 Jan 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/6igqtr8/</guid><description>原資産からの派生商品（デリバティブ）は、大きく分けると次の 3 つに分類できます。
-スワップ （金融機関同士の相対取引） 金利スワップ（店頭デリバティブ取引の 70% を占める） クレジット・デフォルト・スワップ (CDS) バリアンス・スワップ フューチャー （先物） 商品先物 金融先物 通貨先物（為替先物） 金利先物 株価指数先物 オプション</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>デリバティブ on まくまく投資ノート</title><link>https://toushi.maku.blog/tags/%E3%83%87%E3%83%AA%E3%83%90%E3%83%86%E3%82%A3%E3%83%96/</link><description>Recent content in デリバティブ on まくまく投資ノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Mon, 27 Jan 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/tags/%E3%83%87%E3%83%AA%E3%83%90%E3%83%86%E3%82%A3%E3%83%96/index.xml" rel="self" type="application/rss+xml"/><item><title>デリバティブの分類メモ</title><link>https://toushi.maku.blog/p/6igqtr8/</link><pubDate>Mon, 27 Jan 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/6igqtr8/</guid><description>&lt;p>原資産からの派生商品（デリバティブ）は、大きく分けると次の 3 つに分類できます。&lt;/p>
+&lt;ul>
+&lt;li>&lt;b>スワップ&lt;/b>
+（金融機関同士の相対取引）
+&lt;ul>
+&lt;li>金利スワップ（店頭デリバティブ取引の 70% を占める）&lt;/li>
+&lt;li>クレジット・デフォルト・スワップ (CDS)&lt;/li>
+&lt;li>バリアンス・スワップ&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;b>フューチャー&lt;/b>
+（先物）
+&lt;ul>
+&lt;li>商品先物&lt;/li>
+&lt;li>金融先物
+&lt;ul>
+&lt;li>通貨先物（為替先物）&lt;/li>
+&lt;li>金利先物&lt;/li>
+&lt;li>株価指数先物&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;b>オプション&lt;/b>
+&lt;/li>
+&lt;/ul></description></item></channel></rss>

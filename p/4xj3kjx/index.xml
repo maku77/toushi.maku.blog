@@ -1,5 +1,38 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>TradeStation/関数 on まくまく投資ノート</title><link>https://toushi.maku.blog/p/4xj3kjx/</link><description>Recent content in TradeStation/関数 on まくまく投資ノート</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Mon, 13 Apr 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/p/4xj3kjx/index.xml" rel="self" type="application/rss+xml"/><item><title>トレステ/関数/Momentum 関数 - 現在の足のモメンタムを求める</title><link>https://toushi.maku.blog/p/xrap6ky/</link><pubDate>Mon, 13 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/xrap6ky/</guid><description>Momentum 関数の使い方 Momentum 関数は、現在の足のモメンタム（n 本前の足との価格差）を返します。 第1引数に使用する価格の種類 (OHLC)、第2引数に何本前の足と比べるかを指定します。
-14 本前の終値との差分を求める Value1 = Momentum(Close, 14); Momentum 関数は単純に価格差を返しますが、比率（パーセンテージ）で求めるには次のように RateOfChange 関数を使用します。 RateOfChange が返す値は、価格に変化がないときは 0、価格が 50％ 上がっているときは 50 になります。
-14 本前の終値からの変化率（騰落率％）を求める Value1 = RateOfChange(Close, 14); Momentum 関数の実装 Momentum 関数の実装はとてもシンプルです。
-Momentum 関数の実装 inputs: Price(numericseries), Length(numericsimple); Momentum = Price - Price[Length]; RateOfChange 関数の実装は次のようになっています。
-RateOfChange 関数の実装 inputs: Price(numericseries), Length(numericsimple) ; if Price[Length] &amp;lt;&amp;gt; 0 then RateOfChange = (Price / Price[Length] - 1) * 100 else RateOfChange = 0;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>TradeStation/関数 on まくまく投資ノート</title><link>https://toushi.maku.blog/p/4xj3kjx/</link><description>Recent content in TradeStation/関数 on まくまく投資ノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Mon, 13 Apr 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/p/4xj3kjx/index.xml" rel="self" type="application/rss+xml"/><item><title>トレステ/関数/Momentum 関数 - 現在の足のモメンタムを求める</title><link>https://toushi.maku.blog/p/xrap6ky/</link><pubDate>Mon, 13 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/xrap6ky/</guid><description>&lt;h2 id="momentum-関数の使い方">Momentum 関数の使い方&lt;/h2>
+&lt;p>&lt;code>Momentum&lt;/code> 関数は、現在の足のモメンタム（n 本前の足との価格差）を返します。
+第1引数に使用する価格の種類 (OHLC)、第2引数に何本前の足と比べるかを指定します。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">14 本前の終値との差分を求める&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">Value1 = Momentum(Close, 14);&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>&lt;code>Momentum&lt;/code> 関数は単純に価格差を返しますが、比率（パーセンテージ）で求めるには次のように &lt;strong>&lt;code>RateOfChange&lt;/code>&lt;/strong> 関数を使用します。
+&lt;code>RateOfChange&lt;/code> が返す値は、価格に変化がないときは 0、価格が 50％ 上がっているときは 50 になります。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">14 本前の終値からの変化率（騰落率％）を求める&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">Value1 = RateOfChange(Close, 14);&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;h2 id="momentum-関数の実装">Momentum 関数の実装&lt;/h2>
+&lt;p>&lt;code>Momentum&lt;/code> 関数の実装はとてもシンプルです。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">Momentum 関数の実装&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">inputs: Price(numericseries), Length(numericsimple);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Momentum = Price - Price[Length];&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>&lt;code>RateOfChange&lt;/code> 関数の実装は次のようになっています。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">RateOfChange 関数の実装&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">inputs: Price(numericseries), Length(numericsimple) ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if Price[Length] &amp;lt;&amp;gt; 0 then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> RateOfChange = (Price / Price[Length] - 1) * 100
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> RateOfChange = 0;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure></description></item></channel></rss>

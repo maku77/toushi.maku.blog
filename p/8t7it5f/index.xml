@@ -1,36 +1,357 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MetaTrader/MQL: 雑多メモ on まくまく投資ノート</title><link>https://toushi.maku.blog/p/8t7it5f/</link><description>Recent content in MetaTrader/MQL: 雑多メモ on まくまく投資ノート</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Sun, 18 Jun 2023 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/p/8t7it5f/index.xml" rel="self" type="application/rss+xml"/><item><title>MetaTrader/MQL: テキストを出力する方法まとめ (Alert, Comment, Print, MessageBox)</title><link>https://toushi.maku.blog/p/q37kiwa/</link><pubDate>Sun, 18 Jun 2023 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/q37kiwa/</guid><description>Alert/Comment/Print 関数 プログラムのテストや、ユーザへの通知のために画面上にテキストを表示したい場合は、下記の関数を使用できます。
-Alert 関数 &amp;hellip; アラートボックスでテキスト表示する（Strategy Tester での実行時は無視されます） Comment 関数 &amp;ndash; チャートの左上にテキスト表示する Print 関数 &amp;ndash; Terminal ビュー (Ctrl+T) の Expert タブ内にテキスト表示する メソッドごとに出力先は異なりますが、どのメソッドも渡されたパラメータの型によって適切な形式でテキスト表示してくれます。
-string s = &amp;#34;Hello&amp;#34;; bool b = true; int i = 100; float f = 0.123456789f; double d = 0.123456789; datetime dt = TimeLocal(); color cl = C&amp;#39;0xFF,0xC0,0x80&amp;#39;; Alert(s); //=&amp;gt; Hello Alert(b); //=&amp;gt; true Alert(i); //=&amp;gt; 100 Alert(f); //=&amp;gt; 0.12346 Alert(d); //=&amp;gt; 0.123456789 Alert(dt); //=&amp;gt; 2014.12.19 23:59:59 Alert(cl); //=&amp;gt; 255,192,128 パラメータは複数渡すことができ、それぞれが連結されて表示されます。</description></item><item><title>MetaTrader/MQL: デバッグ用のマクロを定義する (#define)</title><link>https://toushi.maku.blog/p/8779pnk/</link><pubDate>Sun, 18 Jun 2023 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/8779pnk/</guid><description>MQL では、C/C++ と同様に #define ディレクティブを使って独自のマクロを定義することができます。 現在のファイル名を示す __FILE__ や、行番号を示す __LINE__ なども同様に使用することができます。 次の例では、現在のファイル名と行番号、指定したメッセージを表示するマクロを定義しています。
-HelloEa.mq5 #define DEBUG(text) Print(__FILE__, &amp;#34;(&amp;#34;, __LINE__, &amp;#34;): &amp;#34;, text) void OnTick() { DEBUG(&amp;#34;Hello, Expert Advisor&amp;#34;); } 関数名を取得するための __FUNCTION__ なども便利です。
-Print(__FUNCTION__); // =&amp;gt; &amp;#34;OnTick()&amp;#34; Print(__FUNCSIG__); // =&amp;gt; &amp;#34;void OnTick()&amp;#34;</description></item><item><title>MetaTrader/MQL: プログラムがデモ口座で実行されている調べる (ACCOUNT_TRADE_MODE)</title><link>https://toushi.maku.blog/p/e7gjidc/</link><pubDate>Tue, 26 Jan 2021 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/e7gjidc/</guid><description>MetaTrader で取引を行うスクリプトや EA をデバッグしているときに、間違えて実際の口座で実行してしまうと、不本意なポジションをとってしまい危険です。 下記のユーティリティ関数を使うと、実行中のプログラムがデモ口座上で実行されているかを調べることができます。
-Include/maku77/Util.mqh namespace Util { /** * プログラムがデモ口座で実行されているか調べ、そうでなければ警告を表示します。 * * @return デモ口座で実行されているなら true、そうでないなら false */ bool IsDemoAccount() { if (AccountInfoInteger(ACCOUNT_TRADE_MODE) == ACCOUNT_TRADE_MODE_DEMO) { return true; } Alert(&amp;#34;Operation is not allowed on a live account!&amp;#34;); return false; } } 例えば、スクリプトのエントリポイント (OnStart 関数) の先頭で次のようにしておけば、スクリプトがデモ口座以外で実行されたときに実行を中止できます。
-Scripts/Test.mq5 #include &amp;lt;maku77/Util.mqh&amp;gt; void OnStart() { if (!Util::IsDemoAccount()) return; // ... 残りの処理 ... }</description></item><item><title>MetaTrader/MQL: GitHub で MetaTrader 用のプログラムを管理する</title><link>https://toushi.maku.blog/p/od4bq8j/</link><pubDate>Thu, 07 Jan 2021 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/od4bq8j/</guid><description>MetaTrader (MT4/MT5) 用に作成した EA やカスタムインジケーターは大切な資産です。 ここでは、MetaTrader 用のプログラムを GitHub で管理する方法を説明します。
-MetaTrader のデータディレクトリ MetaTrader では、自作した EA やカスタムインジケーター（.mq5 ファイルなど）は、あらかじめ用意されたデータディレクトリに格納することになっています。 このディレクトリのパスは、MetaTrader のデスクトップアプリや MetaEditor のメニューから次のように開いて確認することができます。
-ファイル → データフォルダを開く （あるいは Ctrl + Shift + D） データフォルダのパスは環境ごとに異なり、例えば次のような感じになっています。
-C:\Users\maku\AppData\Roaming\MetaQuotes\Terminal\84E63C3B90BC3EC3DADC66BC66DD0A1E 自作した .mq5 ファイルを保存するディレクトリは、このデータディレクトリ以下の MQL5/Experts や MQL5/Indicators ディレクトリになります。
-しかし、データディレクトリには MetaTrader のインストーラーによって作成されたファイルなども含まれているため、MQL5 ディレクトリを丸ごと GitHub で管理しようとすると、余計なファイルがコミットされてしまいます。
-そこで、自作したプログラムは別のディレクトリで管理して、データディレクトリからそのディレクトリに シンボリックリンク を張ることにします。
-シンボリックリンクを作成する まずは、GitHub で作成したコード格納用のリポジトリを git clone しておきます。 ここでは、GitHub 上に metatrader という名前のリポジトリを作成済みで、作業用ディレクトリとして D:\y\gitwork を使うことを想定しています（パスは環境に合わせて調整してください）。
-cd /d D:\y\gitwork git clone https://github.com/ユーザー名/metatrader ローカルに metatrader というディレクトリが作成されるので、この中に MQL5 ディレクトリを作成して、そこに自作の EA やインジケーターを格納することにします。 シンボリックリンクはディレクトリ単位で作成したいので、実際には次のようにもう一段階ディレクトリ作成します。 ここでは maku77 というディレクトリ名にしてますが、GitHub のユーザー名などにしておけばよいでしょう。</description></item><item><title>MetaTrader/MQL: MQL4 と MQL5 のどちらでコンパイルされているか調べる</title><link>https://toushi.maku.blog/p/43cgihf/</link><pubDate>Tue, 27 Oct 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/43cgihf/</guid><description>MQL コード内で下記のマクロが定義されているかどうかを調べることによって、MQL プログラムが MQL4 としてコンパイルされているのか、MQL5 としてコンパイルされているのかを判別することができます。
-MQL4 &amp;hellip; MQL4 としてコンパイルされているときに定義される MQL5 &amp;hellip; MQL5 としてコンパイルされているときに定義される これを利用すると、MQL4 用と MQL5 用のコードを単一のファイルで記述することができます。
-MQL4/5 コードを混在させる void OnStart() { #ifdef __MQL5__ MessageBox(&amp;#34;MQL5 でコンパイルされています&amp;#34;); #else MessageBox(&amp;#34;MQL4 でコンパイルされています&amp;#34;); #endif }</description></item><item><title>MetaTrader/MQL: 組み込み関数の実行に失敗したときにエラー情報を表示する (GetLastError, ErrorDescription)</title><link>https://toushi.maku.blog/p/av9kv7g/</link><pubDate>Sun, 20 Mar 2016 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/av9kv7g/</guid><description>MQL の組み込み関数の実行に失敗した時には、GetLastError 関数によってそのエラーコードを取得できます。 このエラーコードは int 型の数値のため、その内容をテキストで取得したい場合は次のように変換する必要があります。
-MT4 の場合 GetLastError 関数で取得したエラーコードを ErrorDescription に渡すことで、テキスト形式でエラー内容を取得することができます。 これらの関数を使用するには、stdlib.mqh をインクルードしておく必要があります。
-下記は、ObjectCreate の実行に失敗した時のエラー表示の例です。
-MQL4 // #include &amp;lt;stdlib.mqh&amp;gt; if (!ObjectCreate(0 , name, OBJ_LABEL, subWindow, 0, 0)) { Alert(&amp;#34;Failed to create a label: &amp;#34;, ErrorDescription(GetLastError())); return; } 表示例 Failed to create a label: object already exists MT5 の場合 MT5 の場合は、なんと ErrorDescription 関数が提供されてません（なんでやねん）。 正確には、MT4 で用意されていた stdlib.mqh が提供されていません。 代わりに、下記のサイトで、MetaQuotes 社からライブラリとして ErrorDescription.mqh ファイルが提供されています。 自分でダウンロードして使えということですね（なんでやねん）。
-ErrorDescription - library for MetaTrader 5 これをダウンロードして MQL5/Inlude ディレクトリにコピーすれば、</description></item><item><title>MetaTrader/MQL: デバッグモードでコンパイルされているか調べる (_DEBUG, _RELEASE, MQL5_DEBUGGING)</title><link>https://toushi.maku.blog/p/nyzotbh/</link><pubDate>Sat, 24 Oct 2015 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/nyzotbh/</guid><description>MQL のプログラムが、デバッグモードとリリースモードのどちらでコンパイルされているかを調べるには、#ifdef プリプロセッサで下記のマクロが定義されているかどうかを調べます。
-_DEBUG &amp;hellip; デバッグモードでコンパイルされている（MetaEditor 上で F5 で実行したとき） _RELEASE &amp;hellip; リリースモードでコンパイルされている（MetaEditor 上で F7 でコンパイルしたとき） 次のスクリプトを実行すると、スクリプト自身がどちらのモードでコンパイルされているかをログに出力します。
-void OnStart() { #ifdef _DEBUG Print(&amp;#34;Run in debug mode&amp;#34;); #else Print(&amp;#34;Run in release mode&amp;#34;); #endif } 上記はプリプロセッサで調べる例ですが、MQL5InfoInteger 関数を使って、実行時に動的にチェックすることもできます。
-// MQL5 の場合 bool isDebug = MQL5InfoInteger(MQL5_DEBUGGING); // MQL4 の場合 bool isDebug = IS_DEBUG_MODE;</description></item><item><title>MetaTrader/MQL: MQL での色の表現方法 (color)</title><link>https://toushi.maku.blog/p/rn6kw8j/</link><pubDate>Sat, 10 Oct 2015 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/rn6kw8j/</guid><description>MQL コード内で色情報を表現する場合、color 型（日本語）の変数を使います。
-color 変数は 4 バイトの数値で、後ろ 3 バイトでそれぞれ RGB の色情報 (0~255) を保持しています。 コード内で色を表すときは、下記のいずれかのリテラル形式で表現します。
-C'r,g,b' 形式リテラル 定義済みのカラー名 4 バイト数値 // RGB 形式 C&amp;#39;128,128,128&amp;#39; // Gray C&amp;#39;0x00,0x00,0xFF&amp;#39; // Blue // 定義済みカラー値 clrRed // Red clrYellow // Yellow clrBlack // Black // 4 バイト整数 0xFFFFFF // White 16777215 // White 0x008000 // Green 32768 // Green clrRed のような定義済みのカラー値として何が用意されているかは、下記を参照してください。
-（参考）MQL5 - Web Colors（日本語）</description></item><item><title>MetaTrader/MQL: 実行中のプログラムの種類（スクリプト/インジケーター/EA）を判別する (MQL5_PROGRAM_TYPE)</title><link>https://toushi.maku.blog/p/dct2372/</link><pubDate>Thu, 08 Oct 2015 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/dct2372/</guid><description>MQL5InfoInteger 関数の引数に MQL5_PROGRAM_TYPE を指定すると、その関数の呼び出し元がスクリプトなのか、EA なのか、インジケーターなのかを調べることができます。
-// 実行中のプログラムが「スクリプト」かどうかを調べます bool isCalledFromScript() { return MQL5InfoInteger(MQL5_PROGRAM_TYPE) == PROGRAM_SCRIPT; } // 実行中のプログラムが「EA」かどうかを調べます bool isCalledFromEa() { return MQL5InfoInteger(MQL5_PROGRAM_TYPE) == PROGRAM_EXPERT; } // 実行中のプログラムが「インジケーター」かどうかを調べます bool isCalledFromIndicator() { return MQL5InfoInteger(MQL5_PROGRAM_TYPE) == PROGRAM_INDICATOR; }</description></item><item><title>MetaTrader/MQL: #property strict で安全な EA を作る</title><link>https://toushi.maku.blog/p/6riotap/</link><pubDate>Tue, 09 Jun 2015 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/6riotap/</guid><description>MetaTrader Build 765 以降では、EA やインジケーターの実装内で #property strict を指定しておくと、OnInit による初期化時に INIT_SUCCEEDED (0) 以外が返されたときに、チャートから自動的に EA やインジケーターを取り除いてくれます。
-#property strict ありで OnInit 処理が失敗 → EA がチャートから取り除かれる #property strict なしで OnInit 処理が失敗 → EA はチャートに関連付けられたまま 特に理由がない限り、コードの先頭で #property strict を指定しておくことをおすすめします。</description></item><item><title>MetaTrader/MQL: プログラムの実行前に確認ダイアログを表示する (#property show_confirm)</title><link>https://toushi.maku.blog/p/6s6iu7i/</link><pubDate>Sun, 07 Dec 2014 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/6s6iu7i/</guid><description>プログラムの先頭で、次のように __show_confirm プロパティを設定しておくと、プログラムの実行前（チャートにアタッチしたとき）に、 本当に実行してよいかの確認ダイアログ が表示されるようになります。
-#property show_confirm この確認ダイアログは、スクリプト、カスタム指標、EA のどの種類のプログラムでも有効です。 新規注文や決済を行うようなプログラグムは、誤って実行してしまわないように、このプロパティを設定しておくと安心です。</description></item><item><title>MetaTrader/MQL: 音声を再生する</title><link>https://toushi.maku.blog/p/xof3ydu/</link><pubDate>Sun, 07 Dec 2014 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/xof3ydu/</guid><description>MQL5 の PlaySound 関数 を使うと音声ファイル (WAV) を再生することができます。
-使用例 PlaySound(&amp;#34;alert.wav&amp;#34;); PlaySound の引数には、MetaTrader の Sounds ディレクトリ内の WAV ファイルを指定します。 例えば次のようなファイルがあります。
-alert.wav alert2.wav connect.wav disconnect.wav email.wav expert.wav news.wav ok.wav stops.wav tick.wav timeout.wav wait.wav 音声の再生は非同期に実行されるため、PlaySound 関数の呼び出しがプログラムを停止させることはありません。 音声の再生中にもう一度 PlaySound 関数を呼び出すと、現在再生中の音声は停止し、新しく指定した音声の再生が開始されます。 例えば、下記のように連続して実行すると、最後に指定した音だけが聞こえます。
-PlaySound(&amp;#34;alert.wav&amp;#34;); // この音は聞こえず、 PlaySound(&amp;#34;ok.wav&amp;#34;); // この音だけが聞こえる 引数にファイル名ではなく NULL を指定すると、現在再生中の音声を停止することができます。
-音声を停止する PlaySound(NULL); 次のスクリプトは、1 秒おきに異なる音声を再生していきます。
-Scripts/sample.mq5 void OnStart() { string sounds[] = { &amp;#34;alert.wav&amp;#34;, &amp;#34;alert2.wav&amp;#34;, &amp;#34;connect.wav&amp;#34;, &amp;#34;disconnect.wav&amp;#34;, &amp;#34;email.wav&amp;#34;, &amp;#34;expert.wav&amp;#34;, &amp;#34;news.wav&amp;#34;, &amp;#34;ok.wav&amp;#34;, &amp;#34;stops.wav&amp;#34;, &amp;#34;tick.wav&amp;#34;, &amp;#34;timeout.wav&amp;#34;, &amp;#34;wait.wav&amp;#34; }; for(int i = 0; i &amp;lt; ArraySize(sounds); ++i) { Print(&amp;#34;Sound file: &amp;#34; + sounds[i]); // Experts タブにファイル名を表示 PlaySound(sounds[i]); // 音声を再生 Sleep(1000); // 1 秒待つ } }</description></item><item><title>MetaTrader/MQL: MetaTrader 実行環境（ターミナル）の情報を取得する (TerminalInfo*)</title><link>https://toushi.maku.blog/p/85rz2xr/</link><pubDate>Sat, 06 Dec 2014 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/85rz2xr/</guid><description>MetaTrader の実行環境（ターミナル）の情報を取得するには、TerminalInfo* 系の関数を使用します。 戻り値の型によって使用する関数を呼び分ける必要があります。 取得したい項目は、各関数の引数で指定します。
-TerminalInfoString 関数 string 型の情報を取得するとき。 取得する項目は ENUM_TERMINAL_INFO_STRING enum 型 から選択します。 TerminalInfoInteger 関数 int 型の情報を取得するとき。 取得する項目は ENUM_TERMINAL_INFO_INTEGER enum 型 から選択します。 TerminalInfoDouble 関数 double 型の情報を取得するとき。 取得する項目は ENUM_TERMINAL_INFO_DOUBLE enum 型 から選択します。 次のスクリプトを実行すると、MetaTrader 実行環境（ターミナル）の情報をログ出力します。
-Scripts/PrintTerminalInfo.mq5 void OnStart() { Print(&amp;#34;Language=&amp;#34; + TerminalInfoString(TERMINAL_LANGUAGE)); Print(&amp;#34;Company=&amp;#34; + TerminalInfoString(TERMINAL_COMPANY)); Print(&amp;#34;Name=&amp;#34; + TerminalInfoString(TERMINAL_NAME)); Print(&amp;#34;Path=&amp;#34; + TerminalInfoString(TERMINAL_PATH)); Print(&amp;#34;DataPath=&amp;#34; + TerminalInfoString(TERMINAL_DATA_PATH)); Print(&amp;#34;CommonDataPath=&amp;#34; + TerminalInfoString(TERMINAL_COMMONDATA_PATH)); } 実行結果（OANDA の MT5 を使っている場合） Language=Japanese Company=OANDA Corporation Name=OANDA MetaTrader 5 Path=C:\app\OANDA MetaTrader 5 DataPath=C:\Users\maku\AppData\Roaming\MetaQuotes\Terminal\84E63C3B90BC3EC3DADC66BC66DD0A1E CommonDataPath=C:\Users\maku\AppData\Roaming\MetaQuotes\Terminal\Common</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MetaTrader/MQL: 雑多メモ on まくまく投資ノート</title><link>https://toushi.maku.blog/p/8t7it5f/</link><description>Recent content in MetaTrader/MQL: 雑多メモ on まくまく投資ノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Sun, 18 Jun 2023 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/p/8t7it5f/index.xml" rel="self" type="application/rss+xml"/><item><title>MetaTrader/MQL: テキストを出力する方法まとめ (Alert, Comment, Print, MessageBox)</title><link>https://toushi.maku.blog/p/q37kiwa/</link><pubDate>Sun, 18 Jun 2023 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/q37kiwa/</guid><description>&lt;h2 id="alertcommentprint-関数">Alert/Comment/Print 関数&lt;/h2>
+&lt;p>プログラムのテストや、ユーザへの通知のために画面上にテキストを表示したい場合は、下記の関数を使用できます。&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="http://www.mql5.com/en/docs/common/alert">Alert 関数&lt;/a> &amp;hellip; アラートボックスでテキスト表示する（Strategy Tester での実行時は無視されます）&lt;/li>
+&lt;li>&lt;a href="https://www.mql5.com/en/docs/common/comment">Comment 関数&lt;/a> &amp;ndash; チャートの左上にテキスト表示する&lt;/li>
+&lt;li>&lt;a href="https://www.mql5.com/en/docs/common/print">Print 関数&lt;/a> &amp;ndash; Terminal ビュー (Ctrl+T) の Expert タブ内にテキスト表示する&lt;/li>
+&lt;/ul>
+&lt;p>メソッドごとに出力先は異なりますが、どのメソッドも渡されたパラメータの型によって適切な形式でテキスト表示してくれます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="n">string&lt;/span> &lt;span class="n">s&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s">&amp;#34;Hello&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">bool&lt;/span> &lt;span class="n">b&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">true&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">100&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">float&lt;/span> &lt;span class="n">f&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mf">0.123456789f&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">double&lt;/span> &lt;span class="n">d&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mf">0.123456789&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">datetime&lt;/span> &lt;span class="n">dt&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">TimeLocal&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">color&lt;/span> &lt;span class="n">cl&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="err">&amp;#39;&lt;/span>&lt;span class="mh">0xFF&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mh">0xC0&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mh">0x80&lt;/span>&lt;span class="err">&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Alert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">s&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">//=&amp;gt; Hello
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">Alert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">b&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">//=&amp;gt; true
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">Alert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">//=&amp;gt; 100
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">Alert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">f&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">//=&amp;gt; 0.12346
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">Alert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">d&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">//=&amp;gt; 0.123456789
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">Alert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">dt&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">//=&amp;gt; 2014.12.19 23:59:59
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">Alert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cl&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">//=&amp;gt; 255,192,128
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>パラメータは複数渡すことができ、それぞれが連結されて表示されます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="n">Print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;value = &amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">value&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">//=&amp;gt; &amp;#34;value = 100&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>出力時に改行を入れたい場合は、文字列中に改行コード (&lt;code>\n&lt;/code>) を含めれば OK です。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="n">Comment&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;AAA&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">BBB&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">CCC&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="メッセージボックスを表示する">メッセージボックスを表示する&lt;/h2>
+&lt;p>&lt;a href="https://www.mql5.com/en/docs/common/messagebox">MessageBox&lt;/a> 関数を使用すると、Yes/Cancel ボタンなどを表示し、ユーザの意思を確かめることができます。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">確認ダイアログ (OK or Cancel) を表示する&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="n">ret&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">MessageBox&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Are you sure?&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">MB_OKCANCEL&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="n">MB_ICONQUESTION&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">ret&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="n">IDOK&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// OK button was pressed
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;h2 id="comment-関数を使いやすくする">Comment 関数を使いやすくする&lt;/h2>
+&lt;p>チャートの左上にテキスト表示する &lt;code>Comment&lt;/code> 関数は、続けて呼び出すと、最後に指定したテキストで内容が上書きされてしまいます。
+次のような関数を用意しておけば、過去に出力したメッセージを残しながら追加出力していくことができます。&lt;/p></description></item><item><title>MetaTrader/MQL: デバッグ用のマクロを定義する (#define)</title><link>https://toushi.maku.blog/p/8779pnk/</link><pubDate>Sun, 18 Jun 2023 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/8779pnk/</guid><description>&lt;p>MQL では、C/C++ と同様に &lt;a href="https://www.mql5.com/ja/docs/basis/preprosessor/constant">#define&lt;/a> ディレクティブを使って独自のマクロを定義することができます。
+現在のファイル名を示す &lt;strong>&lt;code>__FILE__&lt;/code>&lt;/strong> や、行番号を示す &lt;strong>&lt;code>__LINE__&lt;/code>&lt;/strong> なども同様に使用することができます。
+次の例では、現在のファイル名と行番号、指定したメッセージを表示するマクロを定義しています。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">HelloEa.mq5&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#define DEBUG(text) Print(__FILE__, &amp;#34;(&amp;#34;, __LINE__, &amp;#34;): &amp;#34;, text)
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">OnTick&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">DEBUG&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Hello, Expert Advisor&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>関数名を取得するための &lt;strong>&lt;code>__FUNCTION__&lt;/code>&lt;/strong> なども便利です。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="n">Print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">__FUNCTION__&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// =&amp;gt; &amp;#34;OnTick()&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">Print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">__FUNCSIG__&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// =&amp;gt; &amp;#34;void OnTick()&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>MetaTrader/MQL: プログラムがデモ口座で実行されている調べる (ACCOUNT_TRADE_MODE)</title><link>https://toushi.maku.blog/p/e7gjidc/</link><pubDate>Tue, 26 Jan 2021 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/e7gjidc/</guid><description>&lt;p>MetaTrader で取引を行うスクリプトや EA をデバッグしているときに、間違えて実際の口座で実行してしまうと、不本意なポジションをとってしまい危険です。
+下記のユーティリティ関数を使うと、実行中のプログラムがデモ口座上で実行されているかを調べることができます。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">Include/maku77/Util.mqh&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">namespace&lt;/span> &lt;span class="n">Util&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * プログラムがデモ口座で実行されているか調べ、そうでなければ警告を表示します。
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> *
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * @return デモ口座で実行されているなら true、そうでないなら false
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">bool&lt;/span> &lt;span class="nf">IsDemoAccount&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">AccountInfoInteger&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ACCOUNT_TRADE_MODE&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="n">ACCOUNT_TRADE_MODE_DEMO&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nb">true&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Alert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Operation is not allowed on a live account!&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nb">false&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>例えば、スクリプトのエントリポイント (&lt;code>OnStart&lt;/code> 関数) の先頭で次のようにしておけば、スクリプトがデモ口座以外で実行されたときに実行を中止できます。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">Scripts/Test.mq5&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;maku77/Util.mqh&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">OnStart&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="n">Util&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">IsDemoAccount&lt;/span>&lt;span class="p">())&lt;/span> &lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// ... 残りの処理 ...
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure></description></item><item><title>MetaTrader/MQL: GitHub で MetaTrader 用のプログラムを管理する</title><link>https://toushi.maku.blog/p/od4bq8j/</link><pubDate>Thu, 07 Jan 2021 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/od4bq8j/</guid><description>&lt;p>MetaTrader (MT4/MT5) 用に作成した EA やカスタムインジケーターは大切な資産です。
+ここでは、MetaTrader 用のプログラムを GitHub で管理する方法を説明します。&lt;/p>
+&lt;h2 id="metatrader-のデータディレクトリ">MetaTrader のデータディレクトリ&lt;/h2>
+&lt;p>MetaTrader では、自作した EA やカスタムインジケーター（&lt;code>.mq5&lt;/code> ファイルなど）は、あらかじめ用意されたデータディレクトリに格納することになっています。
+このディレクトリのパスは、MetaTrader のデスクトップアプリや MetaEditor のメニューから次のように開いて確認することができます。&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>ファイル&lt;/code> → &lt;code>データフォルダを開く&lt;/code> （あるいは &lt;strong>&lt;code>Ctrl + Shift + D&lt;/code>&lt;/strong>）&lt;/li>
+&lt;/ul>
+&lt;p>データフォルダのパスは環境ごとに異なり、例えば次のような感じになっています。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">C:\Users\maku\AppData\Roaming\MetaQuotes\Terminal\84E63C3B90BC3EC3DADC66BC66DD0A1E&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>自作した &lt;code>.mq5&lt;/code> ファイルを保存するディレクトリは、このデータディレクトリ以下の &lt;code>MQL5/Experts&lt;/code> や &lt;code>MQL5/Indicators&lt;/code> ディレクトリになります。&lt;/p>
+&lt;p>しかし、データディレクトリには MetaTrader のインストーラーによって作成されたファイルなども含まれているため、&lt;code>MQL5&lt;/code> ディレクトリを丸ごと GitHub で管理しようとすると、余計なファイルがコミットされてしまいます。&lt;/p>
+&lt;p>そこで、自作したプログラムは別のディレクトリで管理して、データディレクトリからそのディレクトリに &lt;strong>シンボリックリンク&lt;/strong> を張ることにします。&lt;/p>
+&lt;h2 id="シンボリックリンクを作成する">シンボリックリンクを作成する&lt;/h2>
+&lt;p>まずは、GitHub で作成したコード格納用のリポジトリを &lt;code>git clone&lt;/code> しておきます。
+ここでは、GitHub 上に &lt;code>metatrader&lt;/code> という名前のリポジトリを作成済みで、作業用ディレクトリとして &lt;code>D:\y\gitwork&lt;/code> を使うことを想定しています（パスは環境に合わせて調整してください）。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">cd /d D:\y\gitwork
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git clone https://github.com/ユーザー名/metatrader&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>ローカルに &lt;code>metatrader&lt;/code> というディレクトリが作成されるので、この中に &lt;code>MQL5&lt;/code> ディレクトリを作成して、そこに自作の EA やインジケーターを格納することにします。
+シンボリックリンクはディレクトリ単位で作成したいので、実際には次のようにもう一段階ディレクトリ作成します。
+ここでは &lt;code>maku77&lt;/code> というディレクトリ名にしてますが、GitHub のユーザー名などにしておけばよいでしょう。&lt;/p></description></item><item><title>MetaTrader/MQL: MQL4 と MQL5 のどちらでコンパイルされているか調べる</title><link>https://toushi.maku.blog/p/43cgihf/</link><pubDate>Tue, 27 Oct 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/43cgihf/</guid><description>&lt;p>MQL コード内で下記のマクロが定義されているかどうかを調べることによって、MQL プログラムが MQL4 としてコンパイルされているのか、MQL5 としてコンパイルされているのかを判別することができます。&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>&lt;code>MQL4&lt;/code>&lt;/strong> &amp;hellip; MQL4 としてコンパイルされているときに定義される&lt;/li>
+&lt;li>&lt;strong>&lt;code>MQL5&lt;/code>&lt;/strong> &amp;hellip; MQL5 としてコンパイルされているときに定義される&lt;/li>
+&lt;/ul>
+&lt;p>これを利用すると、MQL4 用と MQL5 用のコードを単一のファイルで記述することができます。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">MQL4/5 コードを混在させる&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">OnStart&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#ifdef __MQL5__
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span> &lt;span class="n">MessageBox&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;MQL5 でコンパイルされています&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#else
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span> &lt;span class="n">MessageBox&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;MQL4 でコンパイルされています&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#endif
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure></description></item><item><title>MetaTrader/MQL: 組み込み関数の実行に失敗したときにエラー情報を表示する (GetLastError, ErrorDescription)</title><link>https://toushi.maku.blog/p/av9kv7g/</link><pubDate>Sun, 20 Mar 2016 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/av9kv7g/</guid><description>&lt;p>MQL の組み込み関数の実行に失敗した時には、&lt;code>GetLastError&lt;/code> 関数によってそのエラーコードを取得できます。
+このエラーコードは int 型の数値のため、その内容をテキストで取得したい場合は次のように変換する必要があります。&lt;/p>
+&lt;h2 id="mt4-の場合">MT4 の場合&lt;/h2>
+&lt;p>&lt;code>GetLastError&lt;/code> 関数で取得したエラーコードを &lt;code>ErrorDescription&lt;/code> に渡すことで、テキスト形式でエラー内容を取得することができます。
+これらの関数を使用するには、&lt;code>stdlib.mqh&lt;/code> をインクルードしておく必要があります。&lt;/p>
+&lt;p>下記は、&lt;code>ObjectCreate&lt;/code> の実行に失敗した時のエラー表示の例です。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">MQL4&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// #include &amp;lt;stdlib.mqh&amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="n">ObjectCreate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span> &lt;span class="p">,&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">OBJ_LABEL&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">subWindow&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Alert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Failed to create a label: &amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">ErrorDescription&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">GetLastError&lt;/span>&lt;span class="p">()));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">表示例&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">Failed to create a label: object already exists&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;h2 id="mt5-の場合">MT5 の場合&lt;/h2>
+&lt;p>MT5 の場合は、なんと &lt;code>ErrorDescription&lt;/code> 関数が提供されてません（なんでやねん）。
+正確には、MT4 で用意されていた &lt;code>stdlib.mqh&lt;/code> が提供されていません。
+代わりに、下記のサイトで、MetaQuotes 社からライブラリとして &lt;code>ErrorDescription.mqh&lt;/code> ファイルが提供されています。
+自分でダウンロードして使えということですね（なんでやねん）。&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://www.mql5.com/en/code/79">ErrorDescription - library for MetaTrader 5&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>これをダウンロードして &lt;code>MQL5/Inlude&lt;/code> ディレクトリにコピーすれば、&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">MQL5&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;ErrorDescription.mqh&amp;gt;&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>とインクルードして、MT4 と同様に &lt;code>ErrorDescription&lt;/code> 関数が使えるようになります。
+自力で &lt;code>int&lt;/code> → &lt;code>string&lt;/code> 変換する関数を定義しているだけなのであたり前ですけど。&lt;/p></description></item><item><title>MetaTrader/MQL: デバッグモードでコンパイルされているか調べる (_DEBUG, _RELEASE, MQL5_DEBUGGING)</title><link>https://toushi.maku.blog/p/nyzotbh/</link><pubDate>Sat, 24 Oct 2015 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/nyzotbh/</guid><description>&lt;p>MQL のプログラムが、デバッグモードとリリースモードのどちらでコンパイルされているかを調べるには、&lt;strong>&lt;code>#ifdef&lt;/code>&lt;/strong> プリプロセッサで下記のマクロが定義されているかどうかを調べます。&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>&lt;code>_DEBUG&lt;/code>&lt;/strong> &amp;hellip; デバッグモードでコンパイルされている（MetaEditor 上で &lt;code>F5&lt;/code> で実行したとき）&lt;/li>
+&lt;li>&lt;strong>&lt;code>_RELEASE&lt;/code>&lt;/strong> &amp;hellip; リリースモードでコンパイルされている（MetaEditor 上で &lt;code>F7&lt;/code> でコンパイルしたとき）&lt;/li>
+&lt;/ul>
+&lt;p>次のスクリプトを実行すると、スクリプト自身がどちらのモードでコンパイルされているかをログに出力します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">OnStart&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cp">#ifdef _DEBUG
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span> &lt;span class="n">Print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Run in debug mode&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cp">#else
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span> &lt;span class="n">Print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Run in release mode&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="cp">#endif
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上記はプリプロセッサで調べる例ですが、&lt;a href="https://www.mql5.com/en/docs/check/mqlinfointeger">MQL5InfoInteger&lt;/a> 関数を使って、実行時に動的にチェックすることもできます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// MQL5 の場合
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kt">bool&lt;/span> &lt;span class="n">isDebug&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">MQL5InfoInteger&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">MQL5_DEBUGGING&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// MQL4 の場合
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kt">bool&lt;/span> &lt;span class="n">isDebug&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">IS_DEBUG_MODE&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>MetaTrader/MQL: MQL での色の表現方法 (color)</title><link>https://toushi.maku.blog/p/rn6kw8j/</link><pubDate>Sat, 10 Oct 2015 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/rn6kw8j/</guid><description>&lt;p>MQL コード内で色情報を表現する場合、&lt;a href="https://www.mql5.com/en/docs/basis/types/integer/color">color 型&lt;/a>（&lt;a href="https://www.mql5.com/ja/docs/basis/types/integer/color">日本語&lt;/a>）の変数を使います。&lt;/p>
+&lt;p>&lt;code>color&lt;/code> 変数は 4 バイトの数値で、後ろ 3 バイトでそれぞれ RGB の色情報 (0~255) を保持しています。
+コード内で色を表すときは、下記のいずれかのリテラル形式で表現します。&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>&lt;code>C'r,g,b'&lt;/code>&lt;/strong> 形式リテラル&lt;/li>
+&lt;li>定義済みのカラー名&lt;/li>
+&lt;li>4 バイト数値&lt;/li>
+&lt;/ul>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// RGB 形式
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">C&lt;/span>&lt;span class="err">&amp;#39;&lt;/span>&lt;span class="mi">128&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">128&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">128&lt;/span>&lt;span class="err">&amp;#39;&lt;/span> &lt;span class="c1">// Gray
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">C&lt;/span>&lt;span class="err">&amp;#39;&lt;/span>&lt;span class="mh">0x00&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mh">0x00&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mh">0xFF&lt;/span>&lt;span class="err">&amp;#39;&lt;/span> &lt;span class="c1">// Blue
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 定義済みカラー値
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">clrRed&lt;/span> &lt;span class="c1">// Red
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">clrYellow&lt;/span> &lt;span class="c1">// Yellow
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">clrBlack&lt;/span> &lt;span class="c1">// Black
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 4 バイト整数
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="mh">0xFFFFFF&lt;/span> &lt;span class="c1">// White
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="mi">16777215&lt;/span> &lt;span class="c1">// White
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="mh">0x008000&lt;/span> &lt;span class="c1">// Green
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="mi">32768&lt;/span> &lt;span class="c1">// Green
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>&lt;code>clrRed&lt;/code> のような定義済みのカラー値として何が用意されているかは、下記を参照してください。&lt;/p>
+&lt;ul>
+&lt;li>（参考）&lt;a href="https://www.mql5.com/en/docs/constants/objectconstants/webcolors">MQL5 - Web Colors&lt;/a>（&lt;a href="https://www.mql5.com/ja/docs/constants/objectconstants/webcolors">日本語&lt;/a>）&lt;/li>
+&lt;/ul></description></item><item><title>MetaTrader/MQL: 実行中のプログラムの種類（スクリプト/インジケーター/EA）を判別する (MQL5_PROGRAM_TYPE)</title><link>https://toushi.maku.blog/p/dct2372/</link><pubDate>Thu, 08 Oct 2015 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/dct2372/</guid><description>&lt;p>&lt;strong>&lt;code>MQL5InfoInteger&lt;/code>&lt;/strong> 関数の引数に &lt;strong>&lt;code>MQL5_PROGRAM_TYPE&lt;/code>&lt;/strong> を指定すると、その関数の呼び出し元がスクリプトなのか、EA なのか、インジケーターなのかを調べることができます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 実行中のプログラムが「スクリプト」かどうかを調べます
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kt">bool&lt;/span> &lt;span class="nf">isCalledFromScript&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">MQL5InfoInteger&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">MQL5_PROGRAM_TYPE&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="n">PROGRAM_SCRIPT&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 実行中のプログラムが「EA」かどうかを調べます
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kt">bool&lt;/span> &lt;span class="nf">isCalledFromEa&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">MQL5InfoInteger&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">MQL5_PROGRAM_TYPE&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="n">PROGRAM_EXPERT&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 実行中のプログラムが「インジケーター」かどうかを調べます
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kt">bool&lt;/span> &lt;span class="nf">isCalledFromIndicator&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">MQL5InfoInteger&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">MQL5_PROGRAM_TYPE&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="n">PROGRAM_INDICATOR&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>MetaTrader/MQL: #property strict で安全な EA を作る</title><link>https://toushi.maku.blog/p/6riotap/</link><pubDate>Tue, 09 Jun 2015 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/6riotap/</guid><description>&lt;p>MetaTrader Build 765 以降では、EA やインジケーターの実装内で &lt;strong>&lt;code>#property strict&lt;/code>&lt;/strong> を指定しておくと、&lt;code>OnInit&lt;/code> による初期化時に &lt;code>INIT_SUCCEEDED (0)&lt;/code> 以外が返されたときに、チャートから自動的に EA やインジケーターを取り除いてくれます。&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>#property strict&lt;/code> ありで &lt;code>OnInit&lt;/code> 処理が失敗 → EA がチャートから取り除かれる&lt;/li>
+&lt;li>&lt;code>#property strict&lt;/code> なしで &lt;code>OnInit&lt;/code> 処理が失敗 → EA はチャートに関連付けられたまま&lt;/li>
+&lt;/ul>
+&lt;p>特に理由がない限り、コードの先頭で &lt;code>#property strict&lt;/code> を指定しておくことをおすすめします。&lt;/p></description></item><item><title>MetaTrader/MQL: プログラムの実行前に確認ダイアログを表示する (#property show_confirm)</title><link>https://toushi.maku.blog/p/6s6iu7i/</link><pubDate>Sun, 07 Dec 2014 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/6s6iu7i/</guid><description>&lt;p>プログラムの先頭で、次のように __&lt;code>show_confirm&lt;/code> プロパティを設定しておくと、プログラムの実行前（チャートにアタッチしたとき）に、 &lt;strong>本当に実行してよいかの確認ダイアログ&lt;/strong> が表示されるようになります。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">#property show_confirm&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="430" height="208" src="../../p/6s6iu7i/img-001.png" alt="/p/6s6iu7i/img-001.png" />
+&lt;/figure>
+
+&lt;p>この確認ダイアログは、スクリプト、カスタム指標、EA のどの種類のプログラムでも有効です。
+新規注文や決済を行うようなプログラグムは、誤って実行してしまわないように、このプロパティを設定しておくと安心です。&lt;/p></description></item><item><title>MetaTrader/MQL: 音声を再生する</title><link>https://toushi.maku.blog/p/xof3ydu/</link><pubDate>Sun, 07 Dec 2014 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/xof3ydu/</guid><description>&lt;p>MQL5 の &lt;a href="https://www.mql5.com/ja/docs/common/playsound">PlaySound 関数&lt;/a> を使うと音声ファイル (WAV) を再生することができます。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">使用例&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="n">PlaySound&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;alert.wav&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>&lt;code>PlaySound&lt;/code> の引数には、MetaTrader の &lt;strong>&lt;code>Sounds&lt;/code>&lt;/strong> ディレクトリ内の WAV ファイルを指定します。
+例えば次のようなファイルがあります。&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>alert.wav&lt;/code>&lt;/li>
+&lt;li>&lt;code>alert2.wav&lt;/code>&lt;/li>
+&lt;li>&lt;code>connect.wav&lt;/code>&lt;/li>
+&lt;li>&lt;code>disconnect.wav&lt;/code>&lt;/li>
+&lt;li>&lt;code>email.wav&lt;/code>&lt;/li>
+&lt;li>&lt;code>expert.wav&lt;/code>&lt;/li>
+&lt;li>&lt;code>news.wav&lt;/code>&lt;/li>
+&lt;li>&lt;code>ok.wav&lt;/code>&lt;/li>
+&lt;li>&lt;code>stops.wav&lt;/code>&lt;/li>
+&lt;li>&lt;code>tick.wav&lt;/code>&lt;/li>
+&lt;li>&lt;code>timeout.wav&lt;/code>&lt;/li>
+&lt;li>&lt;code>wait.wav&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>音声の再生は非同期に実行されるため、&lt;code>PlaySound&lt;/code> 関数の呼び出しがプログラムを停止させることはありません。
+音声の再生中にもう一度 &lt;code>PlaySound&lt;/code> 関数を呼び出すと、現在再生中の音声は停止し、新しく指定した音声の再生が開始されます。
+例えば、下記のように連続して実行すると、最後に指定した音だけが聞こえます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="n">PlaySound&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;alert.wav&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// この音は聞こえず、
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">PlaySound&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;ok.wav&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// この音だけが聞こえる
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>引数にファイル名ではなく &lt;strong>&lt;code>NULL&lt;/code>&lt;/strong> を指定すると、現在再生中の音声を停止することができます。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">音声を停止する&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="n">PlaySound&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">NULL&lt;/span>&lt;span class="p">);&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>次のスクリプトは、1 秒おきに異なる音声を再生していきます。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">Scripts/sample.mq5&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">OnStart&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">string&lt;/span> &lt;span class="n">sounds&lt;/span>&lt;span class="p">[]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;alert.wav&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;alert2.wav&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;connect.wav&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;disconnect.wav&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;email.wav&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;expert.wav&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;news.wav&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;ok.wav&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;stops.wav&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;tick.wav&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;timeout.wav&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;wait.wav&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">ArraySize&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">sounds&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="o">++&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Sound file: &amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">sounds&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]);&lt;/span> &lt;span class="c1">// Experts タブにファイル名を表示
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">PlaySound&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">sounds&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]);&lt;/span> &lt;span class="c1">// 音声を再生
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">Sleep&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1000&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 1 秒待つ
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure></description></item><item><title>MetaTrader/MQL: MetaTrader 実行環境（ターミナル）の情報を取得する (TerminalInfo*)</title><link>https://toushi.maku.blog/p/85rz2xr/</link><pubDate>Sat, 06 Dec 2014 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/85rz2xr/</guid><description>&lt;p>MetaTrader の実行環境（ターミナル）の情報を取得するには、&lt;strong>&lt;code>TerminalInfo*&lt;/code>&lt;/strong> 系の関数を使用します。
+戻り値の型によって使用する関数を呼び分ける必要があります。
+取得したい項目は、各関数の引数で指定します。&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://www.mql5.com/en/docs/check/terminalinfostring">TerminalInfoString 関数&lt;/a>
+&lt;ul>
+&lt;li>&lt;strong>&lt;code>string&lt;/code>&lt;/strong> 型の情報を取得するとき。&lt;/li>
+&lt;li>取得する項目は &lt;a href="https://www.mql5.com/en/docs/constants/environment_state/terminalstatus#enum_terminal_info_string">ENUM_TERMINAL_INFO_STRING enum 型&lt;/a> から選択します。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a href="https://www.mql5.com/en/docs/check/terminalinfointeger">TerminalInfoInteger 関数&lt;/a>
+&lt;ul>
+&lt;li>&lt;strong>&lt;code>int&lt;/code>&lt;/strong> 型の情報を取得するとき。&lt;/li>
+&lt;li>取得する項目は &lt;a href="https://www.mql5.com/en/docs/constants/environment_state/terminalstatus#enum_terminal_info_integer">ENUM_TERMINAL_INFO_INTEGER enum 型&lt;/a> から選択します。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a href="https://www.mql5.com/en/docs/check/terminalinfodouble">TerminalInfoDouble 関数&lt;/a>
+&lt;ul>
+&lt;li>&lt;strong>&lt;code>double&lt;/code>&lt;/strong> 型の情報を取得するとき。&lt;/li>
+&lt;li>取得する項目は &lt;a href="https://www.mql5.com/en/docs/constants/environment_state/terminalstatus#enum_terminal_info_double">ENUM_TERMINAL_INFO_DOUBLE enum 型&lt;/a> から選択します。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>次のスクリプトを実行すると、MetaTrader 実行環境（ターミナル）の情報をログ出力します。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">Scripts/PrintTerminalInfo.mq5&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">OnStart&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Language=&amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">TerminalInfoString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">TERMINAL_LANGUAGE&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Company=&amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">TerminalInfoString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">TERMINAL_COMPANY&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Name=&amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">TerminalInfoString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">TERMINAL_NAME&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Path=&amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">TerminalInfoString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">TERMINAL_PATH&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;DataPath=&amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">TerminalInfoString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">TERMINAL_DATA_PATH&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;CommonDataPath=&amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">TerminalInfoString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">TERMINAL_COMMONDATA_PATH&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">実行結果（OANDA の MT5 を使っている場合）&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-ini" data-lang="ini">&lt;span class="line">&lt;span class="cl">&lt;span class="na">Language&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">Japanese&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="na">Company&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">OANDA Corporation&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="na">Name&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">OANDA MetaTrader 5&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="na">Path&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">C:\app\OANDA MetaTrader 5&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="na">DataPath&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">C:\Users\maku\AppData\Roaming\MetaQuotes\Terminal\84E63C3B90BC3EC3DADC66BC66DD0A1E&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="na">CommonDataPath&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">C:\Users\maku\AppData\Roaming\MetaQuotes\Terminal\Common&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure></description></item></channel></rss>

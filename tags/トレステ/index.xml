@@ -1,41 +1,691 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>トレステ on まくまく投資ノート</title><link>https://toushi.maku.blog/tags/%E3%83%88%E3%83%AC%E3%82%B9%E3%83%86/</link><description>Recent content in トレステ on まくまく投資ノート</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Sun, 03 May 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/tags/%E3%83%88%E3%83%AC%E3%82%B9%E3%83%86/index.xml" rel="self" type="application/rss+xml"/><item><title>EasyLanguage のコーディングルール（スタイル）</title><link>https://toushi.maku.blog/p/5wet9n3/</link><pubDate>Sat, 18 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/5wet9n3/</guid><description>スペース インデントは半角スペース x4 で行う（タブは使用しない）。 大文字・小文字 小文字で始める 制御構文: if、begin、and など プリミティブ型名: bool、double、null、スキップワード（a、at など） 変数定義: input: で宣言する入力変数や var: で宣言するローカル変数 大文字で始める 関数: AverageFC、StdDev など（ユーザー定義関数を含む） 売買命令: Buy、SellShort など（関数名っぽいので大文字で） 組み込み変数: Open、Close、CurrentBar、Date、Time など すべて大文字 定数: const: で宣言するもの 変数宣言のセクション名 入力変数は input:、定数は const:、変数は var: を使う（一番短い記述のものを採用）。
-記述例 input: iPrice(Close) [DisplayName = &amp;#34;Price&amp;#34;, ToolTip = &amp;#34;Enter an EasyLanguage expression.&amp;#34;]; const: BASELINE_COLOR(&amp;#34;Green&amp;#34;); var: double myAvg(0), HorizontalLine myLine1(null), HorizontalLine myLine2(null); // ここから本文 上記では、入力変数のプレフィックスに i、ローカル変数のプレフィックスに my を付けていますが、付けなくても OK（myAvg の代わりに avg とかでよい）。 ただし、定義済みの変数名や関数名と被るのを避けるために、プレフィックスを付けるのをオススメします。
-改行位置 then や begin は基本的に同じ行に続けて記述、end; は単独行に記述。 if AlertEnabled and alertCondition then begin if alertCond1 then Alert(&amp;#34;Close crossed under high retrace&amp;#34;) else Alert(&amp;#34;Close crossed over low retrace&amp;#34;); end; ただし、関数（メソッド）定義の場合は、begin の前に var 定義が挟まるので、その場合は begin は単独行に記述します。</description></item><item><title>トレステの操作: トレーリングストップ注文を出す</title><link>https://toushi.maku.blog/p/cw8t4eo/</link><pubDate>Sun, 03 May 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/cw8t4eo/</guid><description>トレステのオーダーバーから、トレーリングストップ注文を出すことができます。 オーダーバーが表示されていない場合は、下記のいずれかの方法で表示できます。
-メニューから 表示 → オーダーバー を選択 Ctrl + Shift + O （ホットキー入力） .ob &amp;lt;Enter&amp;gt; （コマンド入力） 保有している現物株をトレーリングストップで売るには以下のようにします。
-注文種類で 逆指値（成行） を選択する トレーリングストップ注文を出すには、逆指値（成行）を選択しておく必要があります。他の注文種類を選択すると、次の 詳細 ボタンが表示されません。 詳細 ボタンを押して、 トレーリングストップ にチェックを入れる。 いくら下落したら売るかは、パーセンテージ での指定と、 価格 (Pts) での指定を選ぶことができます。ここでは、5％の下落で売るように設定しています。 現物売り ボタンを押して注文を発行します。 デフォルトでは下記のような注文確認画面が表示されるので、ここで はい ボタンを押せば実際に注文が発行されます。 トレーリングストップが正しく設定されているかをここで確認しましょう。</description></item><item><title>トレステの設定: トレステ開発環境で最初に設定しておきたい項目</title><link>https://toushi.maku.blog/p/6zgwdr7/</link><pubDate>Wed, 22 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/6zgwdr7/</guid><description>トレステ開発環境のエディタ設定は、メニューから次のようにたどると開くことができます。
-ツール → オプション ここでは、次のような設定を行なっています。
-インデントする際にタブの代わりにスペースを挿入 にチェック タブ文字の代わりに、半角スペース x 4 を使うようにします。 ライン番号 にチェック 各行の左端に行番号が表示されるようになります。 ケーススタイル で 小文字 を選択 input、var、if などの文頭が小文字に統一されます（関数名などは入力したまま大文字・小文字が保持されます）。 エディタのカラー設定や、フォント設定もこのダイアログから行うことができます。</description></item><item><title>EasyLanguage の変数の特徴（値の伝搬のしくみ）</title><link>https://toushi.maku.blog/p/xgr3cku/</link><pubDate>Tue, 21 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/xgr3cku/</guid><description>EasyLanguage でユーザー変数を定義するときは、次のように var: を使います（variables: でも OK）。
-var: int hoge(0); このように定義した変数 hoge は、次のような性質を持ちます。
-チャートにアタッチしたときのみ初期化される（上記の例では 0 に初期化される）。 変数に代入した値は、次の足の処理に引き継がれる。 hoge[n] とすると、n 本前の足の最終的な値を参照できる。hoge[0] は hoge と同じ意味になる。 この振る舞いは、次のようなサンプルコードを実行してみるとよく分かります。 このプログラムでは、初期値 0 の数値変数 hoge を定義し、各足の処理ごとにインクリメントしています。 そして最後に、現在の hoge の値と、1 つ前、2 つ前の足での hoge の値を出力しています。
-サンプルコード var: int hoge(0); hoge += 1; Print(String.Format(&amp;#34;{0} {1} {2}&amp;#34;, hoge[0], hoge[1], hoge[2])); 実行結果 1 0 0 2 1 0 3 2 1 4 3 2 5 4 3 hoge に代入された値は次の足へと引き継がれていくため、1、2、3、4、5 とひとつずつ増えていきます。 最初の足の処理で、hoge[1]、hoge[2] のように過去の足の値を参照した場合は、初期値で設定している 0 が得られます。</description></item><item><title>EasyLanguage で垂直線を描画する (VerticalLine)</title><link>https://toushi.maku.blog/p/f3gs6gs/</link><pubDate>Sat, 18 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/f3gs6gs/</guid><description>垂直線を引く方法 DrawingObjects.Add() で、VerticalLine オブジェクトを追加することで、画面上に垂直線を追加することができます。 これは、水平線 (HorizontalLine) を引く方法と同様です。
-参考: 水平線を描画する (HorizontalLine) VerticalLine オブジェクトで垂直線を表示する コード 次のサンプルコードでは、日付が変わるタイミングで垂直線を描画しています。
-#DateLine using elsystem.drawingobjects; var: bool myIsBarTypeProper(false), BNPoint myPoint(null), VerticalLine myLine(null); method void DrawVerticalLine() begin myPoint = BNPoint.Create(CurrentBar, 0); myLine = VerticalLine.Create(myPoint); myLine.Color = elsystem.drawing.Color.GreenYellow; myLine.Style = elsystem.drawingobjects.StyleType.Solid; myLine.Weight = 3; DrawingObjects.Add(myLine); end; once begin // ティック足(0)、分足(1)、秒足(14) のときのみ描画 myIsBarTypeProper = (BarType = 0) or (BarType = 1) or (BarType = 14); end; // 日付が変わった時に垂直線を描画 if myIsBarTypeProper and (Date &amp;gt; Date[1]) then begin DrawVerticalLine(); end; 解説 VerticalLine オブジェクトは、VerticalLine.</description></item><item><title>EasyLanguage で水平線を描画する (HorizontalLine)</title><link>https://toushi.maku.blog/p/ufr2cmv/</link><pubDate>Sat, 18 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/ufr2cmv/</guid><description>水平線を引く方法 インジケーターで水平線を引くには下記のような方法があります。
-Drawing Object の一種である HorizontalLine を追加する Plot1 関数などで固定 Price の線を引く 後者の方法は、Plot1(100) のように、固定価格でライン描画してしまう方法ですが、この値がインジケーターで求められた値として使われてしまうので、あまり望ましい方法ではないでしょう。 チャート上でローソク足が存在する部分しかラインが引かれないという欠点もあります。
-そこで、ここでは前者の HorizontalLine を使った方法を採用することにします。
-HorizontalLine オブジェクトで水平線を表示する DrawingObjects.Add() で、HorizontalLine オブジェクトを追加することで、画面上に水平線を追加することができます。 次のサンプルコードでは、各足の高値 (High) と安値 (Low) の位置に水平線を描画しています。
-using elsystem.drawingobjects; // HorizontalLine オブジェクト用の変数 vars: HorizontalLine myLine1(null), HorizontalLine myLine2(null); // チャート上に水平線を追加 myLine1 = HorizontalLine.Create(High); myLine2 = HorizontalLine.Create(Low); DrawingObjects.Add(myLine1); DrawingObjects.Add(myLine2); // 水平線のスタイルや色、太さを変更可能 myLine1.Style = elsystem.drawingobjects.StyleType.Solid; myLine2.Style = elsystem.drawingobjects.StyleType.Dotted; myLine1.Color = elsystem.drawing.Color.Crimson; myLine2.Color = elsystem.drawing.Color.DeepSkyBlue; myLine1.Weight = 2; myLine2.Weight = 1; （参考）垂直線を描画する (VerticalLine) （参考）インジケーターサンプル「本日のOHLCラインを表示する」</description></item><item><title>トレステの便利なショートカットキーとコマンド</title><link>https://toushi.maku.blog/p/2mx9jt4/</link><pubDate>Fri, 17 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/2mx9jt4/</guid><description>トレステ内のウィンドウは、ショートカットキーやコマンドで操作することができます。 ショートカットキーは、Ctrl + N などでおなじみのいわゆるホットキーですが、トレステで特徴的なのは、コマンド (Command Line) です。
-コマンドは、 ドット (.) で始まるコマンド名 として定義されており、キーボードからコマンドを入力して Enter キーを押すことで、アクティブなウィンドウを素早く操作することができるようになっています。 例えば、チャート分析ウィンドウをアクティブにした状態で、.iat と入力して Enter キーを押すと、「分析テクニックの挿入」のダイアログを素早く開くことができます。
-全般的なショートカットキー＆コマンド ショートカットキー、あるいはコマンドのどちらかを覚えておけば OK です。
-ショートカットキー コマンド 説明 Alt + → / Ctrl + Tab 次のウィンドウをアクティブにする Alt + ← / Ctrl + Shift + Tab 前のウィンドウをアクティブにする Ctrl + O 「ワークスペース」を開く Ctrl + W 「ワークスペース」を閉じる Ctrl + P .p .print チャートの印刷（チャートを開いている場合のみ） Ctrl + N .nw .newwindow 「トレーディングアプリ」の起動ダイアログを開く Alt + F4 「トレーディングアプリ」を閉じる Ctrl + Alt + C .</description></item><item><title>トレステ/関数/Momentum 関数 - 現在の足のモメンタムを求める</title><link>https://toushi.maku.blog/p/xrap6ky/</link><pubDate>Mon, 13 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/xrap6ky/</guid><description>Momentum 関数の使い方 Momentum 関数は、現在の足のモメンタム（n 本前の足との価格差）を返します。 第1引数に使用する価格の種類 (OHLC)、第2引数に何本前の足と比べるかを指定します。
-14 本前の終値との差分を求める Value1 = Momentum(Close, 14); Momentum 関数は単純に価格差を返しますが、比率（パーセンテージ）で求めるには次のように RateOfChange 関数を使用します。 RateOfChange が返す値は、価格に変化がないときは 0、価格が 50％ 上がっているときは 50 になります。
-14 本前の終値からの変化率（騰落率％）を求める Value1 = RateOfChange(Close, 14); Momentum 関数の実装 Momentum 関数の実装はとてもシンプルです。
-Momentum 関数の実装 inputs: Price(numericseries), Length(numericsimple); Momentum = Price - Price[Length]; RateOfChange 関数の実装は次のようになっています。
-RateOfChange 関数の実装 inputs: Price(numericseries), Length(numericsimple) ; if Price[Length] &amp;lt;&amp;gt; 0 then RateOfChange = (Price / Price[Length] - 1) * 100 else RateOfChange = 0;</description></item><item><title>トレステのチャート分析の時間足（足種）をキーボードで切り替える</title><link>https://toushi.maku.blog/p/n8ju6gq/</link><pubDate>Sun, 12 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/n8ju6gq/</guid><description>コマンド入力ボックスについて トレステ画面でおもむろにキーボードで入力を始めると、トレステ画面の上部に表示されている コマンド入力ボックス （「銘柄コード/コマンドを入力」と表示されているところ）にそのテキストが表示されます。 ここに特定のコマンドを入力して Enter キーを押すと、キーボードだけで各種ウィンドウの表示を切り替えることができます。
-このメインツールバーが表示されていない場合は、メニューから次のようにたどって表示できます。
-表示 → ツールバー → メイン ただ、コマンド入力自体は、このメインツールバーが表示されていなくても可能です。 メインツールバーが表示されていなときにコマンド入力を始めると、独立した「コマンドライン」ダイアログが表示されて、そこに入力したテキストが表示されます。
-コマンド入力ボックスの右に表示されている矢印アイコンをクリックすると、過去に実行したコマンドの履歴からコマンドを実行することができます。
-チャート分析ウィンドウの表示を切り替える 時間足（足種）の切り替え チャート分析ウィンドウをアクティブにした状態で、次のようにキーボードから入力して Enter キーを押すことで、時間足を簡単に切り替えることができます。 大文字と小文字は区別されません。
-1 tick(s): 1 ティック足 10 tick(s): 10 ティック足 30 sec(s) / 30 second(s): 30 秒足 1 min(s) / 1 minute(s): 1 分足 5 min(s) / 5 minute(s): 5 分足 15 min(s) / 15 minute(s): 15 分足 60 min(s) / 60 minute(s): 1 時間足 240 min(s) / 240 minute(s): 4 時間足 .</description></item><item><title>TradeStation/インジケーター/モメンタム (WA-Momentum)</title><link>https://toushi.maku.blog/p/rbnx8hr/</link><pubDate>Sun, 12 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/rbnx8hr/</guid><description>WA-Momentum { Search Tag: WA-Momentum } inputs: Price( Close ) [DisplayName = &amp;#34;Price&amp;#34;, ToolTip = &amp;#34;Enter an EasyLanguage expression to use in the momentum calculation.&amp;#34;], Length( 12 ) [DisplayName = &amp;#34;Length&amp;#34;, ToolTip = &amp;#34;Enter number of bars over which to calculate momentum.&amp;#34;], ColorNormLength( 14 ) [DisplayName = &amp;#34;ColorNormLength&amp;#34;, ToolTip = &amp;#34;Color Normalization Length. Enter the number of bars over which to determine high and low values of the indicator for use in creating gradient colors.</description></item><item><title>トレステのチャート分析ウィンドウを素早く最大化する</title><link>https://toushi.maku.blog/p/9py9hqz/</link><pubDate>Fri, 10 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/9py9hqz/</guid><description>トレステのチャート分析ウィンドウは、
-チャート領域の任意の部分を 右ダブルクリック することで素早く最大化することができます。 元に戻すときも同様です。
-もちろん、タイトルバーのダブルクリックや、右上の最大化ボタンでも同じことができますが、上記の方法が最も素早く操作できると思います。</description></item><item><title>トレステ画面の操作</title><link>https://toushi.maku.blog/p/3nzakv6/</link><pubDate>Fri, 10 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/3nzakv6/</guid><description/></item><item><title>TradeStation や EasyLanguage で使われる用語のメモ</title><link>https://toushi.maku.blog/p/spbgdm2/</link><pubDate>Fri, 24 Jan 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/spbgdm2/</guid><description>トレードステーションの解説や、そのプログラミング言語である EasyLanguage の解説使われる用語の説明です。 投資の世界では「テクニカル指標」という言葉はよく使うけど、「分析テクニック」という表現は独特ですね。
-銘柄 ＝ シンボル ＝ Symbol 複数のシンボルを集めたものを「シンボルリスト 」と呼びます。 足種 ＝ インターバル ＝ Interval 取引情報 &amp;hellip; 下記をまとめたもの 価格 出来高 時間 分析テクニック ＝ テクニカル指標 = 分析情報 「インジケーター」「ショウミー」「ペイントバー」「アクティビティバー」「プロバビリティマップ」などの総称。ストキャスティクスや移動平均など。 分析テクニックを集めたものを「分析グループ 」と呼びます。自分の好きな分析テクニックをカスタム分析グループとして保存しておけば、簡単にその分析画面を復元することができます。</description></item><item><title>EasyLanguage のストラテジーサンプル「移動平均のGC/DCによる売買」</title><link>https://toushi.maku.blog/p/5vds8n2/</link><pubDate>Mon, 20 Jan 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/5vds8n2/</guid><description>2 本の移動平均線がクロスするタイミングで売買を行うストラテジです。 TradeStation には標準で付属しているストラテジとして、「単純移動平均2本クロス買いエントリー (ストラテジー)」がありますが、ここでは自力で実装する場合のサンプルとして示します。
-ストラテジ概要 エントリタイミング 買いエントリ (Buy) の条件 短期移動平均線が長期移動平均線をゴールデンクロス (GC) 売りエントリ (SellShort) の条件 短期移動平均線が長期移動平均線をデッドクロス (DC) パラメータ fastLen: 短期移動平均の足数 slowLen: 長期移動平均の足数 ソースコード input: fastLen(5), slowLen(25); var: fastAvg(0), slowAvg(0); fastAvg = AverageFC(Close, fastLen); slowAvg = AverageFC(Close, slowLen); if fastAvg crosses over slowAvg then begin Buy next bar at market; end; if fastAvg crosses under slowAvg then begin SellShort next bar at market; end;</description></item><item><title>トレステの設定: シンボルリンクとインターバルリンクでウィンドウ間の表示を連携させる</title><link>https://toushi.maku.blog/p/yhr2aiq/</link><pubDate>Sun, 12 Jan 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/yhr2aiq/</guid><description>ウィンドウリンクとは TradeStation の「ウィンドウリンク」の仕組みを使用すると、ウィンドウ間（トレーディングアプリ間）で選択している銘柄や、足のインターバル（分足や時間足）の設定を同期させることができます。 ウィンドウリンクの機能には、次の 2 種類があります。
-シンボルリンク &amp;hellip; 銘柄をリンクして切り替える インターバルリンク（足種リンク） &amp;hellip; 足のインターバルをリンクして切り替える シンボルリンク シンボルリンクを有効にするには、各ウィンドウのタイトルバー右上に表示されている「S」マークをクリックし、ハイライトされた状態にします。
-ここでは、「レーダースクリーン」と「チャート分析」のウィンドウのシンボルリンクを有効にしています。 レーダースクリーンの銘柄コードをクリックすると、チャート分析のウィンドウで表示している銘柄が連動して切り替わるようになります。
-インターバルリンク（足種リンク） インターバルリンクを有効にするには、各ウィンドウのタイトルバー右上に表示されている「I」マークをクリックし、ハイライトされた状態にします（シンボルリンクのボタンの右にあります）。
-インターバルリンクを複数のウィンドウで有効にしておくと、5分足や、1時間足などのインターバル設定を同期させることができます。
-リンクカラーとグローバル設定 シンボルリンクやインターバルリンクのボタンの隅にあるプルダウンマークを押すと、下記のようにリンクの種類を選択することができます。
-ここでは、リンクの色を設定することができ、等しい色を選択したウィンドウ同士でリンク機能が働くようになります。
-また、ここで、グローバルリンクと記述されたものを選択すると、ワークスペースをまたがったウィンドウ間でもリンク機能が働くようになります（デフォルトはローカルリンクになっています）。 ローカルリンクとグローバルリンクはボタンの形が若干違うので、タイトルバーを見るだけで現在どちらが設定されているかを判別できます。
-上のボタンがローカルリンク時の形状で、下のボタンがグローバルリンク時の形状です。</description></item><item><title>トレステの設定</title><link>https://toushi.maku.blog/p/tdpybkv/</link><pubDate>Sun, 12 Jan 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/tdpybkv/</guid><description/></item><item><title>トレステの設定: レーダースクリーンのフォントサイズを変更する</title><link>https://toushi.maku.blog/p/zhry9hq/</link><pubDate>Sun, 12 Jan 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/zhry9hq/</guid><description>TradeStation のレーダースクリーンのフォント設定は、下記の場所から変更することができます。
-レーダースクリーンのウィンドウを選択した状態にする メニューから 設定 → ページ と選択する 「ページの設定」ダイアログから フォント タブを開く フォントサイズを小さめに設定しておくと、レーダースクリーンの一覧性が増します。</description></item><item><title>TradeStation/インジケーター/移動平均線1本 (WA-Mov Avg 1 Line)</title><link>https://toushi.maku.blog/p/kkipwgp/</link><pubDate>Fri, 12 Apr 2019 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/kkipwgp/</guid><description>WA-Mov Avg 1 Line { Search Tag: WA-Mov Avg 1 Line } inputs: Price( Close ) [DisplayName = &amp;#34;Price&amp;#34;, ToolTip = &amp;#34;Enter an EasyLanguage expression to use in the moving average calculation.&amp;#34;], Length( 9 ) [DisplayName = &amp;#34;Length&amp;#34;, ToolTip = &amp;#34;Enter number of bars over which to calculate the simple moving average.&amp;#34;], Displace( 0 ) [DisplayName = &amp;#34;Displace&amp;#34;, ToolTip = &amp;#34;Displacement. Enter the number of bars by which plots will be displaced.</description></item><item><title>トレステ EashLanguage 入門</title><link>https://toushi.maku.blog/p/peu9myd/</link><pubDate>Thu, 07 May 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/peu9myd/</guid><description/></item><item><title>TradeStation の標準インジケーターのコード</title><link>https://toushi.maku.blog/p/hprjx9i/</link><pubDate>Mon, 13 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/hprjx9i/</guid><description>Easy Language の学習用に、Trade Station の標準インジケーターのコードをまとめておきます。</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>トレステ on まくまく投資ノート</title><link>https://toushi.maku.blog/tags/%E3%83%88%E3%83%AC%E3%82%B9%E3%83%86/</link><description>Recent content in トレステ on まくまく投資ノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Thu, 07 May 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/tags/%E3%83%88%E3%83%AC%E3%82%B9%E3%83%86/index.xml" rel="self" type="application/rss+xml"/><item><title>EasyLanguage のコーディングルール（スタイル）</title><link>https://toushi.maku.blog/p/5wet9n3/</link><pubDate>Sat, 18 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/5wet9n3/</guid><description>&lt;h2 id="スペース">スペース&lt;/h2>
+&lt;ul>
+&lt;li>インデントは半角スペース x4 で行う（タブは使用しない）。&lt;/li>
+&lt;/ul>
+&lt;h2 id="大文字小文字">大文字・小文字&lt;/h2>
+&lt;ul>
+&lt;li>小文字で始める
+&lt;ul>
+&lt;li>制御構文: &lt;code>if&lt;/code>、&lt;code>begin&lt;/code>、&lt;code>and&lt;/code> など&lt;/li>
+&lt;li>プリミティブ型名: &lt;code>bool&lt;/code>、&lt;code>double&lt;/code>、&lt;code>null&lt;/code>、スキップワード（&lt;code>a&lt;/code>、&lt;code>at&lt;/code> など）&lt;/li>
+&lt;li>変数定義: &lt;code>input:&lt;/code> で宣言する入力変数や &lt;code>var:&lt;/code> で宣言するローカル変数&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>大文字で始める
+&lt;ul>
+&lt;li>関数: &lt;code>AverageFC&lt;/code>、&lt;code>StdDev&lt;/code> など（ユーザー定義関数を含む）&lt;/li>
+&lt;li>売買命令: &lt;code>Buy&lt;/code>、&lt;code>SellShort&lt;/code> など（関数名っぽいので大文字で）&lt;/li>
+&lt;li>組み込み変数: &lt;code>Open&lt;/code>、&lt;code>Close&lt;/code>、&lt;code>CurrentBar&lt;/code>、&lt;code>Date&lt;/code>、&lt;code>Time&lt;/code> など&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>すべて大文字
+&lt;ul>
+&lt;li>定数: &lt;code>const:&lt;/code> で宣言するもの&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="変数宣言のセクション名">変数宣言のセクション名&lt;/h2>
+&lt;p>入力変数は &lt;strong>&lt;code>input:&lt;/code>&lt;/strong>、定数は &lt;strong>&lt;code>const:&lt;/code>&lt;/strong>、変数は &lt;strong>&lt;code>var:&lt;/code>&lt;/strong> を使う（一番短い記述のものを採用）。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">記述例&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">input:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> iPrice(Close) [DisplayName = &amp;#34;Price&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ToolTip = &amp;#34;Enter an EasyLanguage expression.&amp;#34;];
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">const:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> BASELINE_COLOR(&amp;#34;Green&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">var:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> double myAvg(0),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalLine myLine1(null),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalLine myLine2(null);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">// ここから本文&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>上記では、入力変数のプレフィックスに &lt;strong>&lt;code>i&lt;/code>&lt;/strong>、ローカル変数のプレフィックスに &lt;code>my&lt;/code> を付けていますが、付けなくても OK（&lt;code>myAvg&lt;/code> の代わりに &lt;code>avg&lt;/code> とかでよい）。
+ただし、定義済みの変数名や関数名と被るのを避けるために、プレフィックスを付けるのをオススメします。&lt;/p></description></item><item><title>トレステ EashLanguage 入門</title><link>https://toushi.maku.blog/p/peu9myd/</link><pubDate>Thu, 07 May 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/peu9myd/</guid><description/></item><item><title>トレステの操作: トレーリングストップ注文を出す</title><link>https://toushi.maku.blog/p/cw8t4eo/</link><pubDate>Sun, 03 May 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/cw8t4eo/</guid><description>&lt;p>トレステのオーダーバーから、トレーリングストップ注文を出すことができます。
+オーダーバーが表示されていない場合は、下記のいずれかの方法で表示できます。&lt;/p>
+&lt;ul>
+&lt;li>メニューから &lt;code>表示&lt;/code> → &lt;code>オーダーバー&lt;/code> を選択&lt;/li>
+&lt;li>&lt;code>Ctrl + Shift + O&lt;/code> （ホットキー入力）&lt;/li>
+&lt;li>&lt;code>.ob &amp;lt;Enter&amp;gt;&lt;/code> （コマンド入力）&lt;/li>
+&lt;/ul>
+&lt;p>保有している現物株をトレーリングストップで売るには以下のようにします。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="1286" height="140" src="../../p/cw8t4eo/img-001.png" alt="/p/cw8t4eo/img-001.png" />
+&lt;/figure>
+
+&lt;ol>
+&lt;li>注文種類で &lt;strong>&lt;code>逆指値（成行）&lt;/code>&lt;/strong> を選択する
+&lt;ul>
+&lt;li>トレーリングストップ注文を出すには、逆指値（成行）を選択しておく必要があります。他の注文種類を選択すると、次の &lt;code>詳細&lt;/code> ボタンが表示されません。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>&lt;code>詳細&lt;/code>&lt;/strong> ボタンを押して、 &lt;strong>&lt;code>トレーリングストップ&lt;/code>&lt;/strong> にチェックを入れる。
+&lt;ul>
+&lt;li>いくら下落したら売るかは、&lt;strong>パーセンテージ&lt;/strong> での指定と、 &lt;strong>価格 (Pts)&lt;/strong> での指定を選ぶことができます。ここでは、5％の下落で売るように設定しています。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>&lt;code>現物売り&lt;/code>&lt;/strong> ボタンを押して注文を発行します。&lt;/li>
+&lt;/ol>
+&lt;p>デフォルトでは下記のような注文確認画面が表示されるので、ここで &lt;code>はい&lt;/code> ボタンを押せば実際に注文が発行されます。
+トレーリングストップが正しく設定されているかをここで確認しましょう。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="614" height="338" src="../../p/cw8t4eo/img-002.png" alt="/p/cw8t4eo/img-002.png" />
+&lt;/figure></description></item><item><title>トレステの設定: トレステ開発環境で最初に設定しておきたい項目</title><link>https://toushi.maku.blog/p/6zgwdr7/</link><pubDate>Wed, 22 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/6zgwdr7/</guid><description>&lt;p>トレステ開発環境のエディタ設定は、メニューから次のようにたどると開くことができます。&lt;/p>
+&lt;ol>
+&lt;li>&lt;code>ツール&lt;/code> → &lt;code>オプション&lt;/code>&lt;/li>
+&lt;/ol>
+
+
+&lt;figure class="xImage">
+ &lt;img style="" width="400" height="423" src="../../p/6zgwdr7/img-001_hu16483340674629096233.png" alt="/p/6zgwdr7/img-001.png" />
+&lt;/figure>
+
+&lt;p>ここでは、次のような設定を行なっています。&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>&lt;code>インデントする際にタブの代わりにスペースを挿入&lt;/code>&lt;/strong> にチェック
+&lt;ul>
+&lt;li>タブ文字の代わりに、半角スペース x 4 を使うようにします。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>&lt;code>ライン番号&lt;/code>&lt;/strong> にチェック
+&lt;ul>
+&lt;li>各行の左端に行番号が表示されるようになります。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>&lt;code>ケーススタイル&lt;/code>&lt;/strong> で &lt;strong>&lt;code>小文字&lt;/code>&lt;/strong> を選択
+&lt;ul>
+&lt;li>&lt;code>input&lt;/code>、&lt;code>var&lt;/code>、&lt;code>if&lt;/code> などの文頭が小文字に統一されます（関数名などは入力したまま大文字・小文字が保持されます）。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>エディタのカラー設定や、フォント設定もこのダイアログから行うことができます。&lt;/p></description></item><item><title>EasyLanguage の変数の特徴（値の伝搬のしくみ）</title><link>https://toushi.maku.blog/p/xgr3cku/</link><pubDate>Tue, 21 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/xgr3cku/</guid><description>&lt;p>EasyLanguage でユーザー変数を定義するときは、次のように &lt;code>var:&lt;/code> を使います（&lt;code>variables:&lt;/code> でも OK）。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">var: int hoge(0);&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>このように定義した変数 &lt;code>hoge&lt;/code> は、次のような性質を持ちます。&lt;/p>
+&lt;ul>
+&lt;li>チャートにアタッチしたときのみ初期化される（上記の例では 0 に初期化される）。&lt;/li>
+&lt;li>変数に代入した値は、次の足の処理に引き継がれる。&lt;/li>
+&lt;li>&lt;code>hoge[n]&lt;/code> とすると、n 本前の足の最終的な値を参照できる。&lt;code>hoge[0]&lt;/code> は &lt;code>hoge&lt;/code> と同じ意味になる。&lt;/li>
+&lt;/ul>
+&lt;p>この振る舞いは、次のようなサンプルコードを実行してみるとよく分かります。
+このプログラムでは、初期値 0 の数値変数 &lt;code>hoge&lt;/code> を定義し、各足の処理ごとにインクリメントしています。
+そして最後に、現在の &lt;code>hoge&lt;/code> の値と、1 つ前、2 つ前の足での &lt;code>hoge&lt;/code> の値を出力しています。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">サンプルコード&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">var: int hoge(0);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">hoge += 1;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Print(String.Format(&amp;#34;{0} {1} {2}&amp;#34;, hoge[0], hoge[1], hoge[2]));&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">実行結果&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">1 0 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2 1 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">3 2 1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">4 3 2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">5 4 3&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>&lt;code>hoge&lt;/code> に代入された値は次の足へと引き継がれていくため、1、2、3、4、5 とひとつずつ増えていきます。
+最初の足の処理で、&lt;code>hoge[1]&lt;/code>、&lt;code>hoge[2]&lt;/code> のように過去の足の値を参照した場合は、初期値で設定している 0 が得られます。&lt;/p></description></item><item><title>EasyLanguage で垂直線を描画する (VerticalLine)</title><link>https://toushi.maku.blog/p/f3gs6gs/</link><pubDate>Sat, 18 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/f3gs6gs/</guid><description>&lt;h2 id="垂直線を引く方法">垂直線を引く方法&lt;/h2>
+&lt;p>&lt;strong>&lt;code>DrawingObjects.Add()&lt;/code>&lt;/strong> で、&lt;strong>&lt;code>VerticalLine&lt;/code>&lt;/strong> オブジェクトを追加することで、画面上に垂直線を追加することができます。
+これは、水平線 (&lt;code>HorizontalLine&lt;/code>) を引く方法と同様です。&lt;/p>
+&lt;ul>
+&lt;li>参考: &lt;a href="../../p/ufr2cmv">水平線を描画する (HorizontalLine)&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="verticalline-オブジェクトで垂直線を表示する">VerticalLine オブジェクトで垂直線を表示する&lt;/h2>
+
+
+&lt;figure class="xImage">
+ &lt;img style="" width="600" height="305" src="../../p/f3gs6gs/img-001_hu3759370108885744075.png" alt="/p/f3gs6gs/img-001.png" />
+&lt;/figure>
+
+&lt;h3 id="コード">コード&lt;/h3>
+&lt;p>次のサンプルコードでは、日付が変わるタイミングで垂直線を描画しています。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">#DateLine&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">using elsystem.drawingobjects;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">var:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> bool myIsBarTypeProper(false),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> BNPoint myPoint(null),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> VerticalLine myLine(null);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">method void DrawVerticalLine() begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myPoint = BNPoint.Create(CurrentBar, 0);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLine = VerticalLine.Create(myPoint);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLine.Color = elsystem.drawing.Color.GreenYellow;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLine.Style = elsystem.drawingobjects.StyleType.Solid;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLine.Weight = 3;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> DrawingObjects.Add(myLine);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">once begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // ティック足(0)、分足(1)、秒足(14) のときのみ描画
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myIsBarTypeProper = (BarType = 0) or (BarType = 1) or (BarType = 14);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">// 日付が変わった時に垂直線を描画
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if myIsBarTypeProper and (Date &amp;gt; Date[1]) then begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> DrawVerticalLine();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;h3 id="解説">解説&lt;/h3>
+&lt;p>&lt;code>VerticalLine&lt;/code> オブジェクトは、&lt;code>VerticalLine.Create()&lt;/code> を使って生成するのですが、このとき、描画位置の点を示す、下記のいずれかのオブジェクトを指定します。&lt;/p></description></item><item><title>EasyLanguage で水平線を描画する (HorizontalLine)</title><link>https://toushi.maku.blog/p/ufr2cmv/</link><pubDate>Sat, 18 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/ufr2cmv/</guid><description>&lt;h2 id="水平線を引く方法">水平線を引く方法&lt;/h2>
+&lt;p>インジケーターで水平線を引くには下記のような方法があります。&lt;/p>
+&lt;ul>
+&lt;li>Drawing Object の一種である &lt;strong>HorizontalLine&lt;/strong> を追加する&lt;/li>
+&lt;li>&lt;code>Plot1&lt;/code> 関数などで固定 Price の線を引く&lt;/li>
+&lt;/ul>
+&lt;p>後者の方法は、&lt;code>Plot1(100)&lt;/code> のように、固定価格でライン描画してしまう方法ですが、この値がインジケーターで求められた値として使われてしまうので、あまり望ましい方法ではないでしょう。
+チャート上でローソク足が存在する部分しかラインが引かれないという欠点もあります。&lt;/p>
+&lt;p>そこで、ここでは前者の &lt;code>HorizontalLine&lt;/code> を使った方法を採用することにします。&lt;/p>
+&lt;h2 id="horizontalline-オブジェクトで水平線を表示する">HorizontalLine オブジェクトで水平線を表示する&lt;/h2>
+
+
+&lt;figure class="xImage">
+ &lt;img style="" width="600" height="382" src="../../p/ufr2cmv/img-001_hu2272090969961527788.png" alt="/p/ufr2cmv/img-001.png" />
+&lt;/figure>
+
+&lt;p>&lt;strong>&lt;code>DrawingObjects.Add()&lt;/code>&lt;/strong> で、&lt;strong>&lt;code>HorizontalLine&lt;/code>&lt;/strong> オブジェクトを追加することで、画面上に水平線を追加することができます。
+次のサンプルコードでは、各足の高値 (High) と安値 (Low) の位置に水平線を描画しています。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">using elsystem.drawingobjects;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">// HorizontalLine オブジェクト用の変数
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">vars:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalLine myLine1(null),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalLine myLine2(null);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">// チャート上に水平線を追加
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">myLine1 = HorizontalLine.Create(High);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">myLine2 = HorizontalLine.Create(Low);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">DrawingObjects.Add(myLine1);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">DrawingObjects.Add(myLine2);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">// 水平線のスタイルや色、太さを変更可能
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">myLine1.Style = elsystem.drawingobjects.StyleType.Solid;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">myLine2.Style = elsystem.drawingobjects.StyleType.Dotted;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">myLine1.Color = elsystem.drawing.Color.Crimson;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">myLine2.Color = elsystem.drawing.Color.DeepSkyBlue;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">myLine1.Weight = 2;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">myLine2.Weight = 1;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;ul>
+&lt;li>（参考）&lt;a href="../../p/f3gs6gs">垂直線を描画する (VerticalLine)&lt;/a>&lt;/li>
+&lt;li>（参考）&lt;a href="../../p/h4fr3dn">インジケーターサンプル「本日のOHLCラインを表示する」&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>トレステの便利なショートカットキーとコマンド</title><link>https://toushi.maku.blog/p/2mx9jt4/</link><pubDate>Fri, 17 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/2mx9jt4/</guid><description>&lt;p>トレステ内のウィンドウは、ショートカットキーやコマンドで操作することができます。
+ショートカットキーは、&lt;code>Ctrl + N&lt;/code> などでおなじみのいわゆるホットキーですが、トレステで特徴的なのは、コマンド (Command Line) です。&lt;/p>
+&lt;p>コマンドは、 &lt;strong>ドット (.) で始まるコマンド名&lt;/strong> として定義されており、キーボードからコマンドを入力して &lt;code>Enter&lt;/code> キーを押すことで、アクティブなウィンドウを素早く操作することができるようになっています。
+例えば、チャート分析ウィンドウをアクティブにした状態で、&lt;code>.iat&lt;/code> と入力して &lt;code>Enter&lt;/code> キーを押すと、「分析テクニックの挿入」のダイアログを素早く開くことができます。&lt;/p>
+&lt;h2 id="全般的なショートカットキーコマンド">全般的なショートカットキー＆コマンド&lt;/h2>
+&lt;p>ショートカットキー、あるいはコマンドのどちらかを覚えておけば OK です。&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>ショートカットキー&lt;/th>
+ &lt;th>コマンド&lt;/th>
+ &lt;th>説明&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>&lt;strong>&lt;code>Alt + →&lt;/code>&lt;/strong> / &lt;strong>&lt;code>Ctrl + Tab&lt;/code>&lt;/strong>&lt;/td>
+ &lt;td>&lt;/td>
+ &lt;td>次のウィンドウをアクティブにする&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;strong>&lt;code>Alt + ←&lt;/code>&lt;/strong> / &lt;strong>&lt;code>Ctrl + Shift + Tab&lt;/code>&lt;/strong>&lt;/td>
+ &lt;td>&lt;/td>
+ &lt;td>前のウィンドウをアクティブにする&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>Ctrl + O&lt;/code>&lt;/td>
+ &lt;td>&lt;/td>
+ &lt;td>「ワークスペース」を開く&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>Ctrl + W&lt;/code>&lt;/td>
+ &lt;td>&lt;/td>
+ &lt;td>「ワークスペース」を閉じる&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>Ctrl + P&lt;/code>&lt;/td>
+ &lt;td>&lt;code>.p&lt;/code> &lt;code>.print&lt;/code>&lt;/td>
+ &lt;td>チャートの印刷（チャートを開いている場合のみ）&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>Ctrl + N&lt;/code>&lt;/td>
+ &lt;td>&lt;code>.nw&lt;/code> &lt;code>.newwindow&lt;/code>&lt;/td>
+ &lt;td>「トレーディングアプリ」の起動ダイアログを開く&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;strong>&lt;code>Alt + F4&lt;/code>&lt;/strong>&lt;/td>
+ &lt;td>&lt;/td>
+ &lt;td>「トレーディングアプリ」を閉じる&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;strong>&lt;code>Ctrl + Alt + C&lt;/code>&lt;/strong>&lt;/td>
+ &lt;td>&lt;code>.nc&lt;/code> &lt;code>.newchart&lt;/code>&lt;/td>
+ &lt;td>「チャート分析」のウィンドウを開く&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>Ctrl + Alt + H&lt;/code>&lt;/td>
+ &lt;td>&lt;code>.nhl&lt;/code> &lt;code>.newhotlist&lt;/code>&lt;/td>
+ &lt;td>「ホットリスト」のウィンドウを開く&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>Ctrl + Alt + N&lt;/code>&lt;/td>
+ &lt;td>&lt;code>.nn&lt;/code> &lt;code>.newnews&lt;/code>&lt;/td>
+ &lt;td>「ニュース」のウィンドウを開く&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>Ctrl + Alt + Q&lt;/code>&lt;/td>
+ &lt;td>&lt;code>.nrs&lt;/code> &lt;code>.newraderscreen&lt;/code>&lt;/td>
+ &lt;td>「レーダースクリーン」のウィンドウを開く&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>Ctrl + Alt + T&lt;/code>&lt;/td>
+ &lt;td>&lt;code>.nts&lt;/code> &lt;code>.newtimeandsales&lt;/code>&lt;/td>
+ &lt;td>「タイム＆セールス」のウィンドウを開く&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>Ctrl + Alt + X&lt;/code>&lt;/td>
+ &lt;td>&lt;code>.nm&lt;/code> &lt;code>.newmatrix&lt;/code>&lt;/td>
+ &lt;td>「マトリックス」のウィンドウを開く&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;/td>
+ &lt;td>&lt;code>.nscn&lt;/code> &lt;code>.newscanner&lt;/code>&lt;/td>
+ &lt;td>「スキャナー」のウィンドウを開く&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;strong>&lt;code>Ctrl + Shift + C&lt;/code>&lt;/strong>&lt;/td>
+ &lt;td>&lt;/td>
+ &lt;td>ウィンドウをコピー&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;strong>&lt;code>Ctrl + Shift + V&lt;/code>&lt;/strong>&lt;/td>
+ &lt;td>&lt;/td>
+ &lt;td>ウィンドウを貼り付け&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>Ctrl + Shift + O&lt;/code>&lt;/td>
+ &lt;td>&lt;code>.ob&lt;/code> &lt;code>.orderbar&lt;/code>&lt;/td>
+ &lt;td>オーダーバーを表示・非表示&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h2 id="チャート分析関連のコマンド">チャート分析関連のコマンド&lt;/h2>
+&lt;h3 id="新しいチャート分析ウィンドウを開く-newchart">新しいチャート分析ウィンドウを開く (.NewChart)&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>.nc&lt;/code>&lt;/li>
+&lt;/ul>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">例: 新しいチャート分析を開き、トヨタ自動車の 5 分足チャートを 10 日間分表示&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">.nc ;; 7203-ts 5 min 10 days&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;h3 id="分析テクニックを挿入-insertanalysistechnique">分析テクニックを挿入 (.InsertAnalysisTechnique)&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>.iat&lt;/code> &amp;hellip; 分析テクニックの選択ダイアログを表示&lt;/li>
+&lt;li>&lt;code>.ist &amp;lt;分析テクニック名&amp;gt;&lt;/code> &amp;hellip; 指定した分析テクニックを挿入&lt;/li>
+&lt;/ul>
+&lt;h3 id="ストラテジーを挿入-insertanalysistechnique">ストラテジーを挿入 (.InsertAnalysisTechnique)&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>.ist&lt;/code> &amp;hellip; ストラテジーの選択ダイアログを表示&lt;/li>
+&lt;li>&lt;code>.ist &amp;lt;ストラテジー名&amp;gt;&lt;/code> &amp;hellip; 指定したストラテジーを挿入&lt;/li>
+&lt;/ul>
+&lt;h3 id="スクロールバーを表示非表示-scrollbar">スクロールバーを表示／非表示 (.ScrollBar)&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>.scroll&lt;/code> &amp;hellip; スクロールバーをトグル&lt;/li>
+&lt;/ul>
+&lt;h3 id="最新のバーの右側のマージンを指定-right">最新のバーの右側のマージンを指定 (.Right)&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>.bar 3&lt;/code> &amp;hellip; 最新バーの右側に 3 本分のマージンができるように表示位置を調整&lt;/li>
+&lt;/ul>
+&lt;p>このコマンドは、最新のバーが画面内に表示されているときしか効果がないようです。
+パラメータの数値を省略すると、0 が指定されたのと同じ意味になります（右マージンなし）。&lt;/p></description></item><item><title>トレステ/関数/Momentum 関数 - 現在の足のモメンタムを求める</title><link>https://toushi.maku.blog/p/xrap6ky/</link><pubDate>Mon, 13 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/xrap6ky/</guid><description>&lt;h2 id="momentum-関数の使い方">Momentum 関数の使い方&lt;/h2>
+&lt;p>&lt;code>Momentum&lt;/code> 関数は、現在の足のモメンタム（n 本前の足との価格差）を返します。
+第1引数に使用する価格の種類 (OHLC)、第2引数に何本前の足と比べるかを指定します。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">14 本前の終値との差分を求める&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">Value1 = Momentum(Close, 14);&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>&lt;code>Momentum&lt;/code> 関数は単純に価格差を返しますが、比率（パーセンテージ）で求めるには次のように &lt;strong>&lt;code>RateOfChange&lt;/code>&lt;/strong> 関数を使用します。
+&lt;code>RateOfChange&lt;/code> が返す値は、価格に変化がないときは 0、価格が 50％ 上がっているときは 50 になります。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">14 本前の終値からの変化率（騰落率％）を求める&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">Value1 = RateOfChange(Close, 14);&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;h2 id="momentum-関数の実装">Momentum 関数の実装&lt;/h2>
+&lt;p>&lt;code>Momentum&lt;/code> 関数の実装はとてもシンプルです。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">Momentum 関数の実装&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">inputs: Price(numericseries), Length(numericsimple);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Momentum = Price - Price[Length];&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>&lt;code>RateOfChange&lt;/code> 関数の実装は次のようになっています。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">RateOfChange 関数の実装&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">inputs: Price(numericseries), Length(numericsimple) ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if Price[Length] &amp;lt;&amp;gt; 0 then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> RateOfChange = (Price / Price[Length] - 1) * 100
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> RateOfChange = 0;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure></description></item><item><title>TradeStation の標準インジケーターのコード</title><link>https://toushi.maku.blog/p/hprjx9i/</link><pubDate>Mon, 13 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/hprjx9i/</guid><description>&lt;p>Easy Language の学習用に、Trade Station の標準インジケーターのコードをまとめておきます。&lt;/p></description></item><item><title>トレステのチャート分析の時間足（足種）をキーボードで切り替える</title><link>https://toushi.maku.blog/p/n8ju6gq/</link><pubDate>Sun, 12 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/n8ju6gq/</guid><description>&lt;h2 id="コマンド入力ボックスについて">コマンド入力ボックスについて&lt;/h2>
+&lt;p>トレステ画面でおもむろにキーボードで入力を始めると、トレステ画面の上部に表示されている &lt;strong>コマンド入力ボックス&lt;/strong> （「銘柄コード/コマンドを入力」と表示されているところ）にそのテキストが表示されます。
+ここに特定のコマンドを入力して &lt;code>Enter&lt;/code> キーを押すと、キーボードだけで各種ウィンドウの表示を切り替えることができます。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="" width="600" height="229" src="../../p/n8ju6gq/img-001_hu1868326753463126669.png" alt="/p/n8ju6gq/img-001.png" />
+&lt;/figure>
+
+&lt;p>このメインツールバーが表示されていない場合は、メニューから次のようにたどって表示できます。&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>表示&lt;/code> → &lt;code>ツールバー&lt;/code> → &lt;code>メイン&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>ただ、コマンド入力自体は、このメインツールバーが表示されていなくても可能です。
+メインツールバーが表示されていなときにコマンド入力を始めると、独立した「コマンドライン」ダイアログが表示されて、そこに入力したテキストが表示されます。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="" width="600" height="331" src="../../p/n8ju6gq/img-002_hu7636561790585134751.png" alt="/p/n8ju6gq/img-002.png" />
+&lt;/figure>
+
+&lt;p>コマンド入力ボックスの右に表示されている矢印アイコンをクリックすると、過去に実行したコマンドの履歴からコマンドを実行することができます。&lt;/p>
+&lt;h2 id="チャート分析ウィンドウの表示を切り替える">チャート分析ウィンドウの表示を切り替える&lt;/h2>
+&lt;h3 id="時間足足種の切り替え">時間足（足種）の切り替え&lt;/h3>
+&lt;p>チャート分析ウィンドウをアクティブにした状態で、次のようにキーボードから入力して &lt;code>Enter&lt;/code> キーを押すことで、時間足を簡単に切り替えることができます。
+大文字と小文字は区別されません。&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>1 tick(s)&lt;/code>: 1 ティック足&lt;/li>
+&lt;li>&lt;code>10 tick(s)&lt;/code>: 10 ティック足&lt;/li>
+&lt;li>&lt;code>30 sec(s)&lt;/code> / &lt;code>30 second(s)&lt;/code>: 30 秒足&lt;/li>
+&lt;li>&lt;code>1 min(s)&lt;/code> / &lt;code>1 minute(s)&lt;/code>: 1 分足&lt;/li>
+&lt;li>&lt;code>5 min(s)&lt;/code> / &lt;code>5 minute(s)&lt;/code>: 5 分足&lt;/li>
+&lt;li>&lt;code>15 min(s)&lt;/code> / &lt;code>15 minute(s)&lt;/code>: 15 分足&lt;/li>
+&lt;li>&lt;code>60 min(s)&lt;/code> / &lt;code>60 minute(s)&lt;/code>: 1 時間足&lt;/li>
+&lt;li>&lt;code>240 min(s)&lt;/code> / &lt;code>240 minute(s)&lt;/code>: 4 時間足&lt;/li>
+&lt;li>&lt;code>.d&lt;/code> / &lt;code>.daily&lt;/code> / &lt;code>daily&lt;/code> : 日足&lt;/li>
+&lt;li>&lt;code>.w&lt;/code> / &lt;code>.weekly&lt;/code> / &lt;code>weekly&lt;/code> : 週足&lt;/li>
+&lt;li>&lt;code>.m&lt;/code> / &lt;code>.monthly&lt;/code> / &lt;code>montly&lt;/code> : 月足&lt;/li>
+&lt;/ul>
+&lt;p>&lt;code>.hourly&lt;/code> というコマンドはないので、1 時間足を表示したい場合は &lt;code>60 min&lt;/code> と入力しなければいけないことに気をつけてください。&lt;/p></description></item><item><title>TradeStation/インジケーター/モメンタム (WA-Momentum)</title><link>https://toushi.maku.blog/p/rbnx8hr/</link><pubDate>Sun, 12 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/rbnx8hr/</guid><description>&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">WA-Momentum&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">{ Search Tag: WA-Momentum }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">inputs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Price( Close ) [DisplayName = &amp;#34;Price&amp;#34;, ToolTip = 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Enter an EasyLanguage expression to use in the momentum calculation.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Length( 12 ) [DisplayName = &amp;#34;Length&amp;#34;, ToolTip = 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Enter number of bars over which to calculate momentum.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ColorNormLength( 14 ) [DisplayName = &amp;#34;ColorNormLength&amp;#34;, ToolTip = 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Color Normalization Length. Enter the number of bars over which to determine high and low values of the indicator for use in creating gradient colors.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> UseGradientColoring( true ) [DisplayName = &amp;#34;UseGradientColoring&amp;#34;, ToolTip = 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Enter true for gradient (blended) coloring; enter false for no gradient coloring.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> UpColor( Yellow ) [DisplayName = &amp;#34;UpColor&amp;#34;, ToolTip = 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Enter the color to use for indicator values that are relatively high over ColorNormLength bars.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> DnColor( Red ) [DisplayName = &amp;#34;DnColor&amp;#34;, ToolTip = 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Down Color. Enter the color to use for indicator values that are relatively low over ColorNormLength bars.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> GridForegroundColor( Black ) [DisplayName = &amp;#34;GridForegroundColor&amp;#34;, ToolTip = 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Enter the plot color to be used in RadarScreen. Select a color that will contrast with both UpColor and DnColor. &amp;#34;];
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">variables:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> intrabarpersist InAChart( false ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Mom( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Accel( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ColorLevel( 0 );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">once
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> InAChart = GetAppInfo( aiApplicationType ) = cChart;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Mom = Momentum( Price, Length );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Accel = Momentum( Mom, 1 ); { 1 bar acceleration }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Plot1( Mom, !( &amp;#34;Momentum&amp;#34; ) );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Plot2( 0, !( &amp;#34;ZeroLine&amp;#34; ) );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{ gradient coloring }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if UseGradientColoring then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ColorLevel = NormGradientColor( Mom, true, ColorNormLength, UpColor, DnColor );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if InAChart then { study is applied to a chart }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SetPlotColor( 1, ColorLevel );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> else { study is applied to grid app }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SetPlotColor( 1, GridForegroundColor );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SetPlotBGColor( 1, ColorLevel );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{ alert criteria }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if AlertEnabled then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if Mom &amp;gt; 0 and Accel &amp;gt; 0 then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Alert( !( &amp;#34;Indicator positive and increasing&amp;#34; ) )
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> else if Mom &amp;lt; 0 and Accel &amp;lt; 0 then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Alert( !( &amp;#34;Indicator negative and decreasing&amp;#34; ) );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;div style="padding-left: 32%; font-size: smaller; color: gray;">
+Copyright © TradeStation Technologies, Inc. All Rights Reserved
+TradeStation reserves the right to modify or overwrite
+this analysis technique with each release.
+&lt;/div>
+
+&lt;ul>
+&lt;li>参考: &lt;a href="../../p/xrap6ky">トレステ/関数/Momentum 関数 - 現在の足のモメンタムを求める&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>トレステのチャート分析ウィンドウを素早く最大化する</title><link>https://toushi.maku.blog/p/9py9hqz/</link><pubDate>Fri, 10 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/9py9hqz/</guid><description>&lt;p>トレステのチャート分析ウィンドウは、&lt;/p>
+&lt;ul>
+&lt;li>チャート領域の任意の部分を &lt;strong>右ダブルクリック&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;p>することで素早く最大化することができます。
+元に戻すときも同様です。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="" width="600" height="459" src="../../p/9py9hqz/img-001_hu17955613636999614674.png" alt="/p/9py9hqz/img-001.png" />
+&lt;/figure>
+
+&lt;p>もちろん、タイトルバーのダブルクリックや、右上の最大化ボタンでも同じことができますが、上記の方法が最も素早く操作できると思います。&lt;/p></description></item><item><title>トレステ画面の操作</title><link>https://toushi.maku.blog/p/3nzakv6/</link><pubDate>Fri, 10 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/3nzakv6/</guid><description/></item><item><title>TradeStation や EasyLanguage で使われる用語のメモ</title><link>https://toushi.maku.blog/p/spbgdm2/</link><pubDate>Fri, 24 Jan 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/spbgdm2/</guid><description>&lt;p>トレードステーションの解説や、そのプログラミング言語である EasyLanguage の解説使われる用語の説明です。
+投資の世界では「テクニカル指標」という言葉はよく使うけど、「分析テクニック」という表現は独特ですね。&lt;/p>
+&lt;ul>
+&lt;li>&lt;b>銘柄&lt;/b>
+ ＝ &lt;b>シンボル&lt;/b>
+ ＝ &lt;b>Symbol&lt;/b>
+
+&lt;ul>
+&lt;li>複数のシンボルを集めたものを「&lt;b>シンボルリスト&lt;/b>
+」と呼びます。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;b>足種&lt;/b>
+ ＝ &lt;b>インターバル&lt;/b>
+ ＝ &lt;b>Interval&lt;/b>
+&lt;/li>
+&lt;li>&lt;b>取引情報&lt;/b>
+ &amp;hellip; 下記をまとめたもの
+&lt;ul>
+&lt;li>価格&lt;/li>
+&lt;li>出来高&lt;/li>
+&lt;li>時間&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;b>分析テクニック&lt;/b>
+ ＝ &lt;b>テクニカル指標&lt;/b>
+ = &lt;b>分析情報&lt;/b>
+
+&lt;ul>
+&lt;li>「インジケーター」「ショウミー」「ペイントバー」「アクティビティバー」「プロバビリティマップ」などの総称。ストキャスティクスや移動平均など。&lt;/li>
+&lt;li>分析テクニックを集めたものを「&lt;b>分析グループ&lt;/b>
+」と呼びます。自分の好きな分析テクニックをカスタム分析グループとして保存しておけば、簡単にその分析画面を復元することができます。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>EasyLanguage のストラテジーサンプル「移動平均のGC/DCによる売買」</title><link>https://toushi.maku.blog/p/5vds8n2/</link><pubDate>Mon, 20 Jan 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/5vds8n2/</guid><description>&lt;p>2 本の移動平均線がクロスするタイミングで売買を行うストラテジです。
+TradeStation には標準で付属しているストラテジとして、「単純移動平均2本クロス買いエントリー (ストラテジー)」がありますが、ここでは自力で実装する場合のサンプルとして示します。&lt;/p>
+&lt;h2 id="ストラテジ概要">ストラテジ概要&lt;/h2>
+&lt;h3 id="エントリタイミング">エントリタイミング&lt;/h3>
+&lt;ul>
+&lt;li>買いエントリ (Buy) の条件
+&lt;ul>
+&lt;li>短期移動平均線が長期移動平均線をゴールデンクロス (GC)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>売りエントリ (SellShort) の条件
+&lt;ul>
+&lt;li>短期移動平均線が長期移動平均線をデッドクロス (DC)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="パラメータ">パラメータ&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>fastLen&lt;/code>: 短期移動平均の足数&lt;/li>
+&lt;li>&lt;code>slowLen&lt;/code>: 長期移動平均の足数&lt;/li>
+&lt;/ul>
+&lt;h2 id="ソースコード">ソースコード&lt;/h2>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">input: fastLen(5), slowLen(25);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">var: fastAvg(0), slowAvg(0);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">fastAvg = AverageFC(Close, fastLen);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">slowAvg = AverageFC(Close, slowLen);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if fastAvg crosses over slowAvg then begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Buy next bar at market;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if fastAvg crosses under slowAvg then begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SellShort next bar at market;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure></description></item><item><title>トレステの設定: シンボルリンクとインターバルリンクでウィンドウ間の表示を連携させる</title><link>https://toushi.maku.blog/p/yhr2aiq/</link><pubDate>Sun, 12 Jan 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/yhr2aiq/</guid><description>&lt;h2 id="ウィンドウリンクとは">ウィンドウリンクとは&lt;/h2>
+&lt;p>TradeStation の「ウィンドウリンク」の仕組みを使用すると、ウィンドウ間（トレーディングアプリ間）で選択している銘柄や、足のインターバル（分足や時間足）の設定を同期させることができます。
+ウィンドウリンクの機能には、次の 2 種類があります。&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>シンボルリンク&lt;/strong> &amp;hellip; 銘柄をリンクして切り替える&lt;/li>
+&lt;li>&lt;strong>インターバルリンク（足種リンク）&lt;/strong> &amp;hellip; 足のインターバルをリンクして切り替える&lt;/li>
+&lt;/ul>
+&lt;h2 id="シンボルリンク">シンボルリンク&lt;/h2>
+&lt;p>シンボルリンクを有効にするには、各ウィンドウのタイトルバー右上に表示されている「S」マークをクリックし、ハイライトされた状態にします。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="600" height="386" src="../../p/yhr2aiq/001_hu2197159457018077210.png" alt="/p/yhr2aiq/001.png" />
+&lt;/figure>
+
+&lt;p>ここでは、「レーダースクリーン」と「チャート分析」のウィンドウのシンボルリンクを有効にしています。
+レーダースクリーンの銘柄コードをクリックすると、チャート分析のウィンドウで表示している銘柄が連動して切り替わるようになります。&lt;/p>
+&lt;h2 id="インターバルリンク足種リンク">インターバルリンク（足種リンク）&lt;/h2>
+&lt;p>インターバルリンクを有効にするには、各ウィンドウのタイトルバー右上に表示されている「I」マークをクリックし、ハイライトされた状態にします（シンボルリンクのボタンの右にあります）。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="150" height="81" src="../../p/yhr2aiq/002_hu13422026259346349515.png" alt="/p/yhr2aiq/002.png" />
+&lt;/figure>
+
+&lt;p>インターバルリンクを複数のウィンドウで有効にしておくと、5分足や、1時間足などのインターバル設定を同期させることができます。&lt;/p>
+&lt;h2 id="リンクカラーとグローバル設定">リンクカラーとグローバル設定&lt;/h2>
+&lt;p>シンボルリンクやインターバルリンクのボタンの隅にあるプルダウンマークを押すと、下記のようにリンクの種類を選択することができます。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="250" height="404" src="../../p/yhr2aiq/003_hu3065631293593142071.png" alt="/p/yhr2aiq/003.png" />
+&lt;/figure>
+
+&lt;p>ここでは、リンクの色を設定することができ、等しい色を選択したウィンドウ同士でリンク機能が働くようになります。&lt;/p>
+&lt;p>また、ここで、&lt;strong>グローバルリンク&lt;/strong>と記述されたものを選択すると、ワークスペースをまたがったウィンドウ間でもリンク機能が働くようになります（デフォルトはローカルリンクになっています）。
+ローカルリンクとグローバルリンクはボタンの形が若干違うので、タイトルバーを見るだけで現在どちらが設定されているかを判別できます。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="126" height="111" src="../../p/yhr2aiq/004.png" alt="/p/yhr2aiq/004.png" />
+&lt;/figure>
+
+&lt;p>上のボタンがローカルリンク時の形状で、下のボタンがグローバルリンク時の形状です。&lt;/p></description></item><item><title>トレステの設定</title><link>https://toushi.maku.blog/p/tdpybkv/</link><pubDate>Sun, 12 Jan 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/tdpybkv/</guid><description/></item><item><title>トレステの設定: レーダースクリーンのフォントサイズを変更する</title><link>https://toushi.maku.blog/p/zhry9hq/</link><pubDate>Sun, 12 Jan 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/zhry9hq/</guid><description>&lt;p>TradeStation のレーダースクリーンのフォント設定は、下記の場所から変更することができます。&lt;/p>
+&lt;ol>
+&lt;li>レーダースクリーンのウィンドウを選択した状態にする&lt;/li>
+&lt;li>メニューから &lt;samp>設定&lt;/samp> → &lt;samp>ページ&lt;/samp> と選択する&lt;/li>
+&lt;li>「ページの設定」ダイアログから &lt;samp>フォント&lt;/samp> タブを開く&lt;/li>
+&lt;/ol>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="500" height="449" src="../../p/zhry9hq/001_hu2164364762627490610.png" alt="/p/zhry9hq/001.png" />
+&lt;/figure>
+
+&lt;p>フォントサイズを小さめに設定しておくと、レーダースクリーンの一覧性が増します。&lt;/p></description></item><item><title>TradeStation/インジケーター/移動平均線1本 (WA-Mov Avg 1 Line)</title><link>https://toushi.maku.blog/p/kkipwgp/</link><pubDate>Fri, 12 Apr 2019 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/kkipwgp/</guid><description>&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">WA-Mov Avg 1 Line&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">{ Search Tag: WA-Mov Avg 1 Line }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">inputs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Price( Close ) [DisplayName = &amp;#34;Price&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Enter an EasyLanguage expression to use in the moving average calculation.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Length( 9 ) [DisplayName = &amp;#34;Length&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Enter number of bars over which to calculate the simple moving average.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Displace( 0 ) [DisplayName = &amp;#34;Displace&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Displacement. Enter the number of bars by which plots will be displaced. Displacement may be positive (left) or negative (right).&amp;#34;] ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">variables:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Avg( 0 ) ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Avg = AverageFC( Price, Length ) ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if Displace &amp;gt;= 0 or CurrentBar &amp;gt; AbsValue( Displace ) then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Plot1[Displace]( Avg, !( &amp;#34;Avg&amp;#34; ) ) ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> { alert criteria }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if AlertEnabled and Displace &amp;lt;= 0 then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if Price crosses over Avg then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Alert( !( &amp;#34;Price crossing over average&amp;#34; ) )
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> else if Price crosses under Avg then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Alert( !( &amp;#34;Price crossing under average&amp;#34; ) ) ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end ;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;div style="padding-left: 32%; font-size: smaller; color: gray;">
+Copyright © TradeStation Technologies, Inc. All Rights Reserved
+TradeStation reserves the right to modify or overwrite
+this analysis technique with each release.
+&lt;/div></description></item></channel></rss>

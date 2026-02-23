@@ -1,29 +1,593 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>テクニカル指標 on まくまく投資ノート</title><link>https://toushi.maku.blog/tags/%E3%83%86%E3%82%AF%E3%83%8B%E3%82%AB%E3%83%AB%E6%8C%87%E6%A8%99/</link><description>Recent content in テクニカル指標 on まくまく投資ノート</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Mon, 25 Sep 2023 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/tags/%E3%83%86%E3%82%AF%E3%83%8B%E3%82%AB%E3%83%AB%E6%8C%87%E6%A8%99/index.xml" rel="self" type="application/rss+xml"/><item><title>テクニカル指標の一覧</title><link>https://toushi.maku.blog/p/7y8y8yw/</link><pubDate>Sun, 24 Sep 2017 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/7y8y8yw/</guid><description> テクニカル指標の種類 テクニカル指標は大きく分けて、トレンド系（順張り系）とオシレーター系（逆張り系）の指標に分けることができます。
-トレンド系（順張り系） トレンド系の指標は相場の方向性を判断するために用いられます。移動平均線などが代表的です。 オシレーター系／モメンタム系（逆張り系） オシレータ系の指標は、相場の勢いや、買われ過ぎや売られ過ぎなどの情報を示します。オシレータ (oscillator) とは「振動するもの」という意味を持っており、その名の通り、一定の範囲内で値が上下する性質を持っています。 テクニカル指標一覧 指標名（英語） 指標名（日本語） モメンタム系 トレンド系 移動平均 特殊 オプション ノート その他 回帰分析 Awesome Oscillator Least Squares Moving Average Linear Regression (Least Square) Linear Regression Curve Linear Regression Intercept Linear Regression R-Squared Linear Regression Slope Raff Channel Standard Deviation Channel ボラティリティ ATR: Average True Range Chaikin Volatility Chande Volatility Index Dynamic Average Historical Volatility Ratio Relative Volatility Index 出来高分析 Klinger Volume Oscillator Negative Volume Index Percentage Volume Oscillator Positive Volume Index Volume ＊ PMO Volume Exponential Moving Average Volume Oscillator Volume Simple Moving Average Volume Weighted Moving Average オン・バランス・ボリューム (OBV) 加重平均価格</description></item><item><title>テクニカル指標: Stochastic Oscillator（ストキャスティクス）</title><link>https://toushi.maku.blog/p/ibp4usz/</link><pubDate>Mon, 25 Sep 2023 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/ibp4usz/</guid><description>ストキャスティクスの概要 オシレーター系のテクニカル指標。逆張りの指標。 %K と %D の 2 つの線で構成されます。 %K &amp;hellip; 終値の位置が一定の日数の価格レンジ（値動きした範囲）の中でどの位置にあるかを示す。 %D &amp;hellip; %K を滑らかにしたもの。 売買のタイミング 低い位置で %K が %D を上抜けたら買い。 %K と %D の 2 本のラインのクロスをサインにする（ファストキャスティクス） %D と %D の移動平均 (SD) を使ってサインの出方を緩やかにする方法（スローストキャスティクス） ストキャスティクスの考察 全体的に取引回数が多くなりがち。 勝率が20％など低くなりがち。 でもこれは、逆張りで相場の反転を狙う手法なので当然ともいえます。 短期トレードになることが多いので、トレーリングストップとの併用はあまり有効ではない。</description></item><item><title>テクニカル指標: ATR (Average True Range)</title><link>https://toushi.maku.blog/p/tasaq7n/</link><pubDate>Wed, 30 Mar 2022 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/tasaq7n/</guid><description>ATR の概要 基本情報 英語名ATR: Average True Range 日本語名アベレージ・トゥルー・レンジ 考案者J・W・ワイルダー 考案年─ ATR は、TR（True Range、真のレンジ）の平均をとったものです。 日足の場合、14 日間の平均値を用いることが多いようです。
-計算方法 ATR は TR の平均値なので、TR を求めることができれば簡単に計算できます。 TR は以下のレンジの中の最大値です。 ひとことで言うと、通常の当日レンジを拡張して、前日の終値からの変化を考慮したものです。
-当日の高値 〜 当日の安値（これは通常のレンジ） 前日の終値 〜 当日の高音 前日の終値 〜 当日の安値 図: TR (True Range) 通常の当日レンジ (High - Low) の計算では、その日にストップ高になったとしても、朝から天井に張り付いていたら、レンジは 0 になってしまいます。 これはレンジとしておかしいということで、TR (True Range) という概念が生まれました。 TR であれば、前日の終値からの変化を表現できるので、夜間取引のない株式などが朝にギャップアップして寄り付いた場合に、大きな変化が起こったものとして捉えることができます。
-おまけ TradingView (Pine Script) で終値 ± ATR(10) の範囲を色付けするコードです。 ローソク足がこの範囲をはみ出しているということは、最近の平均的な変動幅 (ATR) よりも大きく動いたことを示しています。
-図: Close ± ATR(10) //@version=5 indicator(&amp;#34;Example of ATR&amp;#34;, overlay=true) myAtr = ta.</description></item><item><title>テクニカル指標: Bollinger Bands（ボリンジャーバンド）</title><link>https://toushi.maku.blog/p/s6djqv3/</link><pubDate>Tue, 29 Dec 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/s6djqv3/</guid><description>ボリンジャーバンドの概要 基本情報 英語名BBands: Bollinger Bands 日本語名ボリンジャー・バンド 考案者ジョン・A・ボリンジャー 考案年1980年代 移動平均に標準偏差のバンドを表示したもの 3 つのライン ミドルバンド &amp;hellip; 20日移動平均 アッパーバンド (+2σ) &amp;hellip; 20日移動平均 + (20日標準偏差 x 2) ローバンド (+2σ) &amp;hellip; 20日移動平均 - (20日標準偏差 x 2) 統計的に次のような確率で価格がバンド内に収まると考えます ±1σ の範囲内に収まる確率 &amp;hellip; 68.3％ ±2σ の範囲内に収まる確率 &amp;hellip; 95.4％ ±3σ の範囲内に収まる確率 &amp;hellip; 99.7％ トレンドがある場合は、±2σ のラインに沿って価格が上昇・下落を続けることがよくあります（バンドウォーク） ボリンジャーバンドの利用例 ±2σ 超えでポジションをクローズする MACD などでトレンドに乗ってポジションを取った後に、一部利食いのタイミングとして利用する。 ±2σ 超えで逆張りのポジションを取る 大きなトレンドが発生するときは、±2σ を超えても上昇・下落が続くので注意。 バンド幅 (BBW) でトレンドの強さを判断する（他のシグナルのフィルタとして使う） バンド幅が狭い時は、価格の変化が小さく、トレンドもほとんどないと判断し、他のテクニカル指標でシグナルが出ている場合でもノイズとして無視する。</description></item><item><title>テクニカル指標: GMMA (Guppy Multi Moving Average)</title><link>https://toushi.maku.blog/p/92izet9/</link><pubDate>Sat, 23 May 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/92izet9/</guid><description>GMMA の概要 基本情報 英語名GMMA: Guppy Multi Moving Average 日本語名複合型移動平均線 考案者Daryl Guppy（ダリル・グッピー） ... オーストラリアのテクニカル・アナリスト） 考案年─ 12本の EMA（指数平滑移動平均線）の関係から相場の状況を判断する 6本の短期線 &amp;hellip; 3日・5日・8日・10日・12日・15日 6本の長期線 &amp;hellip; 30日・35日・40日・45日・50日・60日 利点 見た目でトレンドを把握しやすい 押し目の判断にも使えるし、トレンド転換の判断にも使える ダマシが比較的少ない 移動平均線の GC/DC よりも早めにトレンド転換が示唆される 仕掛けのポイント トレンド転換 短期線6本が長期線6本をすべて突き抜けたとき 押し目買い・戻り売り 短期線6本が長期戦6本に絡んだが、元の方向へ戻ったとき 短期戦の方向がすべて下向きになったが、すべて上向きに戻ったとき ただし、いずれも長期線が規則正しく同じ方向に並んでいるときのみ その他 GMMA の考案者である Guppy 氏は、ローソク足を表示せず、12 本の EMA だけを表示してトレードしているらしい。 Daryl Guppy 氏の Web サイト: guppytraders.com</description></item><item><title>テクニカル指標: モメンタム / RoC (Rate of Change)</title><link>https://toushi.maku.blog/p/q7gow5c/</link><pubDate>Fri, 10 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/q7gow5c/</guid><description>モメンタム / RoC の概要 概要 モメンタム（あるいは RoC: Rate of Change）はとてもシンプルな指標で、 n 日前の終値に対して、最新の終値が何％の値段になっているか を示します（つまり、騰落率です）。 n 日前と価格が同じであれば 100 ですし、50％ 上がっていれば 150 という値になります。 100％ のラインを 100 と表示するか、あるいは 0 や 1 と表示するかは、チャートソフトによって異なります。
-シグナルライン モメンタムのラインと同時に、その移動平均であるシグナルラインを表示することもあります。 シグナルラインは次のように利用できます。
-シグナルラインの傾きでトレンドの方向を探る モメンタムラインとシグナルラインの GC（ゴールデンクロス）と DC（デッドクロス）を売買タイミングとする モメンタム / RoC の計算式 文脈によって、モメンタムは「騰落率・変化率」ではなく、単純に n 本前の足との「価格差」を示す場合があります。 一方、RoC (Rate of Change) と呼ぶ場合は必ず「騰落率」を示しています。 ここでは、モメンタムと RoC を区別して考えることにします。
-Price &amp;hellip; 現在の価格 Price(n) &amp;hellip; n 本前の価格 とすると、モメンタムと RoC は次のように計算できます。
-モメンタム = Price - Price(n) RoC = Price / Price(n) * 100 表示例 SBI証券「株アプリ」 SBI証券「株アプリ」のモメンタムは、期間、シグナルともに 1～255 の範囲で設定できます。 このアプリではモメンタムは 100 を中心に上下しているので、価格差ではなく RoC（騰落率）を表していますね。</description></item><item><title>テクニカル指標: Elder Impulse System</title><link>https://toushi.maku.blog/p/yaeh8wr/</link><pubDate>Tue, 14 Jan 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/yaeh8wr/</guid><description>Elder Impulse System の概要 トレンドの強さを分かりやすく表示してくれる 『投資苑』 の著者であるアレキサンダー・エルダーが開発 13 期間の EMA でトレンドの判断、MACD ヒストグラムでモメンタム（トレンドの強さ）を判断する 米国ではメジャーなインジケーター Elder Impulse System のトレンド判断方法 緑色のバー（ブル相場: 強気トレンド） EMA(13) ＞ 前区間のEMA(13) かつ MACDヒストグラム ＞ 前区間のMACDヒストグラム 「買いエントリー」してもよい 赤色のバー（ベア相場: 弱気トレンド） EMA(13) ＜ 前区間のEMA(13) かつ MACDヒストグラム ＜ 前区間のMACDヒストグラム 「売りエントリー」してもよい 青色のバー（もみ合い） 上記のいずれでもない場合（EMA と MACD の方向が逆） 「様子見」 例えば、緑色のバーになるときに「買いエントリー」し、緑色以外のバーに変わったときに「手仕舞い」します。
-参考 Elder Impulse System - MetaTrader 5のためのインディケーター - MQL5</description></item><item><title>テクニカル指標: MACD (Moving Average Convergence / Divergence)</title><link>https://toushi.maku.blog/p/hj7nm4h/</link><pubDate>Tue, 14 Jan 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/hj7nm4h/</guid><description>MACD の概要 基本情報 英語名MACD: Moving Average Convergence / Divergence 日本語名移動平均収束拡散法 考案者ジェラルド・アペル (Gerald Appel) 考案年1970年代 ラインは 2 つで、EMA（指数平滑移動平均）を使う MACD ライン : 短期と長期の EMA の乖離（12日間EMA - 26日間EMA） シグナルライン : MACD ラインの移動平均（MACDの9日間EMA） 移動平均線をベースにした順張り（トレンド）系のテクニカル指標 移動平均線で生じるダマシやサインの遅れをある程度解決できる トレンド追いかけつつ、転換点を早めに見つけられる よう工夫している デイトレードで威力を発揮 しやすい MACD の利用例 シグナル／売買サイン MACD ラインがシグナルラインを上に突き抜けると上昇トレンド、下に突き抜けると下落トレンド 2 つのラインが同じ方向を向いていればシグナルが強い 使用上のコツ ボラティリティ（株価の振幅）が大きく、トレンドの発生しやすい銘柄 に使うと効果を発揮しやすい サインが出た後、2、3 回に分けて仕掛け・手仕舞いを行うとうまくいく傾向がある カスタマイズ シグナルを作るときの移動平均の期間を調整する（ダマシの軽減） MACD とシグナルの変動幅が小さいときはトレードを控える 売買ポイント MACD がシグナル（移動平均）を上抜けたら「買い」 MACD がシグナル（移動平均）を下抜けたら「売り」 MACD のシグナル（移動平均）が 0 クロスしたときに、MACD のラインがかなり上（下）にある場合、そのままトレンドが続く傾向があります。
-プラス圏で MACD のシグナルに対するデッドクロスが発生したときは、利確のタイミングと捉えるとよいです。
-MACD の計算方法 MACD = 短期の平滑移動平均 - 長期の平滑移動平均 平滑移動平均 = 前日EMA + α(終値 - 前日EMA) α = 2 / (期間日数 + 1) 一般的なパラメーター MACD ライン用の短期 EMA 期間 = 12 MACD ライン用の長期 EMA 期間 = 26 シグナルラインの移動平均期間 = 9</description></item><item><title>テクニカル指標: DMI（方向性指数）</title><link>https://toushi.maku.blog/p/9ju3pvu/</link><pubDate>Fri, 09 Aug 2019 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/9ju3pvu/</guid><description>DMI の概要 基本情報 英語名DMI: Directional Movement Index 日本語名方向性指数 考案者J・W・ワイルダー 考案年─ +DI が価格の上昇力を示す -DI が価格の下落力を示す ADX がトレンドの強さを示す DMI の買いシグナル／売りシグナル 買い: +DI が -DI を上抜け 売り: +DI が -DI を下抜け +DI と -DI のクロスはトレンドの転換を示しているため、+DI が -DI を上抜けたときが買いのタイミング、+DI が -DI を割り込んだときが売りのタイミングです。
-DMI による上昇トレンド／下降トレンドの判断 上昇トレンド: +DI ＞ -DI 下降トレンド: +DI ＜ -DI DMI によるトレンドの強さの判断 ADX が上昇しているときはトレンドが強く、ADX が低く推移しているときはトレンドが弱く、持ち合い相場であることを示します。 つまり、ADX を見ることで、トレンド相場なのか、レンジ相場なのかの見極め をしたトレードを行うことができます。
-関連指標 ATR: Average True Range 同じく、J・W・ワイルダー氏の考案。TR (True Range) の概念を使うことが DMI と ATR で共通しています。</description></item><item><title>テクニカル指標: ローソク足パターン</title><link>https://toushi.maku.blog/p/qanid5r/</link><pubDate>Sun, 04 Mar 2018 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/qanid5r/</guid><description>はらみ足 (Inside bar)、抱き線 (Engulfing) はらみ足 (Inside bar)
-前の足の実体の範囲（始値〜終値）に、次の足の実体（始値〜終値）がすっぽりと収まるパターンです。 相場の転換時に現れることが多いと言われていますが、頻繁に現れるパターンであり、これだけで相場転換を判断するのは危険です。 2本のローソク足の組み合わせによって、次のように細かく呼び分けることもあります。 1) 陰の陽はらみ、2) 陽の陰はらみ、3) 陽の陽はらみ、4) 陰の陰はらみ。 5分足などの短いインターバルのチャートでは、陽の陽はらみや、陰の陰はらみはほとんど出現しません（前の足の終値と、次の足の始値が飛ぶ形になるため）。 抱き線、つつみ線 (Bullish engulfing)
-はらみ足の逆のパターンで、後ろの足の実体部分が、前の足の実体部分をすっぽり囲い込む形です。 陰線をすっぽりと囲む陽線が出た場合は、Bullish engulfing（強気の包み込み）といい、上昇相場への転換サインとなります。 Outside bar パターン
-抱き線の発展形で、最後の足の実体部分が、前の2つの足の実体を両方ともすっぽりと囲む形です。 図のような形になると、上昇への転換を表します。 5分足などの短いインターバルのチャートでは、このように複数の足の関係を見た方が、だましを排除しやすくなるでしょう。 三川 三川はローソク足3本の組み合わせのパターンです。
-三川明けの明星 (Morning star)
-底入れを示すサインです。 三川宵の明星 (Evening star)
-天井を示すサインです。 三兵 三兵はローソク足3本の組み合わせのパターンです。
-赤三兵 (Three white soldiers)
-安値と高値を切り上げながら3連続する陽線が出現するパターンです。 底値圏で出れば上昇転換のサインとなります。 黒三兵 (Three black crows)
-高値と安値を切り下げながら3連続する陰線が出現するパターンです。 天井圏で出れば下降転換のサインになります。 カラカサ／トンカチ カラカサ (Hammer, Hanging man)
-上昇トレンドや下降トレンドが継続した後に、下に長いヒゲを持つ短い実体が登場するパターンです。 一般的に、下降トレンドの後に出現するものをハンマー (Hammer) と呼び、上昇転換を示唆します。 逆に、上昇トレンドの後に出現するものをハングマン (Hanging man)（首吊り）と呼び、上昇相場の終わりを示唆します。 トンカチ、流れ星 (Shooting Star)
-上昇相場のピークあたりに現れると下落の兆しを示し、下降相場の底値あたりで現れると上昇の兆しを示します。日本語でトンカチというと、下に実体のあるこの形ですが、英語で Hammer というと、上に実体のある形（＝カラカサ）を示すことに注意してください。 2デイ・リバーサル 2デイ・リバーサル (上昇転換)</description></item><item><title>テクニカル指標: RSI（相対力指数）</title><link>https://toushi.maku.blog/p/trghokn/</link><pubDate>Sun, 27 Mar 2016 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/trghokn/</guid><description>RSI の概要 基本情報 英語名RSI: Relative Strength Index 日本語名相対力指数 考案者J・ウェルズ・ワイルダー・ジュニア (J. Welles Wilder) 考案年1970年代 モメンタム型オシレータ RCI やストキャスティクスと同じ 逆張り指標 の代表格で、「買われ過ぎ」や「売られ過ぎ」 を知るための指数 ある期間内（通常 14 日間）の価格の変化をベースに判断を行う RSI の値の範囲は、0%（めちゃ売られ過ぎ）～ 100%（めちゃ買われ過ぎ）になる RSI はトレンド発生中は機能しにくい RSI の利用例 RSI が 70% 以上で「買われ過ぎ」と判断して逆張りする RSI が 30% 以下で「売られ過ぎ」と判断して逆張りする RSI 50% を下から上に突き抜けたら「買いの勢いが強い」と判断して順張りする RSI 50% を上から下に突き抜けたら「売りの勢いが強い」と判断して順張りする RSI の計算式 RSI は「平均上昇幅」と「平均下降幅」をもとに、下記の計算式で求められます。 ここでは、計算区間を一般的な 14 日とします。
-$$ RSI = \frac{AvgGain}{AvgGain + AvgLoss} \times 100 $$
-\( AvgGain \) &amp;hellip; 14 日間の平均上昇幅 \( AvgLoss \) &amp;hellip; 14 日間の平均下降幅 「上昇幅」というのは、前日の終値から、当日の終値がいくら上昇したかを示します。 逆に価格が下がっている場合は「下降幅」として扱いますが、いずれも絶対値（0 以上の値）で扱います。 つまり RSI は、一定期間内の日々の価格変化のうち、上昇の割合が何％であったか を計算しています。 14 日前からの終値の情報があれば計算できるので、とってもシンプルです。</description></item><item><title>テクニカル指標: EMA（指数平滑移動平均）</title><link>https://toushi.maku.blog/p/67gvggc/</link><pubDate>Wed, 10 Jun 2015 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/67gvggc/</guid><description>EMA の特徴 EMA は通常の SMA（単純移動平均）と比べ、シグナルの発生が早くなる ことが特徴的です。 日本の投資家は SMA を使用することが多いのですが、海外の投資家は EMA を好む傾向があるようです。 EMA の計算では、過去のデータをある時点で突然切り捨てるということはなく、過去に遡るに従い、合算するときの重みを指数関数的に減少させていきます。 EMA の移動平均線は、 SMA の移動平均線に比べて滑らかになる 傾向があります。 MACD の計算にも EMA が使用されています。
-EMA をうまく使うコツ EMA や SMA などの移動平均線のゴールデンクロス、デッドクロスなどをシグナルに利用したトレードは、レンジ相場では儲かりません。 レンジ相場なのかトレンドが発生しているのかを先に判断し、レンジ相場のときはボリンジャーバンドによる逆張りエントリ、トレンドが発生しているときは移動平均線による順張りエントリなど、使い分けが必要です。</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>テクニカル指標 on まくまく投資ノート</title><link>https://toushi.maku.blog/tags/%E3%83%86%E3%82%AF%E3%83%8B%E3%82%AB%E3%83%AB%E6%8C%87%E6%A8%99/</link><description>Recent content in テクニカル指標 on まくまく投資ノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Mon, 25 Sep 2023 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/tags/%E3%83%86%E3%82%AF%E3%83%8B%E3%82%AB%E3%83%AB%E6%8C%87%E6%A8%99/index.xml" rel="self" type="application/rss+xml"/><item><title>テクニカル指標の一覧</title><link>https://toushi.maku.blog/p/7y8y8yw/</link><pubDate>Sun, 24 Sep 2017 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/7y8y8yw/</guid><description>&lt;script>
+document.addEventListener('DOMContentLoaded', function() {
+ const arr = [
+ { en: "Bill William's Alligator Oscillator", jp: '', tags: ['trend'] },
+ { en: "Bill William's Alligator", jp: '', tags: ['trend'] },
+ { en: "Lane's Stochastic Oscillator", jp: '', tags: ['momentum'] },
+ { en: "Williams’ Percent Range", jp: 'ウィリアム％Ｒ', tags: ['momentum'] },
+ { en: '', jp: '株価移動平均乖離線', tags: ['momentum'] },
+ { en: 'A/D (Accumulation Distribution) Ocsillator', jp: '騰落オシレーター', tags: ['momentum'] },
+ { en: 'AB Ratio', jp: '強弱レシオ', tags: ['momentum'] },
+ { en: 'ADX/DMI', jp: '', tags: ['trend'], url: '/p/9ju3pvu/' },
+ { en: 'ADXR', jp: '', tags: ['trend'] },
+ { en: 'ASI: Accumulation Swing Index', jp: '集積スイング・インデックス', tags: ['momentum'], note: '考案者: J.W.ワイルダー(Welles Wilder)' },
+ { en: 'Accelerator/Decelerator', jp: 'AC オシレーター', tags: ['momentum'] },
+ { en: 'Adaptive Moving Average', jp: '', tags: ['ma'] },
+ { en: 'Anti-Watch Curve, Contrary Watch Curve, Counter Clock Curve', jp: '逆ウォッチ曲線', tags: ['sp'] },
+ { en: 'Arnaud Legoux Moving Average', jp: '', tags: ['ma'] },
+ { en: 'Aroon Oscillator', jp: '', tags: ['trend'] },
+ { en: 'Aroon Up/Dn', jp: '', tags: ['trend'] },
+ { en: 'Bollinger Bands', jp: 'ボリンジャーバンド', tags: ['momentum', 'ma'], url: '/p/s6djqv3/' },
+ { en: 'Chaikin Money Flow', jp: 'チャイキン・マネー・フロー', tags: ['momentum'] },
+ { en: 'Chaikin Oscillator', jp: 'チャイキン・オシレーター', tags: ['momentum'] },
+ { en: 'Chande Momentum Oscillator', jp: '', tags: ['momentum'] },
+ { en: 'Chop Zone', jp: '', tags: ['trend'] },
+ { en: 'Choppiness Index', jp: '', tags: ['trend'] },
+ { en: 'Connors RSI', jp: '', tags: ['trend'] },
+ { en: 'Coppock Curve', jp: '', tags: ['trend'] },
+ { en: 'DMI: Directional Movement Index', jp: '方向性指数', tags: ['trend'], url: '/p/9ju3pvu/' },
+ { en: 'Delta', jp: 'デルタ', tags: ['momentum', 'op'], note: 'オプションプレミアムの変化率' },
+ { en: 'Departure Chart', jp: '', tags: ['ma'] },
+ { en: 'Detrended Price Oscillator', jp: '', tags: ['trend'] },
+ { en: 'Donchian Channel Width', jp: '', tags: ['trend'] },
+ { en: 'Donchian Channels', jp: '', tags: ['trend'] },
+ { en: 'Double Exponential Moving Avg', jp: '', tags: ['ma'] },
+ { en: 'Ease of Movement', jp: '', tags: ['ma'] },
+ { en: 'Elder-Ray', jp: '', tags: ['momentum'] },
+ { en: 'Elder Impulse System', jp: '', tags: ['trend'] },
+ { en: 'Envelope', jp: 'エンベロープ', tags: ['momentum'] },
+ { en: 'Fast Stochastic Oscillator', jp: 'ファスト・ストキャスティクス', tags: ['momentum'], url: '/p/ibp4usz/' },
+ { en: 'Fibonacci Retracement', jp: 'フィボナッチ（フィボナッチ・リトレースメント）', tags: ['sp'] },
+ { en: 'Force Index', jp: '', tags: ['momentum'] },
+ { en: 'GMMA', jp: '複合型移動平均線', tags: ['ma', 'trend'], url: '/p/92izet9/', note: '考案者: ダリル・グッピー。12本のEMA（指数平滑移動平均線）を使用する。' },
+ { en: 'High &amp; Low Channel', jp: 'HL バンド', tags: ['trend'] },
+ { en: 'Hull Moving Average', jp: '', tags: ['ma'] },
+ { en: 'IV: Implied Volatility', jp: 'インプライド・ボラティリティ', tags: ['momentum', 'op'] },
+ { en: 'Ichimoku', jp: '一目均衡表', tags: ['ma', 'sp'], note: '考案者: 一目山人' },
+ { en: 'Intraday Intensity %', jp: '', tags: ['momentum'] },
+ { en: 'Intraday Intensity', jp: '', tags: ['momentum'] },
+ { en: 'Know Sure Thing', jp: '', tags: ['ma'] },
+ { en: 'MA Crossover', jp: '', tags: ['ma'] },
+ { en: 'MACD: Moving Average Convergence/Divergence', jp: '移動平均収束発散法', tags: ['momentum'], url: '/p/hj7nm4h/' },
+ { en: 'MFI: Money Flow Index', jp: 'マネー・フロー・インデックス', tags: ['momentum'] },
+ { en: 'Mass Index', jp: '', tags: ['trend'] },
+ { en: 'McGinley Dynamic', jp: '', tags: ['ma'] },
+ { en: 'Momentum', jp: 'モメンタム', tags: ['momentum'], url: '/p/q7gow5c/', note: '一定期間前の価格に対して、現在の価格がどれくらいの比率（％）かを表します。同じ価格ならば 100 で、値段が倍になっているのであれば 200 となります。' },
+ { en: 'Moving Standard Deviation', jp: '', tags: ['ma'] },
+ { en: 'Normal Stochastic Oscillator', jp: 'ノーマル・ストキャスティクス', tags: ['momentum'], url: '/p/ibp4usz/' },
+ { en: 'Parabolic SAR', jp: 'パラボリック SAR', tags: ['trend'] },
+ { en: 'Percent B', jp: '', tags: ['ma'] },
+ { en: 'Percentage Price Oscillator', jp: '', tags: ['momentum'] },
+ { en: 'Pivot Points High/Low', jp: 'ピボットポイント', tags: ['sp'], note: '考案者：J.W.ワイルダー(Welles Wilder)' },
+ { en: 'Point and Figure', jp: 'ポイント＆フィギュア', tags: ['sp', 'trend'] },
+ { en: 'Price Oscillator', jp: '', tags: ['momentum'] },
+ { en: 'Price Volume Trend', jp: '', tags: ['trend'] },
+ { en: 'Psychological Line', jp: 'サイコロジカル・ライン', tags: ['momentum'] },
+ { en: 'RCI: Rank Correlation Index', jp: '順位相関係数', tags: ['momentum'] },
+ { en: 'ROC: Rate Of Change', jp: 'レート・オブ・チェンジ', tags: ['momentum'] },
+ { en: 'RSI: Relative Strength Index', jp: '相対力指数', tags: ['momentum'], url: '/p/trghokn/' },
+ { en: 'Ratiocator', jp: 'レシオケータ', tags: ['momentum'], note: '日経平均株価と個別銘柄株価の乖離を示します。' },
+ { en: 'Relative Vigor Index', jp: '', tags: ['trend'] },
+ { en: 'Slow Stochastic Oscillator', jp: 'スロー・ストキャスティクス', tags: ['momentum'], url: '/p/ibp4usz/' },
+ { en: 'Stochastic Oscillator', jp: 'ストキャスティクス', tags: ['momentum'], url: '/p/ibp4usz/' },
+ { en: 'Stochastic RSI', jp: 'ストキャスティック RSC', tags: ['momentum'] },
+ { en: 'Swing Index', jp: '', tags: ['trend'] },
+ { en: 'TRIX', jp: '', tags: ['ma'] },
+ { en: 'Three Line Break', jp: '新値足（スリーラインブレイク）', tags: ['sp'] },
+ { en: 'Triangular Moving Average', jp: '', tags: ['ma'] },
+ { en: 'Triple Exponential Moving Avg', jp: '', tags: ['ma'] },
+ { en: 'True Strength Index', jp: '', tags: ['momentum'] },
+ { en: 'Typical Price', jp: '', tags: ['trend'] },
+ { en: 'VAP: Volume at Price', jp: '価格帯別出来高', tags: ['sp'] },
+ { en: 'VR: Volume Ratio', jp: 'ボリューム・レシオ', tags: ['momentum'], note: 'RSI の出来高版。' },
+ { en: 'Variable Moving Average', jp: '', tags: ['ma'] },
+ { en: 'Vertical Horizontal Filter', jp: '', tags: ['trend'] },
+ { en: 'Vortex', jp: '', tags: ['trend'] },
+ { en: 'Weighted Close', jp: '', tags: ['trend'] },
+ { en: 'Wilder Moving Average', jp: '', tags: ['ma'] },
+ { en: 'ZigZag', jp: 'ジグザグ', tags: ['trend'] },
+ { en: '', jp: 'ケルトナー・チャネル', tags: ['momentum'] },
+ { en: '', jp: 'コモディティー・チャネル', tags: ['momentum'] },
+ { en: '', jp: 'パフォーマンス', tags: ['trend'] },
+ { en: '', jp: 'パラボリック', tags: ['trend'] },
+ { en: 'WMA: Weighted Moving Average', jp: '加重移動平均', tags: ['ma'] },
+ { en: 'SMA: Simple Moving Average', jp: '単純移動平均', tags: ['ma'] },
+ { en: 'EMA: Exponential Moving Average', jp: '指数平滑移動平均', tags: ['ma'], url: '/p/67gvggc/' },
+ { en: '', jp: '究極のオシレーター', tags: ['ma'] },
+ ];
+ let html = '';
+ for (let i = 0; i &lt; arr.length; ++i) {
+ const e = arr[i];
+ html += '&lt;tr>';
+ if (e.url) {
+ html += '&lt;td>&lt;a href="' + e.url + '">' + e.en + '&lt;/td>';
+ html += '&lt;td>&lt;a href="' + e.url + '">' + e.jp + '&lt;/td>';
+ } else {
+ html += '&lt;td>' + e.en + '&lt;/td>';
+ html += '&lt;td>' + e.jp + '&lt;/td>';
+ }
+ html += '&lt;td style="text-align:center">' + (e.tags.indexOf('momentum') != -1 ? 'モ' : '-') + '&lt;/td>';
+ html += '&lt;td style="text-align:center">' + (e.tags.indexOf('trend') != -1 ? 'ト' : '-') + '&lt;/td>';
+ html += '&lt;td style="text-align:center">' + (e.tags.indexOf('ma') != -1 ? '移' : '-') + '&lt;/td>';
+ html += '&lt;td style="text-align:center">' + (e.tags.indexOf('sp') != -1 ? '特' : '-') + '&lt;/td>';
+ html += '&lt;td style="text-align:center">' + (e.tags.indexOf('op') != -1 ? 'Op' : '-') + '&lt;/td>';
+ html += '&lt;td>' + (e.note ? e.note : '-') + '&lt;/td>';
+ html += '&lt;/tr>';
+ }
+ document.getElementById('placeholder').innerHTML += html;
+});
+&lt;/script>
+&lt;h2 id="テクニカル指標の種類">テクニカル指標の種類&lt;/h2>
+&lt;p>テクニカル指標は大きく分けて、トレンド系（順張り系）とオシレーター系（逆張り系）の指標に分けることができます。&lt;/p></description></item><item><title>テクニカル指標: Stochastic Oscillator（ストキャスティクス）</title><link>https://toushi.maku.blog/p/ibp4usz/</link><pubDate>Mon, 25 Sep 2023 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/ibp4usz/</guid><description>&lt;h2 id="ストキャスティクスの概要">ストキャスティクスの概要&lt;/h2>
+&lt;ul>
+&lt;li>オシレーター系のテクニカル指標。逆張りの指標。&lt;/li>
+&lt;li>&lt;strong>%K&lt;/strong> と &lt;strong>%D&lt;/strong> の 2 つの線で構成されます。
+&lt;ul>
+&lt;li>&lt;strong>%K&lt;/strong> &amp;hellip; 終値の位置が一定の日数の価格レンジ（値動きした範囲）の中でどの位置にあるかを示す。&lt;/li>
+&lt;li>&lt;strong>%D&lt;/strong> &amp;hellip; %K を滑らかにしたもの。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="売買のタイミング">売買のタイミング&lt;/h2>
+&lt;ul>
+&lt;li>低い位置で &lt;strong>%K&lt;/strong> が &lt;strong>%D&lt;/strong> を上抜けたら買い。&lt;/li>
+&lt;li>&lt;strong>%K&lt;/strong> と &lt;strong>%D&lt;/strong> の 2 本のラインのクロスをサインにする（&lt;strong>ファストキャスティクス&lt;/strong>）&lt;/li>
+&lt;li>&lt;strong>%D&lt;/strong> と %D の移動平均 (SD) を使ってサインの出方を緩やかにする方法（&lt;strong>スローストキャスティクス&lt;/strong>）&lt;/li>
+&lt;/ul>
+&lt;h2 id="ストキャスティクスの考察">ストキャスティクスの考察&lt;/h2>
+&lt;ul>
+&lt;li>全体的に取引回数が多くなりがち。&lt;/li>
+&lt;li>勝率が20％など低くなりがち。
+&lt;ul>
+&lt;li>でもこれは、逆張りで相場の反転を狙う手法なので当然ともいえます。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>短期トレードになることが多いので、トレーリングストップとの併用はあまり有効ではない。&lt;/li>
+&lt;/ul></description></item><item><title>テクニカル指標: ATR (Average True Range)</title><link>https://toushi.maku.blog/p/tasaq7n/</link><pubDate>Wed, 30 Mar 2022 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/tasaq7n/</guid><description>&lt;h2 id="atr-の概要">ATR の概要&lt;/h2>
+
+&lt;table>
+ &lt;thead>
+ &lt;tr>&lt;th colspan="2">基本情報&lt;/th>&lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>&lt;th>英語名&lt;/th>&lt;td>&lt;b>ATR&lt;/b>: Average True Range&lt;/td>&lt;/tr>
+ &lt;tr>&lt;th>日本語名&lt;/th>&lt;td>アベレージ・トゥルー・レンジ&lt;/td>&lt;/tr>
+ &lt;tr>&lt;th>考案者&lt;/th>&lt;td>J・W・ワイルダー&lt;/td>&lt;/tr>
+ &lt;tr>&lt;th>考案年&lt;/th>&lt;td>─&lt;/td>&lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+
+
+&lt;p>ATR は、TR（True Range、真のレンジ）の平均をとったものです。
+日足の場合、14 日間の平均値を用いることが多いようです。&lt;/p>
+&lt;h2 id="計算方法">計算方法&lt;/h2>
+&lt;p>ATR は TR の平均値なので、TR を求めることができれば簡単に計算できます。
+TR は以下のレンジの中の最大値です。
+ひとことで言うと、通常の当日レンジを拡張して、前日の終値からの変化を考慮したものです。&lt;/p>
+&lt;ul>
+&lt;li>当日の高値 〜 当日の安値（これは通常のレンジ）&lt;/li>
+&lt;li>&lt;strong>前日の終値&lt;/strong> 〜 当日の高音&lt;/li>
+&lt;li>&lt;strong>前日の終値&lt;/strong> 〜 当日の安値&lt;/li>
+&lt;/ul>
+
+
+&lt;figure class="xImage">
+ &lt;img style="" width="" height="auto" src="../../p/tasaq7n/img-001.svg" alt="/p/tasaq7n/img-001.svg" />
+ &lt;figcaption>図: TR (True Range)&lt;/figcaption>
+&lt;/figure>
+
+&lt;p>通常の当日レンジ (High - Low) の計算では、その日にストップ高になったとしても、朝から天井に張り付いていたら、レンジは 0 になってしまいます。
+これはレンジとしておかしいということで、TR (True Range) という概念が生まれました。
+TR であれば、前日の終値からの変化を表現できるので、夜間取引のない株式などが朝にギャップアップして寄り付いた場合に、大きな変化が起こったものとして捉えることができます。&lt;/p>
+&lt;h2 id="おまけ">おまけ&lt;/h2>
+&lt;p>TradingView (Pine Script) で終値 ± ATR(10) の範囲を色付けするコードです。
+ローソク足がこの範囲をはみ出しているということは、最近の平均的な変動幅 (ATR) よりも大きく動いたことを示しています。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="" width="400" height="296" src="../../p/tasaq7n/img-002_hu12475759043663802361.png" alt="/p/tasaq7n/img-002.png" />
+ &lt;figcaption>図: Close ± ATR(10)&lt;/figcaption>
+&lt;/figure>
+
+&lt;pre tabindex="0">&lt;code>//@version=5
+indicator(&amp;#34;Example of ATR&amp;#34;, overlay=true)
+myAtr = ta.atr(10)
+plot1 = plot(close + myAtr, offset=1)
+plot2 = plot(close - myAtr, offset=1)
+fill(plot1, plot2, color=#0033ff66)
+&lt;/code>&lt;/pre>&lt;p>1 バーだけ右シフトしてプロットしていることに注意してください。
+シフトしないと、自分自身のバーが ATR の計算に反映されてしまいます。&lt;/p></description></item><item><title>テクニカル指標: Bollinger Bands（ボリンジャーバンド）</title><link>https://toushi.maku.blog/p/s6djqv3/</link><pubDate>Tue, 29 Dec 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/s6djqv3/</guid><description>&lt;h2 id="ボリンジャーバンドの概要">ボリンジャーバンドの概要&lt;/h2>
+
+&lt;table>
+ &lt;thead>
+ &lt;tr>&lt;th colspan="2">基本情報&lt;/th>&lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>&lt;th>英語名&lt;/th>&lt;td>&lt;b>BBands&lt;/b>: Bollinger Bands&lt;/td>&lt;/tr>
+ &lt;tr>&lt;th>日本語名&lt;/th>&lt;td>ボリンジャー・バンド&lt;/td>&lt;/tr>
+ &lt;tr>&lt;th>考案者&lt;/th>&lt;td>ジョン・A・ボリンジャー&lt;/td>&lt;/tr>
+ &lt;tr>&lt;th>考案年&lt;/th>&lt;td>1980年代&lt;/td>&lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+
+
+
+
+&lt;figure class="xImage">
+ &lt;img style="" width="500" height="328" src="../../p/s6djqv3/img-001_hu10217430265106275645.png" alt="/p/s6djqv3/img-001.png" />
+&lt;/figure>
+
+&lt;ul>
+&lt;li>移動平均に標準偏差のバンドを表示したもの&lt;/li>
+&lt;li>3 つのライン
+&lt;ul>
+&lt;li>ミドルバンド &amp;hellip; 20日移動平均&lt;/li>
+&lt;li>アッパーバンド (+2σ) &amp;hellip; 20日移動平均 + (20日標準偏差 x 2)&lt;/li>
+&lt;li>ローバンド (+2σ) &amp;hellip; 20日移動平均 - (20日標準偏差 x 2)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>統計的に次のような確率で価格がバンド内に収まると考えます
+&lt;ul>
+&lt;li>±1σ の範囲内に収まる確率 &amp;hellip; 68.3％&lt;/li>
+&lt;li>±2σ の範囲内に収まる確率 &amp;hellip; 95.4％&lt;/li>
+&lt;li>±3σ の範囲内に収まる確率 &amp;hellip; 99.7％&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>トレンドがある場合は、±2σ のラインに沿って価格が上昇・下落を続けることがよくあります（バンドウォーク）&lt;/li>
+&lt;/ul>
+&lt;h2 id="ボリンジャーバンドの利用例">ボリンジャーバンドの利用例&lt;/h2>
+&lt;ul>
+&lt;li>±2σ 超えでポジションをクローズする
+&lt;ul>
+&lt;li>MACD などでトレンドに乗ってポジションを取った後に、一部利食いのタイミングとして利用する。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>±2σ 超えで逆張りのポジションを取る
+&lt;ul>
+&lt;li>大きなトレンドが発生するときは、±2σ を超えても上昇・下落が続くので注意。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>バンド幅 (BBW) でトレンドの強さを判断する（他のシグナルのフィルタとして使う）
+&lt;ul>
+&lt;li>バンド幅が狭い時は、価格の変化が小さく、トレンドもほとんどないと判断し、他のテクニカル指標でシグナルが出ている場合でもノイズとして無視する。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>テクニカル指標: GMMA (Guppy Multi Moving Average)</title><link>https://toushi.maku.blog/p/92izet9/</link><pubDate>Sat, 23 May 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/92izet9/</guid><description>&lt;h2 id="gmma-の概要">GMMA の概要&lt;/h2>
+
+&lt;table>
+ &lt;thead>
+ &lt;tr>&lt;th colspan="2">基本情報&lt;/th>&lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>&lt;th>英語名&lt;/th>&lt;td>&lt;b>GMMA&lt;/b>: Guppy Multi Moving Average&lt;/td>&lt;/tr>
+ &lt;tr>&lt;th>日本語名&lt;/th>&lt;td>複合型移動平均線&lt;/td>&lt;/tr>
+ &lt;tr>&lt;th>考案者&lt;/th>&lt;td>Daryl Guppy（ダリル・グッピー） ... オーストラリアのテクニカル・アナリスト）&lt;/td>&lt;/tr>
+ &lt;tr>&lt;th>考案年&lt;/th>&lt;td>─&lt;/td>&lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+
+
+&lt;ul>
+&lt;li>12本の EMA（指数平滑移動平均線）の関係から相場の状況を判断する
+&lt;ul>
+&lt;li>6本の短期線 &amp;hellip; 3日・5日・8日・10日・12日・15日&lt;/li>
+&lt;li>6本の長期線 &amp;hellip; 30日・35日・40日・45日・50日・60日&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>利点
+&lt;ul>
+&lt;li>見た目でトレンドを把握しやすい&lt;/li>
+&lt;li>押し目の判断にも使えるし、トレンド転換の判断にも使える&lt;/li>
+&lt;li>ダマシが比較的少ない&lt;/li>
+&lt;li>移動平均線の GC/DC よりも早めにトレンド転換が示唆される&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="仕掛けのポイント">仕掛けのポイント&lt;/h2>
+&lt;ul>
+&lt;li>トレンド転換
+&lt;ul>
+&lt;li>短期線6本が長期線6本をすべて突き抜けたとき&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>押し目買い・戻り売り
+&lt;ul>
+&lt;li>短期線6本が長期戦6本に絡んだが、元の方向へ戻ったとき&lt;/li>
+&lt;li>短期戦の方向がすべて下向きになったが、すべて上向きに戻ったとき&lt;/li>
+&lt;li>ただし、いずれも長期線が規則正しく同じ方向に並んでいるときのみ&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="その他">その他&lt;/h2>
+&lt;ul>
+&lt;li>GMMA の考案者である Guppy 氏は、ローソク足を表示せず、12 本の EMA だけを表示してトレードしているらしい。&lt;/li>
+&lt;li>Daryl Guppy 氏の Web サイト: &lt;a href="https://www.guppytraders.com">guppytraders.com&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>テクニカル指標: モメンタム / RoC (Rate of Change)</title><link>https://toushi.maku.blog/p/q7gow5c/</link><pubDate>Fri, 10 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/q7gow5c/</guid><description>&lt;h2 id="モメンタム--roc-の概要">モメンタム / RoC の概要&lt;/h2>
+&lt;h3 id="概要">概要&lt;/h3>
+&lt;p>モメンタム（あるいは RoC: Rate of Change）はとてもシンプルな指標で、 &lt;strong>n 日前の終値に対して、最新の終値が何％の値段になっているか&lt;/strong> を示します（つまり、騰落率です）。
+n 日前と価格が同じであれば 100 ですし、50％ 上がっていれば 150 という値になります。
+100％ のラインを 100 と表示するか、あるいは 0 や 1 と表示するかは、チャートソフトによって異なります。&lt;/p>
+&lt;h3 id="シグナルライン">シグナルライン&lt;/h3>
+&lt;p>モメンタムのラインと同時に、その移動平均であるシグナルラインを表示することもあります。
+シグナルラインは次のように利用できます。&lt;/p>
+&lt;ul>
+&lt;li>シグナルラインの傾きでトレンドの方向を探る&lt;/li>
+&lt;li>モメンタムラインとシグナルラインの GC（ゴールデンクロス）と DC（デッドクロス）を売買タイミングとする&lt;/li>
+&lt;/ul>
+&lt;h2 id="モメンタム--roc-の計算式">モメンタム / RoC の計算式&lt;/h2>
+&lt;p>文脈によって、モメンタムは「騰落率・変化率」ではなく、単純に n 本前の足との「価格差」を示す場合があります。
+一方、RoC (Rate of Change) と呼ぶ場合は必ず「騰落率」を示しています。
+ここでは、モメンタムと RoC を区別して考えることにします。&lt;/p>
+&lt;ul>
+&lt;li>Price &amp;hellip; 現在の価格&lt;/li>
+&lt;li>Price(n) &amp;hellip; n 本前の価格&lt;/li>
+&lt;/ul>
+&lt;p>とすると、モメンタムと RoC は次のように計算できます。&lt;/p>
+&lt;ul>
+&lt;li>モメンタム = Price - Price(n)&lt;/li>
+&lt;li>RoC = Price / Price(n) * 100&lt;/li>
+&lt;/ul>
+&lt;h2 id="表示例">表示例&lt;/h2>
+&lt;h3 id="sbi証券株アプリ">SBI証券「株アプリ」&lt;/h3>
+
+
+&lt;figure class="xImage">
+ &lt;img style="" width="400" height="496" src="../../p/q7gow5c/img-sbi_hu8423875122864133781.jpg" alt="/p/q7gow5c/img-sbi.jpg" />
+&lt;/figure>
+
+&lt;p>SBI証券「株アプリ」のモメンタムは、期間、シグナルともに 1～255 の範囲で設定できます。
+このアプリではモメンタムは 100 を中心に上下しているので、価格差ではなく RoC（騰落率）を表していますね。&lt;/p></description></item><item><title>テクニカル指標: Elder Impulse System</title><link>https://toushi.maku.blog/p/yaeh8wr/</link><pubDate>Tue, 14 Jan 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/yaeh8wr/</guid><description>&lt;h2 id="elder-impulse-system-の概要">Elder Impulse System の概要&lt;/h2>
+&lt;ul>
+&lt;li>トレンドの強さを分かりやすく表示してくれる&lt;/li>
+&lt;li>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4939103285?tag=maku04-22">『投資苑』&lt;/a>
+ の著者であるアレキサンダー・エルダーが開発&lt;/li>
+&lt;li>13 期間の EMA でトレンドの判断、MACD ヒストグラムでモメンタム（トレンドの強さ）を判断する&lt;/li>
+&lt;li>米国ではメジャーなインジケーター&lt;/li>
+&lt;/ul>
+&lt;h2 id="elder-impulse-system-のトレンド判断方法">Elder Impulse System のトレンド判断方法&lt;/h2>
+&lt;ul>
+&lt;li>緑色のバー（ブル相場: 強気トレンド）
+&lt;ul>
+&lt;li>EMA(13) ＞ 前区間のEMA(13) かつ MACDヒストグラム ＞ 前区間のMACDヒストグラム&lt;/li>
+&lt;li>「買いエントリー」してもよい&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>赤色のバー（ベア相場: 弱気トレンド）
+&lt;ul>
+&lt;li>EMA(13) ＜ 前区間のEMA(13) かつ MACDヒストグラム ＜ 前区間のMACDヒストグラム&lt;/li>
+&lt;li>「売りエントリー」してもよい&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>青色のバー（もみ合い）
+&lt;ul>
+&lt;li>上記のいずれでもない場合（EMA と MACD の方向が逆）&lt;/li>
+&lt;li>「様子見」&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>例えば、緑色のバーになるときに「買いエントリー」し、緑色以外のバーに変わったときに「手仕舞い」します。&lt;/p>
+&lt;h2 id="参考">参考&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://www.mql5.com/ja/code/685">Elder Impulse System - MetaTrader 5のためのインディケーター - MQL5&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>テクニカル指標: MACD (Moving Average Convergence / Divergence)</title><link>https://toushi.maku.blog/p/hj7nm4h/</link><pubDate>Tue, 14 Jan 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/hj7nm4h/</guid><description>&lt;h2 id="macd-の概要">MACD の概要&lt;/h2>
+
+&lt;table>
+ &lt;thead>
+ &lt;tr>&lt;th colspan="2">基本情報&lt;/th>&lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>&lt;th>英語名&lt;/th>&lt;td>&lt;b>MACD&lt;/b>: Moving Average Convergence / Divergence&lt;/td>&lt;/tr>
+ &lt;tr>&lt;th>日本語名&lt;/th>&lt;td>移動平均収束拡散法&lt;/td>&lt;/tr>
+ &lt;tr>&lt;th>考案者&lt;/th>&lt;td>ジェラルド・アペル (Gerald Appel)&lt;/td>&lt;/tr>
+ &lt;tr>&lt;th>考案年&lt;/th>&lt;td>1970年代&lt;/td>&lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+
+
+
+
+&lt;figure class="xImage">
+ &lt;img style="" width="500" height="359" src="../../p/hj7nm4h/img-001_hu1432838466696816576.png" alt="/p/hj7nm4h/img-001.png" />
+&lt;/figure>
+
+&lt;ul>
+&lt;li>ラインは 2 つで、EMA（指数平滑移動平均）を使う
+&lt;ul>
+&lt;li>&lt;b>MACD ライン&lt;/b>
+: 短期と長期の EMA の乖離（12日間EMA - 26日間EMA）&lt;/li>
+&lt;li>&lt;b>シグナルライン&lt;/b>
+: MACD ラインの移動平均（MACDの9日間EMA）&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>移動平均線をベースにした順張り（トレンド）系のテクニカル指標&lt;/li>
+&lt;li>移動平均線で生じるダマシやサインの遅れをある程度解決できる&lt;/li>
+&lt;li>&lt;strong>トレンド追いかけつつ、転換点を早めに見つけられる&lt;/strong> よう工夫している&lt;/li>
+&lt;li>&lt;strong>デイトレードで威力を発揮&lt;/strong> しやすい&lt;/li>
+&lt;/ul>
+&lt;h2 id="macd-の利用例">MACD の利用例&lt;/h2>
+&lt;h3 id="シグナル売買サイン">シグナル／売買サイン&lt;/h3>
+&lt;ul>
+&lt;li>MACD ラインがシグナルラインを上に突き抜けると上昇トレンド、下に突き抜けると下落トレンド&lt;/li>
+&lt;li>2 つのラインが同じ方向を向いていればシグナルが強い&lt;/li>
+&lt;/ul>
+&lt;h3 id="使用上のコツ">使用上のコツ&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>ボラティリティ（株価の振幅）が大きく、トレンドの発生しやすい銘柄&lt;/strong> に使うと効果を発揮しやすい&lt;/li>
+&lt;li>サインが出た後、2、3 回に分けて仕掛け・手仕舞いを行うとうまくいく傾向がある&lt;/li>
+&lt;/ul>
+&lt;h3 id="カスタマイズ">カスタマイズ&lt;/h3>
+&lt;ul>
+&lt;li>シグナルを作るときの移動平均の期間を調整する（ダマシの軽減）&lt;/li>
+&lt;li>MACD とシグナルの変動幅が小さいときはトレードを控える&lt;/li>
+&lt;/ul>
+&lt;h3 id="売買ポイント">売買ポイント&lt;/h3>
+&lt;ul>
+&lt;li>MACD がシグナル（移動平均）を上抜けたら「買い」&lt;/li>
+&lt;li>MACD がシグナル（移動平均）を下抜けたら「売り」&lt;/li>
+&lt;/ul>
+&lt;p>MACD のシグナル（移動平均）が 0 クロスしたときに、MACD のラインがかなり上（下）にある場合、そのままトレンドが続く傾向があります。&lt;/p>
+&lt;p>プラス圏で MACD のシグナルに対するデッドクロスが発生したときは、利確のタイミングと捉えるとよいです。&lt;/p>
+&lt;h2 id="macd-の計算方法">MACD の計算方法&lt;/h2>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">MACD = 短期の平滑移動平均 - 長期の平滑移動平均
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 平滑移動平均 = 前日EMA + α(終値 - 前日EMA)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> α = 2 / (期間日数 + 1)&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;h3 id="一般的なパラメーター">一般的なパラメーター&lt;/h3>
+&lt;ul>
+&lt;li>MACD ライン用の短期 EMA 期間 = &lt;strong>12&lt;/strong>&lt;/li>
+&lt;li>MACD ライン用の長期 EMA 期間 = &lt;strong>26&lt;/strong>&lt;/li>
+&lt;li>シグナルラインの移動平均期間 = &lt;strong>9&lt;/strong>&lt;/li>
+&lt;/ul></description></item><item><title>テクニカル指標: DMI（方向性指数）</title><link>https://toushi.maku.blog/p/9ju3pvu/</link><pubDate>Fri, 09 Aug 2019 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/9ju3pvu/</guid><description>&lt;h2 id="dmi-の概要">DMI の概要&lt;/h2>
+
+&lt;table>
+ &lt;thead>
+ &lt;tr>&lt;th colspan="2">基本情報&lt;/th>&lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>&lt;th>英語名&lt;/th>&lt;td>&lt;b>DMI&lt;/b>: Directional Movement Index&lt;/td>&lt;/tr>
+ &lt;tr>&lt;th>日本語名&lt;/th>&lt;td>方向性指数&lt;/td>&lt;/tr>
+ &lt;tr>&lt;th>考案者&lt;/th>&lt;td>J・W・ワイルダー&lt;/td>&lt;/tr>
+ &lt;tr>&lt;th>考案年&lt;/th>&lt;td>─&lt;/td>&lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+
+
+&lt;ul>
+&lt;li>&lt;strong>+DI&lt;/strong> が価格の上昇力を示す&lt;/li>
+&lt;li>&lt;strong>-DI&lt;/strong> が価格の下落力を示す&lt;/li>
+&lt;li>&lt;strong>ADX&lt;/strong> がトレンドの強さを示す&lt;/li>
+&lt;/ul>
+&lt;h2 id="dmi-の買いシグナル売りシグナル">DMI の買いシグナル／売りシグナル&lt;/h2>
+&lt;ul>
+&lt;li>買い: +DI が -DI を上抜け&lt;/li>
+&lt;li>売り: +DI が -DI を下抜け&lt;/li>
+&lt;/ul>
+&lt;p>+DI と -DI のクロスはトレンドの転換を示しているため、+DI が -DI を上抜けたときが買いのタイミング、+DI が -DI を割り込んだときが売りのタイミングです。&lt;/p>
+&lt;h2 id="dmi-による上昇トレンド下降トレンドの判断">DMI による上昇トレンド／下降トレンドの判断&lt;/h2>
+&lt;ul>
+&lt;li>上昇トレンド: +DI ＞ -DI&lt;/li>
+&lt;li>下降トレンド: +DI ＜ -DI&lt;/li>
+&lt;/ul>
+&lt;h2 id="dmi-によるトレンドの強さの判断">DMI によるトレンドの強さの判断&lt;/h2>
+&lt;p>ADX が上昇しているときはトレンドが強く、ADX が低く推移しているときはトレンドが弱く、持ち合い相場であることを示します。
+つまり、ADX を見ることで、&lt;strong>トレンド相場なのか、レンジ相場なのかの見極め&lt;/strong> をしたトレードを行うことができます。&lt;/p>
+&lt;h2 id="関連指標">関連指標&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="../../p/tasaq7n">ATR: Average True Range&lt;/a>
+&lt;ul>
+&lt;li>同じく、J・W・ワイルダー氏の考案。TR (True Range) の概念を使うことが DMI と ATR で共通しています。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>テクニカル指標: ローソク足パターン</title><link>https://toushi.maku.blog/p/qanid5r/</link><pubDate>Sun, 04 Mar 2018 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/qanid5r/</guid><description>&lt;style>
+ .local-table { width: 100%; table-layout: fixed; }
+ .local-table b { font-size: larger; }
+ .local-table td { padding-bottom: 1em; border: none; vertical-align: top; }
+ .local-table img { padding-top: 0.3em; width: 100%; min-width: 100px; }
+&lt;/style>
+&lt;h2 id="はらみ足-inside-bar抱き線-engulfing">はらみ足 (Inside bar)、抱き線 (Engulfing)&lt;/h2>
+&lt;table class="local-table">
+ &lt;tr>
+ &lt;td>&lt;img src="inside-bar-all.svg">&lt;/td>
+ &lt;td>&lt;b>はらみ足 (Inside bar)&lt;/b>&lt;br>
+ 前の足の実体の範囲（始値〜終値）に、次の足の実体（始値〜終値）がすっぽりと収まるパターンです。
+ &lt;strong>相場の転換時&lt;/strong>に現れることが多いと言われていますが、頻繁に現れるパターンであり、これだけで相場転換を判断するのは危険です。
+ 2本のローソク足の組み合わせによって、次のように細かく呼び分けることもあります。
+ 1) 陰の陽はらみ、2) 陽の陰はらみ、3) 陽の陽はらみ、4) 陰の陰はらみ。
+ 5分足などの短いインターバルのチャートでは、陽の陽はらみや、陰の陰はらみはほとんど出現しません（前の足の終値と、次の足の始値が飛ぶ形になるため）。
+ &lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;img src="engulfing.svg">&lt;/td>
+ &lt;td>&lt;b>抱き線、つつみ線 (Bullish engulfing)&lt;/b>&lt;br>
+ はらみ足の逆のパターンで、後ろの足の実体部分が、前の足の実体部分をすっぽり囲い込む形です。
+ 陰線をすっぽりと囲む陽線が出た場合は、Bullish engulfing（強気の包み込み）といい、&lt;strong>上昇相場への転換サイン&lt;/strong>となります。
+ &lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;img src="outside-bar.svg">&lt;/td>
+ &lt;td>&lt;b>Outside bar パターン&lt;/b>&lt;br>
+ 抱き線の発展形で、最後の足の実体部分が、前の2つの足の実体を両方ともすっぽりと囲む形です。
+ 図のような形になると、&lt;strong>上昇への転換&lt;/strong>を表します。
+ 5分足などの短いインターバルのチャートでは、このように複数の足の関係を見た方が、だましを排除しやすくなるでしょう。
+ &lt;/td>
+ &lt;/tr>
+&lt;/table>
+&lt;h2 id="三川">三川&lt;/h2>
+&lt;p>三川はローソク足3本の組み合わせのパターンです。&lt;/p>
+&lt;table class="local-table">
+ &lt;tr>
+ &lt;td>&lt;img src="morning-star.svg">&lt;/td>
+ &lt;td>&lt;b>三川明けの明星 (Morning star)&lt;/b>&lt;br>
+ &lt;strong>底入れ&lt;/strong>を示すサインです。
+ &lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;img src="evening-star.svg">&lt;/td>
+ &lt;td>&lt;b>三川宵の明星 (Evening star)&lt;/b>&lt;br>
+ &lt;strong>天井&lt;/strong>を示すサインです。
+ &lt;/td>
+ &lt;/tr>
+&lt;/table>
+&lt;h2 id="三兵">三兵&lt;/h2>
+&lt;p>三兵はローソク足3本の組み合わせのパターンです。&lt;/p></description></item><item><title>テクニカル指標: RSI（相対力指数）</title><link>https://toushi.maku.blog/p/trghokn/</link><pubDate>Sun, 27 Mar 2016 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/trghokn/</guid><description>&lt;h2 id="rsi-の概要">RSI の概要&lt;/h2>
+
+&lt;table>
+ &lt;thead>
+ &lt;tr>&lt;th colspan="2">基本情報&lt;/th>&lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>&lt;th>英語名&lt;/th>&lt;td>&lt;b>RSI&lt;/b>: Relative Strength Index&lt;/td>&lt;/tr>
+ &lt;tr>&lt;th>日本語名&lt;/th>&lt;td>相対力指数&lt;/td>&lt;/tr>
+ &lt;tr>&lt;th>考案者&lt;/th>&lt;td>J・ウェルズ・ワイルダー・ジュニア (J. Welles Wilder)&lt;/td>&lt;/tr>
+ &lt;tr>&lt;th>考案年&lt;/th>&lt;td>1970年代&lt;/td>&lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+
+
+
+
+&lt;figure class="xImage">
+ &lt;img style="" width="500" height="329" src="../../p/trghokn/img-001_hu6402731347668193506.png" alt="/p/trghokn/img-001.png" />
+&lt;/figure>
+
+&lt;ul>
+&lt;li>モメンタム型オシレータ&lt;/li>
+&lt;li>RCI やストキャスティクスと同じ &lt;strong>逆張り指標&lt;/strong> の代表格で、&lt;strong>「買われ過ぎ」や「売られ過ぎ」&lt;/strong> を知るための指数&lt;/li>
+&lt;li>ある期間内（通常 14 日間）の価格の変化をベースに判断を行う&lt;/li>
+&lt;li>RSI の値の範囲は、0%（めちゃ売られ過ぎ）～ 100%（めちゃ買われ過ぎ）になる&lt;/li>
+&lt;li>RSI はトレンド発生中は機能しにくい&lt;/li>
+&lt;/ul>
+&lt;h2 id="rsi-の利用例">RSI の利用例&lt;/h2>
+&lt;ul>
+&lt;li>RSI が 70% 以上で「買われ過ぎ」と判断して逆張りする&lt;/li>
+&lt;li>RSI が 30% 以下で「売られ過ぎ」と判断して逆張りする&lt;/li>
+&lt;li>RSI 50% を下から上に突き抜けたら「買いの勢いが強い」と判断して順張りする&lt;/li>
+&lt;li>RSI 50% を上から下に突き抜けたら「売りの勢いが強い」と判断して順張りする&lt;/li>
+&lt;/ul>
+&lt;h2 id="rsi-の計算式">RSI の計算式&lt;/h2>
+&lt;p>RSI は「平均上昇幅」と「平均下降幅」をもとに、下記の計算式で求められます。
+ここでは、計算区間を一般的な 14 日とします。&lt;/p>
+&lt;p>$$
+RSI = \frac{AvgGain}{AvgGain + AvgLoss} \times 100
+$$&lt;/p>
+&lt;ul>
+&lt;li>\( AvgGain \) &amp;hellip; 14 日間の平均上昇幅&lt;/li>
+&lt;li>\( AvgLoss \) &amp;hellip; 14 日間の平均下降幅&lt;/li>
+&lt;/ul>
+&lt;p>「上昇幅」というのは、前日の終値から、当日の終値がいくら上昇したかを示します。
+逆に価格が下がっている場合は「下降幅」として扱いますが、いずれも絶対値（0 以上の値）で扱います。
+つまり RSI は、一定期間内の日々の価格変化のうち、&lt;strong>上昇の割合が何％であったか&lt;/strong> を計算しています。
+14 日前からの終値の情報があれば計算できるので、とってもシンプルです。&lt;/p></description></item><item><title>テクニカル指標: EMA（指数平滑移動平均）</title><link>https://toushi.maku.blog/p/67gvggc/</link><pubDate>Wed, 10 Jun 2015 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/67gvggc/</guid><description>&lt;h2 id="ema-の特徴">EMA の特徴&lt;/h2>
+&lt;p>EMA は通常の &lt;strong>SMA（単純移動平均）と比べ、シグナルの発生が早くなる&lt;/strong> ことが特徴的です。
+日本の投資家は SMA を使用することが多いのですが、海外の投資家は EMA を好む傾向があるようです。
+EMA の計算では、過去のデータをある時点で突然切り捨てるということはなく、過去に遡るに従い、合算するときの重みを指数関数的に減少させていきます。
+EMA の移動平均線は、 &lt;strong>SMA の移動平均線に比べて滑らかになる&lt;/strong> 傾向があります。
+MACD の計算にも EMA が使用されています。&lt;/p>
+&lt;h2 id="ema-をうまく使うコツ">EMA をうまく使うコツ&lt;/h2>
+&lt;p>EMA や SMA などの移動平均線のゴールデンクロス、デッドクロスなどをシグナルに利用したトレードは、レンジ相場では儲かりません。
+レンジ相場なのかトレンドが発生しているのかを先に判断し、レンジ相場のときはボリンジャーバンドによる逆張りエントリ、トレンドが発生しているときは移動平均線による順張りエントリなど、使い分けが必要です。&lt;/p></description></item></channel></rss>

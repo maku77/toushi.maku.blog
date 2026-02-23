@@ -1,4 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MetaTrader/MQL: スクリプト on まくまく投資ノート</title><link>https://toushi.maku.blog/p/jszsprh/</link><description>Recent content in MetaTrader/MQL: スクリプト on まくまく投資ノート</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Sun, 16 Jul 2023 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/p/jszsprh/index.xml" rel="self" type="application/rss+xml"/><item><title>MetaTrader/MQL: スクリプトで使用できるイベント</title><link>https://toushi.maku.blog/p/fvh3d6r/</link><pubDate>Sun, 16 Jul 2023 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/fvh3d6r/</guid><description>MetaTrader のスクリプトでハンドル可能なイベントは、Start イベントのみです。
-OnStart 関数 int OnStart(void); スクリプトの OnStart() 関数は、Start イベントが発生したときに呼び出されます。 戻り値が void のバージョンもありますが、互換性のために残されているだけなので、int を返すバージョンを使ってください。
-スクリプトは、チャートにアタッチした瞬間にロードされ、実行されます。 そして、その処理が完了され次第、自動的にアンロードされます。
-☝️ インジケーターでは OnInit() や OnDeinit() は使えない カスタムインジケーターや EA では、OnInit() や OnDeinit() が呼び出されるようになっていますが、スクリプトではこれらの関数は呼び出されません。 これらのイベントハンドラーは、チャートの内容（シンボルや時間足）が変更されたときのために用意されています。 それが必要なのは、カスタムインジケーターや EA のみです。 スクリプトには OnStart() だけあれば十分なのです。 （参考）アプリの種類ごとに扱えるイベントハンドラーの一覧 （参考）カスタムインジケーターで使用できるイベント （参考）EA で使用できるイベント</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MetaTrader/MQL: スクリプト on まくまく投資ノート</title><link>https://toushi.maku.blog/p/jszsprh/</link><description>Recent content in MetaTrader/MQL: スクリプト on まくまく投資ノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Sun, 16 Jul 2023 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/p/jszsprh/index.xml" rel="self" type="application/rss+xml"/><item><title>MetaTrader/MQL: スクリプトで使用できるイベント</title><link>https://toushi.maku.blog/p/fvh3d6r/</link><pubDate>Sun, 16 Jul 2023 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/fvh3d6r/</guid><description>&lt;p>MetaTrader のスクリプトでハンドル可能なイベントは、&lt;strong>Start&lt;/strong> イベントのみです。&lt;/p>
+&lt;h2 id="onstart-関数">OnStart 関数&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">OnStart&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">void&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>スクリプトの &lt;a href="https://www.mql5.com/en/docs/event_handlers/onstart">OnStart()&lt;/a> 関数は、&lt;strong>Start&lt;/strong> イベントが発生したときに呼び出されます。
+戻り値が &lt;code>void&lt;/code> のバージョンもありますが、互換性のために残されているだけなので、&lt;code>int&lt;/code> を返すバージョンを使ってください。&lt;/p>
+&lt;p>スクリプトは、チャートにアタッチした瞬間にロードされ、実行されます。
+そして、その処理が完了され次第、自動的にアンロードされます。&lt;/p>
+&lt;div class="xNote">
+ &lt;span class="xNote_title">☝️ インジケーターでは OnInit() や OnDeinit() は使えない&lt;/span>
+ &lt;span class="xNote_body">カスタムインジケーターや EA では、&lt;code>OnInit()&lt;/code> や &lt;code>OnDeinit()&lt;/code> が呼び出されるようになっていますが、スクリプトではこれらの関数は呼び出されません。
+これらのイベントハンドラーは、チャートの内容（シンボルや時間足）が変更されたときのために用意されています。
+それが必要なのは、カスタムインジケーターや EA のみです。
+スクリプトには &lt;code>OnStart()&lt;/code> だけあれば十分なのです。&lt;/span>
+&lt;/div>
+&lt;ul>
+&lt;li>（参考）&lt;a href="../../p/um6bbep/">アプリの種類ごとに扱えるイベントハンドラーの一覧&lt;/a>&lt;/li>
+&lt;li>（参考）&lt;a href="../../p/ugs5fq2/">カスタムインジケーターで使用できるイベント&lt;/a>&lt;/li>
+&lt;li>（参考）&lt;a href="../../p/aamwkiu/">EA で使用できるイベント&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>

@@ -1,13 +1,217 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>トレステ画面の操作 on まくまく投資ノート</title><link>https://toushi.maku.blog/p/3nzakv6/</link><description>Recent content in トレステ画面の操作 on まくまく投資ノート</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Fri, 10 Apr 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/p/3nzakv6/index.xml" rel="self" type="application/rss+xml"/><item><title>トレステの操作: トレーリングストップ注文を出す</title><link>https://toushi.maku.blog/p/cw8t4eo/</link><pubDate>Sun, 03 May 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/cw8t4eo/</guid><description>トレステのオーダーバーから、トレーリングストップ注文を出すことができます。 オーダーバーが表示されていない場合は、下記のいずれかの方法で表示できます。
-メニューから 表示 → オーダーバー を選択 Ctrl + Shift + O （ホットキー入力） .ob &amp;lt;Enter&amp;gt; （コマンド入力） 保有している現物株をトレーリングストップで売るには以下のようにします。
-注文種類で 逆指値（成行） を選択する トレーリングストップ注文を出すには、逆指値（成行）を選択しておく必要があります。他の注文種類を選択すると、次の 詳細 ボタンが表示されません。 詳細 ボタンを押して、 トレーリングストップ にチェックを入れる。 いくら下落したら売るかは、パーセンテージ での指定と、 価格 (Pts) での指定を選ぶことができます。ここでは、5％の下落で売るように設定しています。 現物売り ボタンを押して注文を発行します。 デフォルトでは下記のような注文確認画面が表示されるので、ここで はい ボタンを押せば実際に注文が発行されます。 トレーリングストップが正しく設定されているかをここで確認しましょう。</description></item><item><title>トレステの便利なショートカットキーとコマンド</title><link>https://toushi.maku.blog/p/2mx9jt4/</link><pubDate>Fri, 17 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/2mx9jt4/</guid><description>トレステ内のウィンドウは、ショートカットキーやコマンドで操作することができます。 ショートカットキーは、Ctrl + N などでおなじみのいわゆるホットキーですが、トレステで特徴的なのは、コマンド (Command Line) です。
-コマンドは、 ドット (.) で始まるコマンド名 として定義されており、キーボードからコマンドを入力して Enter キーを押すことで、アクティブなウィンドウを素早く操作することができるようになっています。 例えば、チャート分析ウィンドウをアクティブにした状態で、.iat と入力して Enter キーを押すと、「分析テクニックの挿入」のダイアログを素早く開くことができます。
-全般的なショートカットキー＆コマンド ショートカットキー、あるいはコマンドのどちらかを覚えておけば OK です。
-ショートカットキー コマンド 説明 Alt + → / Ctrl + Tab 次のウィンドウをアクティブにする Alt + ← / Ctrl + Shift + Tab 前のウィンドウをアクティブにする Ctrl + O 「ワークスペース」を開く Ctrl + W 「ワークスペース」を閉じる Ctrl + P .p .print チャートの印刷（チャートを開いている場合のみ） Ctrl + N .nw .newwindow 「トレーディングアプリ」の起動ダイアログを開く Alt + F4 「トレーディングアプリ」を閉じる Ctrl + Alt + C .</description></item><item><title>トレステのチャート分析の時間足（足種）をキーボードで切り替える</title><link>https://toushi.maku.blog/p/n8ju6gq/</link><pubDate>Sun, 12 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/n8ju6gq/</guid><description>コマンド入力ボックスについて トレステ画面でおもむろにキーボードで入力を始めると、トレステ画面の上部に表示されている コマンド入力ボックス （「銘柄コード/コマンドを入力」と表示されているところ）にそのテキストが表示されます。 ここに特定のコマンドを入力して Enter キーを押すと、キーボードだけで各種ウィンドウの表示を切り替えることができます。
-このメインツールバーが表示されていない場合は、メニューから次のようにたどって表示できます。
-表示 → ツールバー → メイン ただ、コマンド入力自体は、このメインツールバーが表示されていなくても可能です。 メインツールバーが表示されていなときにコマンド入力を始めると、独立した「コマンドライン」ダイアログが表示されて、そこに入力したテキストが表示されます。
-コマンド入力ボックスの右に表示されている矢印アイコンをクリックすると、過去に実行したコマンドの履歴からコマンドを実行することができます。
-チャート分析ウィンドウの表示を切り替える 時間足（足種）の切り替え チャート分析ウィンドウをアクティブにした状態で、次のようにキーボードから入力して Enter キーを押すことで、時間足を簡単に切り替えることができます。 大文字と小文字は区別されません。
-1 tick(s): 1 ティック足 10 tick(s): 10 ティック足 30 sec(s) / 30 second(s): 30 秒足 1 min(s) / 1 minute(s): 1 分足 5 min(s) / 5 minute(s): 5 分足 15 min(s) / 15 minute(s): 15 分足 60 min(s) / 60 minute(s): 1 時間足 240 min(s) / 240 minute(s): 4 時間足 .</description></item><item><title>トレステのチャート分析ウィンドウを素早く最大化する</title><link>https://toushi.maku.blog/p/9py9hqz/</link><pubDate>Fri, 10 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/9py9hqz/</guid><description>トレステのチャート分析ウィンドウは、
-チャート領域の任意の部分を 右ダブルクリック することで素早く最大化することができます。 元に戻すときも同様です。
-もちろん、タイトルバーのダブルクリックや、右上の最大化ボタンでも同じことができますが、上記の方法が最も素早く操作できると思います。</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>トレステ画面の操作 on まくまく投資ノート</title><link>https://toushi.maku.blog/p/3nzakv6/</link><description>Recent content in トレステ画面の操作 on まくまく投資ノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Sun, 03 May 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/p/3nzakv6/index.xml" rel="self" type="application/rss+xml"/><item><title>トレステの操作: トレーリングストップ注文を出す</title><link>https://toushi.maku.blog/p/cw8t4eo/</link><pubDate>Sun, 03 May 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/cw8t4eo/</guid><description>&lt;p>トレステのオーダーバーから、トレーリングストップ注文を出すことができます。
+オーダーバーが表示されていない場合は、下記のいずれかの方法で表示できます。&lt;/p>
+&lt;ul>
+&lt;li>メニューから &lt;code>表示&lt;/code> → &lt;code>オーダーバー&lt;/code> を選択&lt;/li>
+&lt;li>&lt;code>Ctrl + Shift + O&lt;/code> （ホットキー入力）&lt;/li>
+&lt;li>&lt;code>.ob &amp;lt;Enter&amp;gt;&lt;/code> （コマンド入力）&lt;/li>
+&lt;/ul>
+&lt;p>保有している現物株をトレーリングストップで売るには以下のようにします。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="1286" height="140" src="../../p/cw8t4eo/img-001.png" alt="/p/cw8t4eo/img-001.png" />
+&lt;/figure>
+
+&lt;ol>
+&lt;li>注文種類で &lt;strong>&lt;code>逆指値（成行）&lt;/code>&lt;/strong> を選択する
+&lt;ul>
+&lt;li>トレーリングストップ注文を出すには、逆指値（成行）を選択しておく必要があります。他の注文種類を選択すると、次の &lt;code>詳細&lt;/code> ボタンが表示されません。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>&lt;code>詳細&lt;/code>&lt;/strong> ボタンを押して、 &lt;strong>&lt;code>トレーリングストップ&lt;/code>&lt;/strong> にチェックを入れる。
+&lt;ul>
+&lt;li>いくら下落したら売るかは、&lt;strong>パーセンテージ&lt;/strong> での指定と、 &lt;strong>価格 (Pts)&lt;/strong> での指定を選ぶことができます。ここでは、5％の下落で売るように設定しています。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>&lt;code>現物売り&lt;/code>&lt;/strong> ボタンを押して注文を発行します。&lt;/li>
+&lt;/ol>
+&lt;p>デフォルトでは下記のような注文確認画面が表示されるので、ここで &lt;code>はい&lt;/code> ボタンを押せば実際に注文が発行されます。
+トレーリングストップが正しく設定されているかをここで確認しましょう。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="614" height="338" src="../../p/cw8t4eo/img-002.png" alt="/p/cw8t4eo/img-002.png" />
+&lt;/figure></description></item><item><title>トレステの便利なショートカットキーとコマンド</title><link>https://toushi.maku.blog/p/2mx9jt4/</link><pubDate>Fri, 17 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/2mx9jt4/</guid><description>&lt;p>トレステ内のウィンドウは、ショートカットキーやコマンドで操作することができます。
+ショートカットキーは、&lt;code>Ctrl + N&lt;/code> などでおなじみのいわゆるホットキーですが、トレステで特徴的なのは、コマンド (Command Line) です。&lt;/p>
+&lt;p>コマンドは、 &lt;strong>ドット (.) で始まるコマンド名&lt;/strong> として定義されており、キーボードからコマンドを入力して &lt;code>Enter&lt;/code> キーを押すことで、アクティブなウィンドウを素早く操作することができるようになっています。
+例えば、チャート分析ウィンドウをアクティブにした状態で、&lt;code>.iat&lt;/code> と入力して &lt;code>Enter&lt;/code> キーを押すと、「分析テクニックの挿入」のダイアログを素早く開くことができます。&lt;/p>
+&lt;h2 id="全般的なショートカットキーコマンド">全般的なショートカットキー＆コマンド&lt;/h2>
+&lt;p>ショートカットキー、あるいはコマンドのどちらかを覚えておけば OK です。&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>ショートカットキー&lt;/th>
+ &lt;th>コマンド&lt;/th>
+ &lt;th>説明&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>&lt;strong>&lt;code>Alt + →&lt;/code>&lt;/strong> / &lt;strong>&lt;code>Ctrl + Tab&lt;/code>&lt;/strong>&lt;/td>
+ &lt;td>&lt;/td>
+ &lt;td>次のウィンドウをアクティブにする&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;strong>&lt;code>Alt + ←&lt;/code>&lt;/strong> / &lt;strong>&lt;code>Ctrl + Shift + Tab&lt;/code>&lt;/strong>&lt;/td>
+ &lt;td>&lt;/td>
+ &lt;td>前のウィンドウをアクティブにする&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>Ctrl + O&lt;/code>&lt;/td>
+ &lt;td>&lt;/td>
+ &lt;td>「ワークスペース」を開く&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>Ctrl + W&lt;/code>&lt;/td>
+ &lt;td>&lt;/td>
+ &lt;td>「ワークスペース」を閉じる&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>Ctrl + P&lt;/code>&lt;/td>
+ &lt;td>&lt;code>.p&lt;/code> &lt;code>.print&lt;/code>&lt;/td>
+ &lt;td>チャートの印刷（チャートを開いている場合のみ）&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>Ctrl + N&lt;/code>&lt;/td>
+ &lt;td>&lt;code>.nw&lt;/code> &lt;code>.newwindow&lt;/code>&lt;/td>
+ &lt;td>「トレーディングアプリ」の起動ダイアログを開く&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;strong>&lt;code>Alt + F4&lt;/code>&lt;/strong>&lt;/td>
+ &lt;td>&lt;/td>
+ &lt;td>「トレーディングアプリ」を閉じる&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;strong>&lt;code>Ctrl + Alt + C&lt;/code>&lt;/strong>&lt;/td>
+ &lt;td>&lt;code>.nc&lt;/code> &lt;code>.newchart&lt;/code>&lt;/td>
+ &lt;td>「チャート分析」のウィンドウを開く&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>Ctrl + Alt + H&lt;/code>&lt;/td>
+ &lt;td>&lt;code>.nhl&lt;/code> &lt;code>.newhotlist&lt;/code>&lt;/td>
+ &lt;td>「ホットリスト」のウィンドウを開く&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>Ctrl + Alt + N&lt;/code>&lt;/td>
+ &lt;td>&lt;code>.nn&lt;/code> &lt;code>.newnews&lt;/code>&lt;/td>
+ &lt;td>「ニュース」のウィンドウを開く&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>Ctrl + Alt + Q&lt;/code>&lt;/td>
+ &lt;td>&lt;code>.nrs&lt;/code> &lt;code>.newraderscreen&lt;/code>&lt;/td>
+ &lt;td>「レーダースクリーン」のウィンドウを開く&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>Ctrl + Alt + T&lt;/code>&lt;/td>
+ &lt;td>&lt;code>.nts&lt;/code> &lt;code>.newtimeandsales&lt;/code>&lt;/td>
+ &lt;td>「タイム＆セールス」のウィンドウを開く&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>Ctrl + Alt + X&lt;/code>&lt;/td>
+ &lt;td>&lt;code>.nm&lt;/code> &lt;code>.newmatrix&lt;/code>&lt;/td>
+ &lt;td>「マトリックス」のウィンドウを開く&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;/td>
+ &lt;td>&lt;code>.nscn&lt;/code> &lt;code>.newscanner&lt;/code>&lt;/td>
+ &lt;td>「スキャナー」のウィンドウを開く&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;strong>&lt;code>Ctrl + Shift + C&lt;/code>&lt;/strong>&lt;/td>
+ &lt;td>&lt;/td>
+ &lt;td>ウィンドウをコピー&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;strong>&lt;code>Ctrl + Shift + V&lt;/code>&lt;/strong>&lt;/td>
+ &lt;td>&lt;/td>
+ &lt;td>ウィンドウを貼り付け&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>Ctrl + Shift + O&lt;/code>&lt;/td>
+ &lt;td>&lt;code>.ob&lt;/code> &lt;code>.orderbar&lt;/code>&lt;/td>
+ &lt;td>オーダーバーを表示・非表示&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h2 id="チャート分析関連のコマンド">チャート分析関連のコマンド&lt;/h2>
+&lt;h3 id="新しいチャート分析ウィンドウを開く-newchart">新しいチャート分析ウィンドウを開く (.NewChart)&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>.nc&lt;/code>&lt;/li>
+&lt;/ul>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">例: 新しいチャート分析を開き、トヨタ自動車の 5 分足チャートを 10 日間分表示&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">.nc ;; 7203-ts 5 min 10 days&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;h3 id="分析テクニックを挿入-insertanalysistechnique">分析テクニックを挿入 (.InsertAnalysisTechnique)&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>.iat&lt;/code> &amp;hellip; 分析テクニックの選択ダイアログを表示&lt;/li>
+&lt;li>&lt;code>.ist &amp;lt;分析テクニック名&amp;gt;&lt;/code> &amp;hellip; 指定した分析テクニックを挿入&lt;/li>
+&lt;/ul>
+&lt;h3 id="ストラテジーを挿入-insertanalysistechnique">ストラテジーを挿入 (.InsertAnalysisTechnique)&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>.ist&lt;/code> &amp;hellip; ストラテジーの選択ダイアログを表示&lt;/li>
+&lt;li>&lt;code>.ist &amp;lt;ストラテジー名&amp;gt;&lt;/code> &amp;hellip; 指定したストラテジーを挿入&lt;/li>
+&lt;/ul>
+&lt;h3 id="スクロールバーを表示非表示-scrollbar">スクロールバーを表示／非表示 (.ScrollBar)&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>.scroll&lt;/code> &amp;hellip; スクロールバーをトグル&lt;/li>
+&lt;/ul>
+&lt;h3 id="最新のバーの右側のマージンを指定-right">最新のバーの右側のマージンを指定 (.Right)&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>.bar 3&lt;/code> &amp;hellip; 最新バーの右側に 3 本分のマージンができるように表示位置を調整&lt;/li>
+&lt;/ul>
+&lt;p>このコマンドは、最新のバーが画面内に表示されているときしか効果がないようです。
+パラメータの数値を省略すると、0 が指定されたのと同じ意味になります（右マージンなし）。&lt;/p></description></item><item><title>トレステのチャート分析の時間足（足種）をキーボードで切り替える</title><link>https://toushi.maku.blog/p/n8ju6gq/</link><pubDate>Sun, 12 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/n8ju6gq/</guid><description>&lt;h2 id="コマンド入力ボックスについて">コマンド入力ボックスについて&lt;/h2>
+&lt;p>トレステ画面でおもむろにキーボードで入力を始めると、トレステ画面の上部に表示されている &lt;strong>コマンド入力ボックス&lt;/strong> （「銘柄コード/コマンドを入力」と表示されているところ）にそのテキストが表示されます。
+ここに特定のコマンドを入力して &lt;code>Enter&lt;/code> キーを押すと、キーボードだけで各種ウィンドウの表示を切り替えることができます。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="" width="600" height="229" src="../../p/n8ju6gq/img-001_hu1868326753463126669.png" alt="/p/n8ju6gq/img-001.png" />
+&lt;/figure>
+
+&lt;p>このメインツールバーが表示されていない場合は、メニューから次のようにたどって表示できます。&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>表示&lt;/code> → &lt;code>ツールバー&lt;/code> → &lt;code>メイン&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>ただ、コマンド入力自体は、このメインツールバーが表示されていなくても可能です。
+メインツールバーが表示されていなときにコマンド入力を始めると、独立した「コマンドライン」ダイアログが表示されて、そこに入力したテキストが表示されます。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="" width="600" height="331" src="../../p/n8ju6gq/img-002_hu7636561790585134751.png" alt="/p/n8ju6gq/img-002.png" />
+&lt;/figure>
+
+&lt;p>コマンド入力ボックスの右に表示されている矢印アイコンをクリックすると、過去に実行したコマンドの履歴からコマンドを実行することができます。&lt;/p>
+&lt;h2 id="チャート分析ウィンドウの表示を切り替える">チャート分析ウィンドウの表示を切り替える&lt;/h2>
+&lt;h3 id="時間足足種の切り替え">時間足（足種）の切り替え&lt;/h3>
+&lt;p>チャート分析ウィンドウをアクティブにした状態で、次のようにキーボードから入力して &lt;code>Enter&lt;/code> キーを押すことで、時間足を簡単に切り替えることができます。
+大文字と小文字は区別されません。&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>1 tick(s)&lt;/code>: 1 ティック足&lt;/li>
+&lt;li>&lt;code>10 tick(s)&lt;/code>: 10 ティック足&lt;/li>
+&lt;li>&lt;code>30 sec(s)&lt;/code> / &lt;code>30 second(s)&lt;/code>: 30 秒足&lt;/li>
+&lt;li>&lt;code>1 min(s)&lt;/code> / &lt;code>1 minute(s)&lt;/code>: 1 分足&lt;/li>
+&lt;li>&lt;code>5 min(s)&lt;/code> / &lt;code>5 minute(s)&lt;/code>: 5 分足&lt;/li>
+&lt;li>&lt;code>15 min(s)&lt;/code> / &lt;code>15 minute(s)&lt;/code>: 15 分足&lt;/li>
+&lt;li>&lt;code>60 min(s)&lt;/code> / &lt;code>60 minute(s)&lt;/code>: 1 時間足&lt;/li>
+&lt;li>&lt;code>240 min(s)&lt;/code> / &lt;code>240 minute(s)&lt;/code>: 4 時間足&lt;/li>
+&lt;li>&lt;code>.d&lt;/code> / &lt;code>.daily&lt;/code> / &lt;code>daily&lt;/code> : 日足&lt;/li>
+&lt;li>&lt;code>.w&lt;/code> / &lt;code>.weekly&lt;/code> / &lt;code>weekly&lt;/code> : 週足&lt;/li>
+&lt;li>&lt;code>.m&lt;/code> / &lt;code>.monthly&lt;/code> / &lt;code>montly&lt;/code> : 月足&lt;/li>
+&lt;/ul>
+&lt;p>&lt;code>.hourly&lt;/code> というコマンドはないので、1 時間足を表示したい場合は &lt;code>60 min&lt;/code> と入力しなければいけないことに気をつけてください。&lt;/p></description></item><item><title>トレステのチャート分析ウィンドウを素早く最大化する</title><link>https://toushi.maku.blog/p/9py9hqz/</link><pubDate>Fri, 10 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/9py9hqz/</guid><description>&lt;p>トレステのチャート分析ウィンドウは、&lt;/p>
+&lt;ul>
+&lt;li>チャート領域の任意の部分を &lt;strong>右ダブルクリック&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;p>することで素早く最大化することができます。
+元に戻すときも同様です。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="" width="600" height="459" src="../../p/9py9hqz/img-001_hu17955613636999614674.png" alt="/p/9py9hqz/img-001.png" />
+&lt;/figure>
+
+&lt;p>もちろん、タイトルバーのダブルクリックや、右上の最大化ボタンでも同じことができますが、上記の方法が最も素早く操作できると思います。&lt;/p></description></item></channel></rss>

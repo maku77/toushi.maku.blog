@@ -1,41 +1,203 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ビジネス on まくまく投資ノート</title><link>https://toushi.maku.blog/p/mpnfuug/</link><description>Recent content in ビジネス on まくまく投資ノート</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Sat, 28 Sep 2019 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/p/mpnfuug/index.xml" rel="self" type="application/rss+xml"/><item><title>新規事業の説明（ピッチ）をするときの流れ</title><link>https://toushi.maku.blog/p/ymb7ykj/</link><pubDate>Wed, 19 Jun 2019 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/ymb7ykj/</guid><description>短い時間で新規事業（スタートアップ）に関するピッチを行うときの話し流れのメモです。 いかに「投資したい」という気持ちにさせるかがポイント。
-(1) 導入（何をするのか） &amp;ndash; What/Why シンプルに 何をするのか (What) を説明。
-「○○領域で、××を対象として、△△業を行う」という説明ができるかどうか。 それが なぜ必要なのか (Why) を説明。
-問題提起（不の解消、新しい価値提供、SDGs） 仮説／検証（こうすれば解決するのでないか？ → インタビュー、データによる検証） 提案（だからコレをやるんです） (2) 実現方法（どうやるのか） &amp;ndash; How 課題解決の仕組み (How) と、それによる競争優位性を説明する。
-戦略（方針、道筋） STP分析（フィリップコトラー） Segmentation &amp;hellip; 市場は？ Targeting &amp;hellip; 顧客は？ Positioning &amp;hellip; 商品・サービスの位置付けは？ 競合対策（マイケルポーターの「競争の３つの基本戦略」） コストリーダーシップ戦略 &amp;hellip; 低コストで回す 差別化戦略 &amp;hellip; 異なる価値を提供する 集中戦略 &amp;hellip; エリア、ユーザー、カテゴリを絞って集中する 戦術（戦略に沿った具体施策 5W2H） Segmentation（市場）: Where? When? Targeting（顧客）：Who? Positioning（位置付け）: What? Why? How? How much? オペレーション バリューチェーンの把握、具体化 &amp;hellip; 資材調達 → 製造 → 物流 → 営業・販売 → アフターメンテナンス） 各プロセスでの戦術適用 &amp;hellip; 5W2H の当てはめ 市場があること、既存製品では不を解消できないこと、我々に優位性があることを示すことで、初めて自社が取り組む理由になる。</description></item><item><title>経営者や起業家が読んでおくべき本</title><link>https://toushi.maku.blog/p/hd9nm68/</link><pubDate>Mon, 10 Jun 2019 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/hd9nm68/</guid><description>経営戦略についての有名な書籍をまとめておきます。古すぎるものは手に入らないかも。
-カール・フォン・クラウゼヴィッツ (1780-1831)
-『戦争論〈上〉』
-『戦争論〈下〉』
-フレデリック・テイラー (1856-1915)
-『科学的管理法』 アンリ・ファヨール (1841-1925)
-『産業ならびに一般の管理』
-『ファヨール (経営学史叢書)』
-チェスター・バーナード (1886-1961)
-『経営者の役割』 イゴール・アンゾフ (1918-2002)
-『戦略経営論 (Strategic Management)』 アルフレッド・チャンドラー・ジュニア (1918-2007)
-『組織は戦略に従う』 ピーター・ドラッガー (1909-2005)
-『経営者の条件』
-『現代の経営〈上〉』
-『現代の経営〈下〉』
-『マネジメント（基本と原則）』
-フィリップ・コトラー (1931-)
-『マーケティング・マネジメント』
-『マーケティング原理』
-『コトラーのマーケティング4.0』
-ヘンリー・ミンツバーグ (1939-)
-『マネジャーの仕事』
-『戦略サファリ 第2版』
-マイケル・ポーター (1947-)
-『競争の戦略』
-『競争優位の戦略』
-C・K・プラハラード (1941-2010)、ゲイリー・ハメル
-『コア・コンピタンス経営』 ゲイリー・ハメル (1954-)
-『リーディング・ザ・レボリューション』 クレイトン・クリステンセン (1952-)
-『イノベーションのジレンマ』 ジョン・P・コッター (1947-)
-『企業変革力』
-『第2版 リーダーシップ論』
-トム・ピーターズ、マッキンゼー7S
-『エクセレント・カンパニー』 ジム・コリンズ
-『ビジョナリー・カンパニー』 エリック・リース (1978-)
-『リーンスタートアップ (2011)』 ピーター・ティール (1967-)
-『ゼロ・トゥ・ワン』</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ビジネス on まくまく投資ノート</title><link>https://toushi.maku.blog/p/mpnfuug/</link><description>Recent content in ビジネス on まくまく投資ノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Wed, 19 Jun 2019 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/p/mpnfuug/index.xml" rel="self" type="application/rss+xml"/><item><title>新規事業の説明（ピッチ）をするときの流れ</title><link>https://toushi.maku.blog/p/ymb7ykj/</link><pubDate>Wed, 19 Jun 2019 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/ymb7ykj/</guid><description>&lt;p>短い時間で新規事業（スタートアップ）に関するピッチを行うときの話し流れのメモです。
+いかに「投資したい」という気持ちにさせるかがポイント。&lt;/p>
+&lt;h2 id="1-導入何をするのか----whatwhy">(1) 導入（何をするのか） &amp;ndash; What/Why&lt;/h2>
+&lt;p>シンプルに &lt;strong>何をするのか (What)&lt;/strong> を説明。&lt;/p>
+&lt;ul>
+&lt;li>「○○領域で、××を対象として、△△業を行う」という説明ができるかどうか。&lt;/li>
+&lt;/ul>
+&lt;p>それが &lt;strong>なぜ必要なのか (Why)&lt;/strong> を説明。&lt;/p>
+&lt;ul>
+&lt;li>問題提起（不の解消、新しい価値提供、SDGs）&lt;/li>
+&lt;li>仮説／検証（こうすれば解決するのでないか？ → インタビュー、データによる検証）&lt;/li>
+&lt;li>提案（だからコレをやるんです）&lt;/li>
+&lt;/ul>
+&lt;h2 id="2-実現方法どうやるのか----how">(2) 実現方法（どうやるのか） &amp;ndash; How&lt;/h2>
+&lt;p>&lt;strong>課題解決の仕組み (How)&lt;/strong> と、それによる&lt;strong>競争優位性&lt;/strong>を説明する。&lt;/p>
+&lt;ul>
+&lt;li>戦略（方針、道筋）
+&lt;ul>
+&lt;li>STP分析（フィリップコトラー）
+&lt;ul>
+&lt;li>&lt;b>Segmentation&lt;/b> &amp;hellip; 市場は？&lt;/li>
+&lt;li>&lt;b>Targeting&lt;/b> &amp;hellip; 顧客は？&lt;/li>
+&lt;li>&lt;b>Positioning&lt;/b> &amp;hellip; 商品・サービスの位置付けは？&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>競合対策（マイケルポーターの「競争の３つの基本戦略」）
+&lt;ul>
+&lt;li>&lt;b>コストリーダーシップ戦略&lt;/b> &amp;hellip; 低コストで回す&lt;/li>
+&lt;li>&lt;b>差別化戦略&lt;/b> &amp;hellip; 異なる価値を提供する&lt;/li>
+&lt;li>&lt;b>集中戦略&lt;/b> &amp;hellip; エリア、ユーザー、カテゴリを絞って集中する&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>戦術（戦略に沿った具体施策 5W2H）
+&lt;ul>
+&lt;li>&lt;b>Segmentation（市場）&lt;/b>: Where? When?&lt;/li>
+&lt;li>&lt;b>Targeting（顧客）&lt;/b>：Who?&lt;/li>
+&lt;li>&lt;b>Positioning（位置付け）&lt;/b>: What? Why? How? How much?&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>オペレーション
+&lt;ul>
+&lt;li>&lt;b>バリューチェーンの把握、具体化&lt;/b> &amp;hellip; 資材調達 → 製造 → 物流 → 営業・販売 → アフターメンテナンス）&lt;/li>
+&lt;li>&lt;b>各プロセスでの戦術適用&lt;/b> &amp;hellip; 5W2H の当てはめ&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>市場があること、既存製品では不を解消できないこと、我々に優位性があることを示すことで、初めて自社が取り組む理由になる。&lt;/p></description></item><item><title>経営者や起業家が読んでおくべき本</title><link>https://toushi.maku.blog/p/hd9nm68/</link><pubDate>Mon, 10 Jun 2019 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/hd9nm68/</guid><description>&lt;p>経営戦略についての有名な書籍をまとめておきます。古すぎるものは手に入らないかも。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>カール・フォン・&lt;strong>クラウゼヴィッツ&lt;/strong> (1780-1831)&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4122039398?tag=maku04-22">『戦争論〈上〉』&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4122039541?tag=maku04-22">『戦争論〈下〉』&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>フレデリック・&lt;strong>テイラー&lt;/strong> (1856-1915)&lt;/p>
+&lt;ul>
+&lt;li>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/447800983X?tag=maku04-22">『科学的管理法』&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>アンリ・&lt;strong>ファヨール&lt;/strong> (1841-1925)&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/B000J9TSZ0?tag=maku04-22">『産業ならびに一般の管理』&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4830947322?tag=maku04-22">『ファヨール (経営学史叢書)』&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>チェスター・&lt;strong>バーナード&lt;/strong> (1886-1961)&lt;/p>
+&lt;ul>
+&lt;li>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4478320020?tag=maku04-22">『経営者の役割』&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>イゴール・&lt;strong>アンゾフ&lt;/strong> (1918-2002)&lt;/p>
+&lt;ul>
+&lt;li>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4502168416?tag=maku04-22">『戦略経営論 (Strategic Management)』&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>アルフレッド・&lt;strong>チャンドラー&lt;/strong>・ジュニア (1918-2007)&lt;/p>
+&lt;ul>
+&lt;li>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4478340234?tag=maku04-22">『組織は戦略に従う』&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>ピーター・&lt;strong>ドラッガー&lt;/strong> (1909-2005)&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4478300747?tag=maku04-22">『経営者の条件』&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4478307008?tag=maku04-22">『現代の経営〈上〉』&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4478307016?tag=maku04-22">『現代の経営〈下〉』&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4478410232?tag=maku04-22">『マネジメント（基本と原則）』&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>フィリップ・&lt;strong>コトラー&lt;/strong> (1931-)&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4621066161?tag=maku04-22">『マーケティング・マネジメント』&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4621066226?tag=maku04-22">『マーケティング原理』&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4023316156?tag=maku04-22">『コトラーのマーケティング4.0』&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>ヘンリー・&lt;strong>ミンツバーグ&lt;/strong> (1939-)&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/456124218X?tag=maku04-22">『マネジャーの仕事』&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4492533192?tag=maku04-22">『戦略サファリ 第2版』&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>マイケル・&lt;strong>ポーター&lt;/strong> (1947-)&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4478371520?tag=maku04-22">『競争の戦略』&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4478370192?tag=maku04-22">『競争優位の戦略』&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>C・K・&lt;strong>プラハラード&lt;/strong> (1941-2010)、ゲイリー・ハメル&lt;/p>
+&lt;ul>
+&lt;li>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4532143640?tag=maku04-22">『コア・コンピタンス経営』&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>ゲイリー・&lt;strong>ハメル&lt;/strong> (1954-)&lt;/p>
+&lt;ul>
+&lt;li>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4532148812?tag=maku04-22">『リーディング・ザ・レボリューション』&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>クレイトン・&lt;strong>クリステンセン&lt;/strong> (1952-)&lt;/p>
+&lt;ul>
+&lt;li>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4798100234?tag=maku04-22">『イノベーションのジレンマ』&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>ジョン・P・&lt;strong>コッター&lt;/strong> (1947-)&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4822242749?tag=maku04-22">『企業変革力』&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/447801339X?tag=maku04-22">『第2版 リーダーシップ論』&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>トム・ピーターズ&lt;/strong>、マッキンゼー7S&lt;/p>
+&lt;ul>
+&lt;li>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4901234331?tag=maku04-22">『エクセレント・カンパニー』&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>ジム・コリンズ&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4822740315?tag=maku04-22">『ビジョナリー・カンパニー』&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>エリック・&lt;strong>リース&lt;/strong> (1978-)&lt;/p>
+&lt;ul>
+&lt;li>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4822248976?tag=maku04-22">『リーンスタートアップ (2011)』&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>ピーター・&lt;strong>ティール&lt;/strong> (1967-)&lt;/p>
+&lt;ul>
+&lt;li>&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4140816589?tag=maku04-22">『ゼロ・トゥ・ワン』&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item></channel></rss>

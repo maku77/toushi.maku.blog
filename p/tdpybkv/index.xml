@@ -1,12 +1,84 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>トレステの設定 on まくまく投資ノート</title><link>https://toushi.maku.blog/p/tdpybkv/</link><description>Recent content in トレステの設定 on まくまく投資ノート</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Sun, 12 Jan 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/p/tdpybkv/index.xml" rel="self" type="application/rss+xml"/><item><title>トレステの設定: トレステ開発環境で最初に設定しておきたい項目</title><link>https://toushi.maku.blog/p/6zgwdr7/</link><pubDate>Wed, 22 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/6zgwdr7/</guid><description>トレステ開発環境のエディタ設定は、メニューから次のようにたどると開くことができます。
-ツール → オプション ここでは、次のような設定を行なっています。
-インデントする際にタブの代わりにスペースを挿入 にチェック タブ文字の代わりに、半角スペース x 4 を使うようにします。 ライン番号 にチェック 各行の左端に行番号が表示されるようになります。 ケーススタイル で 小文字 を選択 input、var、if などの文頭が小文字に統一されます（関数名などは入力したまま大文字・小文字が保持されます）。 エディタのカラー設定や、フォント設定もこのダイアログから行うことができます。</description></item><item><title>トレステの設定: シンボルリンクとインターバルリンクでウィンドウ間の表示を連携させる</title><link>https://toushi.maku.blog/p/yhr2aiq/</link><pubDate>Sun, 12 Jan 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/yhr2aiq/</guid><description>ウィンドウリンクとは TradeStation の「ウィンドウリンク」の仕組みを使用すると、ウィンドウ間（トレーディングアプリ間）で選択している銘柄や、足のインターバル（分足や時間足）の設定を同期させることができます。 ウィンドウリンクの機能には、次の 2 種類があります。
-シンボルリンク &amp;hellip; 銘柄をリンクして切り替える インターバルリンク（足種リンク） &amp;hellip; 足のインターバルをリンクして切り替える シンボルリンク シンボルリンクを有効にするには、各ウィンドウのタイトルバー右上に表示されている「S」マークをクリックし、ハイライトされた状態にします。
-ここでは、「レーダースクリーン」と「チャート分析」のウィンドウのシンボルリンクを有効にしています。 レーダースクリーンの銘柄コードをクリックすると、チャート分析のウィンドウで表示している銘柄が連動して切り替わるようになります。
-インターバルリンク（足種リンク） インターバルリンクを有効にするには、各ウィンドウのタイトルバー右上に表示されている「I」マークをクリックし、ハイライトされた状態にします（シンボルリンクのボタンの右にあります）。
-インターバルリンクを複数のウィンドウで有効にしておくと、5分足や、1時間足などのインターバル設定を同期させることができます。
-リンクカラーとグローバル設定 シンボルリンクやインターバルリンクのボタンの隅にあるプルダウンマークを押すと、下記のようにリンクの種類を選択することができます。
-ここでは、リンクの色を設定することができ、等しい色を選択したウィンドウ同士でリンク機能が働くようになります。
-また、ここで、グローバルリンクと記述されたものを選択すると、ワークスペースをまたがったウィンドウ間でもリンク機能が働くようになります（デフォルトはローカルリンクになっています）。 ローカルリンクとグローバルリンクはボタンの形が若干違うので、タイトルバーを見るだけで現在どちらが設定されているかを判別できます。
-上のボタンがローカルリンク時の形状で、下のボタンがグローバルリンク時の形状です。</description></item><item><title>トレステの設定: レーダースクリーンのフォントサイズを変更する</title><link>https://toushi.maku.blog/p/zhry9hq/</link><pubDate>Sun, 12 Jan 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/zhry9hq/</guid><description>TradeStation のレーダースクリーンのフォント設定は、下記の場所から変更することができます。
-レーダースクリーンのウィンドウを選択した状態にする メニューから 設定 → ページ と選択する 「ページの設定」ダイアログから フォント タブを開く フォントサイズを小さめに設定しておくと、レーダースクリーンの一覧性が増します。</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>トレステの設定 on まくまく投資ノート</title><link>https://toushi.maku.blog/p/tdpybkv/</link><description>Recent content in トレステの設定 on まくまく投資ノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Wed, 22 Apr 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/p/tdpybkv/index.xml" rel="self" type="application/rss+xml"/><item><title>トレステの設定: トレステ開発環境で最初に設定しておきたい項目</title><link>https://toushi.maku.blog/p/6zgwdr7/</link><pubDate>Wed, 22 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/6zgwdr7/</guid><description>&lt;p>トレステ開発環境のエディタ設定は、メニューから次のようにたどると開くことができます。&lt;/p>
+&lt;ol>
+&lt;li>&lt;code>ツール&lt;/code> → &lt;code>オプション&lt;/code>&lt;/li>
+&lt;/ol>
+
+
+&lt;figure class="xImage">
+ &lt;img style="" width="400" height="423" src="../../p/6zgwdr7/img-001_hu16483340674629096233.png" alt="/p/6zgwdr7/img-001.png" />
+&lt;/figure>
+
+&lt;p>ここでは、次のような設定を行なっています。&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>&lt;code>インデントする際にタブの代わりにスペースを挿入&lt;/code>&lt;/strong> にチェック
+&lt;ul>
+&lt;li>タブ文字の代わりに、半角スペース x 4 を使うようにします。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>&lt;code>ライン番号&lt;/code>&lt;/strong> にチェック
+&lt;ul>
+&lt;li>各行の左端に行番号が表示されるようになります。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>&lt;code>ケーススタイル&lt;/code>&lt;/strong> で &lt;strong>&lt;code>小文字&lt;/code>&lt;/strong> を選択
+&lt;ul>
+&lt;li>&lt;code>input&lt;/code>、&lt;code>var&lt;/code>、&lt;code>if&lt;/code> などの文頭が小文字に統一されます（関数名などは入力したまま大文字・小文字が保持されます）。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>エディタのカラー設定や、フォント設定もこのダイアログから行うことができます。&lt;/p></description></item><item><title>トレステの設定: シンボルリンクとインターバルリンクでウィンドウ間の表示を連携させる</title><link>https://toushi.maku.blog/p/yhr2aiq/</link><pubDate>Sun, 12 Jan 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/yhr2aiq/</guid><description>&lt;h2 id="ウィンドウリンクとは">ウィンドウリンクとは&lt;/h2>
+&lt;p>TradeStation の「ウィンドウリンク」の仕組みを使用すると、ウィンドウ間（トレーディングアプリ間）で選択している銘柄や、足のインターバル（分足や時間足）の設定を同期させることができます。
+ウィンドウリンクの機能には、次の 2 種類があります。&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>シンボルリンク&lt;/strong> &amp;hellip; 銘柄をリンクして切り替える&lt;/li>
+&lt;li>&lt;strong>インターバルリンク（足種リンク）&lt;/strong> &amp;hellip; 足のインターバルをリンクして切り替える&lt;/li>
+&lt;/ul>
+&lt;h2 id="シンボルリンク">シンボルリンク&lt;/h2>
+&lt;p>シンボルリンクを有効にするには、各ウィンドウのタイトルバー右上に表示されている「S」マークをクリックし、ハイライトされた状態にします。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="600" height="386" src="../../p/yhr2aiq/001_hu2197159457018077210.png" alt="/p/yhr2aiq/001.png" />
+&lt;/figure>
+
+&lt;p>ここでは、「レーダースクリーン」と「チャート分析」のウィンドウのシンボルリンクを有効にしています。
+レーダースクリーンの銘柄コードをクリックすると、チャート分析のウィンドウで表示している銘柄が連動して切り替わるようになります。&lt;/p>
+&lt;h2 id="インターバルリンク足種リンク">インターバルリンク（足種リンク）&lt;/h2>
+&lt;p>インターバルリンクを有効にするには、各ウィンドウのタイトルバー右上に表示されている「I」マークをクリックし、ハイライトされた状態にします（シンボルリンクのボタンの右にあります）。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="150" height="81" src="../../p/yhr2aiq/002_hu13422026259346349515.png" alt="/p/yhr2aiq/002.png" />
+&lt;/figure>
+
+&lt;p>インターバルリンクを複数のウィンドウで有効にしておくと、5分足や、1時間足などのインターバル設定を同期させることができます。&lt;/p>
+&lt;h2 id="リンクカラーとグローバル設定">リンクカラーとグローバル設定&lt;/h2>
+&lt;p>シンボルリンクやインターバルリンクのボタンの隅にあるプルダウンマークを押すと、下記のようにリンクの種類を選択することができます。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="250" height="404" src="../../p/yhr2aiq/003_hu3065631293593142071.png" alt="/p/yhr2aiq/003.png" />
+&lt;/figure>
+
+&lt;p>ここでは、リンクの色を設定することができ、等しい色を選択したウィンドウ同士でリンク機能が働くようになります。&lt;/p>
+&lt;p>また、ここで、&lt;strong>グローバルリンク&lt;/strong>と記述されたものを選択すると、ワークスペースをまたがったウィンドウ間でもリンク機能が働くようになります（デフォルトはローカルリンクになっています）。
+ローカルリンクとグローバルリンクはボタンの形が若干違うので、タイトルバーを見るだけで現在どちらが設定されているかを判別できます。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="126" height="111" src="../../p/yhr2aiq/004.png" alt="/p/yhr2aiq/004.png" />
+&lt;/figure>
+
+&lt;p>上のボタンがローカルリンク時の形状で、下のボタンがグローバルリンク時の形状です。&lt;/p></description></item><item><title>トレステの設定: レーダースクリーンのフォントサイズを変更する</title><link>https://toushi.maku.blog/p/zhry9hq/</link><pubDate>Sun, 12 Jan 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/zhry9hq/</guid><description>&lt;p>TradeStation のレーダースクリーンのフォント設定は、下記の場所から変更することができます。&lt;/p>
+&lt;ol>
+&lt;li>レーダースクリーンのウィンドウを選択した状態にする&lt;/li>
+&lt;li>メニューから &lt;samp>設定&lt;/samp> → &lt;samp>ページ&lt;/samp> と選択する&lt;/li>
+&lt;li>「ページの設定」ダイアログから &lt;samp>フォント&lt;/samp> タブを開く&lt;/li>
+&lt;/ol>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="500" height="449" src="../../p/zhry9hq/001_hu2164364762627490610.png" alt="/p/zhry9hq/001.png" />
+&lt;/figure>
+
+&lt;p>フォントサイズを小さめに設定しておくと、レーダースクリーンの一覧性が増します。&lt;/p></description></item></channel></rss>

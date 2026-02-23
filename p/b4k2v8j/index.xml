@@ -1,5 +1,183 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>EasyLanguage: 色（カラー）情報を扱う on まくまく投資ノート</title><link>https://toushi.maku.blog/p/b4k2v8j/</link><description>Recent content in EasyLanguage: 色（カラー）情報を扱う on まくまく投資ノート</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Sun, 03 May 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/p/b4k2v8j/index.xml" rel="self" type="application/rss+xml"/><item><title>EasyLanguage: GetBackgroundColor関数（チャートの背景色を取得する）</title><link>https://toushi.maku.blog/p/wjw9kv7/</link><pubDate>Sun, 03 May 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/wjw9kv7/</guid><description>GetBackgroundColor 予約語を使用すると、チャートの背景色の色数値（RGBA を示す int 値）を取得することができます。
-使用例 Value1 = GetBackgroundColor; チャート上に描画オブジェクトを配置するときに、背景色を考慮した色付けを行いたい場合などに使用できます。</description></item><item><title>EasyLanguage: RGB関数（RGBの各値を合成して32ビットカラー値を作成する）</title><link>https://toushi.maku.blog/p/znycoyb/</link><pubDate>Sun, 03 May 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/znycoyb/</guid><description>RGB 予約語を使用すると、RGB の各成分の色情報を合成して、32 ビット整数の RGB 値を生成することができます。
-RGB(nRed, nGreen, nBlue); 下記のサンプルコード（インジケーター）では、RGB 予約語の戻り値をログ出力しています。
-once begin ClearPrintLog; Value1 = RGB(255, 0, 0); // = Red (255) Value2 = RGB(255, 255, 0); // = Yellow (65535) Value3 = RGB(255, 0, 255); // = Magenta (16711935) Print(Value1:0:0); Print(Value2:0:0); Print(Value3:0:0); end; 実行結果 255 65535 16711935</description></item><item><title>EasyLanguage: カラー予約語と値の対応表</title><link>https://toushi.maku.blog/p/f9q6kye/</link><pubDate>Sat, 02 May 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/f9q6kye/</guid><description>カラー予約語の一覧 EasyLanguage には下記のような RGB 値を表す予約語が定義されています。 これらの予約語は、内部的には RGB 値を表す int 型の値（32 ビット整数値）です。 つまり、コード上で Red と記述するのと、255 と記述するのは同じ意味になります。
-カラー予約語 10進表記 16進表記 RGB値 レガシー値 サンプル Black 0 000000 (0,0,0) 1 Blue 16711680 0000ff (0,0,255) 2 Cyan 16776960 00ffff (0,255,255) 3 Green 65280 00ff00 (0,255,0) 4 Magenta 16711935 ff00ff (255,0,255) 5 Red 255 ff0000 (255,0,0) 6 Yellow 65535 ffff00 (255,255,0) 7 White 16777215 ffffff (255,255,255) 8 DarkBlue 8388608 000080 (0,0,128) 9 DarkCyan 8421376 008080 (0,128,128) 10 DarkGreen 32768 008000 (0,128,0) 11 DarkMagenta 8388736 800080 (128,0,128) 12 DarkRed 128 800000 (128,0,0) 13 DarkBrown 32896 808000 (128,128,0) 14 DarkGray 8421504 808080 (128,128,128) 15 LightGray 12632256 c0c0c0 (192,192,192) 16 おまけ: カラー予約語の値を出力するコード 下記の EasyLanguage コードは、すべてのカラー予約語の RGB 値を出力します。</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>EasyLanguage: 色（カラー）情報を扱う on まくまく投資ノート</title><link>https://toushi.maku.blog/p/b4k2v8j/</link><description>Recent content in EasyLanguage: 色（カラー）情報を扱う on まくまく投資ノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Sun, 03 May 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/p/b4k2v8j/index.xml" rel="self" type="application/rss+xml"/><item><title>EasyLanguage: GetBackgroundColor関数（チャートの背景色を取得する）</title><link>https://toushi.maku.blog/p/wjw9kv7/</link><pubDate>Sun, 03 May 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/wjw9kv7/</guid><description>&lt;p>&lt;strong>&lt;code>GetBackgroundColor&lt;/code>&lt;/strong> 予約語を使用すると、チャートの背景色の色数値（RGBA を示す int 値）を取得することができます。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">使用例&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">Value1 = GetBackgroundColor;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>チャート上に描画オブジェクトを配置するときに、背景色を考慮した色付けを行いたい場合などに使用できます。&lt;/p></description></item><item><title>EasyLanguage: RGB関数（RGBの各値を合成して32ビットカラー値を作成する）</title><link>https://toushi.maku.blog/p/znycoyb/</link><pubDate>Sun, 03 May 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/znycoyb/</guid><description>&lt;p>&lt;strong>&lt;code>RGB&lt;/code>&lt;/strong> 予約語を使用すると、RGB の各成分の色情報を合成して、32 ビット整数の RGB 値を生成することができます。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">RGB(nRed, nGreen, nBlue);&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>下記のサンプルコード（インジケーター）では、&lt;code>RGB&lt;/code> 予約語の戻り値をログ出力しています。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">once begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ClearPrintLog;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Value1 = RGB(255, 0, 0); // = Red (255)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Value2 = RGB(255, 255, 0); // = Yellow (65535)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Value3 = RGB(255, 0, 255); // = Magenta (16711935)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Print(Value1:0:0);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Print(Value2:0:0);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Print(Value3:0:0);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">実行結果&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">255
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">65535
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">16711935&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure></description></item><item><title>EasyLanguage: カラー予約語と値の対応表</title><link>https://toushi.maku.blog/p/f9q6kye/</link><pubDate>Sat, 02 May 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/f9q6kye/</guid><description>&lt;h2 id="カラー予約語の一覧">カラー予約語の一覧&lt;/h2>
+&lt;p>EasyLanguage には下記のような RGB 値を表す予約語が定義されています。
+これらの予約語は、内部的には RGB 値を表す int 型の値（32 ビット整数値）です。
+つまり、コード上で &lt;code>Red&lt;/code> と記述するのと、&lt;code>255&lt;/code> と記述するのは同じ意味になります。&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>カラー予約語&lt;/th>
+ &lt;th style="text-align: right">10進表記&lt;/th>
+ &lt;th style="text-align: center">16進表記&lt;/th>
+ &lt;th style="text-align: center">RGB値&lt;/th>
+ &lt;th style="text-align: center">レガシー値&lt;/th>
+ &lt;th style="text-align: center">サンプル&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>Black&lt;/td>
+ &lt;td style="text-align: right">0&lt;/td>
+ &lt;td style="text-align: center">000000&lt;/td>
+ &lt;td style="text-align: center">(0,0,0)&lt;/td>
+ &lt;td style="text-align: center">1&lt;/td>
+ &lt;td style="text-align: center">&lt;span style="background: #000000">　　　　&lt;/span>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Blue&lt;/td>
+ &lt;td style="text-align: right">16711680&lt;/td>
+ &lt;td style="text-align: center">0000ff&lt;/td>
+ &lt;td style="text-align: center">(0,0,255)&lt;/td>
+ &lt;td style="text-align: center">2&lt;/td>
+ &lt;td style="text-align: center">&lt;span style="background: #0000ff">　　　　&lt;/span>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Cyan&lt;/td>
+ &lt;td style="text-align: right">16776960&lt;/td>
+ &lt;td style="text-align: center">00ffff&lt;/td>
+ &lt;td style="text-align: center">(0,255,255)&lt;/td>
+ &lt;td style="text-align: center">3&lt;/td>
+ &lt;td style="text-align: center">&lt;span style="background: #00ffff">　　　　&lt;/span>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Green&lt;/td>
+ &lt;td style="text-align: right">65280&lt;/td>
+ &lt;td style="text-align: center">00ff00&lt;/td>
+ &lt;td style="text-align: center">(0,255,0)&lt;/td>
+ &lt;td style="text-align: center">4&lt;/td>
+ &lt;td style="text-align: center">&lt;span style="background: #00ff00">　　　　&lt;/span>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Magenta&lt;/td>
+ &lt;td style="text-align: right">16711935&lt;/td>
+ &lt;td style="text-align: center">ff00ff&lt;/td>
+ &lt;td style="text-align: center">(255,0,255)&lt;/td>
+ &lt;td style="text-align: center">5&lt;/td>
+ &lt;td style="text-align: center">&lt;span style="background: #ff00ff">　　　　&lt;/span>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Red&lt;/td>
+ &lt;td style="text-align: right">255&lt;/td>
+ &lt;td style="text-align: center">ff0000&lt;/td>
+ &lt;td style="text-align: center">(255,0,0)&lt;/td>
+ &lt;td style="text-align: center">6&lt;/td>
+ &lt;td style="text-align: center">&lt;span style="background: #ff0000">　　　　&lt;/span>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Yellow&lt;/td>
+ &lt;td style="text-align: right">65535&lt;/td>
+ &lt;td style="text-align: center">ffff00&lt;/td>
+ &lt;td style="text-align: center">(255,255,0)&lt;/td>
+ &lt;td style="text-align: center">7&lt;/td>
+ &lt;td style="text-align: center">&lt;span style="background: #ffff00">　　　　&lt;/span>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>White&lt;/td>
+ &lt;td style="text-align: right">16777215&lt;/td>
+ &lt;td style="text-align: center">ffffff&lt;/td>
+ &lt;td style="text-align: center">(255,255,255)&lt;/td>
+ &lt;td style="text-align: center">8&lt;/td>
+ &lt;td style="text-align: center">&lt;span style="background: #ffffff">　　　　&lt;/span>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>DarkBlue&lt;/td>
+ &lt;td style="text-align: right">8388608&lt;/td>
+ &lt;td style="text-align: center">000080&lt;/td>
+ &lt;td style="text-align: center">(0,0,128)&lt;/td>
+ &lt;td style="text-align: center">9&lt;/td>
+ &lt;td style="text-align: center">&lt;span style="background: #000080">　　　　&lt;/span>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>DarkCyan&lt;/td>
+ &lt;td style="text-align: right">8421376&lt;/td>
+ &lt;td style="text-align: center">008080&lt;/td>
+ &lt;td style="text-align: center">(0,128,128)&lt;/td>
+ &lt;td style="text-align: center">10&lt;/td>
+ &lt;td style="text-align: center">&lt;span style="background: #008080">　　　　&lt;/span>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>DarkGreen&lt;/td>
+ &lt;td style="text-align: right">32768&lt;/td>
+ &lt;td style="text-align: center">008000&lt;/td>
+ &lt;td style="text-align: center">(0,128,0)&lt;/td>
+ &lt;td style="text-align: center">11&lt;/td>
+ &lt;td style="text-align: center">&lt;span style="background: #008000">　　　　&lt;/span>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>DarkMagenta&lt;/td>
+ &lt;td style="text-align: right">8388736&lt;/td>
+ &lt;td style="text-align: center">800080&lt;/td>
+ &lt;td style="text-align: center">(128,0,128)&lt;/td>
+ &lt;td style="text-align: center">12&lt;/td>
+ &lt;td style="text-align: center">&lt;span style="background: #800080">　　　　&lt;/span>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>DarkRed&lt;/td>
+ &lt;td style="text-align: right">128&lt;/td>
+ &lt;td style="text-align: center">800000&lt;/td>
+ &lt;td style="text-align: center">(128,0,0)&lt;/td>
+ &lt;td style="text-align: center">13&lt;/td>
+ &lt;td style="text-align: center">&lt;span style="background: #800000">　　　　&lt;/span>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>DarkBrown&lt;/td>
+ &lt;td style="text-align: right">32896&lt;/td>
+ &lt;td style="text-align: center">808000&lt;/td>
+ &lt;td style="text-align: center">(128,128,0)&lt;/td>
+ &lt;td style="text-align: center">14&lt;/td>
+ &lt;td style="text-align: center">&lt;span style="background: #808000">　　　　&lt;/span>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>DarkGray&lt;/td>
+ &lt;td style="text-align: right">8421504&lt;/td>
+ &lt;td style="text-align: center">808080&lt;/td>
+ &lt;td style="text-align: center">(128,128,128)&lt;/td>
+ &lt;td style="text-align: center">15&lt;/td>
+ &lt;td style="text-align: center">&lt;span style="background: #808080">　　　　&lt;/span>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>LightGray&lt;/td>
+ &lt;td style="text-align: right">12632256&lt;/td>
+ &lt;td style="text-align: center">c0c0c0&lt;/td>
+ &lt;td style="text-align: center">(192,192,192)&lt;/td>
+ &lt;td style="text-align: center">16&lt;/td>
+ &lt;td style="text-align: center">&lt;span style="background: #c0c0c0">　　　　&lt;/span>&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h2 id="おまけ-カラー予約語の値を出力するコード">おまけ: カラー予約語の値を出力するコード&lt;/h2>
+&lt;p>下記の EasyLanguage コードは、すべてのカラー予約語の RGB 値を出力します。&lt;/p></description></item></channel></rss>

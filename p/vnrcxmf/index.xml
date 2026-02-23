@@ -1,1 +1,396 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>TradeStation/アクティビティバー on まくまく投資ノート</title><link>https://toushi.maku.blog/p/vnrcxmf/</link><description>Recent content in TradeStation/アクティビティバー on まくまく投資ノート</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><atom:link href="https://toushi.maku.blog/p/vnrcxmf/index.xml" rel="self" type="application/rss+xml"/><item><title>TradeStation/アクティビティバー/Price Distribution（プライス・ディストリビューション）</title><link>https://toushi.maku.blog/p/fbpxvp3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://toushi.maku.blog/p/fbpxvp3/</guid><description>WA-Price Distribution { Search Tag: WA-Price Distribution } { This study plots the basic ActivityBar, together with a value area zone based on standard deviations around the ActivityBar&amp;#39;s mode price. } inputs: ApproxNumRows( 10 ) [DisplayName = &amp;#34;ApproxNumRows&amp;#34;, ToolTip = &amp;#34;Aprroximate Number of Rows. Enter the approximate number of rows to use in the study.&amp;#34;], CycleColors( true ) [DisplayName = &amp;#34;CycleColors&amp;#34;, ToolTip = &amp;#34;Enter true to cycle colors from one cell group to the next; enter false to use only a single color for all cells.</description></item><item><title>TradeStation/アクティビティバー/WA-Volume Distribution（ボリューム・ディストリビューション）</title><link>https://toushi.maku.blog/p/c2qkjx3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://toushi.maku.blog/p/c2qkjx3/</guid><description>WA-Volume Distribution { Search Tag: WA-Volume Distribution } { This study plots a modified ActivityBar, with each ActivityData bar being processed either once or not at all depending on whether its volume is above or below the specified BlockSize. If BlockSize is set to zero, each ActivityData bar is processed, resulting in the basic ActivityBar plot of the Price Distribution ActivityBar study. } inputs: ApproxNumRows( 10 ) [DisplayName = &amp;#34;ApproxNumRows&amp;#34;, ToolTip = &amp;#34;Aprroximate Number of Rows.</description></item><item><title>TradeStation/アクティビティバー/WA-Candlestick VolAccum（ローソク足出来高アキュムレーション）</title><link>https://toushi.maku.blog/p/p3omdnr/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://toushi.maku.blog/p/p3omdnr/</guid><description>WA-Candlestick VolAccum { Search Tag: WA-Candlestick VolAccum } { This study plots an ActivityBar that simulates a candlestick, with the width of the candlestick body varying in proportion to the volume of the ActivityBar. } using elsystem.drawing; using elsystem.drawingobjects; inputs: BlockSize( 100 ) [DisplayName = &amp;#34;BlockSize&amp;#34;, ToolTip = &amp;#34;Enter the amount of volume that will cause the width of the candlestick to be increased.&amp;#34;], MaxNumCells( 100 ) [DisplayName = &amp;#34;MaxNumCells&amp;#34;, ToolTip = &amp;#34;Maximum Number of Cells.</description></item><item><title>TradeStation/アクティビティバー/WA-Up vs Down Strength（上昇・下落ストレングス）</title><link>https://toushi.maku.blog/p/4wnw4rp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://toushi.maku.blog/p/4wnw4rp/</guid><description>WA-Up vs Down Strength { Search Tag: WA-Up vs Down Strength } { This study is somewhat similar to the Volume Strength ActivityBar study. As in that study, it plots an ActivityBar in which each ActivityData bar is processed 0 or more times depending on its volume and the specified BlockSize divisor. If BlockSize is set to zero, each ActivityData bar is processed exactly once. The difference is that each time an ActivityData bar is processed, at most one cell is added instead of a range of cells: - if the ActivityData bar was an up bar, one cell is added to the right - if the ActivityData bar was a down bar, one cell is added to the left - if the ActivityData bar was unchanged, no cells are added } inputs: ApproxNumRows( 10 ) [DisplayName = &amp;#34;ApproxNumRows&amp;#34;, ToolTip = &amp;#34;Aprroximate Number of Rows.</description></item><item><title>TradeStation/アクティビティバー/WA-Volume Strength（出来高強度）</title><link>https://toushi.maku.blog/p/8eemvwj/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://toushi.maku.blog/p/8eemvwj/</guid><description>WA-Volume Strength { Search Tag: WA-Volume Strength } { This study plots a modified ActivityBar, with each ActivityData bar being processed 0 or more times depending on its volume and the specified BlockSize divisor. If BlockSize is set to zero, each ActivityData bar is processed exactly once, resulting in the basic ActivityBar plot of the Price Distribution ActivityBar study. } inputs: ApproxNumRows( 10 ) [DisplayName = &amp;#34;ApproxNumRows&amp;#34;, ToolTip = &amp;#34;Approximate Number of Rows.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>TradeStation/アクティビティバー on まくまく投資ノート</title><link>https://toushi.maku.blog/p/vnrcxmf/</link><description>Recent content in TradeStation/アクティビティバー on まくまく投資ノート</description><generator>Hugo</generator><language>ja-jp</language><atom:link href="https://toushi.maku.blog/p/vnrcxmf/index.xml" rel="self" type="application/rss+xml"/><item><title>TradeStation/アクティビティバー/Price Distribution（プライス・ディストリビューション）</title><link>https://toushi.maku.blog/p/fbpxvp3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://toushi.maku.blog/p/fbpxvp3/</guid><description>&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">WA-Price Distribution&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">{ Search Tag: WA-Price Distribution }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{ This study plots the basic ActivityBar, together with a value area zone based on
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> standard deviations around the ActivityBar&amp;#39;s mode price. }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">inputs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ApproxNumRows( 10 ) [DisplayName = &amp;#34;ApproxNumRows&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Aprroximate Number of Rows. Enter the approximate number of rows to use in the study.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CycleColors( true ) [DisplayName = &amp;#34;CycleColors&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Enter true to cycle colors from one cell group to the next; enter false to use only a single color for all cells.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> DefaultColor( DarkGreen ) [DisplayName = &amp;#34;DefaultColor&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Enter the default color used in the ActivityBar study.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ModeType( -1 ) [DisplayName = &amp;#34;ModeType&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Enter 1 for highest mode, enter -1 for lowest mode.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ZoneNumDevs( 1 ) [DisplayName = &amp;#34;ZoneNumDevs&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Zone Number of Deviations. Enter the number of standard deviations on each side of mode price to be included in the AB Zone.&amp;#34;] ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">variables:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CellGroupColor( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> MinuteInterval( BarInterval of ActivityData ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CellGroupLabel( &amp;#34;&amp;#34; ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> oModeCount( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> oModePrice( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SDev( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ZoneHi( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ZoneLo( 0 ) ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">AB_SetRowHeight( AB_RowHeightCalc( ApproxNumRows, 3 ) ) ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if CycleColors then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CellGroupColor = AB_NextColor( MinuteInterval ) of ActivityData
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CellGroupColor = DefaultColor ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if CellGroupColor = GetBackGroundColor then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CellGroupColor = DefaultColor ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CellGroupLabel = AB_NextLabel( MinuteInterval ) of ActivityData ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Value1 = AB_AddCellRange( High of ActivityData, Low of ActivityData, RightSide,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CellGroupLabel, CellGroupColor, 0 ) ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Value2 = AB_Mode( RightSide, ModeType, oModeCount, oModePrice ) ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">SDev = AB_StdDev( ZoneNumDevs, RightSide ) ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ZoneHi = MinList( AB_High, oModePrice + SDev ) ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if ZoneHi = 0 then { ie, if oModePrice + SDev = 0 }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ZoneHi = AB_High ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ZoneLo = MaxList( AB_Low, oModePrice - SDev ) ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{ if oModePrice - SDev = 0 then ZoneLo = Low, so don&amp;#39;t need a check here }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">AB_SetZone( ZoneHi, ZoneLo, RightSide ) ;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;div style="padding-left: 32%; font-size: smaller; color: gray;">
+Copyright © TradeStation Technologies, Inc. All Rights Reserved
+TradeStation reserves the right to modify or overwrite
+this analysis technique with each release.
+&lt;/div></description></item><item><title>TradeStation/アクティビティバー/WA-Volume Distribution（ボリューム・ディストリビューション）</title><link>https://toushi.maku.blog/p/c2qkjx3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://toushi.maku.blog/p/c2qkjx3/</guid><description>&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">WA-Volume Distribution&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">{ Search Tag: WA-Volume Distribution }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">This study plots a modified ActivityBar, with each ActivityData bar being processed
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">either once or not at all depending on whether its volume is above or below the
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">specified BlockSize. If BlockSize is set to zero, each ActivityData bar is
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">processed, resulting in the basic ActivityBar plot of the Price Distribution
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ActivityBar study.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">inputs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	ApproxNumRows( 10 ) [DisplayName = &amp;#34;ApproxNumRows&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	 &amp;#34;Aprroximate Number of Rows. Enter the approximate number of rows to use in the study.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	CycleColors( true ) [DisplayName = &amp;#34;CycleColors&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	 &amp;#34;Enter true to cycle colors from one cell group to the next.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	DefaultColor( DarkGreen ) [DisplayName = &amp;#34;DefaultColor&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	 &amp;#34;Enter the default color used in the ActivityBar study.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	BlockSize( 100 ) [DisplayName = &amp;#34;BlockSize&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	 &amp;#34;Enter the volume increment for calibrating candlestick body width.&amp;#34;] ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">variables:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	MinuteInterval( BarInterval of ActivityData ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	CellGroupColor( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	CellGroupLabel( &amp;#34;&amp;#34; ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	AnyVol( 0 ) ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">AB_SetRowHeight( AB_RowHeightCalc( ApproxNumRows, 3 ) ) ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if BarType of ActivityData &amp;gt;= 2 then { ie, not minute data }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	AnyVol = Volume of ActivityData
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">else { if minute data }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	AnyVol = Ticks of ActivityData ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if CycleColors then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	CellGroupColor = AB_NextColor( MinuteInterval ) of ActivityData
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	CellGroupColor = DefaultColor ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if CellGroupColor = GetBackGroundColor then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	CellGroupColor = DefaultColor ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CellGroupLabel = AB_NextLabel( MinuteInterval ) of ActivityData ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if AnyVol &amp;gt;= BlockSize then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	Value1 = AB_AddCellRange( High of ActivityData, Low of ActivityData, RightSide,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">	 CellGroupLabel, CellGroupColor, 0 ) ;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;div style="padding-left: 32%; font-size: smaller; color: gray;">
+Copyright © TradeStation Technologies, Inc. All Rights Reserved
+TradeStation reserves the right to modify or overwrite
+this analysis technique with each release.
+&lt;/div></description></item><item><title>TradeStation/アクティビティバー/WA-Candlestick VolAccum（ローソク足出来高アキュムレーション）</title><link>https://toushi.maku.blog/p/p3omdnr/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://toushi.maku.blog/p/p3omdnr/</guid><description>&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">WA-Candlestick VolAccum&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">{ Search Tag: WA-Candlestick VolAccum }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{ This study plots an ActivityBar that simulates a candlestick, with the width of the
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> candlestick body varying in proportion to the volume of the ActivityBar. }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using elsystem.drawing;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using elsystem.drawingobjects;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">inputs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> BlockSize( 100 ) [DisplayName = &amp;#34;BlockSize&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Enter the amount of volume that will cause the width of the candlestick to be increased.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> MaxNumCells( 100 ) [DisplayName = &amp;#34;MaxNumCells&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Maximum Number of Cells. Enter the maximum number of cells that can be added to each side of the bar.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> UpColor( Magenta ) [DisplayName = &amp;#34;UpColor&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Enter the color to use when the close is greater than the open.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> DnColor( Yellow ) [DisplayName = &amp;#34;DnColor&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Down Color. Enter the color to use when the close is less than the open.&amp;#34;];
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">variables:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> TrendLine varTrendLine( NULL ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Counter( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> BStatus1Prev( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> BStatus1( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Remainder( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> FirstOpen( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> UnprocessedVol( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> RawNumCells( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> NumCells( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> TLRef( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> AnyVol( 0 );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">method Trendline CreateTrendline()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">variables: TrendLine tempTL;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> tempTL = Trendline.Create( DTPoint.Create( BarDateTime, Open ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> DTPoint.Create( BarDateTime, Close ) );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Setting &amp;#39;Persist&amp;#39; to false causes the text label to be deleted on an intrabar
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> tick. When set to false, a text label that is created on the closing tick of
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> the bar is saved/retained.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> tempTL.Persist = false;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> tempTL.Lock = true; { prevent inadvertant moving }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> tempTL.ExtLeft = false;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> tempTL.ExtRight = false;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> tempTL.Weight = 2;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if Close &amp;gt; Open then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> tempTL.Color = GetColorFromInteger( 255, UpColor )
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> else if Close &amp;lt; Open then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> tempTL.Color = GetColorFromInteger( 255, DnColor );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this is how the Trendline is &amp;#34;shown&amp;#34;; the Trendline is added to the
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> DrawingObjects collection; if you want to remove the Trendline, you can
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> use the Delete method of the DrawingObjects class
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> DrawingObjects.Add( tempTL );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return tempTL;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{ convert integer color to a color object and return the color object }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">method Color GetColorFromInteger( int Alpha, int ColorInteger )
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> return Color.FromARGB( Alpha, GetRValue( ColorInteger ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> GetGValue( ColorInteger ), GetBValue( ColorInteger ) );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">BStatus1Prev = BStatus1;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">BStatus1 = BarStatus( 1 );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if BarType of ActivityData &amp;gt;= 2 then { not minute data }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> AnyVol = Volume of ActivityData
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">else { minute data }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> AnyVol = Ticks of ActivityData;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{ initialize ActivityBar }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ie, if beginning of act data stream (can&amp;#39;t check if ActivityData&amp;#39;s CB = 1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">because act data stream does not start at CB = 1) or if first act data bar of
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">new act bar
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if ( CurrentBar of Data1 = 1 and BStatus1 = 2 )
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> or BStatus1Prev = 2 then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Remainder = 0;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> FirstOpen = Open of ActivityData;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> AB_SetRowHeight( .5 ); { arbitrary; cells not displayed, see note below }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{ add &amp;#34;hidden&amp;#34; cells corresponding to additional volume }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">UnprocessedVol = Remainder + AnyVol;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RawNumCells = IntPortion( UnprocessedVol / BlockSize );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Remainder = Mod( UnprocessedVol, BlockSize );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">NumCells = MinList( RawNumCells, MaxNumCells );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">for Counter = 1 to NumCells
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> these cells are arbitrarily added at FirstOpen; they can be added at any price
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> as long as it stays constant for the entire ActivityBar; the cells and labels
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> are not meant to be displayed (see study properties), but are used to control
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> the width of the zone - or candlestick body - that will be plotted and
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> displayed.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> AB_AddCell( FirstOpen, RightSide, &amp;#34;*&amp;#34;, Yellow, 0 );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> AB_AddCell( FirstOpen, LeftSide, &amp;#34;*&amp;#34;, Yellow, 0 );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{ set/update zone representing candlestick body }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">AB_SetZone( FirstOpen, Close of ActivityData, RightSide );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">AB_SetZone( FirstOpen, Close of ActivityData, LeftSide );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{ if at last ActivityData bar of ActivityBar, paint the ActivityBar }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if BStatus1 = 2 then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> varTrendLine = CreateTrendline();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;div style="padding-left: 32%; font-size: smaller; color: gray;">
+Copyright © TradeStation Technologies, Inc. All Rights Reserved
+TradeStation reserves the right to modify or overwrite
+this analysis technique with each release.
+&lt;/div></description></item><item><title>TradeStation/アクティビティバー/WA-Up vs Down Strength（上昇・下落ストレングス）</title><link>https://toushi.maku.blog/p/4wnw4rp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://toushi.maku.blog/p/4wnw4rp/</guid><description>&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">WA-Up vs Down Strength&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">{ Search Tag: WA-Up vs Down Strength }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">This study is somewhat similar to the Volume Strength ActivityBar study. As in that
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">study, it plots an ActivityBar in which each ActivityData bar is processed 0 or more
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">times depending on its volume and the specified BlockSize divisor. If BlockSize
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">is set to zero, each ActivityData bar is processed exactly once.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">The difference is that each time an ActivityData bar is processed, at most one cell
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">is added instead of a range of cells:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - if the ActivityData bar was an up bar, one cell is added to the right
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - if the ActivityData bar was a down bar, one cell is added to the left
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - if the ActivityData bar was unchanged, no cells are added
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">inputs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ApproxNumRows( 10 ) [DisplayName = &amp;#34;ApproxNumRows&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Aprroximate Number of Rows. Enter the approximate number of rows to use in the study. &amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> BlockSize( 100 ) [DisplayName = &amp;#34;BlockSize&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Enter the volume divisor to determine the number of times to process an ActivityData bar.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> MaxWeight( 15 ) [DisplayName = &amp;#34;MaxWeight&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Maximum Weight. Enter the maximum number of times an ActivityData bar can be processed.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> UpColor( Cyan ) [DisplayName = &amp;#34;UpColor&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Enter the plot color to be used when the Close is greater than the Open.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> DnColor( Red ) [DisplayName = &amp;#34;DnColor&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Down Color. Enter the plot color for the ActivityBar used when the Close is less than the Open.&amp;#34;] ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">variables:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Counter( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> MinuteInterval( BarInterval of ActivityData ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CellGroupLabel( &amp;#34;&amp;#34; ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> RawWeight( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Weight( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Side( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Color( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> AnyVol( 0 ) ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">AB_SetRowHeight( AB_RowHeightCalc( ApproxNumRows, 3 ) ) ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if BarType of ActivityData &amp;gt;= 2 then { ie, not minute data }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> AnyVol = Volume of ActivityData
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">else { if minute data }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> AnyVol = Ticks of ActivityData ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CellGroupLabel = AB_NextLabel( MinuteInterval ) of ActivityData ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if Close of ActivityData &amp;lt;&amp;gt; Close[1] of ActivityData and AnyVol &amp;gt;= BlockSize then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if BlockSize &amp;gt; 0 then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> RawWeight = IntPortion( AnyVol / BlockSize )
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> RawWeight = 1 ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Weight = MinList( RawWeight, MaxWeight ) ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if Close of ActivityData &amp;gt; Close[1] of ActivityData then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Side = RightSide ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Color = UpColor ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Side = LeftSide ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Color = DnColor ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> for Counter = 1 to Weight
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> AB_AddCell( Close of ActivityData, Side, CellGroupLabel, Color, 0 ) ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end ;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;div style="padding-left: 32%; font-size: smaller; color: gray;">
+Copyright © TradeStation Technologies, Inc. All Rights Reserved
+TradeStation reserves the right to modify or overwrite
+this analysis technique with each release.
+&lt;/div></description></item><item><title>TradeStation/アクティビティバー/WA-Volume Strength（出来高強度）</title><link>https://toushi.maku.blog/p/8eemvwj/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://toushi.maku.blog/p/8eemvwj/</guid><description>&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">WA-Volume Strength&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">{ Search Tag: WA-Volume Strength }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">This study plots a modified ActivityBar, with each ActivityData bar being processed
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">0 or more times depending on its volume and the specified BlockSize divisor. If
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">BlockSize is set to zero, each ActivityData bar is processed exactly once,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">resulting in the basic ActivityBar plot of the Price Distribution ActivityBar
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">study.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">inputs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ApproxNumRows( 10 ) [DisplayName = &amp;#34;ApproxNumRows&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Approximate Number of Rows. Enter the approximate number of rows to use in the study.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CycleColors( true ) [DisplayName = &amp;#34;CycleColors&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Enter true to cycle colors from one cell group to the next.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> DefaultColor( DarkGreen ) [DisplayName = &amp;#34;DefaultColor&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Enter the default color used in the ActivityBar study.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> BlockSize( 100 ) [DisplayName = &amp;#34;BlockSize&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Enter the volume increment for calibrating candlestick body width.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> MaxWeight( 5 ) [DisplayName = &amp;#34;MaxWeight&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Maximum Weight. Enter the maximum number of times an ActivityData bar can be processed.&amp;#34;];
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">variables:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> MinuteInterval( BarInterval of ActivityData ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CellGroupColor( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CellGroupLabel( &amp;#34;&amp;#34; ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> RawWeight( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Weight( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> AnyVol( 0 );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">AB_SetRowHeight( AB_RowHeightCalc( ApproxNumRows, 3 ) );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if BarType of ActivityData &amp;gt;= 2 then { ie, not minute data }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> AnyVol = Volume of ActivityData
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">else { if minute data }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> AnyVol = Ticks of ActivityData;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if CycleColors then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CellGroupColor = AB_NextColor( MinuteInterval ) of ActivityData
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CellGroupColor = DefaultColor;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if CellGroupColor = GetBackGroundColor then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CellGroupColor = DefaultColor;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CellGroupLabel = AB_NextLabel( MinuteInterval ) of ActivityData;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if AnyVol &amp;gt;= BlockSize then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if BlockSize &amp;gt; 0 then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> RawWeight = IntPortion( AnyVol / BlockSize )
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> else
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> RawWeight = 1;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Weight = MinList( RawWeight, MaxWeight );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> for Value1 = 1 to Weight
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Value2 = AB_AddCellRange( High of ActivityData, Low of ActivityData,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> RightSide, CellGroupLabel, CellGroupColor, 0 );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;div style="padding-left: 32%; font-size: smaller; color: gray;">
+Copyright © TradeStation Technologies, Inc. All Rights Reserved
+TradeStation reserves the right to modify or overwrite
+this analysis technique with each release.
+&lt;/div></description></item></channel></rss>

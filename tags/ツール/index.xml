@@ -1,14 +1,104 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ツール on まくまく投資ノート</title><link>https://toushi.maku.blog/tags/%E3%83%84%E3%83%BC%E3%83%AB/</link><description>Recent content in ツール on まくまく投資ノート</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Mon, 07 Dec 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/tags/%E3%83%84%E3%83%BC%E3%83%AB/index.xml" rel="self" type="application/rss+xml"/><item><title>資産配分シミュレーター（高橋ダン氏のライオン戦略用）</title><link>https://toushi.maku.blog/p/jxanz7d/</link><pubDate>Mon, 07 Dec 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/jxanz7d/</guid><description>投資資金を振り分けるための計算機 高橋ダン氏の書籍 『お金の増やし方』 、『勝利の投資術』 で紹介されている「ライオン戦略」は、長期投資の戦略として非常に参考になります。 簡単に言うと、投資用の資金を「長期投資用、短期投資用」の 2 つに分け、さらに長期投資用の資金を一定の比率でいろいろな資産に分散投資する戦略です。
-下記のツールは、投資資金を一定の比率で各資産に分配するための計算機です。 投資資金のところに金額を入力すると、それぞれいくら配分すればよいか表示されます（割合は固定してます）。
-投資資金: 万円 長期投資（8割） 万円 &amp;nbsp; 株式・社債・不動産（5割） 万円 &amp;nbsp; コモディティ（3割） 万円 &amp;nbsp; 国債・現金（2割） 万円 短期投資（2割） 万円 各資産について まず、「長期投資」と「短期投資」に使う資金は口座（証券口座）を分けて管理 することで、比率を守って投資できるようにします。 長期投資部分は、毎月いろいろな領域の ETF を少しずつ買っていくことで、分散投資します（シャープレシオを上げるのが重要）。 特定の領域の資産割合が大きくなってしまった場合は、別の領域の ETF の購入割合を大きくするなどして毎月リバランスします。
-長期投資（8割） 長期投資用の資産は長く持ち続けることによる複利効果を狙います。 短期的な大きなリターンは期待せず、多くの商品に分散投資することで安定したリターンを確保します。 出来高が大きく、信託報酬（経費率）の低い ETF を活用します。
-長期投資資産のカテゴリ どう分散するか？ 具体的な ETF 例 株式・社債・不動産（5割）
-（経済成長時に上昇する部分） 「先進国／途上国」、
-「ドル建て／円建て／ユーロ建て」 VEA, VWO, SPY,
-1615, 1306, 2800,
-FXI, SX5S, FEZ,
-EIDO, HYG コモディティ（3割）
-（経済危機に備える部分） 貴金属（金／銀／プラチナ）、
-ベースメタル（亜鉛／鉛／アルミニウム）、
-原油、天然ガス、農業商品、ビットコイン GLD, IAU, GDX,
-GDXJ, SLV, PPLT,</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ツール on まくまく投資ノート</title><link>https://toushi.maku.blog/tags/%E3%83%84%E3%83%BC%E3%83%AB/</link><description>Recent content in ツール on まくまく投資ノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Mon, 07 Dec 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/tags/%E3%83%84%E3%83%BC%E3%83%AB/index.xml" rel="self" type="application/rss+xml"/><item><title>資産配分シミュレーター（高橋ダン氏のライオン戦略用）</title><link>https://toushi.maku.blog/p/jxanz7d/</link><pubDate>Mon, 07 Dec 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/jxanz7d/</guid><description>&lt;h2 id="投資資金を振り分けるための計算機">投資資金を振り分けるための計算機&lt;/h2>
+&lt;p>高橋ダン氏の書籍 &lt;a target="_blank" href="https://www.amazon.co.jp/dp/4761275073?tag=maku04-22">『お金の増やし方』&lt;/a>
+、&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4046049448?tag=maku04-22">『勝利の投資術』&lt;/a>
+ で紹介されている「ライオン戦略」は、長期投資の戦略として非常に参考になります。
+簡単に言うと、投資用の資金を「長期投資用、短期投資用」の 2 つに分け、さらに長期投資用の資金を一定の比率でいろいろな資産に分散投資する戦略です。&lt;/p>
+&lt;p>下記のツールは、投資資金を一定の比率で各資産に分配するための計算機です。
+投資資金のところに金額を入力すると、それぞれいくら配分すればよいか表示されます（割合は固定してます）。&lt;/p>
+&lt;style>
+ .local-total {
+ font-size: 1.1em;
+ width: 4em;
+ margin-right: 0.2em;
+ vertical-align: middle;
+ }
+ .local-table input {
+ width: 3em;
+ text-align: right;
+ border: none;
+ font-size: larger;
+ font-weight: bolder;
+ color: blue;
+ }
+ .local-table th, .local-table td {
+ border: none;
+ }
+ .local-long {
+ text-align: left;
+ background: green;
+ color: white;
+ }
+ .local-short {
+ text-align: left;
+ background: #933;
+ color: white;
+ }
+ .local-long-sub {
+ text-align: left;
+ background: #cfc;
+ color: green;
+ }
+ .local-result {
+ background: #eee;
+ }
+&lt;/style>
+&lt;center style="font-size: larger">
+ &lt;b>投資資金&lt;/b>:
+ &lt;input class="local-total" id="total" type="text" value="100">&lt;/input>万円
+&lt;/center>
+&lt;table class="local-table">
+ &lt;tbody>
+ &lt;tr>
+ &lt;th colspan="2" class="local-long">長期投資（8割）&lt;/th>
+ &lt;td class="local-result">&lt;input id="longTerm" disabled type="text" />万円&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td class="local-long">&amp;nbsp;&lt;/td>
+ &lt;th class="local-long-sub">株式・社債・不動産（5割）&lt;/th>
+ &lt;td class="local-result">&lt;input id="stock" disabled type="text" />万円&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td class="local-long">&amp;nbsp;&lt;/td>
+ &lt;th class="local-long-sub">コモディティ（3割）&lt;/th>
+ &lt;td class="local-result">&lt;input id="commodity" disabled type="text" />万円&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td class="local-long">&amp;nbsp;&lt;/td>
+ &lt;th class="local-long-sub">国債・現金（2割）&lt;/th>
+ &lt;td class="local-result">&lt;input id="bond" disabled type="text" />万円&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;th colspan="2" class="local-short">短期投資（2割）&lt;/th>
+ &lt;td class="local-result">&lt;input id="shortTerm" disabled type="text" value="0">&lt;/input>万円&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;script>
+window.addEventListener('DOMContentLoaded', () => {
+ const total = document.getElementById('total');
+ const longTerm = document.getElementById('longTerm');
+ const shortTerm = document.getElementById('shortTerm');
+ const stock = document.getElementById('stock');
+ const commodity = document.getElementById('commodity');
+ const bond = document.getElementById('bond');
+
+ total.addEventListener('input', (e) => {
+ updateValues();
+ });
+
+ updateValues();
+
+ function updateValues() {
+ const t = total.value;
+ longTerm.value = (t * 0.8).toFixed();
+ stock.value = (t * 0.8 * 0.5).toFixed();
+ commodity.value = (t * 0.8 * 0.3).toFixed();
+ bond.value = (t * 0.8 * 0.2).toFixed();
+ shortTerm.value = (t * 0.2).toFixed();
+ }
+});
+&lt;/script>
+&lt;h2 id="各資産について">各資産について&lt;/h2>
+&lt;p>まず、&lt;strong>「長期投資」と「短期投資」に使う資金は口座（証券口座）を分けて管理&lt;/strong> することで、比率を守って投資できるようにします。
+長期投資部分は、毎月いろいろな領域の ETF を少しずつ買っていくことで、分散投資します（シャープレシオを上げるのが重要）。
+特定の領域の資産割合が大きくなってしまった場合は、別の領域の ETF の購入割合を大きくするなどして毎月リバランスします。&lt;/p></description></item></channel></rss>

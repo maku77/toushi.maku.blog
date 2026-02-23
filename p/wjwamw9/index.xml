@@ -1,2 +1,35 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>トレステメモ (TradeStation) on まくまく投資ノート</title><link>https://toushi.maku.blog/p/wjwamw9/</link><description>Recent content in トレステメモ (TradeStation) on まくまく投資ノート</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 07 May 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/p/wjwamw9/index.xml" rel="self" type="application/rss+xml"/><item><title>TradeStation や EasyLanguage で使われる用語のメモ</title><link>https://toushi.maku.blog/p/spbgdm2/</link><pubDate>Fri, 24 Jan 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/spbgdm2/</guid><description>トレードステーションの解説や、そのプログラミング言語である EasyLanguage の解説使われる用語の説明です。 投資の世界では「テクニカル指標」という言葉はよく使うけど、「分析テクニック」という表現は独特ですね。
-銘柄 ＝ シンボル ＝ Symbol 複数のシンボルを集めたものを「シンボルリスト 」と呼びます。 足種 ＝ インターバル ＝ Interval 取引情報 &amp;hellip; 下記をまとめたもの 価格 出来高 時間 分析テクニック ＝ テクニカル指標 = 分析情報 「インジケーター」「ショウミー」「ペイントバー」「アクティビティバー」「プロバビリティマップ」などの総称。ストキャスティクスや移動平均など。 分析テクニックを集めたものを「分析グループ 」と呼びます。自分の好きな分析テクニックをカスタム分析グループとして保存しておけば、簡単にその分析画面を復元することができます。</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>トレステメモ (TradeStation) on まくまく投資ノート</title><link>https://toushi.maku.blog/p/wjwamw9/</link><description>Recent content in トレステメモ (TradeStation) on まくまく投資ノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Fri, 24 Jan 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/p/wjwamw9/index.xml" rel="self" type="application/rss+xml"/><item><title>TradeStation や EasyLanguage で使われる用語のメモ</title><link>https://toushi.maku.blog/p/spbgdm2/</link><pubDate>Fri, 24 Jan 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/spbgdm2/</guid><description>&lt;p>トレードステーションの解説や、そのプログラミング言語である EasyLanguage の解説使われる用語の説明です。
+投資の世界では「テクニカル指標」という言葉はよく使うけど、「分析テクニック」という表現は独特ですね。&lt;/p>
+&lt;ul>
+&lt;li>&lt;b>銘柄&lt;/b>
+ ＝ &lt;b>シンボル&lt;/b>
+ ＝ &lt;b>Symbol&lt;/b>
+
+&lt;ul>
+&lt;li>複数のシンボルを集めたものを「&lt;b>シンボルリスト&lt;/b>
+」と呼びます。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;b>足種&lt;/b>
+ ＝ &lt;b>インターバル&lt;/b>
+ ＝ &lt;b>Interval&lt;/b>
+&lt;/li>
+&lt;li>&lt;b>取引情報&lt;/b>
+ &amp;hellip; 下記をまとめたもの
+&lt;ul>
+&lt;li>価格&lt;/li>
+&lt;li>出来高&lt;/li>
+&lt;li>時間&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;b>分析テクニック&lt;/b>
+ ＝ &lt;b>テクニカル指標&lt;/b>
+ = &lt;b>分析情報&lt;/b>
+
+&lt;ul>
+&lt;li>「インジケーター」「ショウミー」「ペイントバー」「アクティビティバー」「プロバビリティマップ」などの総称。ストキャスティクスや移動平均など。&lt;/li>
+&lt;li>分析テクニックを集めたものを「&lt;b>分析グループ&lt;/b>
+」と呼びます。自分の好きな分析テクニックをカスタム分析グループとして保存しておけば、簡単にその分析画面を復元することができます。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item></channel></rss>

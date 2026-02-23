@@ -1,3 +1,42 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>DMI on まくまく投資ノート</title><link>https://toushi.maku.blog/tags/dmi/</link><description>Recent content in DMI on まくまく投資ノート</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Fri, 09 Aug 2019 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/tags/dmi/index.xml" rel="self" type="application/rss+xml"/><item><title>テクニカル指標: DMI（方向性指数）</title><link>https://toushi.maku.blog/p/9ju3pvu/</link><pubDate>Fri, 09 Aug 2019 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/9ju3pvu/</guid><description>DMI の概要 基本情報 英語名DMI: Directional Movement Index 日本語名方向性指数 考案者J・W・ワイルダー 考案年─ +DI が価格の上昇力を示す -DI が価格の下落力を示す ADX がトレンドの強さを示す DMI の買いシグナル／売りシグナル 買い: +DI が -DI を上抜け 売り: +DI が -DI を下抜け +DI と -DI のクロスはトレンドの転換を示しているため、+DI が -DI を上抜けたときが買いのタイミング、+DI が -DI を割り込んだときが売りのタイミングです。
-DMI による上昇トレンド／下降トレンドの判断 上昇トレンド: +DI ＞ -DI 下降トレンド: +DI ＜ -DI DMI によるトレンドの強さの判断 ADX が上昇しているときはトレンドが強く、ADX が低く推移しているときはトレンドが弱く、持ち合い相場であることを示します。 つまり、ADX を見ることで、トレンド相場なのか、レンジ相場なのかの見極め をしたトレードを行うことができます。
-関連指標 ATR: Average True Range 同じく、J・W・ワイルダー氏の考案。TR (True Range) の概念を使うことが DMI と ATR で共通しています。</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>DMI on まくまく投資ノート</title><link>https://toushi.maku.blog/tags/dmi/</link><description>Recent content in DMI on まくまく投資ノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Fri, 09 Aug 2019 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/tags/dmi/index.xml" rel="self" type="application/rss+xml"/><item><title>テクニカル指標: DMI（方向性指数）</title><link>https://toushi.maku.blog/p/9ju3pvu/</link><pubDate>Fri, 09 Aug 2019 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/9ju3pvu/</guid><description>&lt;h2 id="dmi-の概要">DMI の概要&lt;/h2>
+
+&lt;table>
+ &lt;thead>
+ &lt;tr>&lt;th colspan="2">基本情報&lt;/th>&lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>&lt;th>英語名&lt;/th>&lt;td>&lt;b>DMI&lt;/b>: Directional Movement Index&lt;/td>&lt;/tr>
+ &lt;tr>&lt;th>日本語名&lt;/th>&lt;td>方向性指数&lt;/td>&lt;/tr>
+ &lt;tr>&lt;th>考案者&lt;/th>&lt;td>J・W・ワイルダー&lt;/td>&lt;/tr>
+ &lt;tr>&lt;th>考案年&lt;/th>&lt;td>─&lt;/td>&lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+
+
+&lt;ul>
+&lt;li>&lt;strong>+DI&lt;/strong> が価格の上昇力を示す&lt;/li>
+&lt;li>&lt;strong>-DI&lt;/strong> が価格の下落力を示す&lt;/li>
+&lt;li>&lt;strong>ADX&lt;/strong> がトレンドの強さを示す&lt;/li>
+&lt;/ul>
+&lt;h2 id="dmi-の買いシグナル売りシグナル">DMI の買いシグナル／売りシグナル&lt;/h2>
+&lt;ul>
+&lt;li>買い: +DI が -DI を上抜け&lt;/li>
+&lt;li>売り: +DI が -DI を下抜け&lt;/li>
+&lt;/ul>
+&lt;p>+DI と -DI のクロスはトレンドの転換を示しているため、+DI が -DI を上抜けたときが買いのタイミング、+DI が -DI を割り込んだときが売りのタイミングです。&lt;/p>
+&lt;h2 id="dmi-による上昇トレンド下降トレンドの判断">DMI による上昇トレンド／下降トレンドの判断&lt;/h2>
+&lt;ul>
+&lt;li>上昇トレンド: +DI ＞ -DI&lt;/li>
+&lt;li>下降トレンド: +DI ＜ -DI&lt;/li>
+&lt;/ul>
+&lt;h2 id="dmi-によるトレンドの強さの判断">DMI によるトレンドの強さの判断&lt;/h2>
+&lt;p>ADX が上昇しているときはトレンドが強く、ADX が低く推移しているときはトレンドが弱く、持ち合い相場であることを示します。
+つまり、ADX を見ることで、&lt;strong>トレンド相場なのか、レンジ相場なのかの見極め&lt;/strong> をしたトレードを行うことができます。&lt;/p>
+&lt;h2 id="関連指標">関連指標&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="../../p/tasaq7n">ATR: Average True Range&lt;/a>
+&lt;ul>
+&lt;li>同じく、J・W・ワイルダー氏の考案。TR (True Range) の概念を使うことが DMI と ATR で共通しています。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item></channel></rss>

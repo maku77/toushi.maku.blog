@@ -1,18 +1,281 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MetaTrader/MQL: 注文を出す on まくまく投資ノート</title><link>https://toushi.maku.blog/p/qboyakv/</link><description>Recent content in MetaTrader/MQL: 注文を出す on まくまく投資ノート</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Tue, 02 Feb 2021 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/p/qboyakv/index.xml" rel="self" type="application/rss+xml"/><item><title>MetaTrader/MQL: CTrade クラスで注文を出す (MT5)</title><link>https://toushi.maku.blog/p/bw6tgck/</link><pubDate>Sun, 08 Nov 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/bw6tgck/</guid><description>MQL で注文を出すときは、クラスベースの CTrade や、関数ベースの OrderSend を使用します。 ここでは、CTrade クラスを使って注文を出す方法を説明します。 OrderSend 関数と違い、CTrade クラスは注文の種類ごとにメソッド名が Buy、Sell、BuyLimit のように分かれている ので、わかりやすいコードを記述することができます。
-CTrade クラスのインクルード トレード用クラス のひとつである CTrade クラス を使用すると、取引のための注文を出したり、注文をキャンセルしたりできます。 Ctrade クラスを使用するには、次のように Trade/Trade.mql ヘッダファイルをインクルードする必要があります。
-#include &amp;lt;Trade/Trade.mqh&amp;gt; CTrade trade; // CTrade インスタンスの生成 成行注文を出す (CTrade.Buy, Sell) カレントシンボルの成行注文 CTrade.Buy メソッド で 成行の買い 注文を出すことができます。 第 1 引数 (volume) だけが必須で、ここで取引のロット数（0.1 なら 1万通貨）を指定します。 許容するスリッページ（ポイント数）は、CTrade.SetDeviationInPoints メソッド で指定できます。
-次のスクリプトを実行すると、現在のシンボルを 0.1 ロット購入します。
-Scripts/Buy.mq5（成行買いのスクリプト実装例） #include &amp;lt;Trade/Trade.mqh&amp;gt; // CTrade const double LOT = 0.1; // 取引するロット数（ボリューム） 0.1 = 1万通貨 /** スクリプトのエントリポイント */ void OnStart() { CTrade trade; trade.</description></item><item><title>MetaTrader/MQL: OrderSend で成行注文を出す (MT5)</title><link>https://toushi.maku.blog/p/iz8gpw6/</link><pubDate>Mon, 01 Feb 2021 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/iz8gpw6/</guid><description>成行注文時の OrderSend 関数の使い方 MT5 で売買注文を出すには、OrderSend 関数（日本語） を使用します。 OrderSend 関数は様々な注文で使用されるため、成行注文を行うには、それ用に設定した MqlTradeRequest オブジェクトを引数で渡してやる必要があります。
-bool OrderSend(MqlTradeRequest&amp;amp; request, MqlTradeResult&amp;amp; result) まず、ブローカーが設定している 注文執行方式 によって指定すべき値が変わってくるので、対象銘柄がどの注文執行方式で取引されるかを把握しておいてください（→ FX 会社の注文執行方式について）。
-簡単に言えば、次の注文執行方式であれば価格とスリッページ (deviation) の指定が必要で、
-Instant Execution（成行方式、ストリーミング方式） Request Execution（リクエスト方式） 次の注文執行方式であれば価格とスリッページの指定は必要ありません（取引価格は時価で決まる）。
-Market Execution（カウントダウン方式、マーケット方式） Exchange Execution（エクスチェンジ方式） それぞれの注文執行方式において、MqlTradeRequest オブジェクトのどのフィールドが必須かは MqlTradeRequest 構造体のドキュメント（日本語）に説明があります。 ただ、公式ドキュメントはとても分かりにくいので下記表でまとめておきます。
-引数 Instant / Request Execution Market / Exchange Execution action TRADE_ACTION_DEAL TRADE_ACTION_DEAL magic ほぼ必須 ほぼ必須 symbol 必須 必須 volume 必須 必須 type 必須 必須 type_filling 必須 必須 price 必須 ─ deviation 必須 ─ sl オプショナル オプショナル tp オプショナル オプショナル comment オプショナル オプショナル 表: 成行注文で必要な MqlTradeRequest のフィールド 一見難しそうですが、要するに約定させる価格 (price / deviation) をユーザーが指定すべきかどうかだけの違いです。 どの注文執行方式でも動作するように OrderSend 関数を呼び出すには、常に price 引数と deviation 引数を指定するようにすればよいでしょう（Market Execution および Exchange Execution では無視されます）。</description></item><item><title>MetaTrader/MQL: OrderSend で決済注文を出す（ポジションのクローズ）(MT5)</title><link>https://toushi.maku.blog/p/wb8rxic/</link><pubDate>Tue, 02 Feb 2021 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/wb8rxic/</guid><description>ポジションのクローズは反対売買 MT5 においてポジションのクローズ（決済）を行うには、OrderSend で逆方向のポジションを追加する注文を行います。 つまり、現在のポジションと相殺するように買い注文 or 売り注文を出します。
-現在の口座が、両建て可能な「ヘッジアカウント」の場合、反対注文を出すときは、対象のポジションを特定するためのチケット番号 (MqlTradeRequest.position) を指定しなければいけないことに注意してください。 「ネットアカウント」を使用している場合は、シンボル（銘柄）だけを指定すれば OK です（ポジションのチケット番号を指定しても無視されます）。
-参考: ヘッジアカウントとネットアカウントの違いを理解する ネットアカウントにおけるポジションクローズ ネットアカウントにおいて既存のポジションをクローズするには、シンボル名を指定して OrderSend で成行注文 (action == TRADE_ACTION_DEAL) あるいは、指値注文 (action == TRADE_ACTION_PENDING) を入れます。 成行注文でも指値注文でも決済タイミングが異なるだけで同様です。
-あるシンボルのポジションをすべて閉じるには、反対方向に同じボリュームだけ売買注文を入れる必要があります。 そのため、まずは現在のポジションの量を調べます。
-/** * ネットアカウントにおいて、指定したシンボルのポジション情報を取得します。 * ヘッジアカウントで使用すると、最初に見つかったポジションの情報を返します。 * * @param volume[out] 保有ポジションのロット数 * @param posType[out] 保有ポジションの売買方向 * (POSITION_TYPE_SELL or POSITION_TYPE_BUY) * @param symbol[in] 取得対象のシンボル（省略時はカレントシンボル） * @return ポジションが見つかった場合: true、ノーポジの場合: false */ bool getOpenPosition_InNetAccount( double &amp;amp;volume, ENUM_POSITION_TYPE &amp;amp;posType, string symbol = NULL ) { if (symbol == NULL) symbol = Symbol(); if (!</description></item><item><title>MetaTrader/MQL: OrderSend の引数を理解する - MqlTradeRequest/MqlTradeResult 構造体 (MT5)</title><link>https://toushi.maku.blog/p/j6iu7hs/</link><pubDate>Sun, 08 Nov 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/j6iu7hs/</guid><description>MT5 の OrderSend 関数 MT5 で注文を出すには OrderSend 関数（日本語）を使用します。
-MT5 の OrderSend 関数 bool OrderSend( MqlTradeRequest&amp;amp; request, // 注文内容を指定する MqlTradeResult&amp;amp; result // 注文結果が格納される ) ここでは、注文結果が格納される MqlTradeResult 構造体（日本語）と、注文結果が格納される MqlTradeResult 構造体（日本語）について説明します。
-MqlTradeRequest 構造体（注文内容を指定する） MqlTraderRequest 構造体には次のようなフィールドが定義されています。 各フィールドにどのような値を設定すべきかを順に説明していきます。
-MqlTradeRequest 構造体 struct MqlTradeRequest { ENUM_TRADE_REQUEST_ACTIONS action; // アクション（取引タイプ） ulong magic; // EA のマジックナンバー ulong order; // オーダーのチケット番号（待機注文を操作する場合） string symbol; // シンボル名 double volume; // ロット数 double price; // 価格 double stoplimit; // ストップ・リミット注文発火時に使われる指値価格 double sl; // 利確の価格 double tp; // 損切の価格 ulong deviation; // 最大許容スリッページ（ポイント） ENUM_ORDER_TYPE type; // 売買のタイプ ENUM_ORDER_TYPE_FILLING type_filling; // フィル・タイプ ENUM_ORDER_TYPE_TIME type_time; // 有効期限タイプ datetime expiration; // 有効期限 string comment; // 注文コメント ulong position; // ポジションのチケット番号（ポジションを操作する場合） ulong position_by; // 反対ポジションのチケット番号（ポジション相殺用） }; ENUM_TRADE_REQUEST_ACTIONS action（必須） ENUM_TRADE_REQUEST_ACTIONS 列挙値 でアクション（取引タイプ）を指定します。 つまり、この OrderSend 関数を何のために使用するかを示します。 この値によって、残りのパラメータに何を設定すべきかがガラリと変わってきます。</description></item><item><title>MetaTrader/MQL: OrderSend で注文を出す (MT4)</title><link>https://toushi.maku.blog/p/oanyb2a/</link><pubDate>Tue, 12 Jan 2021 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/oanyb2a/</guid><description>MT4 で指定したシンボル（USDJPY などの通貨ペア）に対して、成行注文や指値注文を出すには OrderSend 関数 を使用します。 MT4 バージョンと、MT5 バージョンでは関数のパラメータや戻り値が異なるので注意してください。 多くの環境では、まだ MT4 が使われているので、ここでは MT4 バージョンの OrderSend 関数の使い方を説明します。
-OrderSend 関数 (MT4) の使い方 OrderSend 関数 (MQL4) int OrderSend( string symbol, // symbol int cmd, // operation double volume, // volume double price, // price int slippage, // slippage double stoploss, // stop loss double takeprofit, // take profit string comment=NULL, // comment int magic=0, // magic number datetime expiration=0, // pending order expiration color arrow_color=clrNONE // color ) OrderSend のパラメーター symbol &amp;hellip; 注文する通貨ペアのシンボル名。例えば、&amp;quot;USDJPY&amp;quot; などを指定します。選択中のチャートのシンボルを使いたい場合は、Symbol() を指定すれば OK です。 cmd &amp;hellip; 注文の種類 (Order Properties) を指定します。 OP_BUY &amp;hellip; 成行買い OP_SELL &amp;hellip; 成行売り OP_BUYLIMIT &amp;hellip; 指値買い（今より安くなったら買う） OP_SELLLIMIT &amp;hellip; 指値売り（今より高くなったら売る） OP_BUYSTOP &amp;hellip; 逆指値買い（今より高くなったら買う） OP_SELLSTOP &amp;hellip; 逆指値売り（今より安くなったら売る） volume &amp;hellip; ロット数。多くの場合 0.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MetaTrader/MQL: 注文を出す on まくまく投資ノート</title><link>https://toushi.maku.blog/p/qboyakv/</link><description>Recent content in MetaTrader/MQL: 注文を出す on まくまく投資ノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Sun, 03 Apr 2022 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/p/qboyakv/index.xml" rel="self" type="application/rss+xml"/><item><title>MetaTrader/MQL: CTrade クラスで注文を出す (MT5)</title><link>https://toushi.maku.blog/p/bw6tgck/</link><pubDate>Sun, 08 Nov 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/bw6tgck/</guid><description>&lt;p>MQL で注文を出すときは、クラスベースの &lt;code>CTrade&lt;/code> や、関数ベースの &lt;code>OrderSend&lt;/code> を使用します。
+ここでは、&lt;code>CTrade&lt;/code> クラスを使って注文を出す方法を説明します。
+&lt;code>OrderSend&lt;/code> 関数と違い、&lt;strong>&lt;code>CTrade&lt;/code> クラスは注文の種類ごとにメソッド名が &lt;code>Buy&lt;/code>、&lt;code>Sell&lt;/code>、&lt;code>BuyLimit&lt;/code> のように分かれている&lt;/strong> ので、わかりやすいコードを記述することができます。&lt;/p>
+&lt;h2 id="ctrade-クラスのインクルード">CTrade クラスのインクルード&lt;/h2>
+&lt;p>&lt;a href="https://www.mql5.com/ja/docs/standardlibrary/tradeclasses">トレード用クラス&lt;/a> のひとつである &lt;a href="https://www.mql5.com/ja/docs/standardlibrary/tradeclasses/ctrade">CTrade クラス&lt;/a> を使用すると、取引のための注文を出したり、注文をキャンセルしたりできます。
+&lt;code>Ctrade&lt;/code> クラスを使用するには、次のように &lt;code>Trade/Trade.mql&lt;/code> ヘッダファイルをインクルードする必要があります。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;Trade/Trade.mqh&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">CTrade&lt;/span> &lt;span class="n">trade&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// CTrade インスタンスの生成
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;h2 id="成行注文を出す-ctradebuy-sell">成行注文を出す (CTrade.Buy, Sell)&lt;/h2>
+&lt;h3 id="カレントシンボルの成行注文">カレントシンボルの成行注文&lt;/h3>
+&lt;p>&lt;a href="https://www.mql5.com/ja/docs/standardlibrary/tradeclasses/ctrade/ctradebuy">CTrade.Buy メソッド&lt;/a> で &lt;strong>成行の買い&lt;/strong> 注文を出すことができます。
+第 1 引数 (&lt;code>volume&lt;/code>) だけが必須で、ここで取引のロット数（0.1 なら 1万通貨）を指定します。
+許容するスリッページ（ポイント数）は、&lt;a href="https://www.mql5.com/ja/docs/standardlibrary/tradeclasses/ctrade/ctradesetdeviationinpoints">CTrade.SetDeviationInPoints メソッド&lt;/a> で指定できます。&lt;/p>
+&lt;p>次のスクリプトを実行すると、現在のシンボルを 0.1 ロット購入します。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">Scripts/Buy.mq5（成行買いのスクリプト実装例）&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;Trade/Trade.mqh&amp;gt;&lt;/span>&lt;span class="cp"> &lt;/span>&lt;span class="c1">// CTrade
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="n">LOT&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mf">0.1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 取引するロット数（ボリューム） 0.1 = 1万通貨
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/** スクリプトのエントリポイント */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">OnStart&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">CTrade&lt;/span> &lt;span class="n">trade&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">trade&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">SetDeviationInPoints&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">5&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 許容するスリッページ（ポイント数）を設定
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="n">trade&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Buy&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">LOT&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="c1">// 現在のチャートの通貨を、現在の買値 (Ask) で購入
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">printTradeError&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">trade&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/** トレード関数がエラーになったときのエラー出力 */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">printTradeError&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">const&lt;/span> &lt;span class="n">CTrade&lt;/span>&lt;span class="o">&amp;amp;&lt;/span> &lt;span class="n">trade&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">uint&lt;/span> &lt;span class="n">code&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">trade&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">ResultRetcode&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">string&lt;/span> &lt;span class="n">desc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">trade&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">ResultRetcodeDescription&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;ERROR(%u): %s&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">code&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">desc&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>&lt;strong>成行の売り&lt;/strong> 注文を出したいときは、&lt;code>CTrade.Buy&lt;/code> メソッドの代わりに &lt;a href="https://www.mql5.com/ja/docs/standardlibrary/tradeclasses/ctrade/ctradesell">CTrade.Sell メソッド&lt;/a> を使用します。
+パラメータは買い注文と同様です。&lt;/p></description></item><item><title>MetaTrader/MQL: OrderSend で成行注文を出す (MT5)</title><link>https://toushi.maku.blog/p/iz8gpw6/</link><pubDate>Mon, 01 Feb 2021 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/iz8gpw6/</guid><description>&lt;h2 id="成行注文時の-ordersend-関数の使い方">成行注文時の OrderSend 関数の使い方&lt;/h2>
+&lt;p>MT5 で売買注文を出すには、&lt;a href="https://www.mql5.com/en/docs/trading/ordersend">OrderSend 関数&lt;/a>（&lt;a href="https://www.mql5.com/en/docs/trading/ordersend">日本語&lt;/a>） を使用します。
+&lt;code>OrderSend&lt;/code> 関数は様々な注文で使用されるため、成行注文を行うには、それ用に設定した &lt;code>MqlTradeRequest&lt;/code> オブジェクトを引数で渡してやる必要があります。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">bool&lt;/span> &lt;span class="n">OrderSend&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">MqlTradeRequest&lt;/span>&lt;span class="o">&amp;amp;&lt;/span> &lt;span class="n">request&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">MqlTradeResult&lt;/span>&lt;span class="o">&amp;amp;&lt;/span> &lt;span class="n">result&lt;/span>&lt;span class="p">)&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>まず、ブローカーが設定している &lt;strong>注文執行方式&lt;/strong> によって指定すべき値が変わってくるので、対象銘柄がどの注文執行方式で取引されるかを把握しておいてください（→ &lt;a href="../../p/2roz7fo">FX 会社の注文執行方式について&lt;/a>）。&lt;/p>
+&lt;p>簡単に言えば、次の注文執行方式であれば価格とスリッページ (deviation) の指定が必要で、&lt;/p>
+&lt;ul>
+&lt;li>Instant Execution（成行方式、ストリーミング方式）&lt;/li>
+&lt;li>Request Execution（リクエスト方式）&lt;/li>
+&lt;/ul>
+&lt;p>次の注文執行方式であれば価格とスリッページの指定は必要ありません（取引価格は時価で決まる）。&lt;/p>
+&lt;ul>
+&lt;li>Market Execution（カウントダウン方式、マーケット方式）&lt;/li>
+&lt;li>Exchange Execution（エクスチェンジ方式）&lt;/li>
+&lt;/ul>
+&lt;p>それぞれの注文執行方式において、&lt;code>MqlTradeRequest&lt;/code> オブジェクトのどのフィールドが必須かは &lt;a href="https://www.mql5.com/en/docs/constants/structures/mqltraderequest">MqlTradeRequest 構造体のドキュメント&lt;/a>（&lt;a href="https://www.mql5.com/ja/docs/constants/structures/mqltraderequest">日本語&lt;/a>）に説明があります。
+ただ、公式ドキュメントはとても分かりにくいので下記表でまとめておきます。&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>引数&lt;/th>
+ &lt;th style="text-align: center">Instant / Request Execution&lt;/th>
+ &lt;th style="text-align: center">Market / Exchange Execution&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>action&lt;/td>
+ &lt;td style="text-align: center">&lt;code>TRADE_ACTION_DEAL&lt;/code>&lt;/td>
+ &lt;td style="text-align: center">&lt;code>TRADE_ACTION_DEAL&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>magic&lt;/td>
+ &lt;td style="text-align: center">ほぼ必須&lt;/td>
+ &lt;td style="text-align: center">ほぼ必須&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>symbol&lt;/td>
+ &lt;td style="text-align: center">必須&lt;/td>
+ &lt;td style="text-align: center">必須&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>volume&lt;/td>
+ &lt;td style="text-align: center">必須&lt;/td>
+ &lt;td style="text-align: center">必須&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>type&lt;/td>
+ &lt;td style="text-align: center">必須&lt;/td>
+ &lt;td style="text-align: center">必須&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>type_filling&lt;/td>
+ &lt;td style="text-align: center">必須&lt;/td>
+ &lt;td style="text-align: center">必須&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>price&lt;/td>
+ &lt;td style="text-align: center">&lt;strong>必須&lt;/strong>&lt;/td>
+ &lt;td style="text-align: center">─&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>deviation&lt;/td>
+ &lt;td style="text-align: center">&lt;strong>必須&lt;/strong>&lt;/td>
+ &lt;td style="text-align: center">─&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>sl&lt;/td>
+ &lt;td style="text-align: center">オプショナル&lt;/td>
+ &lt;td style="text-align: center">オプショナル&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>tp&lt;/td>
+ &lt;td style="text-align: center">オプショナル&lt;/td>
+ &lt;td style="text-align: center">オプショナル&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>comment&lt;/td>
+ &lt;td style="text-align: center">オプショナル&lt;/td>
+ &lt;td style="text-align: center">オプショナル&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;center>表: 成行注文で必要な MqlTradeRequest のフィールド&lt;/center>
+&lt;p>一見難しそうですが、要するに約定させる価格 (&lt;code>price&lt;/code> / &lt;code>deviation&lt;/code>) をユーザーが指定すべきかどうかだけの違いです。
+どの注文執行方式でも動作するように &lt;code>OrderSend&lt;/code> 関数を呼び出すには、常に &lt;code>price&lt;/code> 引数と &lt;code>deviation&lt;/code> 引数を指定するようにすればよいでしょう（Market Execution および Exchange Execution では無視されます）。&lt;/p></description></item><item><title>MetaTrader/MQL: OrderSend で決済注文を出す（ポジションのクローズ）(MT5)</title><link>https://toushi.maku.blog/p/wb8rxic/</link><pubDate>Tue, 02 Feb 2021 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/wb8rxic/</guid><description>&lt;h2 id="ポジションのクローズは反対売買">ポジションのクローズは反対売買&lt;/h2>
+&lt;p>MT5 においてポジションのクローズ（決済）を行うには、&lt;code>OrderSend&lt;/code> で逆方向のポジションを追加する注文を行います。
+つまり、現在のポジションと相殺するように買い注文 or 売り注文を出します。&lt;/p>
+&lt;p>現在の口座が、両建て可能な「ヘッジアカウント」の場合、反対注文を出すときは、対象のポジションを特定するためのチケット番号 (&lt;code>MqlTradeRequest.position&lt;/code>) を指定しなければいけないことに注意してください。
+「ネットアカウント」を使用している場合は、シンボル（銘柄）だけを指定すれば OK です（ポジションのチケット番号を指定しても無視されます）。&lt;/p>
+&lt;ul>
+&lt;li>参考: &lt;a href="../../p/xmseugr">ヘッジアカウントとネットアカウントの違いを理解する&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="ネットアカウントにおけるポジションクローズ">ネットアカウントにおけるポジションクローズ&lt;/h2>
+&lt;p>ネットアカウントにおいて既存のポジションをクローズするには、シンボル名を指定して &lt;code>OrderSend&lt;/code> で成行注文 (&lt;code>action == TRADE_ACTION_DEAL&lt;/code>) あるいは、指値注文 (&lt;code>action == TRADE_ACTION_PENDING&lt;/code>) を入れます。
+成行注文でも指値注文でも決済タイミングが異なるだけで同様です。&lt;/p>
+&lt;p>あるシンボルのポジションをすべて閉じるには、反対方向に同じボリュームだけ売買注文を入れる必要があります。
+そのため、まずは現在のポジションの量を調べます。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * ネットアカウントにおいて、指定したシンボルのポジション情報を取得します。
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * ヘッジアカウントで使用すると、最初に見つかったポジションの情報を返します。
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> *
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * @param volume[out] 保有ポジションのロット数
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * @param posType[out] 保有ポジションの売買方向
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * (POSITION_TYPE_SELL or POSITION_TYPE_BUY)
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * @param symbol[in] 取得対象のシンボル（省略時はカレントシンボル）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * @return ポジションが見つかった場合: true、ノーポジの場合: false
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">bool&lt;/span> &lt;span class="nf">getOpenPosition_InNetAccount&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">volume&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ENUM_POSITION_TYPE&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">posType&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">string&lt;/span> &lt;span class="n">symbol&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">NULL&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">symbol&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">symbol&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Symbol&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="n">PositionSelect&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">symbol&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 指定したシンボルのポジションが存在しないときは、PositionSelect() は失敗して、
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="c1">// GetLastError() == 4753 (Position not found) になる。
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="nb">false&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 見つかったポジション情報を格納
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">volume&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">PositionGetDouble&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">POSITION_VOLUME&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">posType&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">ENUM_POSITION_TYPE&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">PositionGetInteger&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">POSITION_TYPE&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nb">true&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">OnStart&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">double&lt;/span> &lt;span class="n">volume&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ENUM_POSITION_TYPE&lt;/span> &lt;span class="n">posType&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">getOpenPosition_InNetAccount&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">volume&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">posType&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;ポジション情報: volume=%f, posType=%s&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">volume&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">EnumToString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">posType&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;ポジション情報が見つかりません&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>見つかったポジションのタイプが &lt;code>POSITION_TYPE_BUY&lt;/code> であれば、ロングポジション（買いポジ）を持っているので、同じボリュームの売り注文を出せば、すべてのポジションをクローズできることになります。&lt;/p></description></item><item><title>MetaTrader/MQL: OrderSend の引数を理解する - MqlTradeRequest/MqlTradeResult 構造体 (MT5)</title><link>https://toushi.maku.blog/p/j6iu7hs/</link><pubDate>Sun, 08 Nov 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/j6iu7hs/</guid><description>&lt;h2 id="mt5-の-ordersend-関数">MT5 の OrderSend 関数&lt;/h2>
+&lt;p>MT5 で注文を出すには &lt;a href="https://www.mql5.com/en/docs/trading/ordersend">OrderSend 関数&lt;/a>（&lt;a href="https://www.mql5.com/ja/docs/trading/ordersend">日本語&lt;/a>）を使用します。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">MT5 の OrderSend 関数&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">bool&lt;/span> &lt;span class="n">OrderSend&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">MqlTradeRequest&lt;/span>&lt;span class="o">&amp;amp;&lt;/span> &lt;span class="n">request&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 注文内容を指定する
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">MqlTradeResult&lt;/span>&lt;span class="o">&amp;amp;&lt;/span> &lt;span class="n">result&lt;/span> &lt;span class="c1">// 注文結果が格納される
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">)&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>ここでは、注文結果が格納される &lt;a href="https://www.mql5.com/en/docs/constants/structures/mqltraderesult">MqlTradeResult 構造体&lt;/a>（&lt;a href="https://www.mql5.com/ja/docs/constants/structures/mqltraderesult">日本語&lt;/a>）と、注文結果が格納される &lt;a href="https://www.mql5.com/en/docs/constants/structures/mqltraderesult">MqlTradeResult 構造体&lt;/a>（&lt;a href="https://www.mql5.com/ja/docs/constants/structures/mqltraderesult">日本語&lt;/a>）について説明します。&lt;/p>
+&lt;h2 id="mqltraderequest-構造体注文内容を指定する">MqlTradeRequest 構造体（注文内容を指定する）&lt;/h2>
+&lt;p>&lt;code>MqlTraderRequest&lt;/code> 構造体には次のようなフィールドが定義されています。
+各フィールドにどのような値を設定すべきかを順に説明していきます。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">MqlTradeRequest 構造体&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">struct&lt;/span> &lt;span class="nc">MqlTradeRequest&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ENUM_TRADE_REQUEST_ACTIONS&lt;/span> &lt;span class="n">action&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// アクション（取引タイプ）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">ulong&lt;/span> &lt;span class="n">magic&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// EA のマジックナンバー
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">ulong&lt;/span> &lt;span class="n">order&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// オーダーのチケット番号（待機注文を操作する場合）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">string&lt;/span> &lt;span class="n">symbol&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// シンボル名
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="n">volume&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// ロット数
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="n">price&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 価格
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="n">stoplimit&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// ストップ・リミット注文発火時に使われる指値価格
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="n">sl&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 利確の価格
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="n">tp&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 損切の価格
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">ulong&lt;/span> &lt;span class="n">deviation&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 最大許容スリッページ（ポイント）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">ENUM_ORDER_TYPE&lt;/span> &lt;span class="n">type&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 売買のタイプ
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">ENUM_ORDER_TYPE_FILLING&lt;/span> &lt;span class="n">type_filling&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// フィル・タイプ
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">ENUM_ORDER_TYPE_TIME&lt;/span> &lt;span class="n">type_time&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 有効期限タイプ
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">datetime&lt;/span> &lt;span class="n">expiration&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 有効期限
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">string&lt;/span> &lt;span class="n">comment&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 注文コメント
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">ulong&lt;/span> &lt;span class="n">position&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// ポジションのチケット番号（ポジションを操作する場合）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">ulong&lt;/span> &lt;span class="n">position_by&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 反対ポジションのチケット番号（ポジション相殺用）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">};&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;h3 id="enum_trade_request_actions-action必須">ENUM_TRADE_REQUEST_ACTIONS action（必須）&lt;/h3>
+&lt;p>&lt;a href="https://www.mql5.com/en/docs/constants/tradingconstants/enum_trade_request_actions">ENUM_TRADE_REQUEST_ACTIONS 列挙値&lt;/a> でアクション（取引タイプ）を指定します。
+つまり、この &lt;code>OrderSend&lt;/code> 関数を何のために使用するかを示します。
+この値によって、残りのパラメータに何を設定すべきかがガラリと変わってきます。&lt;/p></description></item><item><title>MetaTrader/MQL: OrderSend で注文を出す (MT4)</title><link>https://toushi.maku.blog/p/oanyb2a/</link><pubDate>Tue, 12 Jan 2021 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/oanyb2a/</guid><description>&lt;p>MT4 で指定したシンボル（USDJPY などの通貨ペア）に対して、成行注文や指値注文を出すには &lt;a href="https://docs.mql4.com/trading/ordersend">OrderSend 関数&lt;/a> を使用します。
+MT4 バージョンと、MT5 バージョンでは関数のパラメータや戻り値が異なるので注意してください。
+多くの環境では、まだ MT4 が使われているので、ここでは MT4 バージョンの &lt;code>OrderSend&lt;/code> 関数の使い方を説明します。&lt;/p>
+&lt;h2 id="ordersend-関数-mt4-の使い方">OrderSend 関数 (MT4) の使い方&lt;/h2>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">OrderSend 関数 (MQL4)&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="n">OrderSend&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">string&lt;/span> &lt;span class="n">symbol&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// symbol
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">cmd&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// operation
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="n">volume&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// volume
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="n">price&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// price
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">slippage&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// slippage
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="n">stoploss&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// stop loss
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="n">takeprofit&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// take profit
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">string&lt;/span> &lt;span class="n">comment&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nb">NULL&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// comment
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">magic&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// magic number
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">datetime&lt;/span> &lt;span class="n">expiration&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// pending order expiration
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">color&lt;/span> &lt;span class="n">arrow_color&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">clrNONE&lt;/span> &lt;span class="c1">// color
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">)&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;h3 id="ordersend-のパラメーター">OrderSend のパラメーター&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>symbol&lt;/code> &amp;hellip; 注文する通貨ペアのシンボル名。例えば、&lt;code>&amp;quot;USDJPY&amp;quot;&lt;/code> などを指定します。選択中のチャートのシンボルを使いたい場合は、&lt;code>Symbol()&lt;/code> を指定すれば OK です。&lt;/li>
+&lt;li>&lt;code>cmd&lt;/code> &amp;hellip; &lt;a href="https://docs.mql4.com/constants/tradingconstants/orderproperties">注文の種類 (Order Properties)&lt;/a> を指定します。
+&lt;ul>
+&lt;li>&lt;code>OP_BUY&lt;/code> &amp;hellip; 成行買い&lt;/li>
+&lt;li>&lt;code>OP_SELL&lt;/code> &amp;hellip; 成行売り&lt;/li>
+&lt;li>&lt;code>OP_BUYLIMIT&lt;/code> &amp;hellip; 指値買い（今より安くなったら買う）&lt;/li>
+&lt;li>&lt;code>OP_SELLLIMIT&lt;/code> &amp;hellip; 指値売り（今より高くなったら売る）&lt;/li>
+&lt;li>&lt;code>OP_BUYSTOP&lt;/code> &amp;hellip; 逆指値買い（今より高くなったら買う）&lt;/li>
+&lt;li>&lt;code>OP_SELLSTOP&lt;/code> &amp;hellip; 逆指値売り（今より安くなったら売る）&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;code>volume&lt;/code> &amp;hellip; ロット数。多くの場合 &lt;code>0.1&lt;/code> で 1 万通貨です。&lt;/li>
+&lt;li>&lt;code>price&lt;/code> &amp;hellip; 価格。例えば、1 ドル 110.5 円で売買するなら &lt;code>110.5&lt;/code> と指定します。スリッページを考慮するため、成行注文の場合でも指定する必要があります。&lt;/li>
+&lt;li>&lt;code>slippage&lt;/code> &amp;hellip; 最大許容スリッページ（ポイント）。&lt;code>price&lt;/code> で指定した価格から、どれだけずれて約定してもいいかをポイントで指定します。例えば、USDJPY が小数点以下 3 桁の価格まで表示される FX 会社の場合、1ポイント＝0.001円 になります。プログラムで &lt;a href="../../p/gkcxsb2">1 ポイントがいくらかを調べる&lt;/a> こともできます。&lt;/li>
+&lt;li>&lt;code>stoploss&lt;/code> &amp;hellip; 損切り価格（決済逆指値）。設定しない場合は 0。&lt;/li>
+&lt;li>&lt;code>takeprofit&lt;/code> &amp;hellip; 利食い価格（決済指値）。設定しない場合は 0。&lt;/li>
+&lt;li>&lt;code>comment=NULL&lt;/code> &amp;hellip; 注文のコメント。&lt;/li>
+&lt;li>&lt;code>magic=0&lt;/code> &amp;hellip; 注文のマジックナンバー。&lt;/li>
+&lt;li>&lt;code>expiration=0&lt;/code> &amp;hellip; 注文の有効期限。待機注文（指値／逆指値）のときのみ有効です。&lt;/li>
+&lt;li>&lt;code>arrow_color=clrNONE&lt;/code> &amp;hellip; 矢印の色。指定すると、ポジションをオープンしたときにチャート上に矢印が表示されます。&lt;/li>
+&lt;/ul>
+&lt;h3 id="ordersend-戻り値">OrderSend 戻り値&lt;/h3>
+&lt;p>&lt;code>OrderSend&lt;/code> 関数は、注文に成功するとチケット番号を返します。注文に失敗すると、&lt;code>-1&lt;/code> を返します。
+&lt;code>-1&lt;/code> が返された場合は、&lt;code>GetLastError()&lt;/code> を使ってエラーの原因を調べることができます。&lt;/p></description></item></channel></rss>

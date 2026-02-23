@@ -1,23 +1,393 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MetaTrader/MQL: チャートを操作する on まくまく投資ノート</title><link>https://toushi.maku.blog/p/g3fr3ep/</link><description>Recent content in MetaTrader/MQL: チャートを操作する on まくまく投資ノート</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Sat, 13 Feb 2021 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/p/g3fr3ep/index.xml" rel="self" type="application/rss+xml"/><item><title>MetaTrader/MQL: 描画オブジェクトの基本 (ObjectCreate, ObjectDelete, ObjectSetXxx)</title><link>https://toushi.maku.blog/p/du6env6/</link><pubDate>Sat, 13 Feb 2021 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/du6env6/</guid><description>描画オブジェクトの作成 (ObjectCreate) MetaTrader のチャート上に何らかの図形を描画するには、ObjectCreate 関数（日本語）を使って、描画オブジェクトを生成します。
-ObjectCreate 関数 bool ObjectCreate( long chart_id, // チャート ID（0 ならカレントチャート） string name, // オブジェクト名 ENUM_OBJECT type, // オブジェクトの種類 int sub_window, // サブウィンドウ番号（0 ならメインウィンドウ） datetime time1, // 1 番目のアンカーポイントの時刻 double price1, // 1 番目のアンカーポイントの価格 ... // : datetime time30=0, // 30番目のアンカーポイントの時刻 double price30=0 // 30番目のアンカーポイントの価格 ); chart_id / sub_window chart_id 引数と sub_window 引数には、どのチャートの、どのウィンドウに描画オブジェクトを表示するかを指定します。 カレントチャートのメインウィンドウに表示するのであれば、両方とも 0 を指定しておけば OK です。
-name name 引数では、作成する描画オブジェクトに名前を付けます。 描画オブジェクトの各種プロパティを設定するときは、この名前で描画オブジェクトを指定することになります。 名前はチャート内（サブウィンドウを含む）で一意でなければいけません。 ただし、使用上 63 文字までしか使えないので、その範囲で他のインジケーターとできるだけ被らない名前を付ける必要があります。</description></item><item><title>MetaTrader/MQL: チャート上にラベルを描画する (OBJ_LABEL, CChartObjectLabel)</title><link>https://toushi.maku.blog/p/h4fq2cm/</link><pubDate>Sun, 20 Mar 2016 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/h4fq2cm/</guid><description>ラベルオブジェクトについて 図: チャート上のラベル表示 ラベルオブジェクト (OBJ_LABEL) は、MetaTrader のチャート上に表示できる描画オブジェクトのひとつです。 ラベルオブジェクトの表示位置は、ウィンドウ上の左上を起点 (CORNER_LEFT_UPPER) として XY 座標が指定されるため、チャートを時間軸方向に移動させても、ラベルの表示位置は固定されて動きません（一方で、テキストオブジェクト (OBJ_TEXT) の場合は、表示位置が時間 (time) と価格 (price) で指定されるため、チャートの時間軸を移動させると同時に移動します）。
-ラベルオブジェクトの作成 ラベルオブジェクトを作成するには、組み込み関数である ObjectCreate の type パラメータに OBJ_LABEL を指定します（ObjectCreate の詳しい使い方はこちら）。
-bool ObjectCreate( long chart_id, // チャート識別子（0 はカレントチャート） string name, // オブジェクト名（ラベルの識別子） ENUM_OBJECT type, // オブジェクトの型（OBJ_LABEL を指定） int sub_window, // ウィンドウインデックス（0 はメインウィンドウ） datetime time1, // 1 番目のアンカーポイントの時間（ラベルの場合は使用しない） double price1, // 1 番目のアンカーポイントの価格（ラベルの場合は使用しない） // ...残りは省略可... ) 例えば、カレントチャート (chart_id=0) の、メインウィンドウ (sub_window=0) に表示するためのラベルオブジェクトを作成するには下記のようにします。
-if (!::ObjectCreate(0, &amp;#34;Label1&amp;#34;, OBJ_LABEL, 0, 0, 0)) { // ラベルオブジェクトの作成に失敗 } ラベルオブジェクトは、チャート上に複数追加することができますが、これらのラベルは、チャート ID（chart_id パラメータ）と、オブジェクト名 (name) で識別することになります。 現在アクティブになっているチャートにラベルを追加するのであれば、chart_id は 0 に設定します。 オブジェクト名はチャートの中で一意 になるような名前を付けます。 すでに同じ名前のオブジェクトが存在する場合は、ObjectCreate は失敗します。</description></item><item><title>MetaTrader/MQL: チャート上に矩形を描画する (OBJ_RECTANGLE, CChartObjectRectangle)</title><link>https://toushi.maku.blog/p/qju4dmu/</link><pubDate>Mon, 21 Mar 2016 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/qju4dmu/</guid><description>矩形オブジェクトについて 矩形オブジェクト (OBJ_RECTANGLE) および、矩形ラベルオブジェクト (OBJ_RECTANGLE_LABEL) は、MetaTrader のチャート上に表示できる描画オブジェクトです。 表示位置の指定方法によって、下記のように使い分けます。
-矩形オブジェクト (OBJ_RECTANGLE) 矩形の表示位置が、チャートの時間軸 (time) および、価格 (price) に基づいて指定されます。チャートの時間軸を移動させると、それに合わせて矩形の表示位置も移動します。 矩形ラベルオブジェクト (OBJ_RECTANGLE_LABEL) 矩形の表示位置は、ウィンドウ上の左上を起点として XY 座標が指定されるため（CORNER_LEFT_UPPER を指定した場合）、チャートを時間軸方向に移動させても、ラベルの表示位置は固定されて動きません。 矩形オブジェクト（矩形ラベルオブジェクト）の作成 矩形オブジェクト（矩形ラベルオブエジェクト）を作成するには、組み込み関数である ObjectCreate の type パラメータに OBJ_RECTANGLE、あるいは OBJ_RECTANGLE_LABEL を指定します。
-bool ObjectCreate( long chart_id, // チャート識別子（0 はカレントチャート） string name, // オブジェクト名 (ラベルの識別子） ENUM_OBJECT type, // オブジェクトの型（OBJ_LABEL を指定） int sub_window, // ウィンドウインデックス（0 はメインウィンドウ） datetime time1, // 1 番目のアンカーポイントの時間（ラベルの場合は使用しない） double price1, // 1 番目のアンカーポイントの価格（ラベルの場合は使用しない） // ...残りは省略可... ) 例えば、カレントチャート (chart_id=0) の、メインウィンドウ (sub_window=0) に表示するための矩形ラベルオブジェクトを作成するには下記のようにします。</description></item><item><title>MetaTrader/MQL: チャート上でのキーハンドリング (OnChartEvent)</title><link>https://toushi.maku.blog/p/c5z4ka3/</link><pubDate>Sat, 30 Jan 2021 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/c5z4ka3/</guid><description>EA の OnChartEvent() 関数でチャートイベントをハンドルすると、チャート上でのキーボード入力を取得することができます。 これを利用すると、自作の EA にキーボードショートカット（ホットキー）機能を付けることができます。 例えば、数字の 1 キーを押したときに、0.1 ロットの買い成行注文を出す、といったことができます。
-キー入力時は、OnChartEvent 関数の id パラメータの値は CHARTEVENT_KEYDOWN になり、lparam パラメータにキーコードが格納されます。 下記のサンプル EA をチャートにアタッチすると、入力したキー情報がチャート上に表示されるようになります。
-Experts/MyEa.mq5 int OnInit() { return INIT_SUCCEEDED; } void OnChartEvent( const int id, const long &amp;amp;lparam, const double &amp;amp;dparam, const string &amp;amp;sparam ) { if (id == CHARTEVENT_KEYDOWN) { string key; if (&amp;#39;0&amp;#39; &amp;lt;= lparam &amp;amp;&amp;amp; lparam &amp;lt;= &amp;#39;z&amp;#39;) { key = StringFormat(&amp;#34;key=%c(%d)&amp;#34;, lparam, lparam); } else { key = StringFormat(&amp;#34;key=%d&amp;#34;, lparam); } Comment(&amp;#34;CHARTEVENT_KEYDOWN: &amp;#34;, key); } } 特定のキー（例えば数字の 1 キー）が押されたときに、ユーザーに確認を求めてから処理を行いたい場合は次のようにします。</description></item><item><title>MetaTrader/MQL: 表示しているチャートを列挙する (ChartFirst, ChartNext)</title><link>https://toushi.maku.blog/p/244ung6/</link><pubDate>Sat, 19 Dec 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/244ung6/</guid><description>MQL の下記の関数を使用すると、現在表示しているチャートの情報を列挙することができます。
-ChartFirst 関数 &amp;hellip; 最初のチャート ID を取得します（見つからない場合は -1）。 ChartNext 関数 &amp;hellip; 次のチャートのチャート ID を取得します（見つからない場合は -1）。 具体的には、ChartFirst 関数で最初のチャートの ID を取得し、ChartNext 関数でその次のチャートの ID を繰り返し取得していく、という感じで処理できます。 処理するチャートがなくなったときは、上記の関数は -1 を返すので、正の値を返す間だけ繰り返し処理すれば OK です。
-次のサンプルスクリプトでは、現在表示しているすべてのチャートの情報（チャートID、シンボル名、時間足）を列挙しています。
-Scripts/Sample.mq5 void showChartInfo(long chartId) { string sym = ChartSymbol(chartId); ENUM_TIMEFRAMES period = ChartPeriod(chartId); PrintFormat(&amp;#34;%I64d: %s (%s)&amp;#34;, chartId, sym, EnumToString(period)); } void OnStart() { for (long id = ChartFirst(); id &amp;gt;= 0; id = ChartNext(id)) { showChartInfo(id); } } 実行結果 128968169024912109: USDJPY (PERIOD_M5) 128968169024912110: EURJPY (PERIOD_H1) 128968169024912111: EURUSD (PERIOD_D1) MQL5 の標準ライブラリとして提供されている CChart クラス を使っても同様のことを行えます。</description></item><item><title>MetaTrader/MQL: チャートのサイズ（幅・高さ）を取得する (ChartGetInteger)</title><link>https://toushi.maku.blog/p/xhxumiu/</link><pubDate>Tue, 27 Oct 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/xhxumiu/</guid><description>ChartGetInteger 関数 の第 2 パラメーター (prop_id) に CHART_WIDTH_IN_PIXELS および CHART_HEIGHT_IN_PIXELS を指定することで、指定したチャートの幅・高さを取得することができます。 取得されるサイズは、チャートの描画領域のみのサイズです（軸の価格表示部分などは含まれません）。
-ChartGetInteger() には次のような 2 つのバージョンがあります。 2 つ目のバージョンを使うと、戻り値で関数の実行に成功したかどうかを調べることができます。
-long ChartGetInteger( long chart_id, // 対象のチャート（0 はカレントチャート） int prop_id, // 取得したいプロパティの ID int sub_window=0 // サブウィンドウ番号（0 はメインチャート） ) bool ChartGetInteger( long chart_id, // 対象のチャート（0 はカレントチャート） int prop_id, // 取得したいプロパティの ID int sub_window, // サブウィンドウ番号（0 はメインチャート） long&amp;amp; long_var // 取得結果の格納先 ) インジケーター用のサブウィンドウのサイズを調べたい場合は、第 3 パラメーター sub_window に 1, 2, 3 のような数値を指定します（1 がひとつめのサブチャートです）。
-Scripts/MyScript.mq5 void OnStart() { long width = ChartGetInteger(0, CHART_WIDTH_IN_PIXELS); long height = ChartGetInteger(0, CHART_HEIGHT_IN_PIXELS); MessageBox(StringFormat(&amp;#34;width=%d, height=%d&amp;#34;, width, height)); } 下記はエラー処理なども行う例です（MT4用）。</description></item><item><title>MetaTrader/MQL: チャートの描画スタイルを設定する (ChartSetXxx)</title><link>https://toushi.maku.blog/p/dzcoybn/</link><pubDate>Sat, 10 Oct 2015 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/dzcoybn/</guid><description>チャートのプロパティを設定／取得する あるチャートに設定されたプロパティ（描画スタイルなど）を変更／取得するには、次のような関数を使用します。
-ChartSetInteger 関数 / ChartGetInteger 関数 整数型 のプロパティ。ENUM_CHART_PROPERTY_INTEGER で示されるプロパティを設定／取得できます（INTEGER という名前がついているけど実際は long 型であることに注意）。 ChartSetDouble 関数 / ChartGetDouble 関数 浮動小数点数型 のプロパティ。ENUM_CHART_PROPERTY_DOUBLE で示されるプロパティを設定／取得できます。 ChartSetString 関数 / ChartGetString 関数 文字列型 のプロパティ。ENUM_CHART_PROPERTY_STRING で示されるプロパティを設定／取得できます。 表示項目の OFF/ON 設定 チャートの表示項目を変更するには、ChartSetInteger 関数の第 2 引数 (prop_id) に以下のようなプロパティ ID を指定します。
-プロパティ ID 設定内容 CHART_MODE CHART_BARS: バーチャート
-CHART_CANDLES: ローソク足
-CHART_LINE: 折れ線 CHART_SHOW_VOLUMES CHART_VOLUME_HIDE: ボリュームを表示しない
-CHART_VOLUME_TICK: ボリュームとして Tick 数を表示する
-CHART_VOLUME_REAL: ボリュームとして実際の取引量を表示する（サーバによって提供されていないことがある） CHART_SHOW_GRID true/false: グリッドを表示する／しない CHART_SHOW_PERIOD_SEP true/false: 一定期間ごとの縦線を表示する／しない CHART_SHOW_ASK_LINE true/false: 買値の水平線を表示する／しない CHART_SHOW_BID_LINE true/false: 売値の水平線を表示する／しない CHART_SHOW_DATE_SCALE true/false: 日時バー（横の軸）を表示する／しない CHART_SHOW_PRICE_SCALE true/false: 価格バー（縦の軸）を表示する／しない CHART_SHOW_OHLC true/false: 左上の Open/High/Low/Close 価格を表示する／しない（これを false にしても、通貨ペア名と時間足は表示されます） CHART_SHOW_ONE_CLICK true/false: 左上のワンクリック注文パネルを表示する／しない 例: チャートのプロパティを変更する /** * Setup the drawing style of the chart.</description></item><item><title>MetaTrader/MQL: 新しいチャートを開く (ChartOpen)</title><link>https://toushi.maku.blog/p/hx7enu3/</link><pubDate>Sat, 10 Oct 2015 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/hx7enu3/</guid><description>ChartOpen 関数 を使うと、指定した通貨ペア、時間足のチャートを開くことができます。 下記は、ドル円の週足チャートを開く例です。 ChartOpen 関数が返したチャート ID を使って、開いたチャートの設定を行うことができます。
-Scripts/Hello.mq5 void OnStart() { // 週足チャートを開く long chartId = ChartOpen(&amp;#34;USDJPY&amp;#34;, PERIOD_W1); if (chartId == 0) { // オープンに失敗した場合（シンボル名がおかしいとか、チャートを開きすぎとか） Alert(&amp;#34;Could not open a new chart: &amp;#34;, GetLastError()); return; } // 開いたチャートを設定する ChartSetInteger(chartId, CHART_MODE, CHART_LINE); // ライン形式 ChartSetInteger(chartId, CHART_SHOW_VOLUMES, CHART_VOLUME_TICK); // 出来高 ChartSetInteger(chartId, CHART_SHOW_GRID, false); // グリッドを非表示 } カレントチャートと同じ通貨ペアのチャートを新しく開きたい場合は、第 1 引数で &amp;quot;USDJPY&amp;quot; と指定しているところを NULL に置き換えれば OK です。 第 2 引数で指定する足のタイムフレームには、ENUM_TIMEFRAMES 型のいずれかの値を指定します。 PERIOD_CURRENT を指定して、カレントチャートと同じタイムフレームを指定することもできます。</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MetaTrader/MQL: チャートを操作する on まくまく投資ノート</title><link>https://toushi.maku.blog/p/g3fr3ep/</link><description>Recent content in MetaTrader/MQL: チャートを操作する on まくまく投資ノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Thu, 03 Feb 2022 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/p/g3fr3ep/index.xml" rel="self" type="application/rss+xml"/><item><title>MetaTrader/MQL: 描画オブジェクトの基本 (ObjectCreate, ObjectDelete, ObjectSetXxx)</title><link>https://toushi.maku.blog/p/du6env6/</link><pubDate>Sat, 13 Feb 2021 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/du6env6/</guid><description>&lt;h2 id="描画オブジェクトの作成-objectcreate">描画オブジェクトの作成 (ObjectCreate)&lt;/h2>
+&lt;p>MetaTrader のチャート上に何らかの図形を描画するには、&lt;a href="https://www.mql5.com/en/docs/objects/objectcreate">ObjectCreate 関数&lt;/a>（&lt;a href="https://www.mql5.com/ja/docs/objects/objectcreate">日本語&lt;/a>）を使って、描画オブジェクトを生成します。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">ObjectCreate 関数&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">bool&lt;/span> &lt;span class="nf">ObjectCreate&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">long&lt;/span> &lt;span class="n">chart_id&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// チャート ID（0 ならカレントチャート）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">string&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// オブジェクト名
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">ENUM_OBJECT&lt;/span> &lt;span class="n">type&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// オブジェクトの種類
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">sub_window&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// サブウィンドウ番号（0 ならメインウィンドウ）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">datetime&lt;/span> &lt;span class="n">time1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 1 番目のアンカーポイントの時刻
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="n">price1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 1 番目のアンカーポイントの価格
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">...&lt;/span> &lt;span class="c1">// :
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">datetime&lt;/span> &lt;span class="n">time30&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 30番目のアンカーポイントの時刻
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="n">price30&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">0&lt;/span> &lt;span class="c1">// 30番目のアンカーポイントの価格
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">);&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;h3 id="chart_id--sub_window">chart_id / sub_window&lt;/h3>
+&lt;p>&lt;code>chart_id&lt;/code> 引数と &lt;code>sub_window&lt;/code> 引数には、どのチャートの、どのウィンドウに描画オブジェクトを表示するかを指定します。
+カレントチャートのメインウィンドウに表示するのであれば、両方とも 0 を指定しておけば OK です。&lt;/p>
+&lt;h3 id="name">name&lt;/h3>
+&lt;p>&lt;code>name&lt;/code> 引数では、作成する描画オブジェクトに名前を付けます。
+描画オブジェクトの各種プロパティを設定するときは、この名前で描画オブジェクトを指定することになります。
+名前はチャート内（サブウィンドウを含む）で一意でなければいけません。
+ただし、使用上 63 文字までしか使えないので、その範囲で他のインジケーターとできるだけ被らない名前を付ける必要があります。&lt;/p>
+&lt;p>簡単なテクニックとして、次のようなプレフィックスマクロを定義しておけば、&lt;/p>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#define OBJ_PREFIX &amp;#34;MY_INDI_&amp;#34;&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>オブジェクト名が必要なところで次のように使えます。
+文字列リテラルを並べると自動的に結合されるので、&lt;code>+&lt;/code> 演算子を使った文字列結合は必要ないことに注意してください。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="n">string&lt;/span> &lt;span class="n">name1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">OBJ_PREFIX&lt;/span> &lt;span class="s">&amp;#34;LABEL_1&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">//=&amp;gt; &amp;#34;MY_INDI_LABEL_1&amp;#34; になる
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">string&lt;/span> &lt;span class="n">name2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">OBJ_PREFIX&lt;/span> &lt;span class="s">&amp;#34;LABEL_2&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">//=&amp;gt; &amp;#34;MY_INDI_LABEL_2&amp;#34; になる
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;h3 id="type">type&lt;/h3>
+&lt;p>&lt;code>type&lt;/code> 引数では、どのような種類の描画オブジェクトを作成するかを指定します。
+例えば、ラベルであれば &lt;code>OBJ_LABEL&lt;/code> を指定し、水平線であれば &lt;code>OBJ_HLINE&lt;/code> を指定します。&lt;/p></description></item><item><title>MetaTrader/MQL: チャート上にラベルを描画する (OBJ_LABEL, CChartObjectLabel)</title><link>https://toushi.maku.blog/p/h4fq2cm/</link><pubDate>Sun, 20 Mar 2016 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/h4fq2cm/</guid><description>&lt;h2 id="ラベルオブジェクトについて">ラベルオブジェクトについて&lt;/h2>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="200" height="66" src="../../p/h4fq2cm/img-001_hu1302417434709473959.png" alt="/p/h4fq2cm/img-001.png" />
+ &lt;figcaption>図: チャート上のラベル表示&lt;/figcaption>
+&lt;/figure>
+
+&lt;p>&lt;strong>ラベルオブジェクト (&lt;code>OBJ_LABEL&lt;/code>)&lt;/strong> は、MetaTrader のチャート上に表示できる描画オブジェクトのひとつです。
+ラベルオブジェクトの表示位置は、ウィンドウ上の左上を起点 (&lt;code>CORNER_LEFT_UPPER&lt;/code>) として XY 座標が指定されるため、チャートを時間軸方向に移動させても、ラベルの表示位置は固定されて動きません（一方で、テキストオブジェクト (&lt;code>OBJ_TEXT&lt;/code>) の場合は、表示位置が時間 (time) と価格 (price) で指定されるため、チャートの時間軸を移動させると同時に移動します）。&lt;/p>
+&lt;h2 id="ラベルオブジェクトの作成">ラベルオブジェクトの作成&lt;/h2>
+&lt;p>ラベルオブジェクトを作成するには、組み込み関数である &lt;code>ObjectCreate&lt;/code> の &lt;code>type&lt;/code> パラメータに &lt;strong>&lt;code>OBJ_LABEL&lt;/code>&lt;/strong> を指定します（&lt;a href="../../p/du6env6">ObjectCreate の詳しい使い方はこちら&lt;/a>）。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">bool&lt;/span> &lt;span class="n">ObjectCreate&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">long&lt;/span> &lt;span class="n">chart_id&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// チャート識別子（0 はカレントチャート）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">string&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// オブジェクト名（ラベルの識別子）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">ENUM_OBJECT&lt;/span> &lt;span class="n">type&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// オブジェクトの型（OBJ_LABEL を指定）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">sub_window&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// ウィンドウインデックス（0 はメインウィンドウ）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">datetime&lt;/span> &lt;span class="n">time1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 1 番目のアンカーポイントの時間（ラベルの場合は使用しない）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="n">price1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 1 番目のアンカーポイントの価格（ラベルの場合は使用しない）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="c1">// ...残りは省略可...
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>例えば、カレントチャート (&lt;code>chart_id=0&lt;/code>) の、メインウィンドウ (&lt;code>sub_window=0&lt;/code>) に表示するためのラベルオブジェクトを作成するには下記のようにします。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!::&lt;/span>&lt;span class="n">ObjectCreate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;Label1&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">OBJ_LABEL&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// ラベルオブジェクトの作成に失敗
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>ラベルオブジェクトは、チャート上に複数追加することができますが、これらのラベルは、チャート ID（&lt;code>chart_id&lt;/code> パラメータ）と、オブジェクト名 (&lt;code>name&lt;/code>) で識別することになります。
+現在アクティブになっているチャートにラベルを追加するのであれば、&lt;code>chart_id&lt;/code> は 0 に設定します。
+&lt;strong>オブジェクト名はチャートの中で一意&lt;/strong> になるような名前を付けます。
+すでに同じ名前のオブジェクトが存在する場合は、&lt;code>ObjectCreate&lt;/code> は失敗します。&lt;/p></description></item><item><title>MetaTrader/MQL: チャート上に矩形を描画する (OBJ_RECTANGLE, CChartObjectRectangle)</title><link>https://toushi.maku.blog/p/qju4dmu/</link><pubDate>Mon, 21 Mar 2016 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/qju4dmu/</guid><description>&lt;h2 id="矩形オブジェクトについて">矩形オブジェクトについて&lt;/h2>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="200" height="136" src="../../p/qju4dmu/img-001_hu13626124891332210038.png" alt="/p/qju4dmu/img-001.png" />
+&lt;/figure>
+
+&lt;p>矩形オブジェクト (&lt;strong>&lt;code>OBJ_RECTANGLE&lt;/code>&lt;/strong>) および、矩形ラベルオブジェクト (&lt;strong>&lt;code>OBJ_RECTANGLE_LABEL&lt;/code>&lt;/strong>) は、MetaTrader のチャート上に表示できる描画オブジェクトです。
+表示位置の指定方法によって、下記のように使い分けます。&lt;/p>
+&lt;dl>
+&lt;dt>矩形オブジェクト (&lt;code>OBJ_RECTANGLE&lt;/code>)&lt;/dt>
+&lt;dd>矩形の表示位置が、チャートの時間軸 (time) および、価格 (price) に基づいて指定されます。チャートの時間軸を移動させると、それに合わせて矩形の表示位置も移動します。&lt;/dd>
+&lt;dt>矩形ラベルオブジェクト (&lt;code>OBJ_RECTANGLE_LABEL&lt;/code>)&lt;/dt>
+&lt;dd>矩形の表示位置は、ウィンドウ上の左上を起点として XY 座標が指定されるため（&lt;code>CORNER_LEFT_UPPER&lt;/code> を指定した場合）、チャートを時間軸方向に移動させても、ラベルの表示位置は固定されて動きません。&lt;/dd>
+&lt;/dl>
+&lt;h2 id="矩形オブジェクト矩形ラベルオブジェクトの作成">矩形オブジェクト（矩形ラベルオブジェクト）の作成&lt;/h2>
+&lt;p>矩形オブジェクト（矩形ラベルオブエジェクト）を作成するには、組み込み関数である &lt;a href="https://www.mql5.com/ja/docs/objects/objectcreate">ObjectCreate&lt;/a> の &lt;code>type&lt;/code> パラメータに &lt;code>OBJ_RECTANGLE&lt;/code>、あるいは &lt;code>OBJ_RECTANGLE_LABEL&lt;/code> を指定します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">bool&lt;/span> &lt;span class="n">ObjectCreate&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">long&lt;/span> &lt;span class="n">chart_id&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// チャート識別子（0 はカレントチャート）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">string&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// オブジェクト名 (ラベルの識別子）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">ENUM_OBJECT&lt;/span> &lt;span class="n">type&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// オブジェクトの型（OBJ_LABEL を指定）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">sub_window&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// ウィンドウインデックス（0 はメインウィンドウ）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">datetime&lt;/span> &lt;span class="n">time1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 1 番目のアンカーポイントの時間（ラベルの場合は使用しない）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="n">price1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 1 番目のアンカーポイントの価格（ラベルの場合は使用しない）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="c1">// ...残りは省略可...
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>例えば、カレントチャート (&lt;code>chart_id=0&lt;/code>) の、メインウィンドウ (&lt;code>sub_window=0&lt;/code>) に表示するための矩形ラベルオブジェクトを作成するには下記のようにします。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!::&lt;/span>&lt;span class="n">ObjectCreate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;Rect1&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">OBJ_RECTANGLE_LABEL&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 矩形ラベルオブジェクトの作成に失敗
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>すでに同じ名前 (&lt;code>name&lt;/code>) のオブジェクトが、そのチャートに追加されている場合は、&lt;code>ObjectCreate&lt;/code> は失敗します。&lt;/p>
+&lt;p>矩形オブジェクトは、チャート上に複数追加することができますが、オブジェクトは、チャート ID（&lt;code>chart_id&lt;/code> パラメータ）と、オブジェクト名 (&lt;code>name&lt;/code>) で識別することになります。
+現在アクティブになっているチャートにオブジェクトを追加するのであれば、&lt;code>chart_id&lt;/code> は 0 に設定します。
+オブジェクト名はチャートの中で一意になるような名前を付けます。&lt;/p></description></item><item><title>MetaTrader/MQL: チャート上でのキーハンドリング (OnChartEvent)</title><link>https://toushi.maku.blog/p/c5z4ka3/</link><pubDate>Sat, 30 Jan 2021 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/c5z4ka3/</guid><description>&lt;p>EA の &lt;strong>&lt;code>OnChartEvent()&lt;/code>&lt;/strong> 関数でチャートイベントをハンドルすると、チャート上でのキーボード入力を取得することができます。
+これを利用すると、自作の EA にキーボードショートカット（ホットキー）機能を付けることができます。
+例えば、数字の &lt;code>1&lt;/code> キーを押したときに、0.1 ロットの買い成行注文を出す、といったことができます。&lt;/p>
+&lt;p>キー入力時は、&lt;code>OnChartEvent&lt;/code> 関数の &lt;code>id&lt;/code> パラメータの値は &lt;code>CHARTEVENT_KEYDOWN&lt;/code> になり、&lt;code>lparam&lt;/code> パラメータにキーコードが格納されます。
+下記のサンプル EA をチャートにアタッチすると、入力したキー情報がチャート上に表示されるようになります。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">Experts/MyEa.mq5&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">OnInit&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">INIT_SUCCEEDED&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">OnChartEvent&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">id&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">long&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">lparam&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">dparam&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">string&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">sparam&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">id&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="n">CHARTEVENT_KEYDOWN&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">string&lt;/span> &lt;span class="n">key&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="sc">&amp;#39;0&amp;#39;&lt;/span> &lt;span class="o">&amp;lt;=&lt;/span> &lt;span class="n">lparam&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="n">lparam&lt;/span> &lt;span class="o">&amp;lt;=&lt;/span> &lt;span class="sc">&amp;#39;z&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">key&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">StringFormat&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;key=%c(%d)&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">lparam&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">lparam&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">key&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">StringFormat&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;key=%d&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">lparam&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Comment&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;CHARTEVENT_KEYDOWN: &amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">key&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>特定のキー（例えば数字の &lt;code>1&lt;/code> キー）が押されたときに、ユーザーに確認を求めてから処理を行いたい場合は次のようにします。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">OnChartEvent&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">id&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">long&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">lparam&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">dparam&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">string&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">sparam&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">id&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="n">CHARTEVENT_KEYDOWN&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="n">lparam&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="sc">&amp;#39;1&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">MessageBox&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Are you sure to buy?&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">NULL&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">MB_YESNO&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="n">IDYES&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// ここで買う！
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="c1">// buyMarketOrder();
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure></description></item><item><title>MetaTrader/MQL: 表示しているチャートを列挙する (ChartFirst, ChartNext)</title><link>https://toushi.maku.blog/p/244ung6/</link><pubDate>Sat, 19 Dec 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/244ung6/</guid><description>&lt;p>MQL の下記の関数を使用すると、現在表示しているチャートの情報を列挙することができます。&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://www.mql5.com/ja/docs/chart_operations/chartfirst">ChartFirst 関数&lt;/a> &amp;hellip; 最初のチャート ID を取得します（見つからない場合は -1）。&lt;/li>
+&lt;li>&lt;a href="https://www.mql5.com/ja/docs/chart_operations/chartnext">ChartNext 関数&lt;/a> &amp;hellip; 次のチャートのチャート ID を取得します（見つからない場合は -1）。&lt;/li>
+&lt;/ul>
+&lt;p>具体的には、&lt;code>ChartFirst&lt;/code> 関数で最初のチャートの ID を取得し、&lt;code>ChartNext&lt;/code> 関数でその次のチャートの ID を繰り返し取得していく、という感じで処理できます。
+処理するチャートがなくなったときは、上記の関数は -1 を返すので、正の値を返す間だけ繰り返し処理すれば OK です。&lt;/p>
+&lt;p>次のサンプルスクリプトでは、現在表示しているすべてのチャートの情報（チャートID、シンボル名、時間足）を列挙しています。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">Scripts/Sample.mq5&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">showChartInfo&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">long&lt;/span> &lt;span class="n">chartId&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">string&lt;/span> &lt;span class="n">sym&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ChartSymbol&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">chartId&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ENUM_TIMEFRAMES&lt;/span> &lt;span class="n">period&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ChartPeriod&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">chartId&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">PrintFormat&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;%I64d: %s (%s)&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">chartId&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">sym&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">EnumToString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">period&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">OnStart&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">long&lt;/span> &lt;span class="n">id&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ChartFirst&lt;/span>&lt;span class="p">();&lt;/span> &lt;span class="n">id&lt;/span> &lt;span class="o">&amp;gt;=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">id&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ChartNext&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">id&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">showChartInfo&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">id&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">実行結果&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">128968169024912109: USDJPY (PERIOD_M5)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">128968169024912110: EURJPY (PERIOD_H1)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">128968169024912111: EURUSD (PERIOD_D1)&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>MQL5 の標準ライブラリとして提供されている &lt;a href="https://www.mql5.com/ja/docs/standardlibrary/cchart">CChart クラス&lt;/a> を使っても同様のことを行えます。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">Scripts/Sample.mq5&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;Charts/Chart.mqh&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">showChartInfo&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">const&lt;/span> &lt;span class="n">CChart&lt;/span>&lt;span class="o">&amp;amp;&lt;/span> &lt;span class="n">chart&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">long&lt;/span> &lt;span class="n">id&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">chart&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">ChartId&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">string&lt;/span> &lt;span class="n">sym&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">chart&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Symbol&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ENUM_TIMEFRAMES&lt;/span> &lt;span class="n">period&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">chart&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Period&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">PrintFormat&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;%I64d: %s (%s)&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">id&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">sym&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">EnumToString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">period&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">OnStart&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">CChart&lt;/span> &lt;span class="n">ch&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">ch&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">FirstChart&lt;/span>&lt;span class="p">();&lt;/span> &lt;span class="n">ch&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">ChartId&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">ch&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">NextChart&lt;/span>&lt;span class="p">())&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">showChartInfo&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ch&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure></description></item><item><title>MetaTrader/MQL: チャートのサイズ（幅・高さ）を取得する (ChartGetInteger)</title><link>https://toushi.maku.blog/p/xhxumiu/</link><pubDate>Tue, 27 Oct 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/xhxumiu/</guid><description>&lt;p>&lt;a href="https://www.mql5.com/ja/docs/chart_operations/chartgetinteger">ChartGetInteger 関数&lt;/a> の第 2 パラメーター (prop_id) に &lt;strong>&lt;code>CHART_WIDTH_IN_PIXELS&lt;/code>&lt;/strong> および &lt;strong>&lt;code>CHART_HEIGHT_IN_PIXELS&lt;/code>&lt;/strong> を指定することで、指定したチャートの幅・高さを取得することができます。
+取得されるサイズは、チャートの描画領域のみのサイズです（軸の価格表示部分などは含まれません）。&lt;/p>
+&lt;p>&lt;code>ChartGetInteger()&lt;/code> には次のような 2 つのバージョンがあります。
+2 つ目のバージョンを使うと、戻り値で関数の実行に成功したかどうかを調べることができます。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">long&lt;/span> &lt;span class="n">ChartGetInteger&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">long&lt;/span> &lt;span class="n">chart_id&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 対象のチャート（0 はカレントチャート）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">prop_id&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 取得したいプロパティの ID
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">sub_window&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">0&lt;/span> &lt;span class="c1">// サブウィンドウ番号（0 はメインチャート）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">bool&lt;/span> &lt;span class="n">ChartGetInteger&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">long&lt;/span> &lt;span class="n">chart_id&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 対象のチャート（0 はカレントチャート）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">prop_id&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 取得したいプロパティの ID
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">sub_window&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// サブウィンドウ番号（0 はメインチャート）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">long&lt;/span>&lt;span class="o">&amp;amp;&lt;/span> &lt;span class="n">long_var&lt;/span> &lt;span class="c1">// 取得結果の格納先
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">)&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>インジケーター用のサブウィンドウのサイズを調べたい場合は、第 3 パラメーター &lt;code>sub_window&lt;/code> に 1, 2, 3 のような数値を指定します（1 がひとつめのサブチャートです）。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">Scripts/MyScript.mq5&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">OnStart&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">long&lt;/span> &lt;span class="n">width&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ChartGetInteger&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">CHART_WIDTH_IN_PIXELS&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">long&lt;/span> &lt;span class="n">height&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ChartGetInteger&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">CHART_HEIGHT_IN_PIXELS&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">MessageBox&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">StringFormat&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;width=%d, height=%d&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">width&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">height&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>下記はエラー処理なども行う例です（MT4用）。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">Scripts/ShowChartWidthAndHeight.mq4&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property strict
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;stdlib.mqh&amp;gt;&lt;/span>&lt;span class="cp"> &lt;/span>&lt;span class="c1">// ErrorDescription
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 指定したチャートのメインチャートウィンドウの幅（ピクセル）を取得します。
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 取得に失敗した場合は -1 を返します。
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">GetChartWidthInPixels&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">const&lt;/span> &lt;span class="kt">long&lt;/span> &lt;span class="n">chartId&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">long&lt;/span> &lt;span class="n">result&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="n">ChartGetInteger&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">chartId&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">CHART_WIDTH_IN_PIXELS&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">result&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">string&lt;/span> &lt;span class="n">err&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ErrorDescription&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">GetLastError&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">PrintFormat&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;ERROR in %s: %s&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">__FUNCTION__&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">err&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">result&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 指定したチャートのメインチャートウィンドウの高さ（ピクセル）を取得します。
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * 取得に失敗した場合は -1 を返します。
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">GetChartHeightInPixels&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">const&lt;/span> &lt;span class="kt">long&lt;/span> &lt;span class="n">chartId&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">long&lt;/span> &lt;span class="n">result&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="n">ChartGetInteger&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">chartId&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">CHART_HEIGHT_IN_PIXELS&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">result&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">string&lt;/span> &lt;span class="n">err&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ErrorDescription&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">GetLastError&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">PrintFormat&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;ERROR in %s: %s&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">__FUNCTION__&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">err&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">result&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">OnStart&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="n">width&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">GetChartWidthInPixels&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="n">height&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">GetChartHeightInPixels&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">MessageBox&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">StringFormat&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;width=%d, height=%d&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">width&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">height&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure></description></item><item><title>MetaTrader/MQL: チャートの描画スタイルを設定する (ChartSetXxx)</title><link>https://toushi.maku.blog/p/dzcoybn/</link><pubDate>Sat, 10 Oct 2015 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/dzcoybn/</guid><description>&lt;h2 id="チャートのプロパティを設定取得する">チャートのプロパティを設定／取得する&lt;/h2>
+&lt;p>あるチャートに設定されたプロパティ（描画スタイルなど）を変更／取得するには、次のような関数を使用します。&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://www.mql5.com/en/docs/chart_operations/chartsetinteger">ChartSetInteger 関数&lt;/a> / &lt;a href="https://www.mql5.com/en/docs/chart_operations/chartgetinteger">ChartGetInteger 関数&lt;/a>
+&lt;ul>
+&lt;li>&lt;strong>整数型&lt;/strong> のプロパティ。&lt;a href="https://www.mql5.com/en/docs/constants/chartconstants/enum_chart_property#enum_chart_property_integer">ENUM_CHART_PROPERTY_INTEGER&lt;/a> で示されるプロパティを設定／取得できます（&lt;code>INTEGER&lt;/code> という名前がついているけど実際は &lt;code>long&lt;/code> 型であることに注意）。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a href="https://www.mql5.com/en/docs/chart_operations/chartsetdouble">ChartSetDouble 関数&lt;/a> / &lt;a href="https://www.mql5.com/en/docs/chart_operations/chartgetdouble">ChartGetDouble 関数&lt;/a>
+&lt;ul>
+&lt;li>&lt;strong>浮動小数点数型&lt;/strong> のプロパティ。&lt;a href="https://www.mql5.com/en/docs/constants/chartconstants/enum_chart_property#enum_chart_property_double">ENUM_CHART_PROPERTY_DOUBLE&lt;/a> で示されるプロパティを設定／取得できます。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a href="https://www.mql5.com/en/docs/chart_operations/chartsetstring">ChartSetString 関数&lt;/a> / &lt;a href="https://www.mql5.com/en/docs/chart_operations/chartgetstring">ChartGetString 関数&lt;/a>
+&lt;ul>
+&lt;li>&lt;strong>文字列型&lt;/strong> のプロパティ。&lt;a href="https://www.mql5.com/en/docs/constants/chartconstants/enum_chart_property#enum_chart_property_string">ENUM_CHART_PROPERTY_STRING&lt;/a> で示されるプロパティを設定／取得できます。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="表示項目の-offon-設定">表示項目の OFF/ON 設定&lt;/h2>
+&lt;p>チャートの表示項目を変更するには、&lt;code>ChartSetInteger&lt;/code> 関数の第 2 引数 (&lt;code>prop_id&lt;/code>) に以下のようなプロパティ ID を指定します。&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>プロパティ ID&lt;/th>
+ &lt;th>設定内容&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>CHART_MODE&lt;/td>
+ &lt;td>&lt;code>CHART_BARS&lt;/code>: バーチャート&lt;br>&lt;code>CHART_CANDLES&lt;/code>: ローソク足&lt;br>&lt;code>CHART_LINE&lt;/code>: 折れ線&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>CHART_SHOW_VOLUMES&lt;/td>
+ &lt;td>&lt;code>CHART_VOLUME_HIDE&lt;/code>: ボリュームを表示しない&lt;br>&lt;code>CHART_VOLUME_TICK&lt;/code>: ボリュームとして Tick 数を表示する&lt;br>&lt;code>CHART_VOLUME_REAL&lt;/code>: ボリュームとして実際の取引量を表示する（サーバによって提供されていないことがある）&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>CHART_SHOW_GRID&lt;/td>
+ &lt;td>&lt;code>true/false&lt;/code>: グリッドを表示する／しない&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>CHART_SHOW_PERIOD_SEP&lt;/td>
+ &lt;td>&lt;code>true/false&lt;/code>: 一定期間ごとの縦線を表示する／しない&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>CHART_SHOW_ASK_LINE&lt;/td>
+ &lt;td>&lt;code>true/false&lt;/code>: 買値の水平線を表示する／しない&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>CHART_SHOW_BID_LINE&lt;/td>
+ &lt;td>&lt;code>true/false&lt;/code>: 売値の水平線を表示する／しない&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>CHART_SHOW_DATE_SCALE&lt;/td>
+ &lt;td>&lt;code>true/false&lt;/code>: 日時バー（横の軸）を表示する／しない&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>CHART_SHOW_PRICE_SCALE&lt;/td>
+ &lt;td>&lt;code>true/false&lt;/code>: 価格バー（縦の軸）を表示する／しない&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>CHART_SHOW_OHLC&lt;/td>
+ &lt;td>&lt;code>true/false&lt;/code>: 左上の Open/High/Low/Close 価格を表示する／しない（これを false にしても、通貨ペア名と時間足は表示されます）&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>CHART_SHOW_ONE_CLICK&lt;/td>
+ &lt;td>&lt;code>true/false&lt;/code>: 左上のワンクリック注文パネルを表示する／しない&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">例: チャートのプロパティを変更する&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * Setup the drawing style of the chart.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> *
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * @param chartId the target chart ID (0 means the current chart)
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">setupChart&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">long&lt;/span> &lt;span class="n">chartId&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// ローソク足で表示
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">ChartSetInteger&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">chartId&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">CHART_MODE&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">CHART_CANDLES&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 買値 (Ask) ラインを表示
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">ChartSetInteger&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">chartId&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">CHART_SHOW_ASK_LINE&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">true&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 売値 (Bid) ラインを表示
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">ChartSetInteger&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">chartId&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">CHART_SHOW_BID_LINE&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">true&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ChartRedraw&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">chartId&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>各種プロパティの変更が実際に画面上に反映されるのは、次のチャートの再描画のタイミングです（例えば、次の tick が発生したとき）。
+直ちに設定を画面に反映させたい場合は、上記のように &lt;a href="https://www.mql5.com/en/docs/chart_operations/chartredraw">ChartRedraw 関数&lt;/a> を呼び出します。&lt;/p></description></item><item><title>MetaTrader/MQL: 新しいチャートを開く (ChartOpen)</title><link>https://toushi.maku.blog/p/hx7enu3/</link><pubDate>Sat, 10 Oct 2015 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/hx7enu3/</guid><description>&lt;p>&lt;a href="https://www.mql5.com/en/docs/chart_operations/chartopen">ChartOpen 関数&lt;/a> を使うと、指定した通貨ペア、時間足のチャートを開くことができます。
+下記は、ドル円の週足チャートを開く例です。
+&lt;code>ChartOpen&lt;/code> 関数が返したチャート ID を使って、開いたチャートの設定を行うことができます。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">Scripts/Hello.mq5&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">OnStart&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 週足チャートを開く
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">long&lt;/span> &lt;span class="n">chartId&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ChartOpen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;USDJPY&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">PERIOD_W1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">chartId&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// オープンに失敗した場合（シンボル名がおかしいとか、チャートを開きすぎとか）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">Alert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Could not open a new chart: &amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">GetLastError&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 開いたチャートを設定する
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">ChartSetInteger&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">chartId&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">CHART_MODE&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">CHART_LINE&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// ライン形式
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">ChartSetInteger&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">chartId&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">CHART_SHOW_VOLUMES&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">CHART_VOLUME_TICK&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 出来高
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">ChartSetInteger&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">chartId&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">CHART_SHOW_GRID&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">false&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// グリッドを非表示
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>カレントチャートと同じ通貨ペアのチャートを新しく開きたい場合は、第 1 引数で &lt;code>&amp;quot;USDJPY&amp;quot;&lt;/code> と指定しているところを &lt;code>NULL&lt;/code> に置き換えれば OK です。
+第 2 引数で指定する足のタイムフレームには、&lt;a href="https://www.mql5.com/en/docs/constants/chartconstants/enum_timeframes">ENUM_TIMEFRAMES&lt;/a> 型のいずれかの値を指定します。
+&lt;code>PERIOD_CURRENT&lt;/code> を指定して、カレントチャートと同じタイムフレームを指定することもできます。&lt;/p></description></item></channel></rss>

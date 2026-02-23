@@ -1,18 +1,662 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MetaTrader/MQL: カスタムインジケーター on まくまく投資ノート</title><link>https://toushi.maku.blog/p/br2airy/</link><description>Recent content in MetaTrader/MQL: カスタムインジケーター on まくまく投資ノート</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Sun, 18 Jun 2023 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/p/br2airy/index.xml" rel="self" type="application/rss+xml"/><item><title>MetaTrader/MQL: カスタムインジケーターを作成する</title><link>https://toushi.maku.blog/p/5q5gs5g/</link><pubDate>Sun, 01 Feb 2015 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/5q5gs5g/</guid><description>カスタムインジケータの作成 ここでは、最初のステップとして、ローソク足の終値をラインで結ぶだけのカスタムインジケータを作成してみます。 Meta Editor 上で Control + N を押して、Custom Indicator を選択すると、カスタムインジケータのファイルを新規作成することができます。
-下記は、終値を結ぶラインを引く簡単なインジケーターの実装例です。
-MyIndicator.mt4 #property strict #property indicator_chart_window #property indicator_buffers 1 #property indicator_plots 1 // Default properties for Line 1 #property indicator_label1 &amp;#34;Line 1&amp;#34; #property indicator_type1 DRAW_LINE #property indicator_color1 clrRed #property indicator_style1 STYLE_SOLID #property indicator_width1 1 // Buffer for indicator line double gBuffer[]; int OnInit() { SetIndexBuffer(0, gBuffer, INDICATOR_DATA); return INIT_SUCCEEDED; } int OnCalculate( const int rates_total, // ローソク足の数 const int prev_calculated, // 前回の OnCalculate() の戻り値 const datetime &amp;amp;time[], // ローソク足ごとの時刻 [0.</description></item><item><title>MetaTrader/MQL: カスタムインジケーターに水平線を表示する (IndicatorSet*)</title><link>https://toushi.maku.blog/p/fsy7djp/</link><pubDate>Sun, 14 Jun 2015 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/fsy7djp/</guid><description>IndicatorSetXxx() 系の関数を使用して、インジケーターに水平線を表示することができます。 下記の例では、0.1 と -0.1 の値の位置に水平線を表示しています（0.0 の位置には、デフォルトで水平線が表示されるようです）。
-void InitLevelLines() { // The number of horizontal lines. IndicatorSetInteger(INDICATOR_LEVELS, 2); // First line settings. IndicatorSetString(INDICATOR_LEVELTEXT, 0, &amp;#34;Upper line&amp;#34;); IndicatorSetDouble(INDICATOR_LEVELVALUE, 0, 0.1); IndicatorSetInteger(INDICATOR_LEVELSTYLE, 0, STYLE_DASHDOT); IndicatorSetInteger(INDICATOR_LEVELCOLOR, 0, clrPink); IndicatorSetInteger(INDICATOR_LEVELWIDTH, 0, 1); // Second line settings. IndicatorSetString(INDICATOR_LEVELTEXT, 1, &amp;#34;Lower line&amp;#34;); IndicatorSetDouble(INDICATOR_LEVELVALUE, 1, -0.1); IndicatorSetInteger(INDICATOR_LEVELSTYLE, 1, STYLE_DASHDOT); IndicatorSetInteger(INDICATOR_LEVELCOLOR, 1, clrPink); IndicatorSetInteger(INDICATOR_LEVELWIDTH, 1, 1); } int OnInit() { // ... InitLevelLines(); // ... return INIT_SUCCEEDED; }</description></item><item><title>MetaTrader/MQL: カスタムインジケーターで使用できるイベント</title><link>https://toushi.maku.blog/p/ugs5fq2/</link><pubDate>Wed, 10 Jun 2015 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/ugs5fq2/</guid><description>カスタムインジケーターのプログラム内で、決まったシグネチャ（関数名やパラメーター構成）で関数を定義しておくと、特定のイベント発生時に自動的にその関数を呼び出してくれるようになります。
-（参考）アプリの種類ごとに扱えるイベントハンドラーの一覧 （参考）EA で使用できるイベント （参考）スクリプトで使用できるイベント カスタムインジケーターでは次のようなイベントハンドラーを定義することができます。
-OnInit 関数 int OnInit(void); インジケーターの OnInit() 関数は、Init イベントが発生したときに呼び出されます。 Init イベントは次のようなタイミングで発生します。
-インジケーターが最初にチャートにアタッチされたとき チャートのシンボル（USDJPY など）やタイムフレーム（時間足）が変更されたとき MetaEditor 上でインジケーターが再コンパイルされたとき インジケーターの入力パラメータがダイアログから変更されたとき このハンドラー関数内では、描画用バッファーの初期化などを行います。 戻り値が void のバージョンもありますが、互換性のために残されているだけなので、int を返すバージョンを使ってください。
-OnDeinit 関数 void OnDeinit(const int reason); インジケーターの OnDeinit 関数は、次のようなタイミングで呼び出されます（参考: Uninitialization Reason Codes）。 パラメータ部分の const を省略して int reason と記述したりすると、ちゃんと呼び出されないので注意してください。
-説明 定数 チャートからインジケーターをデタッチしたとき REASON_REMOVE (1) MetaEditor 上でインジケーターが再コンパイルされたとき REASON_RECOMPILE (2) チャートのシンボル（USDJPY など）やタイムフレーム（時間足）が変更されたとき REASON_CHARTCHANGE (3) チャートを閉じたとき REASON_CHARTCLOSE (4) インジケーターの入力パラメータがダイアログから変更されたとき REASON_PARAMETERS (5) 別のアカウントで接続されたとき REASON_ACCOUNT (6) テンプレートが適用されて、インジケーターが設定されたチャートが開くとき REASON_TEMPLATE (7) OnInit() 処理が失敗して 0 以外の値を返したとき REASON_INITFAILED (8) ターミナル (MetaTrader) を閉じたとき REASON_CLOSE (9) OnCalculate 関数 int OnCalculate( const int rates_total, // price[] array size const int prev_calculated, // number of handled bars at the previous call const int begin, // index number in the price[] array meaningful data starts from const double&amp;amp; price[] // array of values for calculation ); int OnCalculate( const int rates_total, // size of input time series const int prev_calculated, // bars handled in previous call const datetime&amp;amp; time[], // Time const double&amp;amp; open[], // Open const double&amp;amp; high[], // High const double&amp;amp; low[], // Low const double&amp;amp; close[], // Close const long&amp;amp; tick_volume[], // Tick Volume const long&amp;amp; volume[], // Real Volume const int&amp;amp; spread[] // Spread ); インジケーターの OnCalculate() 関数は、Calculate イベントが発生したとき（最新の価格が変化したとき）に呼び出されます。 インジケーターを最初にチャートにアタッチしたときにも呼び出されます。</description></item><item><title>MetaTrader/MQL: インジケーターの実装例 - 大きなシンボル名を表示する</title><link>https://toushi.maku.blog/p/mbewc25/</link><pubDate>Sun, 18 Jun 2023 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/mbewc25/</guid><description>図: LargeSymbol インジケーター 下記の LargeSymbol インジケーターをチャートに適用すると、チャートの左上に大きな文字で通貨ペアと、タイムフレーム（時間足）を表示します（コードリポジトリはこちら）。
-Indicators/maku/LargeSymbol.mq5 /* * LargeSymbol indicator. * * This indicator displays large symbol name and timeframe * on the top-left corner of the current chart. */ #property copyright &amp;#34;maku77&amp;#34; #property link &amp;#34;https://toushi.maku.blog/&amp;#34; #property version &amp;#34;1.00&amp;#34; #property strict #property indicator_chart_window #property indicator_plots 0 // Surpress &amp;#34;no indicator plot&amp;#34; warning #include &amp;lt;maku77/ErrorUtil.mqh&amp;gt; #include &amp;lt;ChartObjects/ChartObjectsTxtControls.mqh&amp;gt; input color gForegroundColor = clrBlack; // Foreground color input color gBackgroundColor = clrWhite; // Background color CChartObjectLabel gLabel; CChartObjectRectLabel gRect; // Hide Open/High/Low/Close price indicator void HideOhlc() { ::ChartSetInteger(0, CHART_SHOW_OHLC, false); } string RandomObjectName() { return &amp;#34;Object-&amp;#34; + IntegerToString(MathRand()); } string GetPeriodText() { switch (Period()) { case PERIOD_D1: return &amp;#34;D1&amp;#34;; case PERIOD_H1: return &amp;#34;H1&amp;#34;; case PERIOD_H4: return &amp;#34;H4&amp;#34;; case PERIOD_M1: return &amp;#34;M1&amp;#34;; case PERIOD_M5: return &amp;#34;M5&amp;#34;; case PERIOD_M15: return &amp;#34;M15&amp;#34;; case PERIOD_M30: return &amp;#34;M30&amp;#34;; case PERIOD_MN1: return &amp;#34;MN1&amp;#34;; case PERIOD_W1: return &amp;#34;W1&amp;#34;; } return &amp;#34;?</description></item><item><title>MetaTrader/MQL: インジケーターの実装例 - アカウント（口座）情報を表示する</title><link>https://toushi.maku.blog/p/tsig7ew/</link><pubDate>Sat, 26 Mar 2016 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/tsig7ew/</guid><description> 図: AccountInfo インジケーター 下記の AccountInfo インジケータを使用すると、チャート上に口座情報（証拠金情報）を表示することができます。
-Indicators/maku/AccountInfo.mq5 それぞれの表示は下記のような意味を持っています。
-Balance: 証拠金残高 Profit: 損益 Equity: 純資産（証拠金残高 - 損益） Margin level: 証拠金維持率 Margin: 必要証拠金 Free margin: 有効証拠金 こういった口座情報は、AccountInfo* 系の API で取得することができます。 詳しくは下記を参照してください。
-MetaTrader/MQL: アカウント情報（口座情報）を取得する (AccountInfo*) (MT5)</description></item><item><title>MetaTrader/MQL: インジケーターの実装例 - Momentum（モメンタム）</title><link>https://toushi.maku.blog/p/3emsz6c/</link><pubDate>Sun, 14 Jun 2015 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/3emsz6c/</guid><description>モメンタムは下記の計算式で求められます。
-モメンタム = 現在の価格 - X日前の価格 ある一定期間前の価格と比べ、現在の価格がどれだけ上下しているかを示すため、相場の勢いを知るために使用されます。 どれくらい前の価格と比較するかは、一般的に下記のような値が使用されます。
-日足の場合 &amp;hellip; 10日、25日 週足の場合 &amp;hellip; 9週、13週、26週 月足の場合 &amp;hellip; 3ヶ月、6ヶ月、9ヶ月 モメンタムは価格の差分を表すため、通常は下記のように別ウィンドウに表示します。
-Momentum.mq5 #property copyright &amp;#34;Maku&amp;#34; #property version &amp;#34;1.00&amp;#34; // Global settings #property description &amp;#34;Momentum&amp;#34; #property strict #property indicator_separate_window #property indicator_buffers 1 #property indicator_plots 1 // Indicator settings #property indicator_type1 DRAW_LINE #property indicator_color1 clrCyan #property indicator_style1 STYLE_SOLID #property indicator_width1 1 // Input parameters input int gPeriod = 25; // Momentum Period // Indicator bufferes double gMomentumBuffer[]; // Initialize the indicator.</description></item><item><title>MetaTrader/MQL: インジケーターの実装例 - WMA（加重移動平均）</title><link>https://toushi.maku.blog/p/f2eq2dp/</link><pubDate>Wed, 10 Jun 2015 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/f2eq2dp/</guid><description>WMA: Weighted Moving Average（加重移動平均線）は、直前の価格ほど重みをおいた移動平均線です。 考え方は EMA（指数平滑移動平均線）に近いのですが、WMA の方が計算はシンプルです。 例えば、5 WMA は以下のように求められます。
-下記の値を合計する 1 つ前の値 x 5 2 つ前の値 x 4 3 つ前の値 x 3 4 つ前の値 x 2 5 つ前の値 x 1 これを 15 (1+2+3+4+5) で割る MyWma.mq5 #property copyright &amp;#34;Maku&amp;#34; #property link &amp;#34;http://www.mql5.com&amp;#34; #property version &amp;#34;1.00&amp;#34; #property strict // Chart settings #property indicator_chart_window #property indicator_buffers 1 #property indicator_plots 1 // Each indicator settings #property indicator_type1 DRAW_LINE #property indicator_style1 STYLE_SOLID #property indicator_width1 1 #property indicator_color1 clrPink // Input parameters input int gPeriod = 25; // Period of WMA // Indicator buffers double gWmaBuffer[]; /** * [Utility] * How many candles should be re-calculated.</description></item><item><title>MetaTrader/MQL: インジケーターの実装例 - SMA（単純移動平均）</title><link>https://toushi.maku.blog/p/h3fr3do/</link><pubDate>Sun, 01 Feb 2015 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/h3fr3do/</guid><description>移動平均線のカスタムインジケータを作成する 単純移動平均線 (SMA: Simple Moving Average) を表示するためのインジケータはデフォルトで用意されていますが、ここでは勉強のためにインジケータを自作してみます。
-MySma.mq5 #property description &amp;#34;My Moving Average&amp;#34; #property strict #property indicator_chart_window #property indicator_buffers 1 #property indicator_plots 1 // Indicator settings #property indicator_label1 &amp;#34;MA&amp;#34; #property indicator_type1 DRAW_LINE #property indicator_color1 clrRed #property indicator_style1 STYLE_SOLID #property indicator_width1 1 // Input parameters input int gPeriod = 7; // MA Period // Indicator buffers double gMaBuffer[]; int OnInit() { if (gPeriod &amp;lt;= 0) { Alert(&amp;#34;Period must be larger than 0&amp;#34;); return INIT_PARAMETERS_INCORRECT; } SetIndexBuffer(0, gMaBuffer); IndicatorShortName(&amp;#34;MA(&amp;#34; + gPeriod + &amp;#34;)&amp;#34;); return INIT_SUCCEEDED; } /** * [Utility] * How many candles should be re-calculated.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MetaTrader/MQL: カスタムインジケーター on まくまく投資ノート</title><link>https://toushi.maku.blog/p/br2airy/</link><description>Recent content in MetaTrader/MQL: カスタムインジケーター on まくまく投資ノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Sun, 18 Jun 2023 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/p/br2airy/index.xml" rel="self" type="application/rss+xml"/><item><title>MetaTrader/MQL: カスタムインジケーターを作成する</title><link>https://toushi.maku.blog/p/5q5gs5g/</link><pubDate>Sun, 01 Feb 2015 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/5q5gs5g/</guid><description>&lt;h2 id="カスタムインジケータの作成">カスタムインジケータの作成&lt;/h2>
+&lt;p>ここでは、最初のステップとして、ローソク足の終値をラインで結ぶだけのカスタムインジケータを作成してみます。
+Meta Editor 上で &lt;code>Control + N&lt;/code> を押して、Custom Indicator を選択すると、カスタムインジケータのファイルを新規作成することができます。&lt;/p>
+&lt;p>下記は、終値を結ぶラインを引く簡単なインジケーターの実装例です。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">MyIndicator.mt4&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property strict
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_chart_window
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_buffers 1
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_plots 1
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Default properties for Line 1
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="cp">#property indicator_label1 &amp;#34;Line 1&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_type1 DRAW_LINE
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_color1 clrRed
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_style1 STYLE_SOLID
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_width1 1
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Buffer for indicator line
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kt">double&lt;/span> &lt;span class="n">gBuffer&lt;/span>&lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">OnInit&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">SetIndexBuffer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">gBuffer&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">INDICATOR_DATA&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">INIT_SUCCEEDED&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">OnCalculate&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">rates_total&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// ローソク足の数
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">prev_calculated&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="err">前回の&lt;/span> &lt;span class="n">OnCalculate&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="err">の戻り値&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">datetime&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">time&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="c1">// ローソク足ごとの時刻 [0..rates_total-1]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">open&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="c1">// ローソク足ごとの始値 [0..rates_total-1]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">high&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="c1">// ローソク足ごとの高値 [0..rates_total-1]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">low&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="c1">// ローソク足ごとの安値 [0..rates_total-1]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">close&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="c1">// ローソク足ごとの終値 [0..rates_total-1]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="kt">long&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">tick_volume&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">long&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">volume&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">spread&lt;/span>&lt;span class="p">[])&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 終値をそのままインデックス・バッファに詰める
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">rates_total&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="o">++&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">gBuffer&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">close&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 最新の終値をチャートの左上に表示
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">Comment&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">time&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="s">&amp;#34; -- &amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">close&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 次の OnCalculate() の prev_calculated にこの値が入る
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="n">rates_total&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;h2 id="各パートの説明">各パートの説明&lt;/h2>
+&lt;h3 id="プロパティ設定">プロパティ設定&lt;/h3>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_chart_window &lt;/span>&lt;span class="c1">// チャート上に表示する
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="cp">#property indicator_buffers 1 &lt;/span>&lt;span class="c1">// 使用する時系列バッファの数（表示用 ＋ 計算用）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="cp">#property indicator_plots 1 &lt;/span>&lt;span class="c1">// 使用する時系列バッファの数（表示用）
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>このプロパティでは、カスタムインジケータをローソクチャート上に重ねて表示すること、ラインを 1 本だけ使用することを宣言しています。
+仮に、別ウィンドウでインジケータを表示したい場合は、&lt;code>indicator_chart_window&lt;/code> の代わりに &lt;code>indicator_separate_window&lt;/code> を指定します。&lt;/p></description></item><item><title>MetaTrader/MQL: カスタムインジケーターに水平線を表示する (IndicatorSet*)</title><link>https://toushi.maku.blog/p/fsy7djp/</link><pubDate>Sun, 14 Jun 2015 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/fsy7djp/</guid><description>&lt;p>&lt;code>IndicatorSetXxx()&lt;/code> 系の関数を使用して、インジケーターに水平線を表示することができます。
+下記の例では、&lt;code>0.1&lt;/code> と &lt;code>-0.1&lt;/code> の値の位置に水平線を表示しています（&lt;code>0.0&lt;/code> の位置には、デフォルトで水平線が表示されるようです）。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="" width="1258" height="261" src="../../p/fsy7djp/img-001.png" alt="/p/fsy7djp/img-001.png" />
+&lt;/figure>
+
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">InitLevelLines&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// The number of horizontal lines.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">IndicatorSetInteger&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">INDICATOR_LEVELS&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// First line settings.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">IndicatorSetString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">INDICATOR_LEVELTEXT&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;Upper line&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">IndicatorSetDouble&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">INDICATOR_LEVELVALUE&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mf">0.1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">IndicatorSetInteger&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">INDICATOR_LEVELSTYLE&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">STYLE_DASHDOT&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">IndicatorSetInteger&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">INDICATOR_LEVELCOLOR&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">clrPink&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">IndicatorSetInteger&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">INDICATOR_LEVELWIDTH&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Second line settings.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">IndicatorSetString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">INDICATOR_LEVELTEXT&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;Lower line&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">IndicatorSetDouble&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">INDICATOR_LEVELVALUE&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mf">0.1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">IndicatorSetInteger&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">INDICATOR_LEVELSTYLE&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">STYLE_DASHDOT&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">IndicatorSetInteger&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">INDICATOR_LEVELCOLOR&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">clrPink&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">IndicatorSetInteger&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">INDICATOR_LEVELWIDTH&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">OnInit&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// ...
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">InitLevelLines&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// ...
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="n">INIT_SUCCEEDED&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure></description></item><item><title>MetaTrader/MQL: カスタムインジケーターで使用できるイベント</title><link>https://toushi.maku.blog/p/ugs5fq2/</link><pubDate>Wed, 10 Jun 2015 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/ugs5fq2/</guid><description>&lt;p>カスタムインジケーターのプログラム内で、決まったシグネチャ（関数名やパラメーター構成）で関数を定義しておくと、特定のイベント発生時に自動的にその関数を呼び出してくれるようになります。&lt;/p>
+&lt;ul>
+&lt;li>（参考）&lt;a href="../../p/um6bbep/">アプリの種類ごとに扱えるイベントハンドラーの一覧&lt;/a>&lt;/li>
+&lt;li>（参考）&lt;a href="../../p/aamwkiu/">EA で使用できるイベント&lt;/a>&lt;/li>
+&lt;li>（参考）&lt;a href="../../p/fvh3d6r/">スクリプトで使用できるイベント&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>カスタムインジケーターでは次のようなイベントハンドラーを定義することができます。&lt;/p>
+&lt;h2 id="oninit-関数">OnInit 関数&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">OnInit&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">void&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>インジケーターの &lt;a href="https://www.mql5.com/en/docs/event_handlers/oninit">OnInit()&lt;/a> 関数は、&lt;strong>Init&lt;/strong> イベントが発生したときに呼び出されます。
+Init イベントは次のようなタイミングで発生します。&lt;/p>
+&lt;ul>
+&lt;li>インジケーターが最初にチャートにアタッチされたとき&lt;/li>
+&lt;li>チャートのシンボル（&lt;code>USDJPY&lt;/code> など）やタイムフレーム（時間足）が変更されたとき&lt;/li>
+&lt;li>MetaEditor 上でインジケーターが再コンパイルされたとき&lt;/li>
+&lt;li>インジケーターの入力パラメータがダイアログから変更されたとき&lt;/li>
+&lt;/ul>
+&lt;p>このハンドラー関数内では、描画用バッファーの初期化などを行います。
+戻り値が &lt;code>void&lt;/code> のバージョンもありますが、互換性のために残されているだけなので、&lt;code>int&lt;/code> を返すバージョンを使ってください。&lt;/p>
+&lt;h2 id="ondeinit-関数">OnDeinit 関数&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">OnDeinit&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">const&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">reason&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>インジケーターの &lt;a href="https://www.mql5.com/en/docs/event_handlers/ondeinit">&lt;code>OnDeinit&lt;/code>&lt;/a> 関数は、次のようなタイミングで呼び出されます（参考: &lt;a href="https://www.mql5.com/en/docs/constants/namedconstants/uninit">Uninitialization Reason Codes&lt;/a>）。
+パラメータ部分の &lt;code>const&lt;/code> を省略して &lt;code>int reason&lt;/code> と記述したりすると、ちゃんと呼び出されないので注意してください。&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>説明&lt;/th>
+ &lt;th>定数&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>チャートからインジケーターをデタッチしたとき&lt;/td>
+ &lt;td>&lt;code>REASON_REMOVE (1)&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>MetaEditor 上でインジケーターが再コンパイルされたとき&lt;/td>
+ &lt;td>&lt;code>REASON_RECOMPILE (2)&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>チャートのシンボル（&lt;code>USDJPY&lt;/code> など）やタイムフレーム（時間足）が変更されたとき&lt;/td>
+ &lt;td>&lt;code>REASON_CHARTCHANGE (3)&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>チャートを閉じたとき&lt;/td>
+ &lt;td>&lt;code>REASON_CHARTCLOSE (4)&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>インジケーターの入力パラメータがダイアログから変更されたとき&lt;/td>
+ &lt;td>&lt;code>REASON_PARAMETERS (5)&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>別のアカウントで接続されたとき&lt;/td>
+ &lt;td>&lt;code>REASON_ACCOUNT (6)&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>テンプレートが適用されて、インジケーターが設定されたチャートが開くとき&lt;/td>
+ &lt;td>&lt;code>REASON_TEMPLATE (7)&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>OnInit()&lt;/code> 処理が失敗して &lt;code>0&lt;/code> 以外の値を返したとき&lt;/td>
+ &lt;td>&lt;code>REASON_INITFAILED (8)&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>ターミナル (MetaTrader) を閉じたとき&lt;/td>
+ &lt;td>&lt;code>REASON_CLOSE (9)&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h2 id="oncalculate-関数">OnCalculate 関数&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">OnCalculate&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">rates_total&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// price[] array size
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">prev_calculated&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// number of handled bars at the previous call
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">begin&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// index number in the price[] array meaningful data starts from
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span>&lt;span class="o">&amp;amp;&lt;/span> &lt;span class="n">price&lt;/span>&lt;span class="p">[]&lt;/span> &lt;span class="c1">// array of values for calculation
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">OnCalculate&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">rates_total&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// size of input time series
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">prev_calculated&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// bars handled in previous call
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="n">datetime&lt;/span>&lt;span class="o">&amp;amp;&lt;/span> &lt;span class="n">time&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="c1">// Time
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span>&lt;span class="o">&amp;amp;&lt;/span> &lt;span class="n">open&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="c1">// Open
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span>&lt;span class="o">&amp;amp;&lt;/span> &lt;span class="n">high&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="c1">// High
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span>&lt;span class="o">&amp;amp;&lt;/span> &lt;span class="n">low&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="c1">// Low
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span>&lt;span class="o">&amp;amp;&lt;/span> &lt;span class="n">close&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="c1">// Close
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="kt">long&lt;/span>&lt;span class="o">&amp;amp;&lt;/span> &lt;span class="n">tick_volume&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="c1">// Tick Volume
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="kt">long&lt;/span>&lt;span class="o">&amp;amp;&lt;/span> &lt;span class="n">volume&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="c1">// Real Volume
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="kt">int&lt;/span>&lt;span class="o">&amp;amp;&lt;/span> &lt;span class="n">spread&lt;/span>&lt;span class="p">[]&lt;/span> &lt;span class="c1">// Spread
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>インジケーターの &lt;a href="https://www.mql5.com/en/docs/event_handlers/oncalculate">OnCalculate()&lt;/a> 関数は、&lt;strong>Calculate&lt;/strong> イベントが発生したとき（最新の価格が変化したとき）に呼び出されます。
+インジケーターを最初にチャートにアタッチしたときにも呼び出されます。&lt;/p></description></item><item><title>MetaTrader/MQL: インジケーターの実装例 - 大きなシンボル名を表示する</title><link>https://toushi.maku.blog/p/mbewc25/</link><pubDate>Sun, 18 Jun 2023 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/mbewc25/</guid><description>&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="500" height="253" src="../../p/mbewc25/img-001_hu12550321783509821543.png" alt="/p/mbewc25/img-001.png" />
+ &lt;figcaption>図: LargeSymbol インジケーター&lt;/figcaption>
+&lt;/figure>
+
+&lt;p>下記の LargeSymbol インジケーターをチャートに適用すると、チャートの左上に大きな文字で通貨ペアと、タイムフレーム（時間足）を表示します（コードリポジトリは&lt;a href="https://github.com/maku77/metatrader/">こちら&lt;/a>）。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">Indicators/maku/LargeSymbol.mq5&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/*
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * LargeSymbol indicator.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> *
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * This indicator displays large symbol name and timeframe
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * on the top-left corner of the current chart.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property copyright &amp;#34;maku77&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property link &amp;#34;https:&lt;/span>&lt;span class="c1">//toushi.maku.blog/&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="cp">#property version &amp;#34;1.00&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property strict
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_chart_window
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_plots 0 &lt;/span>&lt;span class="c1">// Surpress &amp;#34;no indicator plot&amp;#34; warning
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;maku77/ErrorUtil.mqh&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;ChartObjects/ChartObjectsTxtControls.mqh&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">input&lt;/span> &lt;span class="n">color&lt;/span> &lt;span class="n">gForegroundColor&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">clrBlack&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// Foreground color
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">input&lt;/span> &lt;span class="n">color&lt;/span> &lt;span class="n">gBackgroundColor&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">clrWhite&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// Background color
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">CChartObjectLabel&lt;/span> &lt;span class="n">gLabel&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">CChartObjectRectLabel&lt;/span> &lt;span class="n">gRect&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Hide Open/High/Low/Close price indicator
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kt">void&lt;/span> &lt;span class="nf">HideOhlc&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">::&lt;/span>&lt;span class="n">ChartSetInteger&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">CHART_SHOW_OHLC&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">false&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">string&lt;/span> &lt;span class="nf">RandomObjectName&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="s">&amp;#34;Object-&amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">IntegerToString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">MathRand&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">string&lt;/span> &lt;span class="nf">GetPeriodText&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">switch&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">Period&lt;/span>&lt;span class="p">())&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="nl">PERIOD_D1&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="s">&amp;#34;D1&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="nl">PERIOD_H1&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="s">&amp;#34;H1&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="nl">PERIOD_H4&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="s">&amp;#34;H4&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="nl">PERIOD_M1&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="s">&amp;#34;M1&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="nl">PERIOD_M5&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="s">&amp;#34;M5&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="nl">PERIOD_M15&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="s">&amp;#34;M15&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="nl">PERIOD_M30&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="s">&amp;#34;M30&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="nl">PERIOD_MN1&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="s">&amp;#34;MN1&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="nl">PERIOD_W1&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="s">&amp;#34;W1&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="s">&amp;#34;???&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">string&lt;/span> &lt;span class="nf">GetLabelText&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">Symbol&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="s">&amp;#34;, &amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">GetPeriodText&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">bool&lt;/span> &lt;span class="nf">AddRect&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Create a new rectangle
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="n">gRect&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Create&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">RandomObjectName&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">200&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">50&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ErrorUtil&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">AlertLastError&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nb">false&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Position
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">gRect&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Corner&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">CORNER_LEFT_UPPER&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Background
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">gRect&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">BackColor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">gBackgroundColor&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">gRect&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Background&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">false&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">gRect&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Width&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nb">true&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">bool&lt;/span> &lt;span class="nf">AddLabel&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Create a new label
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="n">gLabel&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Create&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">RandomObjectName&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ErrorUtil&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">AlertLastError&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nb">false&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Text
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">gLabel&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">SetString&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">OBJPROP_TEXT&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">GetLabelText&lt;/span>&lt;span class="p">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">gLabel&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Font&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Arial&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">gLabel&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">FontSize&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">16&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">gLabel&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Color&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">gForegroundColor&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Position
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">gLabel&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Corner&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">CORNER_LEFT_UPPER&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">gLabel&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Anchor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ANCHOR_LEFT_UPPER&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">gLabel&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">X_Distance&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">10&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">gLabel&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Y_Distance&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nb">true&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">OnInit&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">HideOhlc&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="n">AddRect&lt;/span>&lt;span class="p">())&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="n">INIT_FAILED&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="n">AddLabel&lt;/span>&lt;span class="p">())&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="n">INIT_FAILED&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">INIT_SUCCEEDED&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">OnCalculate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">const&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">rates_total&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">prev_calculated&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">datetime&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">time&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">open&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">high&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">low&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">close&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">long&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">tick_volume&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">long&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">volume&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">spread&lt;/span>&lt;span class="p">[])&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">rates_total&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure></description></item><item><title>MetaTrader/MQL: インジケーターの実装例 - アカウント（口座）情報を表示する</title><link>https://toushi.maku.blog/p/tsig7ew/</link><pubDate>Sat, 26 Mar 2016 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/tsig7ew/</guid><description>&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="536" height="264" src="../../p/tsig7ew/img-001.png" alt="/p/tsig7ew/img-001.png" />
+ &lt;figcaption>図: AccountInfo インジケーター&lt;/figcaption>
+&lt;/figure>
+
+&lt;p>下記の AccountInfo インジケータを使用すると、チャート上に口座情報（証拠金情報）を表示することができます。&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/maku77/metatrader/blob/main/MQL5/Indicators/maku77/AccountInfo.mq5">Indicators/maku/AccountInfo.mq5&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>それぞれの表示は下記のような意味を持っています。&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Balance&lt;/code>: 証拠金残高&lt;/li>
+&lt;li>&lt;code>Profit&lt;/code>: 損益&lt;/li>
+&lt;li>&lt;code>Equity&lt;/code>: 純資産（証拠金残高 - 損益）&lt;/li>
+&lt;li>&lt;code>Margin level&lt;/code>: 証拠金維持率&lt;/li>
+&lt;li>&lt;code>Margin&lt;/code>: 必要証拠金&lt;/li>
+&lt;li>&lt;code>Free margin&lt;/code>: 有効証拠金&lt;/li>
+&lt;/ul>
+&lt;p>こういった口座情報は、&lt;code>AccountInfo*&lt;/code> 系の API で取得することができます。
+詳しくは下記を参照してください。&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="../../p/nb7h9vg/">MetaTrader/MQL: アカウント情報（口座情報）を取得する (AccountInfo*) (MT5)&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>MetaTrader/MQL: インジケーターの実装例 - Momentum（モメンタム）</title><link>https://toushi.maku.blog/p/3emsz6c/</link><pubDate>Sun, 14 Jun 2015 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/3emsz6c/</guid><description>&lt;p>モメンタムは下記の計算式で求められます。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">モメンタム = 現在の価格 - X日前の価格&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>ある一定期間前の価格と比べ、現在の価格がどれだけ上下しているかを示すため、相場の勢いを知るために使用されます。
+どれくらい前の価格と比較するかは、一般的に下記のような値が使用されます。&lt;/p>
+&lt;ul>
+&lt;li>日足の場合 &amp;hellip; 10日、25日&lt;/li>
+&lt;li>週足の場合 &amp;hellip; 9週、13週、26週&lt;/li>
+&lt;li>月足の場合 &amp;hellip; 3ヶ月、6ヶ月、9ヶ月&lt;/li>
+&lt;/ul>
+&lt;p>モメンタムは価格の差分を表すため、通常は下記のように別ウィンドウに表示します。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="" width="1272" height="394" src="../../p/3emsz6c/img-001.png" alt="/p/3emsz6c/img-001.png" />
+&lt;/figure>
+
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">Momentum.mq5&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property copyright &amp;#34;Maku&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property version &amp;#34;1.00&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Global settings
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="cp">#property description &amp;#34;Momentum&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property strict
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_separate_window
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_buffers 1
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_plots 1
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Indicator settings
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="cp">#property indicator_type1 DRAW_LINE
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_color1 clrCyan
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_style1 STYLE_SOLID
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_width1 1
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Input parameters
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">input&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">gPeriod&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">25&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// Momentum Period
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Indicator bufferes
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kt">double&lt;/span> &lt;span class="n">gMomentumBuffer&lt;/span>&lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Initialize the indicator.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="nf">OnInit&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">gPeriod&lt;/span> &lt;span class="o">&amp;lt;=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Alert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Period must be larger than 0&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">INIT_PARAMETERS_INCORRECT&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">string&lt;/span> &lt;span class="n">label&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">StringFormat&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Momemtum (%i)&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">gPeriod&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">SetIndexBuffer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">gMomentumBuffer&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">SetIndexLabel&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">label&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">IndicatorShortName&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">label&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">INIT_SUCCEEDED&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * [Utility]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * How many candles should be re-calculated.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">changedBars&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">rates_total&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">prev_calculated&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">prev_calculated&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">rates_total&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// The latest bar should be updated, so add 1.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="n">rates_total&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">prev_calculated&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">calcMomentum&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">buf&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">price&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="n">price_total&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">changed&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">period&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Needs adequate price data for calculating
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">price_total&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">period&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ArrayFill&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">buf&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">price_total&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">EMPTY_VALUE&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Update momentum buffer
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">count&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">MathMin&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">changed&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">price_total&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">period&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">count&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="o">++&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">buf&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">price&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">price&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">period&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">price_total&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Handle change of a tick
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="nf">OnCalculate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">const&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">rates_total&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">prev_calculated&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">datetime&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">time&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">open&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">high&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">low&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">close&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">long&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">tick_volume&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">long&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">volume&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">spread&lt;/span>&lt;span class="p">[])&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="n">changed&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">changedBars&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">rates_total&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">prev_calculated&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">calcMomentum&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">gMomentumBuffer&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">close&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">rates_total&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">changed&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">gPeriod&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// return value of prev_calculated for next call
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="n">rates_total&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure></description></item><item><title>MetaTrader/MQL: インジケーターの実装例 - WMA（加重移動平均）</title><link>https://toushi.maku.blog/p/f2eq2dp/</link><pubDate>Wed, 10 Jun 2015 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/f2eq2dp/</guid><description>&lt;p>WMA: Weighted Moving Average（加重移動平均線）は、直前の価格ほど重みをおいた移動平均線です。
+考え方は EMA（指数平滑移動平均線）に近いのですが、WMA の方が計算はシンプルです。
+例えば、5 WMA は以下のように求められます。&lt;/p>
+&lt;ol>
+&lt;li>下記の値を合計する
+&lt;ul>
+&lt;li>1 つ前の値 x 5&lt;/li>
+&lt;li>2 つ前の値 x 4&lt;/li>
+&lt;li>3 つ前の値 x 3&lt;/li>
+&lt;li>4 つ前の値 x 2&lt;/li>
+&lt;li>5 つ前の値 x 1&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>これを 15 (1+2+3+4+5) で割る&lt;/li>
+&lt;/ol>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">MyWma.mq5&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property copyright &amp;#34;Maku&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property link &amp;#34;http:&lt;/span>&lt;span class="c1">//www.mql5.com&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="cp">#property version &amp;#34;1.00&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property strict
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Chart settings
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="cp">#property indicator_chart_window
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_buffers 1
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_plots 1
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Each indicator settings
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="cp">#property indicator_type1 DRAW_LINE
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_style1 STYLE_SOLID
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_width1 1
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_color1 clrPink
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Input parameters
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">input&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">gPeriod&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">25&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// Period of WMA
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Indicator buffers
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kt">double&lt;/span> &lt;span class="n">gWmaBuffer&lt;/span>&lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * [Utility]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * How many candles should be re-calculated.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">changedBars&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">rates_total&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">prev_calculated&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">prev_calculated&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">rates_total&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// The latest bar should be updated, so add 1.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="n">rates_total&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">prev_calculated&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">OnInit&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">gPeriod&lt;/span> &lt;span class="o">&amp;lt;=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Alert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Period must be larger than 0&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">INIT_PARAMETERS_INCORRECT&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">SetIndexBuffer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">gWmaBuffer&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">SetIndexLabel&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">StringFormat&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;WMA(%i)&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">gPeriod&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">IndicatorShortName&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">StringFormat&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;WMA(%i)&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">gPeriod&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">INIT_SUCCEEDED&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * Calculates WMA. The size of vals must be equal or larger than index + count.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">double&lt;/span> &lt;span class="nf">calcWma&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span>&lt;span class="o">&amp;amp;&lt;/span> &lt;span class="n">vals&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">index&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">count&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">double&lt;/span> &lt;span class="n">sum&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">count&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="o">++&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">sum&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="n">vals&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">index&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">count&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">sum&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">count&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">count&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">updateWma&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span>&lt;span class="o">&amp;amp;&lt;/span> &lt;span class="n">prices&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">rates_total&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">prev_calculated&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Is there enough amount of price data?
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">rates_total&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">gPeriod&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="n">changed&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">changedBars&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">rates_total&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">prev_calculated&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="n">count&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">MathMin&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">changed&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">rates_total&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">gPeriod&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">count&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="o">++&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">gWmaBuffer&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">calcWma&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">prices&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">gPeriod&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Print(&amp;#34;Latest WMA = &amp;#34;, gWmaBuffer[0]);
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="n">rates_total&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">OnCalculate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">const&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">rates_total&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">prev_calculated&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">datetime&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">time&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">open&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">high&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">low&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">close&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">long&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">tick_volume&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">long&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">volume&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">spread&lt;/span>&lt;span class="p">[])&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// PlaySound(&amp;#34;tick.wav&amp;#34;);
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="n">updateWma&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">close&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">rates_total&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">prev_calculated&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure></description></item><item><title>MetaTrader/MQL: インジケーターの実装例 - SMA（単純移動平均）</title><link>https://toushi.maku.blog/p/h3fr3do/</link><pubDate>Sun, 01 Feb 2015 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/h3fr3do/</guid><description>&lt;h2 id="移動平均線のカスタムインジケータを作成する">移動平均線のカスタムインジケータを作成する&lt;/h2>
+&lt;p>単純移動平均線 (SMA: Simple Moving Average) を表示するためのインジケータはデフォルトで用意されていますが、ここでは勉強のためにインジケータを自作してみます。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="" width="480" height="320" src="../../p/h3fr3do/img-001.png" alt="/p/h3fr3do/img-001.png" />
+&lt;/figure>
+
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">MySma.mq5&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property description &amp;#34;My Moving Average&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property strict
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_chart_window
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_buffers 1
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_plots 1
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Indicator settings
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="cp">#property indicator_label1 &amp;#34;MA&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_type1 DRAW_LINE
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_color1 clrRed
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_style1 STYLE_SOLID
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#property indicator_width1 1
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Input parameters
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">input&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">gPeriod&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">7&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// MA Period
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Indicator buffers
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kt">double&lt;/span> &lt;span class="n">gMaBuffer&lt;/span>&lt;span class="p">[];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">OnInit&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">gPeriod&lt;/span> &lt;span class="o">&amp;lt;=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Alert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Period must be larger than 0&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">INIT_PARAMETERS_INCORRECT&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">SetIndexBuffer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">gMaBuffer&lt;/span>&lt;span class="p">);&lt;/span> 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">IndicatorShortName&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;MA(&amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">gPeriod&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="s">&amp;#34;)&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">INIT_SUCCEEDED&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * [Utility]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * How many candles should be re-calculated.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">changedBars&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">rates_total&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">prev_calculated&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">prev_calculated&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">rates_total&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// The latest bar should be updated, so add 1.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="n">rates_total&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">prev_calculated&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * Calculate average of vals[index .. index+count)
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">double&lt;/span> &lt;span class="nf">average&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">vals&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">index&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">count&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">double&lt;/span> &lt;span class="n">sum&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mf">0.0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">count&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="o">++&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">sum&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="n">vals&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">index&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">sum&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="n">count&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * Updates a moving average buffer.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> *
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * Parameters:
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * buf -- the buffer where calculated MA is stored
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * price -- the price used for calculating the MA
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * price_count -- the number of prices
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * changed -- price[0..changed-1] has been updated
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> * period -- MA&amp;#39;s period
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cm"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">calcMovingAverage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">buf&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">price&lt;/span>&lt;span class="p">[],&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">price_count&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="n">changed&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">period&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Needs adequate price data for calculating MA.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">price_count&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">period&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ArrayFill&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">buf&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">price_count&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">EMPTY_VALUE&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Update each MA
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">count&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">MathMin&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">changed&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">price_count&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">period&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">count&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="o">++&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">buf&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">average&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">price&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">period&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">OnCalculate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">const&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">rates_total&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">prev_calculated&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">datetime&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">time&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">open&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">high&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">low&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">close&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">long&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">tick_volume&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">long&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">volume&lt;/span>&lt;span class="p">[],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">spread&lt;/span>&lt;span class="p">[])&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">rates_total&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">gPeriod&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="n">changed&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">changedBars&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">rates_total&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">prev_calculated&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">calcMovingAverage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">gMaBuffer&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">close&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">rates_total&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">changed&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">gPeriod&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">rates_total&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;h3 id="コードの説明">コードの説明&lt;/h3>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Input parameters
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">input&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">gPeriod&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">7&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// MA Period
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>何本のローソク足を使って平均値を求めるかを示す変数です。
+&lt;strong>&lt;code>input&lt;/code>&lt;/strong> キーワードを使うことで、インジケータをチャートにセットするときに、ユーザが自由に値を変更できるようになります。
+そのときにデフォルトでは変数名が表示されるのですが、上記のように、変数宣言の後ろにコメントを記載しておくと、そのテキストが代わりに表示されるようになります。&lt;/p></description></item></channel></rss>

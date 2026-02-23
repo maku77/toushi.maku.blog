@@ -1,23 +1,379 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MetaTrader/MQL: 基本 on まくまく投資ノート</title><link>https://toushi.maku.blog/p/vhu6hs4/</link><description>Recent content in MetaTrader/MQL: 基本 on まくまく投資ノート</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Sun, 16 Jul 2023 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/p/vhu6hs4/index.xml" rel="self" type="application/rss+xml"/><item><title>MetaTrader 用のプログラミング言語 MQL とは</title><link>https://toushi.maku.blog/p/rk2hvbq/</link><pubDate>Sun, 09 Nov 2014 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/rk2hvbq/</guid><description>MQL は MetaQuotes Language の略であり、MetaQuotes Software 社の作成した言語です。MetaQuotes Software 社は FX トレードのためのソフトウェアである MetaTrader（Windows 用）を開発しており、MQL はこの中で動作するプログラムを作成するための言語です。MQL を使ってプログラムを作成すると、
-自動売買を行うトレーディング・ロボット (Expert Advisor、通称 EA) カスタムインジケータ (Custom Indicator) 任意の処理を行うスクリプト (Script) などを作成することができます。MQL は C/C++ 言語をベースとした構文になっているため、C/C++ の経験者であれば簡単に使用することができます。 MetaTrader には、MQL でコーディングを行うための MetaEditor が付属しています。まずは MetaTrader をダウンロードしてインストールしましょう。現在公開されている MetaTrader にはバージョン 4 と 5 があり、それぞれの環境で使用可能な MQL のバージョンも異なります (MQL4 と MQL5)。日本の FX 会社が対応しているのは、主に MetaTrader 4 です。
-MetaTrader 4 のダウンロード MetaTrader 5 のダウンロード 練習や、開発用途で使用するのであれば、MetaQuotes のサイトからダウンロードできる MetaTrader を使い、インストール時にデモアカウントを作成すれば十分です。 実際に FX 会社の口座を使って取引するための MetaTrader は、ほとんどの場合、その FX 会社がカスタマイズ版の MetaTrader として配布していますので、そちらを使うのがよいでしょう。</description></item><item><title>MQL で Hello World</title><link>https://toushi.maku.blog/p/ay9a762/</link><pubDate>Tue, 27 Oct 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/ay9a762/</guid><description>ここでは、MetaTrader の MetaEditor を使って、次のように Hello World と表示するだけの Script を作成してみます。
-MetaEditor の起動 MQL でコーディングを行うためには、MetaTrader に付属している MetaEditor を使用します。MetaTrader の画面で下記のいずれかの方法で MetaEditor を起動します。
-F4 キーを押す ツールバー上の Editor アイコン をクリックする メニューから ツール → MetaQuotes Language Editor を選択する Script ファイルの新規作成 MetaEditor が起動したら、下記のようにして新規コードを作成します。 最初に作成するファイルの種類を選ぶのですが、ここでは一番単純な「Script」を選択します。
-Ctrl + N で新規作成ウィザード (MQL Wizard) を開く Script を選択 プロパティとして次のような感じで入力 名前: Scripts\Hello 著作者: （空欄） リンク: （空欄） すると、Hello.mq4 というファイル（MQL5 の場合は Hello.mq5）というファイルが生成され、エディタが開きます。
-☝️ ワンポイント ここではファイルの種類として Script を選択しましたが、新規作成ウィザードから選択できるもののうち、下記のものが 実行可能 になるプログラムです。
-エキスパートアドバイザー (Expert Advisor) &amp;hellip; 自動売買用のプログラム（EAと呼ばれる） カスタム指標 (Custom Indicator) &amp;hellip; 独自のインジケータを表示するためのプログラム スクリプト (Script) &amp;hellip; 一度だけ実行するプログラム それ以外の Library などのファイルは、他のプログラムから共有して使用する関数群などを定義するためのファイルを作成したい時に使用します。</description></item><item><title>MetaTrader/MQL: ヘッジアカウントとネットアカウントの違いを理解する</title><link>https://toushi.maku.blog/p/xmseugr/</link><pubDate>Tue, 02 Feb 2021 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/xmseugr/</guid><description>MT5 のアカウント（口座）には、ヘッジアカウント と ネットアカウント の 2 種類があり、それぞれポジションの取り方が異なります。 どちらを使用できるかは、FX 会社によって異なります。
-ヘッジカウント 同一シンボル（通貨）でも、注文ごとにポジションが作られるため 両建てが可能です。ポジションを決済するときは、ポジションを特定するチケット番号 (MqlTradeRequest 構造体 の position フィールド) の指定が必要です。 ネットアカウント シンボル（通貨）ごとに 1 つにマージされたポジションになるため、両建てができません。例えば、USDJPY を 0.1 ロット買い、次に 0.5 ロット売ると、USDJPY の 0.4 ロットのショートポジションが残ります。2 つのロングポジションを取ると、加重平均のオープン価格でポジションを取ったのと同じ扱いになります。注文時のパラメータ指定は、基本的にシンボル情報＋売買タイプだけの指定になります。 以前はネットアカウントの FX 会社が多かったのですが、現在は多くの FX 会社がヘッジアカウントを採用しています。 MT4 で両建てが可能だったのに、MT5 でできなくなったことに対して不満が出たためでしょう。 『くるくるワイド』 みたいな両建て手法は、基本的にはヘッジアカウントでなければ実行できません。
-MQL でアカウントのタイプを調べる方法 MT5 のタイトルバーで確認する MetaTrader アプリケーションのタイトルバーに、次のような感じで Headge と表示されていれば、ヘッジアカウントであることが分かります。
-MQL プログラムで確認する AccountInfoInteger 関数を使って、ヘッジアカウントとネットアカウントのどちらを使っているかを調べることができます。
-Scripts/ShowAccountType.mq5 void OnStart() { ENUM_ACCOUNT_MARGIN_MODE marginMode = (ENUM_ACCOUNT_MARGIN_MODE) AccountInfoInteger(ACCOUNT_MARGIN_MODE); switch (marginMode) { case ACCOUNT_MARGIN_MODE_RETAIL_HEDGING: MessageBox(&amp;#34;ヘッジアカウントを使用しています。両建て可能です。&amp;#34;); break; case ACCOUNT_MARGIN_MODE_RETAIL_NETTING: MessageBox(&amp;#34;ネットアカウントを使用しています。両建てできません。&amp;#34;); break; case ACCOUNT_MARGIN_MODE_EXCHANGE: MessageBox(&amp;#34;株式取引用のアカウントを使用しています。&amp;#34;); break; } } 参考: アカウント情報（口座情報）を取得する (AccountXxx) (MT5)</description></item><item><title>MetaTrader/MQL: 成行注文の 4 つの注文執行方式 (Request Execution Type) を理解する</title><link>https://toushi.maku.blog/p/2roz7fo/</link><pubDate>Mon, 18 Jan 2021 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/2roz7fo/</guid><description>4 つの注文執行方式 MT5 から成行注文 (Market Orders) を出すときには、4 種類の注文執行方式（Request Execution Type/Mode とも）が用意されており、ブローカー（FX 会社）によって設定されることとされています。 これが意外とややこしいのでまとめておきます。
-執行モード 説明 1 Market Execution（カウントダウン方式、マーケット方式） 最終的なマーケット価格で約定 2 Instant Execution（成行方式、ストリーミング方式） ユーザー指定の価格で約定（許容スリッページ指定あり） 3 Exchange Execution（エクスチェンジ方式） ECN ブローカーを通じて FX 市場に直接注文を出す方式 (NDD)。扱い方は Market Execution と同じ。 4 Request Execution（リクエスト方式） ブローカーから先に提示された価格で取引する。主に為替以外で使われる。 「成行方式」と「成行注文」という用語の違いに注意してください。 注文執行方式として成行方式を採用しているブローカーに対しては、「成行方式で成行注文を出す」ということになります。 注文執行方式によって、MQL5 プログラム内の OrderSend 関数で指定すべきパラメーターが変わってくるので、EA を作成する場合はこれらの違いを把握しておく必要があります（このあたりを理解せずに作られた EA がたくさん出回っています）。
-日本の多くの FX 会社は、Market Execution（カウントダウン方式）か Instant Execution（成行方式）を採用しているので、この 2 つの違いを理解しておけば OK です。 簡単に言えば、許容スリッページの指定があるかないかの違いです。 海外の FX 会社はよく Exchange Execution（エクスチェンジ方式）を採用していますが、MQL プログラムなどでの扱い方は Market Execution と同じです。
-1. Market Execution（カウントダウン方式、マーケット方式） カウントダウン方式は 注文を約定させることを重視 する方式で、スリッページが発生したとしても、最終的な市場価格 (Ask/Bid) で約定させます。 必ず市場価格で約定させるので、Market Execution と呼ばれます。 FX 会社からの約定拒否（リクオート）が発生しない代わりに、価格のボラティリティが大きいときには、不利な価格で約定してしまう可能性があります。</description></item><item><title>MetaTrader/MQL: 注文時のフィル・ポリシー（充填ポリシー）を理解する</title><link>https://toushi.maku.blog/p/9jjrrp5/</link><pubDate>Tue, 26 Jan 2021 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/9jjrrp5/</guid><description>フィル・ポリシーとは OrderSend 関数 (MT5) で売買注文を出すとき、MqlTradeRequest 構造体（日本語）の type_filling フィールドにフィル・ポリシー（充填ポリシー？）を設定してやる必要があります。 フィル・ポリシーは、注文時に指定したボリューム（ロット数）が一度に約定できない場合に、その注文をどのように扱うのか （部分的にでも約定させるのかなど）を表します。
-この type_filling フィールドを適当に設定していると、OrderSend 関数が次のようなエラーコード返して失敗することがあります。
-result.retcode: 10030 result.comment: Unsupported filling mode ようするに、ブローカー（FX 会社）側のトレードサーバーが、「そのフィル・ポリシーは受け付けないよ」と言っているんですね（理由はきっと大人の事情、あるいはブローカーの手抜き）。 フィル・ポリシーには、ENUM_ORDER_TYPE_FILLING 列挙型 で定義されている次のいずれかの値を指定することができます。
-ORDER_FILLING_FOK (0) Fill or Kill. 注文時に指定したボリューム（ロット数）で全て約定できないときは、その注文をキャンセルします。 ORDER_FILLING_IOC (1) Immediate or Cancel. 指定したボリュームのうちすぐに約定できる部分だけ約定させ、残りをキャンセルします。システムによっては Fill or Cancel と呼ばれていたりします。 ORDER_FILLING_RETURN (2) Return. 指定したボリュームのうちすぐに約定できる部分だけを約定させ、残りも市場価格でさらに約定させるようにトレードサーバー側ががんばります。MT 用語としては、ひとつの「注文 (order)」で、複数の「約定 (deal)」が発生し、最終的にひとつの「ポジション (position)」になる、と表現されます。最新の市場価格で次々と約定させていく必要があるため、このポリシーはブローカーの 注文執行方式 が Market execution あるいは Exchange execution であるときのみ有効です。このポリシーは以下の注文タイプ（type 引数）で注文を出すときに有効です。 ORDER_TYPE_BUY / ORDER_TYPE_SELL &amp;hellip; 成行注文 ORDER_TYPE_BUY_LIMIT / ORDER_TYPE_SELL_LIMIT &amp;hellip; 指値注文 ORDER_TYPE_BUY_STOP_LIMIT / ORDER_TYPE_SELL_STOP_LIMIT &amp;hellip; ストップ・リミット注文（トリガー後に指値注文に置き換えられるので、そのときに ORDER_FILLING_RETURN のポリシーがセットされます） フィル・ポリシーは自由には指定できない MQL5 のドキュメントサイトには、以下のような 記載（日本語）があります。</description></item><item><title>MetaTrader/MQL: EA のマジックナンバーについて理解する</title><link>https://toushi.maku.blog/p/p6fgxgf/</link><pubDate>Sun, 27 Dec 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/p6fgxgf/</guid><description>マジックナンバー・ジェネレーター 再生成 EA 用のマジックナンバーとして、ランダムな 8 桁の整数値を生成するツールです。 生成されたコードを .mq5 コード内にコピペして使ってください。 変数 Magic の値は、MqlTradeRequest 構造体の magic フィールドなどにセットして使用します。
-マジックナンバーとは MT4/5 の EA（エキスパートアドバイザ）から何らかの注文を出す場合、マジックナンバーと呼ばれる整数値を設定する必要があります。 これは、OrderSend 関数 で注文を出す場合も、CTrade クラス で注文を出す場合も同様です。 具体的には次のようにマジックナンバーを指定します。
-MT5 の OrderSend 関数の場合 &amp;hellip; MqlTradeRequest オブジェクト の magic フィールド（uint 値） MT5 の CTrade クラスの場合 &amp;hellip; SetExpertMagicNumber メソッド（uint 値） MT4 の OrderSend 関数の場合 &amp;hellip; magic パラメータ（int 値） このマジックナンバーは、どの EA から出された注文かを識別するため のものであり、1 つの口座内で複数の EA を動かすときは、それぞれ異なる値を割り当てておく必要があります。 マジックナンバーが重複してしまうと、別の EA から注文を修正されてしまうといった誤動作の原因になります。 マジックナンバーを設定しなくても注文用の API は呼び出せてしまいますが、このときはデフォルト値として 0 が使われます。 0 というマジックナンバーは手動でのエントリーを示す ものであり、EA のコードでは何らかの一意なマジックナンバーを指定しておく必要があります。</description></item><item><title>MetaTrader/MQL: アプリの種類ごとに扱えるイベントハンドラーの一覧</title><link>https://toushi.maku.blog/p/um6bbep/</link><pubDate>Sun, 16 Jul 2023 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/um6bbep/</guid><description>MQL で作成するアプリの種類によって、自動的に呼び出される関数（イベントハンドラー）が異なっています。 よく使うイベントハンドラーに関しては、ファイルを新規作成するときに雛形コードを自動生成してくれるようになっています。
-スクリプト インジケーター EA（エキスパートアドバイザー） OnStart() ✅ OnInit() ✅ ✅ OnDeinit() ✅ ✅ OnCalculate() ✅ ✅ OnTimer() ✅ ✅ OnChartEvent() ✅ ✅ OnBookEvent() ✅ ✅ OnTick() ✅ OnTrade() ✅ OnTester() ✅ （参考）スクリプトで使用できるイベント （参考）カスタムインジケーターで使用できるイベント （参考）EA で使用できるイベント</description></item><item><title>MetaTrader/MQL: 基本データ型一覧</title><link>https://toushi.maku.blog/p/3n2eq3e/</link><pubDate>Sun, 03 Jan 2021 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/3n2eq3e/</guid><description>MetaTrader 用のプログラミング言語 MQL では、次のような基本型が定義されています。
-型名 種類 バイト数 値の範囲 リテラルの例 char 整数 1 -128 〜 127 'A' short 整数 2 -32,768 〜 32,767 12345 int 整数 4 -2,147,483,648 〜 2,147,483,647 1234567890 long 整数 8 -9,223,372,036,854,775,808
-〜 9,223,372,036,854,775,807 ─ uchar 整数(正) 1 0 〜 255 234 ushort 整数(正) 2 0 〜 65,535 45678 uint 整数(正) 4 0 〜 4,294,967,295 3456789012 ulong 整数(正) 8 0 〜 18,446,744,073,709,551,615 ─ float 実数 4 -3.402823e+38 〜 3.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MetaTrader/MQL: 基本 on まくまく投資ノート</title><link>https://toushi.maku.blog/p/vhu6hs4/</link><description>Recent content in MetaTrader/MQL: 基本 on まくまく投資ノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Sun, 16 Jul 2023 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/p/vhu6hs4/index.xml" rel="self" type="application/rss+xml"/><item><title>MetaTrader 用のプログラミング言語 MQL とは</title><link>https://toushi.maku.blog/p/rk2hvbq/</link><pubDate>Sun, 09 Nov 2014 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/rk2hvbq/</guid><description>&lt;p>MQL は MetaQuotes Language の略であり、MetaQuotes Software 社の作成した言語です。MetaQuotes Software 社は FX トレードのためのソフトウェアである MetaTrader（Windows 用）を開発しており、MQL はこの中で動作するプログラムを作成するための言語です。MQL を使ってプログラムを作成すると、&lt;/p>
+&lt;ul>
+&lt;li>自動売買を行うトレーディング・ロボット (&lt;strong>Expert Advisor&lt;/strong>、通称 EA)&lt;/li>
+&lt;li>カスタムインジケータ (&lt;strong>Custom Indicator&lt;/strong>)&lt;/li>
+&lt;li>任意の処理を行うスクリプト (&lt;strong>Script&lt;/strong>)&lt;/li>
+&lt;/ul>
+&lt;p>などを作成することができます。MQL は C/C++ 言語をベースとした構文になっているため、C/C++ の経験者であれば簡単に使用することができます。
+MetaTrader には、MQL でコーディングを行うための MetaEditor が付属しています。まずは MetaTrader をダウンロードしてインストールしましょう。現在公開されている MetaTrader にはバージョン 4 と 5 があり、それぞれの環境で使用可能な MQL のバージョンも異なります (MQL4 と MQL5)。日本の FX 会社が対応しているのは、主に MetaTrader 4 です。&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="http://www.metatrader4.com/">MetaTrader 4 のダウンロード&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://www.metaquotes.net/">MetaTrader 5 のダウンロード&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>練習や、開発用途で使用するのであれば、MetaQuotes のサイトからダウンロードできる MetaTrader を使い、インストール時にデモアカウントを作成すれば十分です。
+実際に FX 会社の口座を使って取引するための MetaTrader は、ほとんどの場合、その FX 会社がカスタマイズ版の MetaTrader として配布していますので、そちらを使うのがよいでしょう。&lt;/p></description></item><item><title>MQL で Hello World</title><link>https://toushi.maku.blog/p/ay9a762/</link><pubDate>Tue, 27 Oct 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/ay9a762/</guid><description>&lt;p>ここでは、MetaTrader の MetaEditor を使って、次のように &lt;code>Hello World&lt;/code> と表示するだけの Script を作成してみます。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="158" height="186" src="../../p/ay9a762/img-002.png" alt="/p/ay9a762/img-002.png" />
+&lt;/figure>
+
+&lt;h2 id="metaeditor-の起動">MetaEditor の起動&lt;/h2>
+&lt;p>MQL でコーディングを行うためには、MetaTrader に付属している MetaEditor を使用します。MetaTrader の画面で下記のいずれかの方法で MetaEditor を起動します。&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>&lt;code>F4&lt;/code>&lt;/strong> キーを押す&lt;/li>
+&lt;li>ツールバー上の &lt;code>Editor アイコン&lt;/code> をクリックする&lt;/li>
+&lt;li>メニューから &lt;code>ツール&lt;/code> → &lt;code>MetaQuotes Language Editor&lt;/code> を選択する&lt;/li>
+&lt;/ul>
+&lt;h2 id="script-ファイルの新規作成">Script ファイルの新規作成&lt;/h2>
+&lt;p>MetaEditor が起動したら、下記のようにして新規コードを作成します。
+最初に作成するファイルの種類を選ぶのですが、ここでは一番単純な「Script」を選択します。&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>&lt;code>Ctrl + N&lt;/code>&lt;/strong> で新規作成ウィザード (MQL Wizard) を開く&lt;/li>
+&lt;li>&lt;code>Script&lt;/code> を選択&lt;/li>
+&lt;li>プロパティとして次のような感じで入力
+&lt;ul>
+&lt;li>名前: &lt;code>Scripts\Hello&lt;/code>&lt;/li>
+&lt;li>著作者: （空欄）&lt;/li>
+&lt;li>リンク: （空欄）&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>すると、&lt;code>Hello.mq4&lt;/code> というファイル（MQL5 の場合は &lt;code>Hello.mq5&lt;/code>）というファイルが生成され、エディタが開きます。&lt;/p>
+&lt;div class="xNote">
+ &lt;span class="xNote_title">☝️ ワンポイント&lt;/span>
+ &lt;span class="xNote_body">&lt;p>ここではファイルの種類として Script を選択しましたが、新規作成ウィザードから選択できるもののうち、下記のものが &lt;strong>実行可能&lt;/strong> になるプログラムです。&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>エキスパートアドバイザー (Expert Advisor)&lt;/code> &amp;hellip; 自動売買用のプログラム（EAと呼ばれる）&lt;/li>
+&lt;li>&lt;code>カスタム指標 (Custom Indicator)&lt;/code> &amp;hellip; 独自のインジケータを表示するためのプログラム&lt;/li>
+&lt;li>&lt;code>スクリプト (Script)&lt;/code> &amp;hellip; 一度だけ実行するプログラム&lt;/li>
+&lt;/ul>
+&lt;p>それ以外の Library などのファイルは、他のプログラムから共有して使用する関数群などを定義するためのファイルを作成したい時に使用します。&lt;/p></description></item><item><title>MetaTrader/MQL: ヘッジアカウントとネットアカウントの違いを理解する</title><link>https://toushi.maku.blog/p/xmseugr/</link><pubDate>Tue, 02 Feb 2021 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/xmseugr/</guid><description>&lt;p>MT5 のアカウント（口座）には、&lt;strong>ヘッジアカウント&lt;/strong> と &lt;strong>ネットアカウント&lt;/strong> の 2 種類があり、それぞれポジションの取り方が異なります。
+どちらを使用できるかは、FX 会社によって異なります。&lt;/p>
+&lt;dl>
+&lt;dt>ヘッジカウント&lt;/dt>
+&lt;dd>同一シンボル（通貨）でも、注文ごとにポジションが作られるため &lt;strong>両建てが可能です&lt;/strong>。ポジションを決済するときは、ポジションを特定するチケット番号 (&lt;a href="https://www.mql5.com/en/docs/constants/structures/mqltraderequest">MqlTradeRequest 構造体&lt;/a> の &lt;code>position&lt;/code> フィールド) の指定が必要です。&lt;/dd>
+&lt;dt>ネットアカウント&lt;/dt>
+&lt;dd>シンボル（通貨）ごとに 1 つにマージされたポジションになるため、&lt;strong>両建てができません&lt;/strong>。例えば、USDJPY を 0.1 ロット買い、次に 0.5 ロット売ると、USDJPY の 0.4 ロットのショートポジションが残ります。2 つのロングポジションを取ると、加重平均のオープン価格でポジションを取ったのと同じ扱いになります。注文時のパラメータ指定は、基本的にシンボル情報＋売買タイプだけの指定になります。&lt;/dd>
+&lt;/dl>
+&lt;p>以前はネットアカウントの FX 会社が多かったのですが、現在は多くの FX 会社がヘッジアカウントを採用しています。
+MT4 で両建てが可能だったのに、MT5 でできなくなったことに対して不満が出たためでしょう。
+&lt;a target="_blank" href="https://www.amazon.co.jp/dp/4534053479?tag=maku04-22">『くるくるワイド』&lt;/a>
+ みたいな両建て手法は、基本的にはヘッジアカウントでなければ実行できません。&lt;/p>
+&lt;h2 id="mql-でアカウントのタイプを調べる方法">MQL でアカウントのタイプを調べる方法&lt;/h2>
+&lt;h3 id="mt5-のタイトルバーで確認する">MT5 のタイトルバーで確認する&lt;/h3>
+&lt;p>MetaTrader アプリケーションのタイトルバーに、次のような感じで &lt;strong>Headge&lt;/strong> と表示されていれば、ヘッジアカウントであることが分かります。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="656" height="96" src="../../p/xmseugr/img-001.png" alt="/p/xmseugr/img-001.png" />
+&lt;/figure>
+
+&lt;h3 id="mql-プログラムで確認する">MQL プログラムで確認する&lt;/h3>
+&lt;p>&lt;code>AccountInfoInteger&lt;/code> 関数を使って、ヘッジアカウントとネットアカウントのどちらを使っているかを調べることができます。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">Scripts/ShowAccountType.mq5&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">void&lt;/span> &lt;span class="nf">OnStart&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ENUM_ACCOUNT_MARGIN_MODE&lt;/span> &lt;span class="n">marginMode&lt;/span> &lt;span class="o">=&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">(&lt;/span>&lt;span class="n">ENUM_ACCOUNT_MARGIN_MODE&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="n">AccountInfoInteger&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ACCOUNT_MARGIN_MODE&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">switch&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">marginMode&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="nl">ACCOUNT_MARGIN_MODE_RETAIL_HEDGING&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">MessageBox&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;ヘッジアカウントを使用しています。両建て可能です。&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="nl">ACCOUNT_MARGIN_MODE_RETAIL_NETTING&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">MessageBox&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;ネットアカウントを使用しています。両建てできません。&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="nl">ACCOUNT_MARGIN_MODE_EXCHANGE&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">MessageBox&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;株式取引用のアカウントを使用しています。&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;ul>
+&lt;li>参考: &lt;a href="../../p/nb7h9vg">アカウント情報（口座情報）を取得する (AccountXxx) (MT5)&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>MetaTrader/MQL: 成行注文の 4 つの注文執行方式 (Request Execution Type) を理解する</title><link>https://toushi.maku.blog/p/2roz7fo/</link><pubDate>Mon, 18 Jan 2021 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/2roz7fo/</guid><description>&lt;h2 id="4-つの注文執行方式">4 つの注文執行方式&lt;/h2>
+&lt;p>MT5 から成行注文 (Market Orders) を出すときには、4 種類の注文執行方式（Request Execution Type/Mode とも）が用意されており、ブローカー（FX 会社）によって設定されることとされています。
+これが意外とややこしいのでまとめておきます。&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>&lt;/th>
+ &lt;th>執行モード&lt;/th>
+ &lt;th>説明&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>1&lt;/td>
+ &lt;td>&lt;b>Market Execution&lt;/b>（カウントダウン方式、マーケット方式）&lt;/td>
+ &lt;td>最終的なマーケット価格で約定&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>2&lt;/td>
+ &lt;td>&lt;b>Instant Execution&lt;/b>（成行方式、ストリーミング方式）&lt;/td>
+ &lt;td>ユーザー指定の価格で約定（許容スリッページ指定あり）&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>3&lt;/td>
+ &lt;td>&lt;b>Exchange Execution&lt;/b>（エクスチェンジ方式）&lt;/td>
+ &lt;td>ECN ブローカーを通じて FX 市場に直接注文を出す方式 (NDD)。扱い方は Market Execution と同じ。&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>4&lt;/td>
+ &lt;td>&lt;b>Request Execution&lt;/b>（リクエスト方式）&lt;/td>
+ &lt;td>ブローカーから先に提示された価格で取引する。主に為替以外で使われる。&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;p>「成行方式」と「成行注文」という用語の違いに注意してください。
+注文執行方式として成行方式を採用しているブローカーに対しては、「成行方式で成行注文を出す」ということになります。
+注文執行方式によって、MQL5 プログラム内の &lt;code>OrderSend&lt;/code> 関数で指定すべきパラメーターが変わってくるので、EA を作成する場合はこれらの違いを把握しておく必要があります（このあたりを理解せずに作られた EA がたくさん出回っています）。&lt;/p>
+&lt;p>日本の多くの FX 会社は、Market Execution（カウントダウン方式）か Instant Execution（成行方式）を採用しているので、この 2 つの違いを理解しておけば OK です。
+簡単に言えば、許容スリッページの指定があるかないかの違いです。
+海外の FX 会社はよく Exchange Execution（エクスチェンジ方式）を採用していますが、MQL プログラムなどでの扱い方は Market Execution と同じです。&lt;/p>
+&lt;h3 id="1-market-executionカウントダウン方式マーケット方式">1. Market Execution（カウントダウン方式、マーケット方式）&lt;/h3>
+&lt;p>カウントダウン方式は &lt;strong>注文を約定させることを重視&lt;/strong> する方式で、スリッページが発生したとしても、最終的な市場価格 (Ask/Bid) で約定させます。
+必ず市場価格で約定させるので、Market Execution と呼ばれます。
+FX 会社からの約定拒否（リクオート）が発生しない代わりに、価格のボラティリティが大きいときには、不利な価格で約定してしまう可能性があります。&lt;/p></description></item><item><title>MetaTrader/MQL: 注文時のフィル・ポリシー（充填ポリシー）を理解する</title><link>https://toushi.maku.blog/p/9jjrrp5/</link><pubDate>Tue, 26 Jan 2021 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/9jjrrp5/</guid><description>&lt;h2 id="フィルポリシーとは">フィル・ポリシーとは&lt;/h2>
+&lt;p>&lt;code>OrderSend&lt;/code> 関数 (MT5) で売買注文を出すとき、&lt;a href="https://www.mql5.com/en/docs/constants/structures/mqltraderequest">MqlTradeRequest 構造体&lt;/a>（&lt;a href="https://www.mql5.com/ja/docs/constants/structures/mqltraderequest">日本語&lt;/a>）の &lt;strong>&lt;code>type_filling&lt;/code>&lt;/strong> フィールドにフィル・ポリシー（充填ポリシー？）を設定してやる必要があります。
+フィル・ポリシーは、&lt;strong>注文時に指定したボリューム（ロット数）が一度に約定できない場合に、その注文をどのように扱うのか&lt;/strong> （部分的にでも約定させるのかなど）を表します。&lt;/p>
+&lt;p>この &lt;code>type_filling&lt;/code> フィールドを適当に設定していると、&lt;code>OrderSend&lt;/code> 関数が次のようなエラーコード返して失敗することがあります。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">result.retcode: 10030
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">result.comment: Unsupported filling mode&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>ようするに、ブローカー（FX 会社）側のトレードサーバーが、「そのフィル・ポリシーは受け付けないよ」と言っているんですね（理由はきっと大人の事情、あるいはブローカーの手抜き）。
+フィル・ポリシーには、&lt;a href="https://www.mql5.com/en/docs/constants/tradingconstants/orderproperties#enum_order_type_filling">ENUM_ORDER_TYPE_FILLING 列挙型&lt;/a> で定義されている次のいずれかの値を指定することができます。&lt;/p>
+&lt;dl>
+&lt;dt>&lt;code>ORDER_FILLING_FOK (0)&lt;/code>&lt;/dt>
+&lt;dd>Fill or Kill. 注文時に指定したボリューム（ロット数）で全て約定できないときは、その注文をキャンセルします。&lt;/dd>
+&lt;dt>&lt;code>ORDER_FILLING_IOC (1)&lt;/code>&lt;/dt>
+&lt;dd>Immediate or Cancel. 指定したボリュームのうちすぐに約定できる部分だけ約定させ、残りをキャンセルします。システムによっては Fill or Cancel と呼ばれていたりします。&lt;/dd>
+&lt;dt>&lt;code>ORDER_FILLING_RETURN (2)&lt;/code>&lt;/dt>
+&lt;dd>Return. 指定したボリュームのうちすぐに約定できる部分だけを約定させ、残りも市場価格でさらに約定させるようにトレードサーバー側ががんばります。MT 用語としては、ひとつの「注文 (order)」で、複数の「約定 (deal)」が発生し、最終的にひとつの「ポジション (position)」になる、と表現されます。最新の市場価格で次々と約定させていく必要があるため、このポリシーはブローカーの &lt;a href="../../p/2roz7fo">注文執行方式&lt;/a> が Market execution あるいは Exchange execution であるときのみ有効です。このポリシーは以下の注文タイプ（&lt;code>type&lt;/code> 引数）で注文を出すときに有効です。
+&lt;ul>
+&lt;li>&lt;code>ORDER_TYPE_BUY&lt;/code> / &lt;code>ORDER_TYPE_SELL&lt;/code> &amp;hellip; 成行注文&lt;/li>
+&lt;li>&lt;code>ORDER_TYPE_BUY_LIMIT&lt;/code> / &lt;code>ORDER_TYPE_SELL_LIMIT&lt;/code> &amp;hellip; 指値注文&lt;/li>
+&lt;li>&lt;code>ORDER_TYPE_BUY_STOP_LIMIT&lt;/code> / &lt;code>ORDER_TYPE_SELL_STOP_LIMIT&lt;/code> &amp;hellip; ストップ・リミット注文（トリガー後に指値注文に置き換えられるので、そのときに &lt;code>ORDER_FILLING_RETURN&lt;/code> のポリシーがセットされます）&lt;/li>
+&lt;/ul>
+&lt;/dd>
+&lt;/dl>
+&lt;h2 id="フィルポリシーは自由には指定できない">フィル・ポリシーは自由には指定できない&lt;/h2>
+&lt;p>MQL5 のドキュメントサイトには、以下のような &lt;a href="https://www.mql5.com/en/docs/constants/environment_state/marketinfoconstants#symbol_filling_mode">記載&lt;/a>（&lt;a href="https://www.mql5.com/ja/docs/constants/environment_state/marketinfoconstants#symbol_filling_mode">日本語&lt;/a>）があります。&lt;/p></description></item><item><title>MetaTrader/MQL: EA のマジックナンバーについて理解する</title><link>https://toushi.maku.blog/p/p6fgxgf/</link><pubDate>Sun, 27 Dec 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/p6fgxgf/</guid><description>&lt;h2 id="マジックナンバージェネレーター">マジックナンバー・ジェネレーター&lt;/h2>
+&lt;form style="color:white; background:#c50; padding:1rem; text-align:center;">
+ &lt;div id="result" style="border-radius:1rem; letter-spacing:0.1em; text-align: left; background:#fff0e0; color:#c50; font-size: 1.5rem; font-weight: bolder; margin: 1rem 1rem 0 1rem; padding: 0.7em;">&lt;/div>
+ &lt;button onclick="generate(); return false;" style="margin-top:1rem; font-size:1.5em;">再生成&lt;/button>
+&lt;/form>
+&lt;script>
+function generate() {
+ const RAND_START = 10000
+ const RAND_END = 90000
+ const SHIFT = 1000
+ const rand = Math.floor(Math.random() * RAND_END) + RAND_START;
+ const code = 'input ulong Magic = ' + (rand * SHIFT) + ';';
+ document.getElementById('result').innerText = code;
+}
+window.onload = generate();
+&lt;/script>
+&lt;p>EA 用のマジックナンバーとして、ランダムな 8 桁の整数値を生成するツールです。
+生成されたコードを &lt;code>.mq5&lt;/code> コード内にコピペして使ってください。
+変数 &lt;code>Magic&lt;/code> の値は、&lt;code>MqlTradeRequest&lt;/code> 構造体の &lt;code>magic&lt;/code> フィールドなどにセットして使用します。&lt;/p></description></item><item><title>MetaTrader/MQL: アプリの種類ごとに扱えるイベントハンドラーの一覧</title><link>https://toushi.maku.blog/p/um6bbep/</link><pubDate>Sun, 16 Jul 2023 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/um6bbep/</guid><description>&lt;p>MQL で作成するアプリの種類によって、自動的に呼び出される関数（イベントハンドラー）が異なっています。
+よく使うイベントハンドラーに関しては、ファイルを新規作成するときに雛形コードを自動生成してくれるようになっています。&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>&lt;/th>
+ &lt;th style="text-align: center">スクリプト&lt;/th>
+ &lt;th style="text-align: center">インジケーター&lt;/th>
+ &lt;th style="text-align: center">EA（エキスパートアドバイザー）&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>&lt;code>OnStart()&lt;/code>&lt;/td>
+ &lt;td style="text-align: center">✅&lt;/td>
+ &lt;td style="text-align: center">&lt;/td>
+ &lt;td style="text-align: center">&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>OnInit()&lt;/code>&lt;/td>
+ &lt;td style="text-align: center">&lt;/td>
+ &lt;td style="text-align: center">✅&lt;/td>
+ &lt;td style="text-align: center">✅&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>OnDeinit()&lt;/code>&lt;/td>
+ &lt;td style="text-align: center">&lt;/td>
+ &lt;td style="text-align: center">✅&lt;/td>
+ &lt;td style="text-align: center">✅&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>OnCalculate()&lt;/code>&lt;/td>
+ &lt;td style="text-align: center">&lt;/td>
+ &lt;td style="text-align: center">✅&lt;/td>
+ &lt;td style="text-align: center">✅&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>OnTimer()&lt;/code>&lt;/td>
+ &lt;td style="text-align: center">&lt;/td>
+ &lt;td style="text-align: center">✅&lt;/td>
+ &lt;td style="text-align: center">✅&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>OnChartEvent()&lt;/code>&lt;/td>
+ &lt;td style="text-align: center">&lt;/td>
+ &lt;td style="text-align: center">✅&lt;/td>
+ &lt;td style="text-align: center">✅&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>OnBookEvent()&lt;/code>&lt;/td>
+ &lt;td style="text-align: center">&lt;/td>
+ &lt;td style="text-align: center">✅&lt;/td>
+ &lt;td style="text-align: center">✅&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>OnTick()&lt;/code>&lt;/td>
+ &lt;td style="text-align: center">&lt;/td>
+ &lt;td style="text-align: center">&lt;/td>
+ &lt;td style="text-align: center">✅&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>OnTrade()&lt;/code>&lt;/td>
+ &lt;td style="text-align: center">&lt;/td>
+ &lt;td style="text-align: center">&lt;/td>
+ &lt;td style="text-align: center">✅&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>OnTester()&lt;/code>&lt;/td>
+ &lt;td style="text-align: center">&lt;/td>
+ &lt;td style="text-align: center">&lt;/td>
+ &lt;td style="text-align: center">✅&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;ul>
+&lt;li>（参考）&lt;a href="../../p/fvh3d6r/">スクリプトで使用できるイベント&lt;/a>&lt;/li>
+&lt;li>（参考）&lt;a href="../../p/ugs5fq2/">カスタムインジケーターで使用できるイベント&lt;/a>&lt;/li>
+&lt;li>（参考）&lt;a href="../../p/aamwkiu/">EA で使用できるイベント&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>MetaTrader/MQL: 基本データ型一覧</title><link>https://toushi.maku.blog/p/3n2eq3e/</link><pubDate>Sun, 03 Jan 2021 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/3n2eq3e/</guid><description>&lt;p>MetaTrader 用のプログラミング言語 MQL では、次のような基本型が定義されています。&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>型名&lt;/th>
+ &lt;th>種類&lt;/th>
+ &lt;th>バイト数&lt;/th>
+ &lt;th>値の範囲&lt;/th>
+ &lt;th>リテラルの例&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>&lt;code>char&lt;/code>&lt;/td>
+ &lt;td>整数&lt;/td>
+ &lt;td>1&lt;/td>
+ &lt;td>-128 〜 127&lt;/td>
+ &lt;td>&lt;code>'A'&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>short&lt;/code>&lt;/td>
+ &lt;td>整数&lt;/td>
+ &lt;td>2&lt;/td>
+ &lt;td>-32,768 〜 32,767&lt;/td>
+ &lt;td>&lt;code>12345&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>int&lt;/code>&lt;/td>
+ &lt;td>整数&lt;/td>
+ &lt;td>4&lt;/td>
+ &lt;td>-2,147,483,648 〜 2,147,483,647&lt;/td>
+ &lt;td>&lt;code>1234567890&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>long&lt;/code>&lt;/td>
+ &lt;td>整数&lt;/td>
+ &lt;td>8&lt;/td>
+ &lt;td>-9,223,372,036,854,775,808&lt;br>〜 9,223,372,036,854,775,807&lt;/td>
+ &lt;td>─&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>uchar&lt;/code>&lt;/td>
+ &lt;td>整数(正)&lt;/td>
+ &lt;td>1&lt;/td>
+ &lt;td>0 〜 255&lt;/td>
+ &lt;td>&lt;code>234&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>ushort&lt;/code>&lt;/td>
+ &lt;td>整数(正)&lt;/td>
+ &lt;td>2&lt;/td>
+ &lt;td>0 〜 65,535&lt;/td>
+ &lt;td>&lt;code>45678&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>uint&lt;/code>&lt;/td>
+ &lt;td>整数(正)&lt;/td>
+ &lt;td>4&lt;/td>
+ &lt;td>0 〜 4,294,967,295&lt;/td>
+ &lt;td>&lt;code>3456789012&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>ulong&lt;/code>&lt;/td>
+ &lt;td>整数(正)&lt;/td>
+ &lt;td>8&lt;/td>
+ &lt;td>0 〜 18,446,744,073,709,551,615&lt;/td>
+ &lt;td>─&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>float&lt;/code>&lt;/td>
+ &lt;td>実数&lt;/td>
+ &lt;td>4&lt;/td>
+ &lt;td>-3.402823e+38 〜 3.402823e+38&lt;/td>
+ &lt;td>&lt;code>-1.5&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>double&lt;/code>&lt;/td>
+ &lt;td>実数&lt;/td>
+ &lt;td>8&lt;/td>
+ &lt;td>-1.797693e+308 〜 1.797693e+308&lt;/td>
+ &lt;td>&lt;code>-1.5&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>string&lt;/code>&lt;/td>
+ &lt;td>文字列&lt;/td>
+ &lt;td>─&lt;/td>
+ &lt;td>─&lt;/td>
+ &lt;td>&lt;code>&amp;quot;ABCDE&amp;quot;&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>bool&lt;/code>&lt;/td>
+ &lt;td>真偽値&lt;/td>
+ &lt;td>─&lt;/td>
+ &lt;td>&lt;code>false&lt;/code> / &lt;code>true&lt;/code>&lt;/td>
+ &lt;td>&lt;code>true&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>color&lt;/code>&lt;/td>
+ &lt;td>色&lt;/td>
+ &lt;td>─&lt;/td>
+ &lt;td>─&lt;/td>
+ &lt;td>&lt;code>clrRed&lt;/code>&lt;br>&lt;code>C'255,0,0'&lt;/code>&lt;br>&lt;code>0xFF0000&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;code>datetime&lt;/code>&lt;/td>
+ &lt;td>日時&lt;/td>
+ &lt;td>8&lt;/td>
+ &lt;td>─&lt;/td>
+ &lt;td>&lt;code>D'2020.01.01 23:30:50'&lt;/code>&lt;br>&lt;code>D'2020.01.01'&lt;/code>&lt;br>&lt;code>D'23:30'&lt;/code>&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;ul>
+&lt;li>参考: &lt;a href="../../p/mfee8vj/">MQL で時刻情報 (datetime) を扱う&lt;/a>&lt;/li>
+&lt;li>参考: &lt;a href="../../p/rn6kw8j/">MQL で色情報 (color) を扱う&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>

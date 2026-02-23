@@ -1,1 +1,108 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>インジケーター on まくまく投資ノート</title><link>https://toushi.maku.blog/tags/%E3%82%A4%E3%83%B3%E3%82%B8%E3%82%B1%E3%83%BC%E3%82%BF%E3%83%BC/</link><description>Recent content in インジケーター on まくまく投資ノート</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Sun, 12 Apr 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/tags/%E3%82%A4%E3%83%B3%E3%82%B8%E3%82%B1%E3%83%BC%E3%82%BF%E3%83%BC/index.xml" rel="self" type="application/rss+xml"/><item><title>TradeStation/インジケーター/モメンタム (WA-Momentum)</title><link>https://toushi.maku.blog/p/rbnx8hr/</link><pubDate>Sun, 12 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/rbnx8hr/</guid><description>WA-Momentum { Search Tag: WA-Momentum } inputs: Price( Close ) [DisplayName = &amp;#34;Price&amp;#34;, ToolTip = &amp;#34;Enter an EasyLanguage expression to use in the momentum calculation.&amp;#34;], Length( 12 ) [DisplayName = &amp;#34;Length&amp;#34;, ToolTip = &amp;#34;Enter number of bars over which to calculate momentum.&amp;#34;], ColorNormLength( 14 ) [DisplayName = &amp;#34;ColorNormLength&amp;#34;, ToolTip = &amp;#34;Color Normalization Length. Enter the number of bars over which to determine high and low values of the indicator for use in creating gradient colors.</description></item><item><title>TradeStation/インジケーター/移動平均線1本 (WA-Mov Avg 1 Line)</title><link>https://toushi.maku.blog/p/kkipwgp/</link><pubDate>Fri, 12 Apr 2019 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/kkipwgp/</guid><description>WA-Mov Avg 1 Line { Search Tag: WA-Mov Avg 1 Line } inputs: Price( Close ) [DisplayName = &amp;#34;Price&amp;#34;, ToolTip = &amp;#34;Enter an EasyLanguage expression to use in the moving average calculation.&amp;#34;], Length( 9 ) [DisplayName = &amp;#34;Length&amp;#34;, ToolTip = &amp;#34;Enter number of bars over which to calculate the simple moving average.&amp;#34;], Displace( 0 ) [DisplayName = &amp;#34;Displace&amp;#34;, ToolTip = &amp;#34;Displacement. Enter the number of bars by which plots will be displaced.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>インジケーター on まくまく投資ノート</title><link>https://toushi.maku.blog/tags/%E3%82%A4%E3%83%B3%E3%82%B8%E3%82%B1%E3%83%BC%E3%82%BF%E3%83%BC/</link><description>Recent content in インジケーター on まくまく投資ノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Sun, 12 Apr 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/tags/%E3%82%A4%E3%83%B3%E3%82%B8%E3%82%B1%E3%83%BC%E3%82%BF%E3%83%BC/index.xml" rel="self" type="application/rss+xml"/><item><title>TradeStation/インジケーター/モメンタム (WA-Momentum)</title><link>https://toushi.maku.blog/p/rbnx8hr/</link><pubDate>Sun, 12 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/rbnx8hr/</guid><description>&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">WA-Momentum&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">{ Search Tag: WA-Momentum }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">inputs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Price( Close ) [DisplayName = &amp;#34;Price&amp;#34;, ToolTip = 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Enter an EasyLanguage expression to use in the momentum calculation.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Length( 12 ) [DisplayName = &amp;#34;Length&amp;#34;, ToolTip = 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Enter number of bars over which to calculate momentum.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ColorNormLength( 14 ) [DisplayName = &amp;#34;ColorNormLength&amp;#34;, ToolTip = 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Color Normalization Length. Enter the number of bars over which to determine high and low values of the indicator for use in creating gradient colors.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> UseGradientColoring( true ) [DisplayName = &amp;#34;UseGradientColoring&amp;#34;, ToolTip = 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Enter true for gradient (blended) coloring; enter false for no gradient coloring.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> UpColor( Yellow ) [DisplayName = &amp;#34;UpColor&amp;#34;, ToolTip = 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Enter the color to use for indicator values that are relatively high over ColorNormLength bars.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> DnColor( Red ) [DisplayName = &amp;#34;DnColor&amp;#34;, ToolTip = 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Down Color. Enter the color to use for indicator values that are relatively low over ColorNormLength bars.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> GridForegroundColor( Black ) [DisplayName = &amp;#34;GridForegroundColor&amp;#34;, ToolTip = 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Enter the plot color to be used in RadarScreen. Select a color that will contrast with both UpColor and DnColor. &amp;#34;];
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">variables:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> intrabarpersist InAChart( false ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Mom( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Accel( 0 ),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ColorLevel( 0 );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">once
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> InAChart = GetAppInfo( aiApplicationType ) = cChart;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Mom = Momentum( Price, Length );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Accel = Momentum( Mom, 1 ); { 1 bar acceleration }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Plot1( Mom, !( &amp;#34;Momentum&amp;#34; ) );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Plot2( 0, !( &amp;#34;ZeroLine&amp;#34; ) );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{ gradient coloring }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if UseGradientColoring then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ColorLevel = NormGradientColor( Mom, true, ColorNormLength, UpColor, DnColor );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if InAChart then { study is applied to a chart }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SetPlotColor( 1, ColorLevel );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> else { study is applied to grid app }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SetPlotColor( 1, GridForegroundColor );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SetPlotBGColor( 1, ColorLevel );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{ alert criteria }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if AlertEnabled then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if Mom &amp;gt; 0 and Accel &amp;gt; 0 then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Alert( !( &amp;#34;Indicator positive and increasing&amp;#34; ) )
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> else if Mom &amp;lt; 0 and Accel &amp;lt; 0 then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Alert( !( &amp;#34;Indicator negative and decreasing&amp;#34; ) );
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;div style="padding-left: 32%; font-size: smaller; color: gray;">
+Copyright © TradeStation Technologies, Inc. All Rights Reserved
+TradeStation reserves the right to modify or overwrite
+this analysis technique with each release.
+&lt;/div>
+
+&lt;ul>
+&lt;li>参考: &lt;a href="../../p/xrap6ky">トレステ/関数/Momentum 関数 - 現在の足のモメンタムを求める&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>TradeStation/インジケーター/移動平均線1本 (WA-Mov Avg 1 Line)</title><link>https://toushi.maku.blog/p/kkipwgp/</link><pubDate>Fri, 12 Apr 2019 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/kkipwgp/</guid><description>&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">WA-Mov Avg 1 Line&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">{ Search Tag: WA-Mov Avg 1 Line }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">inputs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Price( Close ) [DisplayName = &amp;#34;Price&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Enter an EasyLanguage expression to use in the moving average calculation.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Length( 9 ) [DisplayName = &amp;#34;Length&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Enter number of bars over which to calculate the simple moving average.&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Displace( 0 ) [DisplayName = &amp;#34;Displace&amp;#34;, ToolTip =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;Displacement. Enter the number of bars by which plots will be displaced. Displacement may be positive (left) or negative (right).&amp;#34;] ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">variables:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Avg( 0 ) ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Avg = AverageFC( Price, Length ) ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if Displace &amp;gt;= 0 or CurrentBar &amp;gt; AbsValue( Displace ) then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Plot1[Displace]( Avg, !( &amp;#34;Avg&amp;#34; ) ) ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> { alert criteria }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if AlertEnabled and Displace &amp;lt;= 0 then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if Price crosses over Avg then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Alert( !( &amp;#34;Price crossing over average&amp;#34; ) )
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> else if Price crosses under Avg then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Alert( !( &amp;#34;Price crossing under average&amp;#34; ) ) ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end ;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end ;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;div style="padding-left: 32%; font-size: smaller; color: gray;">
+Copyright © TradeStation Technologies, Inc. All Rights Reserved
+TradeStation reserves the right to modify or overwrite
+this analysis technique with each release.
+&lt;/div></description></item></channel></rss>

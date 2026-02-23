@@ -1,34 +1,474 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>トレステ EashLanguage 入門 on まくまく投資ノート</title><link>https://toushi.maku.blog/p/peu9myd/</link><description>Recent content in トレステ EashLanguage 入門 on まくまく投資ノート</description><generator>Hugo -- gohugo.io</generator><language>ja-jp</language><lastBuildDate>Thu, 07 May 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/p/peu9myd/index.xml" rel="self" type="application/rss+xml"/><item><title>EasyLanguage のコーディングルール（スタイル）</title><link>https://toushi.maku.blog/p/5wet9n3/</link><pubDate>Sat, 18 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/5wet9n3/</guid><description>スペース インデントは半角スペース x4 で行う（タブは使用しない）。 大文字・小文字 小文字で始める 制御構文: if、begin、and など プリミティブ型名: bool、double、null、スキップワード（a、at など） 変数定義: input: で宣言する入力変数や var: で宣言するローカル変数 大文字で始める 関数: AverageFC、StdDev など（ユーザー定義関数を含む） 売買命令: Buy、SellShort など（関数名っぽいので大文字で） 組み込み変数: Open、Close、CurrentBar、Date、Time など すべて大文字 定数: const: で宣言するもの 変数宣言のセクション名 入力変数は input:、定数は const:、変数は var: を使う（一番短い記述のものを採用）。
-記述例 input: iPrice(Close) [DisplayName = &amp;#34;Price&amp;#34;, ToolTip = &amp;#34;Enter an EasyLanguage expression.&amp;#34;]; const: BASELINE_COLOR(&amp;#34;Green&amp;#34;); var: double myAvg(0), HorizontalLine myLine1(null), HorizontalLine myLine2(null); // ここから本文 上記では、入力変数のプレフィックスに i、ローカル変数のプレフィックスに my を付けていますが、付けなくても OK（myAvg の代わりに avg とかでよい）。 ただし、定義済みの変数名や関数名と被るのを避けるために、プレフィックスを付けるのをオススメします。
-改行位置 then や begin は基本的に同じ行に続けて記述、end; は単独行に記述。 if AlertEnabled and alertCondition then begin if alertCond1 then Alert(&amp;#34;Close crossed under high retrace&amp;#34;) else Alert(&amp;#34;Close crossed over low retrace&amp;#34;); end; ただし、関数（メソッド）定義の場合は、begin の前に var 定義が挟まるので、その場合は begin は単独行に記述します。</description></item><item><title>EasyLanguage: ペイントバーを作成する</title><link>https://toushi.maku.blog/p/vyt8n3g/</link><pubDate>Wed, 06 May 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/vyt8n3g/</guid><description>ペイントバーとは？ ペイントバーは、その名の通り、チャートのローソク足（バー）に色を付ける機能です。 通常、チャートの足は、陽線（赤）と陰線（青）で色分けしますが、ペイントバーを使用すると、任意の条件でバーを色分けすることができます。 上の日足チャートでは、月曜日のバーを緑色で描画するようにしています。
-ペイントバーの新規作成 新しくペイントバーを作成するには、TradeStation 開発環境のメニューから下記のように辿ります。
-ファイル → 新規作成 → ペイントバー インジケーター として新規作成してしまうと、ペイントバー の実装は行えないので注意してください（後述の PaintPB を呼び出せません）。
-ペイントバーの実装 下記は、木曜日のローソク足に色を付けるペイントバーの実装例です。
-#PB_Monday if DayOfWeek(Date) = Monday then begin PlotPB(High, Low, &amp;#34;Monday&amp;#34;, Green); end; ローソク足に色をつけるには、PlotPB（あるいは PlotPaintBar）を使用します。
-PlotPB(価格1, 価格2, プロット名, 色); 例:
-PlotPB(High, Low, &amp;quot;MyPB&amp;quot;, Yellow); &amp;hellip; ローソク足全体に色を付ける PlotPB(Open, Close, &amp;quot;MyPB&amp;quot;, Yellow); &amp;hellip; 実体部分（ひげを除く）に色を付ける 第 1 引数と、第 2 引数の上下関係は入れ替わっても同じ振る舞いになります。</description></item><item><title>EasyLanguage: レーダースクリーン用のインジケーターを作成する</title><link>https://toushi.maku.blog/p/ct3bjry/</link><pubDate>Sun, 03 May 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/ct3bjry/</guid><description>インジケーターの新規作成 レーダースクリーン用のインジケーターを新しく作成するには、トレードステーション開発環境のメニューから、 ファイル → 新規作成 → インジケーター と辿ります。
-インジケーターは、デフォルトでは「チャート分析」ウィンドウと、「レーダースクリーン」ウィンドウの両方に適用できるように設定されています（Plot1 や Plot2 で出力した値がどちらのウィンドウでも使われます）。 インジケーターを「レーダースクリーン」専用にするには、新規作成ダイアログで、下記のように「チャート分析」のチェックボックスを外します。
-このようにインジケーターを作成すると、「レーダースクリーン」をアクティブにして分析テクニックを挿入するときだけ、インジケーターがリストに表示されるようになります。
-レーダースクリーン用のインジケーター実装サンプル ここでは、下の図のように、レーダースクリーン上に 4 つの指標（指標1 〜 指標4）を表示するインジケーターを作成してみます。
-!TestRader once begin // テキスト色 SetPlotColor(1, Cyan); SetPlotColor(2, Red); SetPlotColor(3, White); SetPlotColor(4, White); // 背景色 SetPlotBgColor(1, DarkBlue); SetPlotBgColor(2, DarkRed); SetPlotBgColor(3, Black); SetPlotBgColor(4, RGB(50, 80, 50)); end; once (LastBarOnChart) begin Plot1(100, &amp;#34;指標1&amp;#34;); Plot2(200, &amp;#34;指標2&amp;#34;); Plot3(&amp;#34;買い？&amp;#34;, &amp;#34;指標3&amp;#34;); Plot4(&amp;#34;売りでしょ&amp;#34;, &amp;#34;指標3&amp;#34;); end; 各セルのテキスト色や背景色は、SetPlotColor および SetPlotBgColor で設定することができます。 上記では、once begin でインジケーターのアタッチ時に一度だけ色設定しているので、全ての銘柄で同じ色になっていますが、本来は、何らかのシグナルが発生しているときにハイライト表示すると分かりやすいです。
-セルに表示する値は、チャート分析のインジケーター同様、Plot1 や Plot2 を使用します。 第 1 引数で表示する値を指定するのですが、ここには数字だけでなく、文字列を指定することもできます。 第 2 引数には、カラム名として表示される文字列を指定します。 省略することもできますが、その場合は Plot1、Plot2 のように意味不明なカラム名になってしまうので、必ず指定するようにしましょう。</description></item><item><title>EasyLanguage: インジケーターサンプル「日毎の始値（寄付）価格にラインを引く」</title><link>https://toushi.maku.blog/p/7pz8gpx/</link><pubDate>Thu, 07 May 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/7pz8gpx/</guid><description>概要 このインジケーターは、その日の寄付の価格にラインを引きます。 日毎の買い優勢・売り優勢の判断などに利用できます。 日をまたぐ部分は線を繋がない というテクニックも使っています。
-コード Plot1(OpenD(0), &amp;#34;Open&amp;#34;, Green); if (Time = SessionEndTime(1, 1)) then begin SetPlotColor(1, Transparent); end; OpenD(0) で、日毎の始値を取得できるので、基本的にはこれをプロットしているだけです。
-後半の if (Time = SessionEndTime(1, 1) という条件に一致した場合に、プロット色を透明 (Transparent) に設定することで、 日をまたぐ部分に線を引かない ようにしています。</description></item><item><title>EasyLanguage: インジケーターサンプル「本日のOHLCラインを表示する」</title><link>https://toushi.maku.blog/p/h4fr3dn/</link><pubDate>Sun, 03 May 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/h4fr3dn/</guid><description>概要 このインジケーターは、本日の OHLC（始値、高値、安値、終値）にラインを描画します。 デイトレードで、上昇基調／下降基調などを判断するときなどに利用できます。
-コード #OHLC_Lines { Author: Maku } using elsystem.drawing; using elsystem.drawingobjects; input: ColorOpen(DarkRed) [DisplayName = &amp;#34;本日の始値の色&amp;#34;], ColorHigh(LightGray) [DisplayName = &amp;#34;本日の高値の色&amp;#34;], ColorLow(LightGray) [DisplayName = &amp;#34;本日の安値の色&amp;#34;], ColorClose(Green) [DisplayName = &amp;#34;本日の終値の色&amp;#34;]; var: // HorizontalLine オブジェクト用の変数 HorizontalLine myLineOpen(null), HorizontalLine myLineHigh(null), HorizontalLine myLineLow(null), HorizontalLine myLineClose(null); once (LastBarOnChart) begin // チャート上に水平線を追加 myLineOpen = HorizontalLine.Create(OpenD(0)); myLineHigh = HorizontalLine.Create(HighD(0)); myLineLow = HorizontalLine.Create(LowD(0)); myLineClose = HorizontalLine.Create(CloseD(0)); // 線のスタイル myLineOpen.Style = elsystem.drawingobjects.StyleType.Solid; myLineHigh.Style = elsystem.drawingobjects.StyleType.Solid; myLineLow.Style = elsystem.</description></item><item><title>EasyLanguage: レーダースクリーンのセルのフォーマットを変更する（中央寄せ、小数点以下の表示など）</title><link>https://toushi.maku.blog/p/g9r8n3h/</link><pubDate>Sun, 03 May 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/g9r8n3h/</guid><description>セル内のテキストを左寄せ／中央寄せ／右寄せ レーダースクリーン用のストラテジを作って、セル内にテキストを表示すると、デフォルトではすべて右寄せになったりして見映えがよくありません。 セル内のテキストを中央寄せなどで表示したいときは、次のように設定します。
-TradeStation 開発環境のエディタ領域で右クリック → プロパティ を選択 グリッドのスタイル のタブの 整列する の項目で「中央寄せ」を選択 F3 キーで再コンパイル これで、レーダースクリーンにストラテジーを追加したときに、最初からセル内のテキストが中央寄せで表示されるようになります。 インジケータープロパティのダイアログで、プロット項目が出てこない場合は、一度 F3 キーでコンパイルしてから開き直すと表示されます。
-（おまけ）上記の表示をするために使った EL コード !テストインジケーター once begin for Value1 = 1 to 3 begin SetPlotColor(Value1, White); SetPlotBgColor(Value1, DarkBlue); end; end; once (LastBarOnChart) begin Plot1(&amp;#34;左&amp;#34;, &amp;#34;指標1&amp;#34;); Plot2(&amp;#34;中&amp;#34;, &amp;#34;指標2&amp;#34;); Plot3(&amp;#34;右&amp;#34;, &amp;#34;指標3&amp;#34;); end; セル内の数値の表示フォーマットを設定する レーダースクリーンのセル内に表示する数値のフォーマットも、同様にインジケータープロパティから設定することができます。 上記の例では、指標1 から 指標4 まで全て同じ、123.45 という値をプロットしているのですが、数値の表示フォーマット設定で、小数点以下を何桁まで表示するかを変更しています。
-指標1 &amp;hellip; 小数点以下 3 桁まで表示（上の図では、0 パディング） 指標2 &amp;hellip; 小数点以下 2 桁まで表示 指標3 &amp;hellip; 小数点以下 1 桁まで表示（上の図では、四捨五入で切り上げ） 指標4 &amp;hellip; 小数点以下 0 桁まで表示（上の図では、四捨五入で切り捨て） 下の図は設定の例です。</description></item><item><title>EasyLanguage: 独自インジケーターの線を元の銘柄のチャートに重ねて表示する</title><link>https://toushi.maku.blog/p/8v8hs3c/</link><pubDate>Sat, 02 May 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/8v8hs3c/</guid><description>トレステで作成した独自のインジケーターをチャートに適用すると、デフォルトではサブチャート（別のウィンドウ）に描画されるようになっています。 デフォルトで最初の銘柄のウィンドウ領域に描画されるようにするには下記のように設定します。
-トレードステーション開発環境の EasyLanguage エディタ領域で右クリック プロパティ を選択 スケーリング タブの スケール位置 で 元データに軸を合わせる を選択 F3 キーで再コンパイル</description></item><item><title>EasyLanguage の変数の特徴（値の伝搬のしくみ）</title><link>https://toushi.maku.blog/p/xgr3cku/</link><pubDate>Tue, 21 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/xgr3cku/</guid><description>EasyLanguage でユーザー変数を定義するときは、次のように var: を使います（variables: でも OK）。
-var: int hoge(0); このように定義した変数 hoge は、次のような性質を持ちます。
-チャートにアタッチしたときのみ初期化される（上記の例では 0 に初期化される）。 変数に代入した値は、次の足の処理に引き継がれる。 hoge[n] とすると、n 本前の足の最終的な値を参照できる。hoge[0] は hoge と同じ意味になる。 この振る舞いは、次のようなサンプルコードを実行してみるとよく分かります。 このプログラムでは、初期値 0 の数値変数 hoge を定義し、各足の処理ごとにインクリメントしています。 そして最後に、現在の hoge の値と、1 つ前、2 つ前の足での hoge の値を出力しています。
-サンプルコード var: int hoge(0); hoge += 1; Print(String.Format(&amp;#34;{0} {1} {2}&amp;#34;, hoge[0], hoge[1], hoge[2])); 実行結果 1 0 0 2 1 0 3 2 1 4 3 2 5 4 3 hoge に代入された値は次の足へと引き継がれていくため、1、2、3、4、5 とひとつずつ増えていきます。 最初の足の処理で、hoge[1]、hoge[2] のように過去の足の値を参照した場合は、初期値で設定している 0 が得られます。</description></item><item><title>EasyLanguage で垂直線を描画する (VerticalLine)</title><link>https://toushi.maku.blog/p/f3gs6gs/</link><pubDate>Sat, 18 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/f3gs6gs/</guid><description>垂直線を引く方法 DrawingObjects.Add() で、VerticalLine オブジェクトを追加することで、画面上に垂直線を追加することができます。 これは、水平線 (HorizontalLine) を引く方法と同様です。
-参考: 水平線を描画する (HorizontalLine) VerticalLine オブジェクトで垂直線を表示する コード 次のサンプルコードでは、日付が変わるタイミングで垂直線を描画しています。
-#DateLine using elsystem.drawingobjects; var: bool myIsBarTypeProper(false), BNPoint myPoint(null), VerticalLine myLine(null); method void DrawVerticalLine() begin myPoint = BNPoint.Create(CurrentBar, 0); myLine = VerticalLine.Create(myPoint); myLine.Color = elsystem.drawing.Color.GreenYellow; myLine.Style = elsystem.drawingobjects.StyleType.Solid; myLine.Weight = 3; DrawingObjects.Add(myLine); end; once begin // ティック足(0)、分足(1)、秒足(14) のときのみ描画 myIsBarTypeProper = (BarType = 0) or (BarType = 1) or (BarType = 14); end; // 日付が変わった時に垂直線を描画 if myIsBarTypeProper and (Date &amp;gt; Date[1]) then begin DrawVerticalLine(); end; 解説 VerticalLine オブジェクトは、VerticalLine.</description></item><item><title>EasyLanguage で水平線を描画する (HorizontalLine)</title><link>https://toushi.maku.blog/p/ufr2cmv/</link><pubDate>Sat, 18 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/ufr2cmv/</guid><description>水平線を引く方法 インジケーターで水平線を引くには下記のような方法があります。
-Drawing Object の一種である HorizontalLine を追加する Plot1 関数などで固定 Price の線を引く 後者の方法は、Plot1(100) のように、固定価格でライン描画してしまう方法ですが、この値がインジケーターで求められた値として使われてしまうので、あまり望ましい方法ではないでしょう。 チャート上でローソク足が存在する部分しかラインが引かれないという欠点もあります。
-そこで、ここでは前者の HorizontalLine を使った方法を採用することにします。
-HorizontalLine オブジェクトで水平線を表示する DrawingObjects.Add() で、HorizontalLine オブジェクトを追加することで、画面上に水平線を追加することができます。 次のサンプルコードでは、各足の高値 (High) と安値 (Low) の位置に水平線を描画しています。
-using elsystem.drawingobjects; // HorizontalLine オブジェクト用の変数 vars: HorizontalLine myLine1(null), HorizontalLine myLine2(null); // チャート上に水平線を追加 myLine1 = HorizontalLine.Create(High); myLine2 = HorizontalLine.Create(Low); DrawingObjects.Add(myLine1); DrawingObjects.Add(myLine2); // 水平線のスタイルや色、太さを変更可能 myLine1.Style = elsystem.drawingobjects.StyleType.Solid; myLine2.Style = elsystem.drawingobjects.StyleType.Dotted; myLine1.Color = elsystem.drawing.Color.Crimson; myLine2.Color = elsystem.drawing.Color.DeepSkyBlue; myLine1.Weight = 2; myLine2.Weight = 1; （参考）垂直線を描画する (VerticalLine) （参考）インジケーターサンプル「本日のOHLCラインを表示する」</description></item><item><title>EasyLanguage: 印刷ログの内容をクリアする (ClearPrintLog)</title><link>https://toushi.maku.blog/p/znydp2d/</link><pubDate>Mon, 13 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/znydp2d/</guid><description>Print 関数を使って「印刷ログ」ウィンドウにログを出力してデバッグしていると、どんどんログ出力が溜まっていくので、最後に適用したインジケーターの出力がどの行から始まっているかが分かりにくくなります。
-そのような場合は、EasyLanguage のコード内から ClearPrintLog を呼び出すことで、「印刷ログ」の内容を自動でクリアすることができます（他の分析テクニックが出力した内容もクリアされてしまうことに注意してください）。
-// インジケーター適用時にログをクリア once ClearPrintLog; // バー番号と終値をログ出力 Print(CurrentBar:4:0, &amp;#34;: Close = &amp;#34;, Close:0:0); ClearPrintLog をそのまま実行してしまうと、各足の処理で毎回ログをクリアすることになってしまうので、once を使って、インジケーターを適用したときに一度だけ実行するようにします。</description></item><item><title>EasyLanguage で入力変数の表示名を設定する (DisplayName)</title><link>https://toushi.maku.blog/p/req3doz/</link><pubDate>Sun, 12 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/req3doz/</guid><description>EasyLanguage で作成するインジケーターでは、使用者が値を変更可能な入力変数を定義することができます。 インジケーターの設定ダイアログでは、デフォルトでは入力変数の名前がそのまま表示されるのですが、次のように DisplayName を指定することで、任意の表示名に変更することができます。
-inputs: Price(Close) [DisplayName = &amp;#34;プロットする価格&amp;#34;]; インジケーターの設定ダイアログで、次のように表示名が変わっていることを確認できます。</description></item><item><title>EasyLanguage のストラテジーサンプル「移動平均のGC/DCによる売買」</title><link>https://toushi.maku.blog/p/5vds8n2/</link><pubDate>Mon, 20 Jan 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/5vds8n2/</guid><description>2 本の移動平均線がクロスするタイミングで売買を行うストラテジです。 TradeStation には標準で付属しているストラテジとして、「単純移動平均2本クロス買いエントリー (ストラテジー)」がありますが、ここでは自力で実装する場合のサンプルとして示します。
-ストラテジ概要 エントリタイミング 買いエントリ (Buy) の条件 短期移動平均線が長期移動平均線をゴールデンクロス (GC) 売りエントリ (SellShort) の条件 短期移動平均線が長期移動平均線をデッドクロス (DC) パラメータ fastLen: 短期移動平均の足数 slowLen: 長期移動平均の足数 ソースコード input: fastLen(5), slowLen(25); var: fastAvg(0), slowAvg(0); fastAvg = AverageFC(Close, fastLen); slowAvg = AverageFC(Close, slowLen); if fastAvg crosses over slowAvg then begin Buy next bar at market; end; if fastAvg crosses under slowAvg then begin SellShort next bar at market; end;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>トレステ EashLanguage 入門 on まくまく投資ノート</title><link>https://toushi.maku.blog/p/peu9myd/</link><description>Recent content in トレステ EashLanguage 入門 on まくまく投資ノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Thu, 07 May 2020 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/p/peu9myd/index.xml" rel="self" type="application/rss+xml"/><item><title>EasyLanguage のコーディングルール（スタイル）</title><link>https://toushi.maku.blog/p/5wet9n3/</link><pubDate>Sat, 18 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/5wet9n3/</guid><description>&lt;h2 id="スペース">スペース&lt;/h2>
+&lt;ul>
+&lt;li>インデントは半角スペース x4 で行う（タブは使用しない）。&lt;/li>
+&lt;/ul>
+&lt;h2 id="大文字小文字">大文字・小文字&lt;/h2>
+&lt;ul>
+&lt;li>小文字で始める
+&lt;ul>
+&lt;li>制御構文: &lt;code>if&lt;/code>、&lt;code>begin&lt;/code>、&lt;code>and&lt;/code> など&lt;/li>
+&lt;li>プリミティブ型名: &lt;code>bool&lt;/code>、&lt;code>double&lt;/code>、&lt;code>null&lt;/code>、スキップワード（&lt;code>a&lt;/code>、&lt;code>at&lt;/code> など）&lt;/li>
+&lt;li>変数定義: &lt;code>input:&lt;/code> で宣言する入力変数や &lt;code>var:&lt;/code> で宣言するローカル変数&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>大文字で始める
+&lt;ul>
+&lt;li>関数: &lt;code>AverageFC&lt;/code>、&lt;code>StdDev&lt;/code> など（ユーザー定義関数を含む）&lt;/li>
+&lt;li>売買命令: &lt;code>Buy&lt;/code>、&lt;code>SellShort&lt;/code> など（関数名っぽいので大文字で）&lt;/li>
+&lt;li>組み込み変数: &lt;code>Open&lt;/code>、&lt;code>Close&lt;/code>、&lt;code>CurrentBar&lt;/code>、&lt;code>Date&lt;/code>、&lt;code>Time&lt;/code> など&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>すべて大文字
+&lt;ul>
+&lt;li>定数: &lt;code>const:&lt;/code> で宣言するもの&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="変数宣言のセクション名">変数宣言のセクション名&lt;/h2>
+&lt;p>入力変数は &lt;strong>&lt;code>input:&lt;/code>&lt;/strong>、定数は &lt;strong>&lt;code>const:&lt;/code>&lt;/strong>、変数は &lt;strong>&lt;code>var:&lt;/code>&lt;/strong> を使う（一番短い記述のものを採用）。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">記述例&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">input:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> iPrice(Close) [DisplayName = &amp;#34;Price&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ToolTip = &amp;#34;Enter an EasyLanguage expression.&amp;#34;];
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">const:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> BASELINE_COLOR(&amp;#34;Green&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">var:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> double myAvg(0),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalLine myLine1(null),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalLine myLine2(null);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">// ここから本文&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>上記では、入力変数のプレフィックスに &lt;strong>&lt;code>i&lt;/code>&lt;/strong>、ローカル変数のプレフィックスに &lt;code>my&lt;/code> を付けていますが、付けなくても OK（&lt;code>myAvg&lt;/code> の代わりに &lt;code>avg&lt;/code> とかでよい）。
+ただし、定義済みの変数名や関数名と被るのを避けるために、プレフィックスを付けるのをオススメします。&lt;/p></description></item><item><title>EasyLanguage: ペイントバーを作成する</title><link>https://toushi.maku.blog/p/vyt8n3g/</link><pubDate>Wed, 06 May 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/vyt8n3g/</guid><description>&lt;h2 id="ペイントバーとは">ペイントバーとは？&lt;/h2>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="831" height="383" src="../../p/vyt8n3g/img-001.png" alt="/p/vyt8n3g/img-001.png" />
+&lt;/figure>
+
+&lt;p>ペイントバーは、その名の通り、チャートのローソク足（バー）に色を付ける機能です。
+通常、チャートの足は、陽線（赤）と陰線（青）で色分けしますが、ペイントバーを使用すると、任意の条件でバーを色分けすることができます。
+上の日足チャートでは、月曜日のバーを緑色で描画するようにしています。&lt;/p>
+&lt;h2 id="ペイントバーの新規作成">ペイントバーの新規作成&lt;/h2>
+&lt;p>新しくペイントバーを作成するには、TradeStation 開発環境のメニューから下記のように辿ります。&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>&lt;code>ファイル&lt;/code> → &lt;code>新規作成&lt;/code> → &lt;code>ペイントバー&lt;/code>&lt;/strong>&lt;/li>
+&lt;/ol>
+&lt;p>&lt;code>インジケーター&lt;/code> として新規作成してしまうと、&lt;code>ペイントバー&lt;/code> の実装は行えないので注意してください（後述の &lt;code>PaintPB&lt;/code> を呼び出せません）。&lt;/p>
+&lt;h2 id="ペイントバーの実装">ペイントバーの実装&lt;/h2>
+&lt;p>下記は、木曜日のローソク足に色を付けるペイントバーの実装例です。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">#PB_Monday&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">if DayOfWeek(Date) = Monday then begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> PlotPB(High, Low, &amp;#34;Monday&amp;#34;, Green);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>ローソク足に色をつけるには、&lt;strong>&lt;code>PlotPB&lt;/code>&lt;/strong>（あるいは &lt;strong>&lt;code>PlotPaintBar&lt;/code>&lt;/strong>）を使用します。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">PlotPB(価格1, 価格2, プロット名, 色);&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>例:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>PlotPB(High, Low, &amp;quot;MyPB&amp;quot;, Yellow);&lt;/code> &amp;hellip; ローソク足全体に色を付ける&lt;/li>
+&lt;li>&lt;code>PlotPB(Open, Close, &amp;quot;MyPB&amp;quot;, Yellow);&lt;/code> &amp;hellip; 実体部分（ひげを除く）に色を付ける&lt;/li>
+&lt;/ul>
+&lt;p>第 1 引数と、第 2 引数の上下関係は入れ替わっても同じ振る舞いになります。&lt;/p></description></item><item><title>EasyLanguage: レーダースクリーン用のインジケーターを作成する</title><link>https://toushi.maku.blog/p/ct3bjry/</link><pubDate>Sun, 03 May 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/ct3bjry/</guid><description>&lt;h2 id="インジケーターの新規作成">インジケーターの新規作成&lt;/h2>
+&lt;p>レーダースクリーン用のインジケーターを新しく作成するには、トレードステーション開発環境のメニューから、 &lt;strong>&lt;code>ファイル&lt;/code> → &lt;code>新規作成&lt;/code> → &lt;code>インジケーター&lt;/code>&lt;/strong> と辿ります。&lt;/p>
+&lt;p>インジケーターは、デフォルトでは「チャート分析」ウィンドウと、「レーダースクリーン」ウィンドウの両方に適用できるように設定されています（&lt;code>Plot1&lt;/code> や &lt;code>Plot2&lt;/code> で出力した値がどちらのウィンドウでも使われます）。
+インジケーターを「レーダースクリーン」専用にするには、新規作成ダイアログで、下記のように「チャート分析」のチェックボックスを外します。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="525" height="366" src="../../p/ct3bjry/img-001.png" alt="/p/ct3bjry/img-001.png" />
+&lt;/figure>
+
+&lt;p>このようにインジケーターを作成すると、「レーダースクリーン」をアクティブにして分析テクニックを挿入するときだけ、インジケーターがリストに表示されるようになります。&lt;/p>
+&lt;h2 id="レーダースクリーン用のインジケーター実装サンプル">レーダースクリーン用のインジケーター実装サンプル&lt;/h2>
+&lt;p>ここでは、下の図のように、レーダースクリーン上に 4 つの指標（&lt;code>指標1&lt;/code> 〜 &lt;code>指標4&lt;/code>）を表示するインジケーターを作成してみます。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="820" height="272" src="../../p/ct3bjry/img-002.png" alt="/p/ct3bjry/img-002.png" />
+&lt;/figure>
+
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">!TestRader&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">once begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // テキスト色
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SetPlotColor(1, Cyan);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SetPlotColor(2, Red);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SetPlotColor(3, White);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SetPlotColor(4, White);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // 背景色
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SetPlotBgColor(1, DarkBlue);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SetPlotBgColor(2, DarkRed);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SetPlotBgColor(3, Black);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SetPlotBgColor(4, RGB(50, 80, 50));
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">once (LastBarOnChart) begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Plot1(100, &amp;#34;指標1&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Plot2(200, &amp;#34;指標2&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Plot3(&amp;#34;買い？&amp;#34;, &amp;#34;指標3&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Plot4(&amp;#34;売りでしょ&amp;#34;, &amp;#34;指標3&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>各セルのテキスト色や背景色は、&lt;strong>&lt;code>SetPlotColor&lt;/code>&lt;/strong> および &lt;strong>&lt;code>SetPlotBgColor&lt;/code>&lt;/strong> で設定することができます。
+上記では、&lt;code>once begin&lt;/code> でインジケーターのアタッチ時に一度だけ色設定しているので、全ての銘柄で同じ色になっていますが、本来は、何らかのシグナルが発生しているときにハイライト表示すると分かりやすいです。&lt;/p></description></item><item><title>EasyLanguage: インジケーターサンプル「日毎の始値（寄付）価格にラインを引く」</title><link>https://toushi.maku.blog/p/7pz8gpx/</link><pubDate>Thu, 07 May 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/7pz8gpx/</guid><description>&lt;h2 id="概要">概要&lt;/h2>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="708" height="335" src="../../p/7pz8gpx/img-001.png" alt="/p/7pz8gpx/img-001.png" />
+&lt;/figure>
+
+&lt;p>このインジケーターは、その日の寄付の価格にラインを引きます。
+日毎の買い優勢・売り優勢の判断などに利用できます。
+&lt;strong>日をまたぐ部分は線を繋がない&lt;/strong> というテクニックも使っています。&lt;/p>
+&lt;h2 id="コード">コード&lt;/h2>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">Plot1(OpenD(0), &amp;#34;Open&amp;#34;, Green);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if (Time = SessionEndTime(1, 1)) then begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SetPlotColor(1, Transparent);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>&lt;code>OpenD(0)&lt;/code> で、日毎の始値を取得できるので、基本的にはこれをプロットしているだけです。&lt;/p>
+&lt;p>後半の &lt;code>if (Time = SessionEndTime(1, 1)&lt;/code> という条件に一致した場合に、プロット色を透明 (&lt;code>Transparent&lt;/code>) に設定することで、 &lt;strong>日をまたぐ部分に線を引かない&lt;/strong> ようにしています。&lt;/p></description></item><item><title>EasyLanguage: インジケーターサンプル「本日のOHLCラインを表示する」</title><link>https://toushi.maku.blog/p/h4fr3dn/</link><pubDate>Sun, 03 May 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/h4fr3dn/</guid><description>&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="843" height="495" src="../../p/h4fr3dn/img-001.png" alt="/p/h4fr3dn/img-001.png" />
+&lt;/figure>
+
+&lt;h2 id="概要">概要&lt;/h2>
+&lt;p>このインジケーターは、本日の OHLC（始値、高値、安値、終値）にラインを描画します。
+デイトレードで、上昇基調／下降基調などを判断するときなどに利用できます。&lt;/p>
+&lt;h2 id="コード">コード&lt;/h2>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">#OHLC_Lines&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">{ Author: Maku }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using elsystem.drawing;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">using elsystem.drawingobjects;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">input:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ColorOpen(DarkRed) [DisplayName = &amp;#34;本日の始値の色&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ColorHigh(LightGray) [DisplayName = &amp;#34;本日の高値の色&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ColorLow(LightGray) [DisplayName = &amp;#34;本日の安値の色&amp;#34;],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ColorClose(Green) [DisplayName = &amp;#34;本日の終値の色&amp;#34;];
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">var:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // HorizontalLine オブジェクト用の変数
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalLine myLineOpen(null),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalLine myLineHigh(null),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalLine myLineLow(null),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalLine myLineClose(null);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">once (LastBarOnChart) begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // チャート上に水平線を追加
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLineOpen = HorizontalLine.Create(OpenD(0));
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLineHigh = HorizontalLine.Create(HighD(0));
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLineLow = HorizontalLine.Create(LowD(0));
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLineClose = HorizontalLine.Create(CloseD(0));
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // 線のスタイル
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLineOpen.Style = elsystem.drawingobjects.StyleType.Solid;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLineHigh.Style = elsystem.drawingobjects.StyleType.Solid;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLineLow.Style = elsystem.drawingobjects.StyleType.Solid;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLineClose.Style = elsystem.drawingobjects.StyleType.Solid;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // 線の色
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLineOpen.Color = Color.FromARGB(ColorOpen);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLineHigh.Color = Color.FromARGB(ColorHigh);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLineLow.Color = Color.FromARGB(ColorLow);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLineClose.Color = Color.FromARGB(ColorClose);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // 線の太さ
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLineOpen.Weight = 1;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLineHigh.Weight = 1;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLineLow.Weight = 1;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLineClose.Weight = 1;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //　ユーザーによる線の移動を禁止
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLineOpen.Lock = true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLineHigh.Lock = true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLineLow.Lock = true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLineClose.Lock = true;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // 線を追加
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> DrawingObjects.Add(myLineOpen);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> DrawingObjects.Add(myLineHigh);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> DrawingObjects.Add(myLineLow);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> DrawingObjects.Add(myLineClose);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;ul>
+&lt;li>（参考）&lt;a href="../../p/ufr2cmv/">水平線を描画する (HorizontalLine)&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>EasyLanguage: レーダースクリーンのセルのフォーマットを変更する（中央寄せ、小数点以下の表示など）</title><link>https://toushi.maku.blog/p/g9r8n3h/</link><pubDate>Sun, 03 May 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/g9r8n3h/</guid><description>&lt;h2 id="セル内のテキストを左寄せ中央寄せ右寄せ">セル内のテキストを左寄せ／中央寄せ／右寄せ&lt;/h2>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="746" height="207" src="../../p/g9r8n3h/img-001.png" alt="/p/g9r8n3h/img-001.png" />
+&lt;/figure>
+
+&lt;p>レーダースクリーン用のストラテジを作って、セル内にテキストを表示すると、デフォルトではすべて右寄せになったりして見映えがよくありません。
+セル内のテキストを中央寄せなどで表示したいときは、次のように設定します。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="551" height="337" src="../../p/g9r8n3h/img-002.png" alt="/p/g9r8n3h/img-002.png" />
+&lt;/figure>
+
+&lt;ol>
+&lt;li>TradeStation 開発環境のエディタ領域で右クリック → &lt;strong>&lt;code>プロパティ&lt;/code>&lt;/strong> を選択&lt;/li>
+&lt;li>&lt;code>グリッドのスタイル&lt;/code> のタブの &lt;strong>&lt;code>整列する&lt;/code>&lt;/strong> の項目で「中央寄せ」を選択&lt;/li>
+&lt;li>&lt;code>F3&lt;/code> キーで再コンパイル&lt;/li>
+&lt;/ol>
+&lt;p>これで、レーダースクリーンにストラテジーを追加したときに、最初からセル内のテキストが中央寄せで表示されるようになります。
+インジケータープロパティのダイアログで、プロット項目が出てこない場合は、一度 &lt;code>F3&lt;/code> キーでコンパイルしてから開き直すと表示されます。&lt;/p>
+&lt;h3 id="おまけ上記の表示をするために使った-el-コード">（おまけ）上記の表示をするために使った EL コード&lt;/h3>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">!テストインジケーター&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">once begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> for Value1 = 1 to 3 begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SetPlotColor(Value1, White);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SetPlotBgColor(Value1, DarkBlue);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> end;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">once (LastBarOnChart) begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Plot1(&amp;#34;左&amp;#34;, &amp;#34;指標1&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Plot2(&amp;#34;中&amp;#34;, &amp;#34;指標2&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Plot3(&amp;#34;右&amp;#34;, &amp;#34;指標3&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;h2 id="セル内の数値の表示フォーマットを設定する">セル内の数値の表示フォーマットを設定する&lt;/h2>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="827" height="205" src="../../p/g9r8n3h/img-003.png" alt="/p/g9r8n3h/img-003.png" />
+&lt;/figure>
+
+&lt;p>レーダースクリーンのセル内に表示する数値のフォーマットも、同様にインジケータープロパティから設定することができます。
+上記の例では、&lt;code>指標1&lt;/code> から &lt;code>指標4&lt;/code> まで全て同じ、&lt;code>123.45&lt;/code> という値をプロットしているのですが、数値の表示フォーマット設定で、小数点以下を何桁まで表示するかを変更しています。&lt;/p></description></item><item><title>EasyLanguage: 独自インジケーターの線を元の銘柄のチャートに重ねて表示する</title><link>https://toushi.maku.blog/p/8v8hs3c/</link><pubDate>Sat, 02 May 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/8v8hs3c/</guid><description>&lt;p>トレステで作成した独自のインジケーターをチャートに適用すると、デフォルトではサブチャート（別のウィンドウ）に描画されるようになっています。
+デフォルトで最初の銘柄のウィンドウ領域に描画されるようにするには下記のように設定します。&lt;/p>
+&lt;ol>
+&lt;li>トレードステーション開発環境の EasyLanguage エディタ領域で右クリック&lt;/li>
+&lt;li>&lt;code>プロパティ&lt;/code> を選択&lt;/li>
+&lt;li>&lt;code>スケーリング&lt;/code> タブの &lt;code>スケール位置&lt;/code> で &lt;strong>&lt;code>元データに軸を合わせる&lt;/code>&lt;/strong> を選択&lt;/li>
+&lt;li>&lt;code>F3&lt;/code> キーで再コンパイル&lt;/li>
+&lt;/ol>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="550" height="311" src="../../p/8v8hs3c/img-001.png" alt="/p/8v8hs3c/img-001.png" />
+&lt;/figure></description></item><item><title>EasyLanguage の変数の特徴（値の伝搬のしくみ）</title><link>https://toushi.maku.blog/p/xgr3cku/</link><pubDate>Tue, 21 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/xgr3cku/</guid><description>&lt;p>EasyLanguage でユーザー変数を定義するときは、次のように &lt;code>var:&lt;/code> を使います（&lt;code>variables:&lt;/code> でも OK）。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">var: int hoge(0);&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>このように定義した変数 &lt;code>hoge&lt;/code> は、次のような性質を持ちます。&lt;/p>
+&lt;ul>
+&lt;li>チャートにアタッチしたときのみ初期化される（上記の例では 0 に初期化される）。&lt;/li>
+&lt;li>変数に代入した値は、次の足の処理に引き継がれる。&lt;/li>
+&lt;li>&lt;code>hoge[n]&lt;/code> とすると、n 本前の足の最終的な値を参照できる。&lt;code>hoge[0]&lt;/code> は &lt;code>hoge&lt;/code> と同じ意味になる。&lt;/li>
+&lt;/ul>
+&lt;p>この振る舞いは、次のようなサンプルコードを実行してみるとよく分かります。
+このプログラムでは、初期値 0 の数値変数 &lt;code>hoge&lt;/code> を定義し、各足の処理ごとにインクリメントしています。
+そして最後に、現在の &lt;code>hoge&lt;/code> の値と、1 つ前、2 つ前の足での &lt;code>hoge&lt;/code> の値を出力しています。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">サンプルコード&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">var: int hoge(0);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">hoge += 1;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Print(String.Format(&amp;#34;{0} {1} {2}&amp;#34;, hoge[0], hoge[1], hoge[2]));&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">実行結果&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">1 0 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2 1 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">3 2 1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">4 3 2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">5 4 3&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>&lt;code>hoge&lt;/code> に代入された値は次の足へと引き継がれていくため、1、2、3、4、5 とひとつずつ増えていきます。
+最初の足の処理で、&lt;code>hoge[1]&lt;/code>、&lt;code>hoge[2]&lt;/code> のように過去の足の値を参照した場合は、初期値で設定している 0 が得られます。&lt;/p></description></item><item><title>EasyLanguage で垂直線を描画する (VerticalLine)</title><link>https://toushi.maku.blog/p/f3gs6gs/</link><pubDate>Sat, 18 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/f3gs6gs/</guid><description>&lt;h2 id="垂直線を引く方法">垂直線を引く方法&lt;/h2>
+&lt;p>&lt;strong>&lt;code>DrawingObjects.Add()&lt;/code>&lt;/strong> で、&lt;strong>&lt;code>VerticalLine&lt;/code>&lt;/strong> オブジェクトを追加することで、画面上に垂直線を追加することができます。
+これは、水平線 (&lt;code>HorizontalLine&lt;/code>) を引く方法と同様です。&lt;/p>
+&lt;ul>
+&lt;li>参考: &lt;a href="../../p/ufr2cmv">水平線を描画する (HorizontalLine)&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="verticalline-オブジェクトで垂直線を表示する">VerticalLine オブジェクトで垂直線を表示する&lt;/h2>
+
+
+&lt;figure class="xImage">
+ &lt;img style="" width="600" height="305" src="../../p/f3gs6gs/img-001_hu3759370108885744075.png" alt="/p/f3gs6gs/img-001.png" />
+&lt;/figure>
+
+&lt;h3 id="コード">コード&lt;/h3>
+&lt;p>次のサンプルコードでは、日付が変わるタイミングで垂直線を描画しています。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+&lt;figcaption class="xCodeBlock_title">#DateLine&lt;/figcaption>
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">using elsystem.drawingobjects;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">var:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> bool myIsBarTypeProper(false),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> BNPoint myPoint(null),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> VerticalLine myLine(null);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">method void DrawVerticalLine() begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myPoint = BNPoint.Create(CurrentBar, 0);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLine = VerticalLine.Create(myPoint);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLine.Color = elsystem.drawing.Color.GreenYellow;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLine.Style = elsystem.drawingobjects.StyleType.Solid;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myLine.Weight = 3;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> DrawingObjects.Add(myLine);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">once begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> // ティック足(0)、分足(1)、秒足(14) のときのみ描画
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> myIsBarTypeProper = (BarType = 0) or (BarType = 1) or (BarType = 14);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">// 日付が変わった時に垂直線を描画
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if myIsBarTypeProper and (Date &amp;gt; Date[1]) then begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> DrawVerticalLine();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;h3 id="解説">解説&lt;/h3>
+&lt;p>&lt;code>VerticalLine&lt;/code> オブジェクトは、&lt;code>VerticalLine.Create()&lt;/code> を使って生成するのですが、このとき、描画位置の点を示す、下記のいずれかのオブジェクトを指定します。&lt;/p></description></item><item><title>EasyLanguage で水平線を描画する (HorizontalLine)</title><link>https://toushi.maku.blog/p/ufr2cmv/</link><pubDate>Sat, 18 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/ufr2cmv/</guid><description>&lt;h2 id="水平線を引く方法">水平線を引く方法&lt;/h2>
+&lt;p>インジケーターで水平線を引くには下記のような方法があります。&lt;/p>
+&lt;ul>
+&lt;li>Drawing Object の一種である &lt;strong>HorizontalLine&lt;/strong> を追加する&lt;/li>
+&lt;li>&lt;code>Plot1&lt;/code> 関数などで固定 Price の線を引く&lt;/li>
+&lt;/ul>
+&lt;p>後者の方法は、&lt;code>Plot1(100)&lt;/code> のように、固定価格でライン描画してしまう方法ですが、この値がインジケーターで求められた値として使われてしまうので、あまり望ましい方法ではないでしょう。
+チャート上でローソク足が存在する部分しかラインが引かれないという欠点もあります。&lt;/p>
+&lt;p>そこで、ここでは前者の &lt;code>HorizontalLine&lt;/code> を使った方法を採用することにします。&lt;/p>
+&lt;h2 id="horizontalline-オブジェクトで水平線を表示する">HorizontalLine オブジェクトで水平線を表示する&lt;/h2>
+
+
+&lt;figure class="xImage">
+ &lt;img style="" width="600" height="382" src="../../p/ufr2cmv/img-001_hu2272090969961527788.png" alt="/p/ufr2cmv/img-001.png" />
+&lt;/figure>
+
+&lt;p>&lt;strong>&lt;code>DrawingObjects.Add()&lt;/code>&lt;/strong> で、&lt;strong>&lt;code>HorizontalLine&lt;/code>&lt;/strong> オブジェクトを追加することで、画面上に水平線を追加することができます。
+次のサンプルコードでは、各足の高値 (High) と安値 (Low) の位置に水平線を描画しています。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">using elsystem.drawingobjects;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">// HorizontalLine オブジェクト用の変数
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">vars:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalLine myLine1(null),
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> HorizontalLine myLine2(null);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">// チャート上に水平線を追加
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">myLine1 = HorizontalLine.Create(High);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">myLine2 = HorizontalLine.Create(Low);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">DrawingObjects.Add(myLine1);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">DrawingObjects.Add(myLine2);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">// 水平線のスタイルや色、太さを変更可能
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">myLine1.Style = elsystem.drawingobjects.StyleType.Solid;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">myLine2.Style = elsystem.drawingobjects.StyleType.Dotted;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">myLine1.Color = elsystem.drawing.Color.Crimson;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">myLine2.Color = elsystem.drawing.Color.DeepSkyBlue;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">myLine1.Weight = 2;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">myLine2.Weight = 1;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;ul>
+&lt;li>（参考）&lt;a href="../../p/f3gs6gs">垂直線を描画する (VerticalLine)&lt;/a>&lt;/li>
+&lt;li>（参考）&lt;a href="../../p/h4fr3dn">インジケーターサンプル「本日のOHLCラインを表示する」&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>EasyLanguage: 印刷ログの内容をクリアする (ClearPrintLog)</title><link>https://toushi.maku.blog/p/znydp2d/</link><pubDate>Mon, 13 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/znydp2d/</guid><description>&lt;p>&lt;code>Print&lt;/code> 関数を使って「印刷ログ」ウィンドウにログを出力してデバッグしていると、どんどんログ出力が溜まっていくので、最後に適用したインジケーターの出力がどの行から始まっているかが分かりにくくなります。&lt;/p>
+&lt;p>そのような場合は、EasyLanguage のコード内から &lt;strong>&lt;code>ClearPrintLog&lt;/code>&lt;/strong> を呼び出すことで、「印刷ログ」の内容を自動でクリアすることができます（他の分析テクニックが出力した内容もクリアされてしまうことに注意してください）。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">// インジケーター適用時にログをクリア
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">once ClearPrintLog;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">// バー番号と終値をログ出力
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Print(CurrentBar:4:0, &amp;#34;: Close = &amp;#34;, Close:0:0);&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>&lt;code>ClearPrintLog&lt;/code> をそのまま実行してしまうと、各足の処理で毎回ログをクリアすることになってしまうので、&lt;strong>&lt;code>once&lt;/code>&lt;/strong> を使って、インジケーターを適用したときに一度だけ実行するようにします。&lt;/p></description></item><item><title>EasyLanguage で入力変数の表示名を設定する (DisplayName)</title><link>https://toushi.maku.blog/p/req3doz/</link><pubDate>Sun, 12 Apr 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/req3doz/</guid><description>&lt;p>EasyLanguage で作成するインジケーターでは、使用者が値を変更可能な入力変数を定義することができます。
+インジケーターの設定ダイアログでは、デフォルトでは入力変数の名前がそのまま表示されるのですが、次のように &lt;strong>&lt;code>DisplayName&lt;/code>&lt;/strong> を指定することで、任意の表示名に変更することができます。&lt;/p>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">inputs:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Price(Close) [DisplayName = &amp;#34;プロットする価格&amp;#34;];&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure>
+
+&lt;p>インジケーターの設定ダイアログで、次のように表示名が変わっていることを確認できます。&lt;/p>
+
+
+&lt;figure class="xImage">
+ &lt;img style="border: solid #ccc 2px;" width="629" height="203" src="../../p/req3doz/img-001.png" alt="/p/req3doz/img-001.png" />
+&lt;/figure></description></item><item><title>EasyLanguage のストラテジーサンプル「移動平均のGC/DCによる売買」</title><link>https://toushi.maku.blog/p/5vds8n2/</link><pubDate>Mon, 20 Jan 2020 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/5vds8n2/</guid><description>&lt;p>2 本の移動平均線がクロスするタイミングで売買を行うストラテジです。
+TradeStation には標準で付属しているストラテジとして、「単純移動平均2本クロス買いエントリー (ストラテジー)」がありますが、ここでは自力で実装する場合のサンプルとして示します。&lt;/p>
+&lt;h2 id="ストラテジ概要">ストラテジ概要&lt;/h2>
+&lt;h3 id="エントリタイミング">エントリタイミング&lt;/h3>
+&lt;ul>
+&lt;li>買いエントリ (Buy) の条件
+&lt;ul>
+&lt;li>短期移動平均線が長期移動平均線をゴールデンクロス (GC)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>売りエントリ (SellShort) の条件
+&lt;ul>
+&lt;li>短期移動平均線が長期移動平均線をデッドクロス (DC)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="パラメータ">パラメータ&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>fastLen&lt;/code>: 短期移動平均の足数&lt;/li>
+&lt;li>&lt;code>slowLen&lt;/code>: 長期移動平均の足数&lt;/li>
+&lt;/ul>
+&lt;h2 id="ソースコード">ソースコード&lt;/h2>
+
+&lt;figure class="xCodeBlock">
+
+&lt;div class="xCodeBlock_code">&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-plain" data-lang="plain">&lt;span class="line">&lt;span class="cl">input: fastLen(5), slowLen(25);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">var: fastAvg(0), slowAvg(0);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">fastAvg = AverageFC(Close, fastLen);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">slowAvg = AverageFC(Close, slowLen);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if fastAvg crosses over slowAvg then begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> Buy next bar at market;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if fastAvg crosses under slowAvg then begin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> SellShort next bar at market;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">end;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/figure></description></item></channel></rss>
