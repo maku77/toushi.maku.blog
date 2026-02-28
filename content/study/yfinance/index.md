@@ -1,13 +1,13 @@
 ---
-title: "yfinance ライブラリで銘柄情報を取得する"
+title: "Python の yfinance ライブラリで銘柄情報を取得する"
 url: "p/5dyijyb/"
 date: "2025-05-05"
+lastmod: "2026-02-28"
 tags: ["yfinance"]
-draft: true
 ---
 
 Python の [**`yfinance`** ライブラリ](https://ranaroussi.github.io/yfinance/)を使って、Yahoo Finance から銘柄情報を取得する方法のまとめです。
-このライブラリは非公式なものなのでいつ使えなくなるかわかりませんが、2025 年現在でも利用可能です。
+このライブラリは非公式なものなのでいつ使えなくなるかわかりませんが、2026 年現在でも利用可能です。
 
 
 パッケージのインストール
@@ -20,7 +20,7 @@ $ uv init yfinance-study  # プロジェクトディレクトリを作成
 $ cd yfinance-study       # プロジェクトディレクトリに移動
 $ uv add yfinance         # yfinance ライブラリをインストール
 
-$ uv run main.py          # テスト実行
+$ uv run main.py          # main.py を実行できるか確認
 Hello from yfinance-study!
 {{< /code >}}
 
