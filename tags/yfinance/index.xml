@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Yfinance on まくまく投資ノート</title><link>https://toushi.maku.blog/tags/yfinance/</link><description>Recent content in Yfinance on まくまく投資ノート</description><generator>Hugo</generator><language>ja-jp</language><lastBuildDate>Sat, 28 Feb 2026 00:00:00 +0900</lastBuildDate><atom:link href="https://toushi.maku.blog/tags/yfinance/index.xml" rel="self" type="application/rss+xml"/><item><title>Python の yfinance ライブラリで銘柄情報を取得する</title><link>https://toushi.maku.blog/p/5dyijyb/</link><pubDate>Mon, 05 May 2025 00:00:00 +0900</pubDate><guid>https://toushi.maku.blog/p/5dyijyb/</guid><description>&lt;p>Python の &lt;a href="https://ranaroussi.github.io/yfinance/">&lt;strong>&lt;code>yfinance&lt;/code>&lt;/strong> ライブラリ&lt;/a>を使って、Yahoo Finance から銘柄情報を取得する方法のまとめです。
-このライブラリは非公式なものなのでいつ使えなくなるかわかりませんが、2026 年現在でも利用可能です。&lt;/p>
+このライブラリは非公式なものなので、いつ使えなくなるかわかりませんが、2026 年現在でも利用可能です。&lt;/p>
 &lt;h2 id="パッケージのインストール">パッケージのインストール&lt;/h2>
 &lt;p>&lt;code>yfinance&lt;/code> パッケージは &lt;code>pip install yfinance&lt;/code> でインストールできますが、ローカル環境を汚さないために &lt;a href="https://maku77.github.io/p/fjsfjpw/">uv パッケージマネージャを使ってインストールする&lt;/a>ことをおすすめします。&lt;/p>
 
@@ -15,7 +15,7 @@
 &lt;/figure>
 
 &lt;h2 id="基本的な使い方">基本的な使い方&lt;/h2>
-&lt;p>下記は &lt;code>yfinance&lt;/code> ライブラリを使って、ソニーグループ (6758) の銘柄情報を取得する例です。
+&lt;p>以下は &lt;code>yfinance&lt;/code> ライブラリを使って、ソニーグループ (6758) の銘柄情報を取得する例です。
 &lt;strong>&lt;code>Ticker&lt;/code>&lt;/strong> コンストラクタにティッカーシンボル &lt;strong>&lt;code>6758.T&lt;/code>&lt;/strong> を渡し、各種プロパティにアクセスするだけで簡単に情報を取得できます（東証銘柄のシンボルには &lt;code>.T&lt;/code> サフィックスを付けます）。&lt;/p>
 
 &lt;figure class="xCodeBlock">
