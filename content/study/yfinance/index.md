@@ -7,7 +7,7 @@ tags: ["yfinance"]
 ---
 
 Python の [**`yfinance`** ライブラリ](https://ranaroussi.github.io/yfinance/)を使って、Yahoo Finance から銘柄情報を取得する方法のまとめです。
-このライブラリは非公式なものなのでいつ使えなくなるかわかりませんが、2026 年現在でも利用可能です。
+このライブラリは非公式なものなので、いつ使えなくなるかわかりませんが、2026 年現在でも利用可能です。
 
 
 パッケージのインストール
@@ -28,7 +28,7 @@ Hello from yfinance-study!
 基本的な使い方
 ----
 
-下記は `yfinance` ライブラリを使って、ソニーグループ (6758) の銘柄情報を取得する例です。
+以下は `yfinance` ライブラリを使って、ソニーグループ (6758) の銘柄情報を取得する例です。
 **`Ticker`** コンストラクタにティッカーシンボル **`6758.T`** を渡し、各種プロパティにアクセスするだけで簡単に情報を取得できます（東証銘柄のシンボルには `.T` サフィックスを付けます）。
 
 {{< code lang="python" title="main.py" >}}
@@ -65,7 +65,7 @@ def fetch_ticker_info(symbol: str) -> dict:
     return yf.Ticker(symbol).info
 
 if __name__ == "__main__":
-    info = fetch_ticker_info("6758.T")  # 2回目以降はキャッシュから取得される
+    info = fetch_ticker_info("6758.T")  # 2 回目以降はキャッシュから取得される
     print(info["country"])  # Japan
     print(info["ebitda"])  # 2036071006208
 {{< /code >}}
@@ -76,7 +76,7 @@ if __name__ == "__main__":
 Ticker.info の内容
 ----
 
-`Ticker.info` プロパティからは例えば次のような情報を取得できます。
+`Ticker.info` プロパティからは、例えば次のような情報を取得できます。
 
 ### 基本情報
 
@@ -97,8 +97,8 @@ Ticker.info の内容
 | `currentPrice` | 現在株価 | 最新の取引価格 | 3336.0 |
 | `marketCap` | 時価総額 | 発行済株式数×株価 | 19893707603968 |
 | `enterpriseValue` | 企業価値 (EV) | 時価総額+純有利子負債 | 19835845083136 |
-| `trailingPE` | PER(実績) | 株価÷直近EPS | 16.154964 |
-| `forwardPE` | PER(予想) | 株価÷予想EPS | 18.209608 |
+| `trailingPE` | PER(実績) | 株価÷直近 EPS | 16.154964 |
+| `forwardPE` | PER(予想) | 株価÷予想 EPS | 18.209608 |
 | `priceToSalesTrailing12Months` | PSR(TTM) | 株価÷直近売上 | 1.5104991 |
 | `priceToBook` | PBR | 株価÷1株純資産 | 2.438962 |
 
@@ -106,17 +106,17 @@ Ticker.info の内容
 
 | キー | 日本語名 | 概要 | 値の例 |
 | ---- | ---- | ---- | ---- |
-| `profitMargins` | 利益率 | 売上に対する純利益率 | -0.0161 |
-| `grossMargins` | 粗利率 | 売上に対する粗利益率 | 0.29479 |
-| `operatingMargins` | 営業利益率 | 売上に対する営業利益率 | 0.13736 |
-| `returnOnAssets` | ROA | 総資産利益率 | 0.0396 |
-| `returnOnEquity` | ROE | 自己資本利益率 | 0.14917 |
+| `grossMargins` | 粗利率（売上高総利益率） | 粗利益／売上 | 0.29479 |
+| `operatingMargins` | 営業利益率（売上高営業利益率） | 営業利益／売上 | 0.13736 |
+| `profitMargins` | 売上高当期純利益率 | 純利益／売上 | -0.0161 |
+| `returnOnAssets` | ROA（総資産利益率） | 純利益／総資産 | 0.0396 |
+| `returnOnEquity` | ROE（自己資本利益率） | 純利益／自己資本 | 0.14917 |
 
 ### 財務
 
 | キー | 日本語名 | 概要 | 値の例 |
 | ---- | ---- | ---- | ---- |
-| `totalRevenue` | 売上高(TTM) | 直近12か月の売上 | 13170287575040 |
+| `totalRevenue` | 売上高(TTM) | 直近 12 か月の売上 | 13170287575040 |
 | `ebitda` | EBITDA | 利払い・税引き・償却前利益 | 2036071006208 |
 | `totalCash` | 現金等 | 手元資金 | 2086500040704 |
 | `totalDebt` | 有利子負債 | 借入や社債など | 1656855986176 |
@@ -136,8 +136,8 @@ Ticker.info の内容
 | ---- | ---- | ---- | ---- |
 | `volume` | 出来高 | 直近の売買高 | 26683400 |
 | `averageVolume` | 平均出来高 | 平均の売買高 | 17558655 |
-| `fiftyTwoWeekHigh` | 52週高値 | 過去52週の最高値 | 4776.0 |
-| `fiftyTwoWeekLow` | 52週安値 | 過去52週の最安値 | 2980.5 |
+| `fiftyTwoWeekHigh` | 52週高値 | 過去 52 週の最高値 | 4776.0 |
+| `fiftyTwoWeekLow` | 52週安値 | 過去 52 週の最安値 | 2980.5 |
 
 上記のテーブル出力に使ったコード: {{< file src="yfutils.py" >}} + `main.py`
 

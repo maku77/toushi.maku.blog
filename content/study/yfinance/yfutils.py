@@ -30,11 +30,11 @@ def print_info_tables(info: dict) -> None:
             ("priceToBook", "PBR", "株価÷1株純資産"),
         ],
         "収益性": [
-            ("profitMargins", "利益率", "売上に対する純利益率"),
-            ("grossMargins", "粗利率", "売上に対する粗利益率"),
-            ("operatingMargins", "営業利益率", "売上に対する営業利益率"),
-            ("returnOnAssets", "ROA", "総資産利益率"),
-            ("returnOnEquity", "ROE", "自己資本利益率"),
+            ("grossMargins", "粗利率（売上高総利益率）", "粗利益／売上"),
+            ("operatingMargins", "営業利益率（売上高営業利益率）", "営業利益／売上"),
+            ("profitMargins", "売上高当期純利益率", "純利益／売上"),
+            ("returnOnAssets", "ROA（総資産利益率）", "純利益／総資産"),
+            ("returnOnEquity", "ROE（自己資本利益率）", "純利益／自己資本"),
         ],
         "財務": [
             ("totalRevenue", "売上高(TTM)", "直近12か月の売上"),
